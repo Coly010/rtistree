@@ -1,6 +1,6 @@
 # ADR 001: TypeScript control plane and native CPU Skia renderer
 
-Status: accepted for the MVP.
+Status: accepted for the MVP. Later extensions and superseded limitations are documented in [ADR 003](003-editing-refinement-and-agent-validation.md).
 
 ## Context
 

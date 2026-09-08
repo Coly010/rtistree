@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 768,
+    "height": 768,
+    "background": "#e6d9bd"
+  },
+  "assets": {
+    "rough": {
+      "source": "assets/rough.png"
+    }
+  },
+  "layers": []
+}

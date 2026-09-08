@@ -1,0 +1,50 @@
+{
+  "status": "pass",
+  "brief": {
+    "id": "pear",
+    "category": "raster-refinement",
+    "prompt": "Refine the supplied rough winter pear still life. Give the pear a warmer lit side, subtle skin texture and better material definition while keeping the silhouette, background, label and placement intact. Every changed pixel must stay within [260,180,240,340].",
+    "max_edits": 5,
+    "allowed_bounds": [260, 180, 240, 340]
+  },
+  "agent": "Codex assistant, interactive visual inspection in this task",
+  "review_method": "same-agent visual critique; not independent human evaluation",
+  "edits": 2,
+  "commands": 6,
+  "tokens": null,
+  "token_note": "null means the host did not expose token usage",
+  "critique_before": 0.42,
+  "critique_after": 0.79,
+  "locality": {
+    "changed_pixels": 33367,
+    "outside_changed_pixels": 0,
+    "changed_bounds": [282, 206, 174, 296],
+    "scopes": [[260, 180, 240, 340]]
+  },
+  "cold_identical": true,
+  "export_identical": true,
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:9108b817c2a3b8606b593672c84116887c378791c98be356320300e5eed322e1",
+      "png_hash": "sha256:ac45bb7055f0820750207710a92af4626aa15dd26afd05188c53583119c61cdb",
+      "png": "/Users/colum/dev/personal/rtistree/examples/agent-trials/pear/benchmarks/pear/before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 1,
+      "timestamp": "2026-09-08T19:24:51.191Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:383d7be500c836a1a6e5888a51b37a3b8914c0ca4a26871cb55458d82f54cd7d",
+      "png_hash": "sha256:2a0c5087d2585c0c888a3c9e052a1dd450a88263cca98b3589044ff31eccad84",
+      "png": "/Users/colum/dev/personal/rtistree/examples/agent-trials/pear/benchmarks/pear/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 3,
+      "timestamp": "2026-09-08T19:27:10.496Z",
+      "tokens": null
+    }
+  ]
+}

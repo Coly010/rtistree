@@ -1,4 +1,6 @@
 import { createCanvas, type Canvas, type SKRSContext2D } from './native.js';
+import { identity, type Matrix } from './layout.js';
+import { inverse, point, worldScope } from './spatial.js';
 import type { Bounds, Mask, RasterOperation } from './schema.js';
 
 export function rgba(hex: string): [number, number, number, number] {
@@ -36,10 +38,12 @@ export function maskCanvas(
   width: number,
   height: number,
   lookup: (id: string) => Canvas,
+  matrix: Matrix = identity,
 ): Canvas {
   let result = createCanvas(width, height);
   const ctx = result.getContext('2d');
   ctx.fillStyle = '#ffffff';
+  if (mask.space === 'layer' && mask.type !== 'semantic-object') ctx.setTransform(...matrix);
   if (mask.type === 'semantic-object') ctx.drawImage(lookup(mask.target), 0, 0);
   else if (mask.type === 'rectangle') ctx.fillRect(...mask.bounds);
   else if (mask.type === 'ellipse') {
@@ -84,15 +88,23 @@ export function applyRasterOperation(
   surface: Canvas,
   op: RasterOperation,
   lookup: (id: string) => Canvas,
+  matrix: Matrix = identity,
+  maskMatrix: Matrix = matrix,
 ): void {
-  const scope = pixelBounds(op.bounds, surface.width, surface.height);
+  const attached = op.space === 'layer',
+    inv = attached ? inverse(matrix) : identity;
+  const scope = pixelBounds(
+    attached ? worldScope(op.bounds, matrix) : op.bounds,
+    surface.width,
+    surface.height,
+  );
   if (!scope) return;
   const [x, y, w, h] = scope,
     ctx = surface.getContext('2d');
   const original = ctx.getImageData(x, y, w, h),
     after = new Uint8ClampedArray(original.data);
   const mask = op.mask
-    ? maskCanvas(op.mask, surface.width, surface.height, lookup)
+    ? maskCanvas(op.mask, surface.width, surface.height, lookup, maskMatrix)
         .getContext('2d')
         .getImageData(x, y, w, h).data
     : undefined;
@@ -106,22 +118,32 @@ export function applyRasterOperation(
       c = edited.getContext('2d');
     if (op.type === 'fill') {
       c.fillStyle = op.colour;
-      c.fillRect(x, y, w, h);
+      if (attached) c.setTransform(...matrix);
+      c.fillRect(...(attached ? op.bounds : scope));
     } else if (op.type === 'blur') {
       c.clearRect(0, 0, edited.width, edited.height);
       c.filter = `blur(${op.radius}px)`;
       c.drawImage(surface, 0, 0);
     } else if (op.type === 'eraseStroke') {
       const brush = createCanvas(surface.width, surface.height);
-      stroke(brush.getContext('2d'), op);
+      const brushContext = brush.getContext('2d');
+      if (attached) brushContext.setTransform(...matrix);
+      stroke(brushContext, op);
       c.globalCompositeOperation = 'destination-out';
       c.drawImage(brush, 0, 0);
-    } else stroke(c, op);
+    } else {
+      if (attached) c.setTransform(...matrix);
+      stroke(c, op);
+    }
     after.set(c.getImageData(x, y, w, h).data);
   } else if (op.type === 'setPixels') {
-    for (const pixel of op.pixels)
-      if (pixel.x >= x && pixel.x < x + w && pixel.y >= y && pixel.y < y + h)
-        after.set(rgba(pixel.colour), ((pixel.y - y) * w + pixel.x - x) * 4);
+    const pixels = new Map(op.pixels.map((p) => [`${p.x},${p.y}`, p.colour]));
+    for (let py = y; py < y + h; py++)
+      for (let px = x; px < x + w; px++) {
+        const [lx, ly] = point(inv, px + (attached ? 0.5 : 0), py + (attached ? 0.5 : 0));
+        const colour = pixels.get(`${Math.floor(lx)},${Math.floor(ly)}`);
+        if (colour) after.set(rgba(colour), ((py - y) * w + px - x) * 4);
+      }
   } else {
     const random = seededRandom(op.type === 'noise' ? op.seed : 0);
     for (let i = 0; i < after.length; i += 4) {
@@ -170,6 +192,16 @@ export function applyRasterOperation(
     }
   }
   for (let i = 0; i < after.length; i += 4) {
+    const px = x + ((i / 4) % w),
+      py = y + Math.floor(i / 4 / w),
+      [lx, ly] = point(inv, px + 0.5, py + 0.5);
+    const inScope =
+      !attached ||
+      (lx >= op.bounds[0] &&
+        ly >= op.bounds[1] &&
+        lx < op.bounds[0] + op.bounds[2] &&
+        ly < op.bounds[1] + op.bounds[3]);
+    if (!inScope) continue;
     const amount = (mask?.[i + 3] ?? 255) / 255;
     // Interpolate premultiplied colours to avoid halos around transparent masks.
     const oldA = original.data[i + 3]! / 255,

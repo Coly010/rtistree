@@ -13,7 +13,12 @@ export async function writeArtifact(file: string, data: string | Uint8Array): Pr
 export async function writeRender(file: string, result: RenderResult) {
   await writeArtifact(file, result.png);
   await writeArtifact(`${file}.evidence.json`, JSON.stringify(result.evidence, null, 2) + '\n');
-  return { image: file, evidence: `${file}.evidence.json`, ...result.evidence.render };
+  return {
+    image: file,
+    evidence: `${file}.evidence.json`,
+    ...result.evidence.render,
+    statistics: result.statistics,
+  };
 }
 
 /** Write a fresh baseline with immutable local assets, without any history. */
@@ -28,6 +33,16 @@ export async function writeSceneBundle(input: Scene, root: string, file: string)
     await writeArtifact(join(dirname(file), relative), bytes);
     asset.source = relative;
     asset.hash = hash;
+  }
+  for (const font of Object.values(scene.fonts ?? {})) {
+    const source = await localAssetPath(root, font.source),
+      bytes = await readFile(source),
+      hash = sha256(bytes);
+    if (font.hash && font.hash !== hash) throw new Error('Font changed before export');
+    const path = join('fonts', `${hash.slice(7)}${extname(source)}`);
+    await writeArtifact(join(dirname(file), path), bytes);
+    font.source = path;
+    font.hash = hash;
   }
   await writeArtifact(file, JSON.stringify(scene, null, 2) + '\n');
 }

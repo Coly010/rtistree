@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "scene_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "png_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "method": {
+      "type": "string",
+      "enum": ["vision-agent", "human"]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "issues": {
+      "maxItems": 100,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema0"
+      }
+    }
+  },
+  "required": ["scene_hash", "png_hash", "reviewer", "method", "summary", "score", "issues"],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["composition", "typography", "lighting", "texture", "semantic", "coherence"]
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "target": {
+          "type": "string"
+        },
+        "region": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "$ref": "#/$defs/__schema1"
+            },
+            {
+              "$ref": "#/$defs/__schema1"
+            },
+            {
+              "$ref": "#/$defs/__schema2"
+            },
+            {
+              "$ref": "#/$defs/__schema2"
+            }
+          ],
+          "items": false,
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suggestion": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "category", "severity", "message"],
+      "additionalProperties": false
+    },
+    "__schema1": {
+      "type": "number"
+    },
+    "__schema2": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 8192,
+      "$ref": "#/$defs/__schema1"
+    }
+  }
+}

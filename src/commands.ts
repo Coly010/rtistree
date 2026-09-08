@@ -1,6 +1,15 @@
+import { coordinateMatrix, worldScope, type Coordinates } from './spatial.js';
 import { z } from 'zod';
 import { resolveLayout, flattenResolved } from './layout.js';
 import {
+  fontSchema,
+  assetSchema,
+  rasterRegionSchema,
+  shapeSchema,
+  maskSchema,
+  layoutSchema,
+  generatorSchema,
+  ruleSchema,
   blendSchema,
   boundsSchema,
   effectSchema,
@@ -15,7 +24,72 @@ import {
 } from './schema.js';
 
 const target = { target: z.string() };
+const stylePatchSchema = z.strictObject({
+  font: styleSchema.shape.font.removeDefault().optional(),
+  size: styleSchema.shape.size.removeDefault().optional(),
+  weight: styleSchema.shape.weight.removeDefault().optional(),
+  colour: styleSchema.shape.colour.removeDefault().optional(),
+  line_height: styleSchema.shape.line_height.removeDefault().optional(),
+  align: styleSchema.shape.align.removeDefault().optional(),
+});
+const geometryPatchSchema = z.strictObject({
+  bounds: layerSchema.shape.bounds,
+  width: layerSchema.shape.width,
+  height: layerSchema.shape.height,
+  anchor: layerSchema.shape.anchor.removeDefault().optional(),
+  aspect_ratio: layerSchema.shape.aspect_ratio,
+  grow: layerSchema.shape.grow,
+});
+
 export const commandSchema = z.discriminatedUnion('type', [
+  z.strictObject({ type: z.literal('registerFont'), id: z.string(), font: fontSchema }),
+  z.strictObject({ type: z.literal('removeFont'), id: z.string() }),
+  z.strictObject({ type: z.literal('promoteRegion'), ...target, region: rasterRegionSchema }),
+  z.strictObject({ type: z.literal('updateRegion'), ...target, region: rasterRegionSchema }),
+  z.strictObject({ type: z.literal('demoteRegion'), ...target, id: z.string() }),
+
+  z.strictObject({ type: z.literal('registerAsset'), id: z.string(), asset: assetSchema }),
+  z.strictObject({ type: z.literal('removeAsset'), id: z.string() }),
+  z.strictObject({ type: z.literal('setShape'), ...target, shape: shapeSchema }),
+  z.strictObject({ type: z.literal('setGenerator'), ...target, generator: generatorSchema }),
+  z.strictObject({
+    type: z.literal('setTransform'),
+    ...target,
+    transform: layerSchema.shape.transform.unwrap().nullable(),
+  }),
+  z.strictObject({ type: z.literal('setMask'), ...target, mask: maskSchema.nullable() }),
+  z.strictObject({ type: z.literal('setLayout'), ...target, layout: layoutSchema.nullable() }),
+  z.strictObject({ type: z.literal('setGeometry'), ...target, geometry: geometryPatchSchema }),
+  z.strictObject({
+    type: z.literal('setSource'),
+    ...target,
+    source: z.string(),
+    fit: layerSchema.shape.fit.removeDefault().optional(),
+  }),
+  z.strictObject({ type: z.literal('setVisibility'), ...target, visible: z.boolean() }),
+  z.strictObject({ type: z.literal('setRole'), ...target, role: z.string().nullable() }),
+  z.strictObject({ type: z.literal('setZ'), ...target, z: z.number().finite() }),
+  z.strictObject({ type: z.literal('setVerification'), rules: z.array(ruleSchema).max(256) }),
+  z.strictObject({
+    type: z.literal('updateEffect'),
+    ...target,
+    index: z.number().int().min(0),
+    effect: effectSchema,
+  }),
+  z.strictObject({ type: z.literal('removeEffect'), ...target, index: z.number().int().min(0) }),
+  z.strictObject({
+    type: z.literal('updateRasterOperation'),
+    ...target,
+    index: z.number().int().min(0),
+    operation: rasterOperationSchema,
+  }),
+  z.strictObject({
+    type: z.literal('removeRasterOperation'),
+    ...target,
+    index: z.number().int().min(0),
+  }),
+  z.strictObject({ type: z.literal('removeTile'), ...target, index: z.number().int().min(0) }),
+
   z.strictObject({
     type: z.literal('addLayer'),
     layer: layerSchema,
@@ -37,7 +111,7 @@ export const commandSchema = z.discriminatedUnion('type', [
   z.strictObject({ type: z.literal('setOpacity'), ...target, opacity: z.number().min(0).max(1) }),
   z.strictObject({ type: z.literal('setBlendMode'), ...target, blend_mode: blendSchema }),
   z.strictObject({ type: z.literal('setText'), ...target, content: z.string().max(50000) }),
-  z.strictObject({ type: z.literal('setStyle'), ...target, style: styleSchema.partial() }),
+  z.strictObject({ type: z.literal('setStyle'), ...target, style: stylePatchSchema }),
   z.strictObject({ type: z.literal('applyEffect'), ...target, effect: effectSchema }),
   z.strictObject({
     type: z.literal('applyRasterOperation'),
@@ -102,7 +176,105 @@ export function applyCommand(input: Scene, raw: unknown): Scene {
     delete target.height;
     return target.bounds;
   }
+  function attach<T extends Coordinates>(value: T): T {
+    if (value.space === 'layer' && !value.reference_size) {
+      const node = nodes.find((n) => n.layer.id === layer!.id)!;
+      value.reference_size = [node.bounds[2], node.bounds[3]];
+    }
+    if ('mask' in value && value.mask) attach(value.mask as Coordinates);
+    return value;
+  }
+  function replaceAt<T>(items: T[], index: number, value?: T) {
+    if (index >= items.length) throw new Error(`Index ${index} is out of range`);
+    if (value === undefined) items.splice(index, 1);
+    else items[index] = value;
+  }
   switch (command.type) {
+    case 'promoteRegion':
+      if (layer!.regions?.some((r) => r.id === command.region.id))
+        throw new Error('Region already exists');
+      (layer!.regions ??= []).push(attach(command.region));
+      break;
+    case 'updateRegion': {
+      const i = layer!.regions?.findIndex((r) => r.id === command.region.id) ?? -1;
+      if (i < 0) throw new Error('Unknown region');
+      layer!.regions![i] = attach(command.region);
+      break;
+    }
+    case 'demoteRegion': {
+      const i = layer!.regions?.findIndex((r) => r.id === command.id) ?? -1;
+      if (i < 0) throw new Error('Unknown region');
+      layer!.regions!.splice(i, 1);
+      break;
+    }
+    case 'registerFont':
+      (scene.fonts ??= {})[command.id] = command.font;
+      break;
+    case 'removeFont':
+      if (!Object.hasOwn(scene.fonts ?? {}, command.id)) throw new Error('Unknown font');
+      delete scene.fonts![command.id];
+      break;
+    case 'registerAsset':
+      scene.assets[command.id] = command.asset;
+      break;
+    case 'removeAsset':
+      if (!Object.hasOwn(scene.assets, command.id)) throw new Error('Unknown asset');
+      delete scene.assets[command.id];
+      break;
+    case 'setShape':
+      layer!.shape = command.shape;
+      break;
+    case 'setGenerator':
+      layer!.generator = command.generator;
+      break;
+    case 'setTransform':
+      if (command.transform) layer!.transform = command.transform;
+      else delete layer!.transform;
+      break;
+    case 'setMask':
+      if (command.mask) layer!.mask = attach(command.mask);
+      else delete layer!.mask;
+      break;
+    case 'setLayout':
+      if (command.layout) layer!.layout = command.layout;
+      else delete layer!.layout;
+      break;
+    case 'setGeometry':
+      Object.assign(layer!, command.geometry);
+      break;
+    case 'setSource':
+      layer!.source = command.source;
+      if (command.fit) layer!.fit = command.fit;
+      break;
+    case 'setVisibility':
+      layer!.visible = command.visible;
+      break;
+    case 'setRole':
+      if (command.role !== null) layer!.role = command.role;
+      else delete layer!.role;
+      break;
+    case 'setZ':
+      layer!.z = command.z;
+      break;
+    case 'setVerification':
+      scene.verification.rules = command.rules;
+      break;
+    case 'updateEffect':
+      replaceAt(layer!.effects, command.index, command.effect);
+      break;
+    case 'removeEffect':
+      replaceAt(layer!.effects, command.index);
+      break;
+    case 'updateRasterOperation':
+      replaceAt(layer!.operations, command.index, attach(command.operation));
+      break;
+    case 'removeRasterOperation':
+      replaceAt(layer!.operations, command.index);
+      break;
+    case 'removeTile':
+      replaceAt(layer!.tiles, command.index);
+      break;
+
     case 'addLayer': {
       const parent = command.parent ? findLayer(scene, command.parent) : undefined;
       if (parent && parent.type !== 'group') throw new Error('Parent must be a group');
@@ -147,9 +319,10 @@ export function applyCommand(input: Scene, raw: unknown): Scene {
       layer!.effects.push(command.effect);
       break;
     case 'applyRasterOperation':
-      layer!.operations.push(command.operation);
+      layer!.operations.push(attach(command.operation));
       break;
     case 'replaceTile': {
+      attach(command.tile);
       const tileIndex = layer!.tiles.findIndex((t) =>
         t.bounds.every((v, i) => v === command.tile.bounds[i]),
       );
@@ -227,10 +400,44 @@ export function applyCommand(input: Scene, raw: unknown): Scene {
   }
   return parseScene(scene);
 }
-export function commandScope(command: Command) {
-  return command.type === 'applyRasterOperation'
-    ? command.operation.bounds
-    : command.type === 'replaceTile'
-      ? command.tile.bounds
-      : undefined;
+export function commandScopes(
+  command: Command,
+  before: Scene,
+  after: Scene,
+): import('./schema.js').Bounds[] {
+  const scopes: import('./schema.js').Bounds[] = [];
+  function add(value: Coordinates & { bounds: import('./schema.js').Bounds }, scene: Scene) {
+    const node = flattenResolved(resolveLayout(scene)).find(
+      (n) => n.layer.id === ('target' in command ? command.target : ''),
+    )!;
+    scopes.push(
+      value.space === 'layer'
+        ? worldScope(value.bounds, coordinateMatrix(value, node))
+        : value.bounds,
+    );
+  }
+  if (command.type === 'promoteRegion' || command.type === 'updateRegion')
+    add(
+      findLayer(after, command.target).regions!.find((r) => r.id === command.region.id)!,
+      after,
+    );
+  if (command.type === 'updateRegion' || command.type === 'demoteRegion') {
+    const id = command.type === 'demoteRegion' ? command.id : command.region.id;
+    add(
+      findLayer(before, command.target).regions!.find((r) => r.id === id)!,
+      before,
+    );
+  }
+  if (command.type === 'applyRasterOperation')
+    add(findLayer(after, command.target).operations.at(-1)!, after);
+  if (command.type === 'updateRasterOperation') {
+    add(findLayer(after, command.target).operations[command.index]!, after);
+    add(findLayer(before, command.target).operations[command.index]!, before);
+  }
+  if (command.type === 'replaceTile') add(command.tile, after);
+  if (command.type === 'removeRasterOperation')
+    add(findLayer(before, command.target).operations[command.index]!, before);
+  if (command.type === 'removeTile')
+    add(findLayer(before, command.target).tiles[command.index]!, before);
+  return scopes;
 }

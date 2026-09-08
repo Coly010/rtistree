@@ -2,7 +2,7 @@
 
 A deterministic raster graphics engine that agents can inspect, edit, verify, and replay. A persistent scene is the source of truth; PNG is an output.
 
-TypeScript provides the scene schema, transactions, CLI, and MCP tool server. **Native CPU Skia** performs rendering through `@napi-rs/canvas`. No browser, WebGL, GPU, model API key, or external service is required.
+TypeScript provides the scene schema, transactions, CLI, and MCP tool server. The next-stage implementation includes attached painting, adaptive patches, incremental layer rendering, visual critique and source rebasing. **Native CPU Skia** performs rendering through `@napi-rs/canvas`. No browser, WebGL, GPU, model API key, or external service is required.
 
 ![Poster rendered by Rtistree](docs/previews/poster.png)
 
@@ -67,7 +67,7 @@ node dist/cli.js serve /absolute/path/to/scene.yaml
 
 Configure an MCP client to launch `node`, with the absolute path to `dist/cli.js`, `serve`, and the absolute scene path as arguments. Transport is stdio; the server writes only protocol messages to stdout.
 
-Tools: `inspectScene`, `inspectLayer`, `inspectRegion`, `render`, `renderRegion`, `apply`, `undo`, `redo`, `verify`, `history`. Image tools return PNG image content so a vision-capable agent can inspect the result. `apply` advertises a typed command schema and requires an explanation. Supply the scene hash returned by inspection to reject stale edits.
+Tools: `inspectScene`, `inspectLayer`, `inspectRegion`, `render`, `renderRegion`, `apply`, `undo`, `redo`, `verify`, `history`, `recordCritique`, `readCritique`, `rebase`, `compactHistory`. Image tools return PNG image content so a vision-capable agent can inspect the result. `apply` advertises a typed command schema and requires an explanation. Supply the scene hash returned by inspection to reject stale edits.
 
 ```json
 {
@@ -87,15 +87,15 @@ Tools: `inspectScene`, `inspectLayer`, `inspectRegion`, `render`, `renderRegion`
 }
 ```
 
-The SDK also exposes `Project`, `SkiaRenderer`, `parseScene`, layout and verification functions, and `runIterations(project, editingAgent, options)`. The injected agent receives the scene, PNG, and verifier report and returns a patch or `null`. Iteration budgets, stale-state checks, stall thresholds, and cancellation bound the loop. Model choice and vision critique stay outside the renderer; there is no built-in LLM or diffusion service.
+The SDK also exposes `Project`, `SkiaRenderer`, `parseScene`, layout and verification functions, and `runIterations(project, editingAgent, options)`. The injected agent receives the scene, PNG, and verifier report and returns a patch or `null`. Iteration budgets, stale-state checks, stall thresholds, and cancellation bound the loop. An optional typed `critic` callback adds visual feedback; `requireCritique: true` requires a current critique before passing, and unresolved medium/high findings prevent success. Model choice and vision critique stay outside the renderer; there is no built-in LLM or diffusion service.
 
 ## Persistence and reproducibility
 
 Authoring fragments remain intact. Successful mutations append a transaction to `history/<scene-filename>.operations.jsonl`. Each record stores its commands, reason, full resolved state, previous-record hash, input/output scene hashes, asset hashes, and measured locality. Reads replay this journal over the original scene. Undo/redo append records rather than deleting history. Full state snapshots favor correctness and recovery over storage efficiency in this MVP.
 
-A failed batch leaves the scene unchanged. A project lock prevents concurrent writers; an expected scene hash handles stale agents. Incomplete or altered journal records are rejected. If a writer crashes, inspect the PID in the `.lock` file before removing the stale lock. Do not edit authoring sources underneath active history: export the working state into a new project first. If sources were already changed, restore the originals before exporting. Changed raster asset bytes are also rejected after history exists.
+A failed batch leaves the scene unchanged. A project lock prevents concurrent writers; an expected scene hash handles stale agents. Incomplete or altered journal records are rejected. If a writer crashes, inspect the PID in the `.lock` file before removing the stale lock. After manual source edits, run `graphics rebase scene.yaml` to merge nonconflicting changes into the working state. Conflicts report exact paths without committing. `graphics compact scene.yaml` compresses history while retaining every undo/redo state. New histories retain their source baseline; legacy histories require restoring/exporting the original source before rebasing. Changed raster asset bytes are also rejected after history exists.
 
-Exports copy raster assets into content-addressed files and pin their hashes. Every PNG has a `.evidence.json` sidecar recording renderer/backend/runtime versions, scene hash, asset hashes, bundled font hashes, dimensions, quality, and PNG hash. Byte identity is tested on the same pinned runtime and platform. Cross-platform Skia byte identity is **not** promised.
+Exports copy raster assets and custom fonts into content-addressed files and pin their hashes. Every PNG has a `.evidence.json` sidecar recording renderer/backend/runtime versions, scene hash, asset hashes, bundled font hashes, dimensions, quality, and PNG hash. Byte identity is tested on the same pinned runtime and platform. Cross-platform Skia byte identity is **not** promised.
 
 ## Implemented scope
 
@@ -106,7 +106,21 @@ Exports copy raster assets into content-addressed files and pin their hashes. Ev
 - Exact region crops, structural/color inspection, append-only transactions, undo/redo, self-contained export, CLI, and MCP.
 - Text overflow, declared contrast, safe-area, overlap, copy/role and region-luma rules, issue heatmaps, measured edit locality, and bounded agent iterations.
 
-The design's later phases remain extension points: adaptive quadtrees and high-resolution tile promotion, incremental rendering/caching, SVG export, warp/smudge/clone tools, image segmentation, built-in vision critique, learned asset generation, and animation. Draft currently downsamples a full render; region rendering crops a full composite to preserve exact effects at crop boundaries. The CPU surface budget bounds memory; this implementation favors correctness over throughput.
+The remaining extensions are automatic quadtree subdivision, a general dirty-tile compositor, SVG export, warp/smudge/clone tools, segmentation, provider-specific model integrations, learned asset generation, and animation. Draft still downsamples after rendering. Safe pointwise region scenes use smaller viewport surfaces; antialias-sensitive scenes fall back to a full composite and exact crop.
+
+## Next-stage examples and agent trials
+
+See [the new API and workflows](docs/evolution.md) and [ADR 003](docs/decisions/003-editing-refinement-and-agent-validation.md). New features include mutable effects/operations, object-relative paint, promoted patches at 1–4× resolution, layer caching, rendered contrast/visibility rules, hash-bound visual critiques, component instances, custom fonts, source rebasing and compressed history.
+
+Three interactive trials are recorded in [agent-trials/results.json](examples/agent-trials/results.json), with before/after images, briefs, complete audit snapshots and portable final scenes. Corrections were selected after inspecting the images. The visual scores are same-agent judgments; these are not independent quality evaluations, and token usage was unavailable. All three final scenes passed their configured checks and reproduced after export. The pear trial preserved every checked nonfruit pixel.
+
+```sh
+node dist/cli.js render examples/agent-trials/reading-club/final/scene.json -o /tmp/reading-club.png
+node dist/cli.js render examples/agent-trials/pear/final/scene.json -o /tmp/pear.png
+npm run performance
+```
+
+The performance probe records cache counters and local timings in `docs/previews/performance.json`. Its 16-layer edit reuses 15 surfaces and rasterizes one, while matching an uncached render exactly.
 
 See [architecture decisions](docs/decisions/001-runtime-and-renderer.md), [multi-file persistence decision](docs/decisions/002-composable-scenes-and-history.md), and the original [architecture proposal](agentic-raster-graphics-architecture.md).
 
@@ -120,4 +134,4 @@ npm run schema
 
 Subsystems are separate modules in `src/`: schema, loader, layout, assets, paint, renderer, commands, project transactions, verification, workflow, CLI and MCP. The `Renderer` interface makes backend replacement independent of scene authoring or agent logic. The original proposal's package boundaries are module boundaries until independent packaging has a concrete benefit.
 
-Bundled fonts are Inter and DM Serif Display from Fontsource, under their bundled SIL Open Font Licenses. They cover Latin text; broader scripts and arbitrary symbol fallback are not supported yet. Example artwork and book-cover raster are built from this engine's own primitives; regenerate the cover with `node --import tsx scripts/create-fixtures.ts`.
+Bundled fonts are Inter and DM Serif Display from Fontsource, under their bundled SIL Open Font Licenses. They cover Latin text; custom project fonts can supply broader script coverage. Arbitrary system-font fallback remains disabled. Example artwork and book-cover raster are built from this engine's own primitives; regenerate the cover with `node --import tsx scripts/create-fixtures.ts`.

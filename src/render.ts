@@ -1,11 +1,21 @@
+import { viewportScene } from './viewport.js';
+import { renderDetail } from './detail.js';
 import { createRequire } from 'node:module';
 import { createCanvas, Path2D, type Canvas, type SKRSContext2D } from './native.js';
-import { loadAssets, registerFonts, sceneHash, sha256 } from './assets.js';
+import {
+  canonical,
+  loadAssets,
+  registerFonts,
+  registerProjectFonts,
+  sceneHash,
+  sha256,
+} from './assets.js';
 import { flattenResolved, resolveLayout, type ResolvedLayer } from './layout.js';
 import { applyRasterOperation, maskCanvas, rgba, seededRandom } from './paint.js';
+import { coordinateMatrix } from './spatial.js';
 import { parseScene, type Bounds, type Layer, type Scene } from './schema.js';
 
-export const RENDERER_VERSION = '0.1.0';
+export const RENDERER_VERSION = '0.2.0';
 const require = createRequire(import.meta.url);
 const canvasVersion = (require('@napi-rs/canvas/package.json') as { version: string }).version;
 export interface TextDiagnostic {
@@ -20,6 +30,9 @@ export interface RenderOptions {
   region?: Bounds;
   quality?: 'draft' | 'preview' | 'final';
   layer?: string;
+  cache?: boolean;
+  regionMode?: 'auto' | 'full';
+  excludeLayers?: string[];
 }
 export interface RenderEvidence {
   renderer: {
@@ -41,6 +54,7 @@ export interface RenderEvidence {
     region?: Bounds;
     layer?: string;
     png_hash: string;
+    excluded_layers?: string[];
   };
 }
 export interface RenderResult {
@@ -50,12 +64,19 @@ export interface RenderResult {
   height: number;
   evidence: RenderEvidence;
   text: TextDiagnostic[];
+  statistics: {
+    rasterized_layers: number;
+    cached_layers: number;
+    cache_bytes: number;
+    viewport_pixels?: number;
+  };
 }
 export interface Renderer {
   render(scene: Scene, root: string, options?: RenderOptions): Promise<RenderResult>;
 }
-export function fontStyle(layer: Layer): string {
+export function fontStyle(layer: Layer, aliases: Record<string, string> = {}): string {
   const s = layer.style!;
+  if (aliases[s.font]) return `${s.size}px "${aliases[s.font]}"`;
   return `${s.size}px "Rtistree-${s.font === 'display' ? 'display' : s.weight === 'bold' ? 'inter-bold' : 'inter'}"`;
 }
 export function layoutText(
@@ -63,8 +84,9 @@ export function layoutText(
   layer: Layer,
   width: number,
   height: number,
+  aliases: Record<string, string> = {},
 ): TextDiagnostic {
-  ctx.font = fontStyle(layer);
+  ctx.font = fontStyle(layer, aliases);
   const lines: string[] = [];
   for (const paragraph of layer.content!.split('\n')) {
     let line = '';
@@ -89,9 +111,58 @@ export function layoutText(
   };
 }
 export class SkiaRenderer implements Renderer {
+  private surfaces = new Map<string, { canvas: Canvas; text: TextDiagnostic[]; bytes: number }>();
+  private cacheBytes = 0;
+  constructor(readonly maxCacheBytes = 128 * 1024 * 1024) {}
+  clearCache() {
+    this.surfaces.clear();
+    this.cacheBytes = 0;
+  }
+  private remember(key: string, canvas: Canvas, text: TextDiagnostic[]) {
+    const bytes = canvas.width * canvas.height * 4;
+    if (bytes > this.maxCacheBytes) return;
+    if (this.surfaces.has(key)) return;
+    while (this.cacheBytes + bytes > this.maxCacheBytes && this.surfaces.size) {
+      const oldest = this.surfaces.keys().next().value!;
+      this.cacheBytes -= this.surfaces.get(oldest)!.bytes;
+      this.surfaces.delete(oldest);
+    }
+    this.surfaces.set(key, { canvas, text, bytes });
+    this.cacheBytes += bytes;
+  }
+
   async render(input: Scene, root: string, options: RenderOptions = {}): Promise<RenderResult> {
+    if (options.region && options.regionMode !== 'full') {
+      const original = parseScene(input),
+        [x, y, w, h] = options.region;
+      if (
+        !options.region.every(Number.isInteger) ||
+        x < 0 ||
+        y < 0 ||
+        w <= 0 ||
+        h <= 0 ||
+        x + w > original.canvas.width ||
+        y + h > original.canvas.height
+      )
+        throw new Error('Render region must be an integer rectangle inside the canvas');
+      const viewport = viewportScene(original, options.region);
+      if (viewport) {
+        const r = await this.render(viewport, root, { ...options, region: undefined });
+        return {
+          ...r,
+          statistics: { ...r.statistics, viewport_pixels: w * h },
+          evidence: {
+            ...r.evidence,
+            scene: { version: 1, hash: sceneHash(original) },
+            render: { ...r.evidence.render, region: options.region },
+          },
+        };
+      }
+    }
     const scene = parseScene(input),
-      fonts = await registerFonts(),
+      bundledFonts = await registerFonts(),
+      customFonts = await registerProjectFonts(scene, root),
+      fonts = { ...bundledFonts, ...customFonts.hashes },
       assets = await loadAssets(scene, root);
     const { width, height } = scene.canvas,
       nodes = resolveLayout(scene),
@@ -99,6 +170,36 @@ export class SkiaRenderer implements Renderer {
       index = new Map(all.map((n) => [n.layer.id, n]));
     if (width * height * (all.length + 6) > 128 * 1024 * 1024)
       throw new Error('Scene exceeds the CPU surface budget; reduce canvas size or layer count');
+    const statistics = { rasterized_layers: 0, cached_layers: 0, cache_bytes: 0 };
+    const keys = new Map<string, string>();
+    const keyFor = (node: ResolvedLayer): string => {
+      const existing = keys.get(node.layer.id);
+      if (existing) return existing;
+      const { children, ...layer } = node.layer;
+      const masks = [
+        layer.mask,
+        ...layer.operations.map((op) => op.mask),
+        ...(layer.regions ?? []).flatMap((r) => r.operations.map((op) => op.mask)),
+      ].flatMap((mask) =>
+        mask?.type === 'semantic-object' ? [keyFor(index.get(mask.target)!)] : [],
+      );
+      const key = sha256(
+        canonical({
+          width,
+          height,
+          layer,
+          matrix: node.matrix,
+          bounds: node.bounds,
+          children: node.children.map(keyFor),
+          masks,
+          assets: assets.hashes,
+          fonts,
+          exclude: options.excludeLayers ?? [],
+        }),
+      );
+      keys.set(layer.id, key);
+      return key;
+    };
     const cache = new Map<string, Canvas>(),
       text: TextDiagnostic[] = [];
     const fresh = () => createCanvas(width, height);
@@ -114,11 +215,24 @@ export class SkiaRenderer implements Renderer {
         if (child.layer.type === 'adjustment') {
           const modified = fresh();
           modified.getContext('2d').drawImage(target, 0, 0);
-          for (const op of child.layer.operations) applyRasterOperation(modified, op, lookup);
+          for (const op of child.layer.operations)
+            applyRasterOperation(
+              modified,
+              op,
+              lookup,
+              coordinateMatrix(op, child),
+              op.mask ? coordinateMatrix(op.mask, child) : undefined,
+            );
           const before = ctx.getImageData(0, 0, width, height),
             after = modified.getContext('2d').getImageData(0, 0, width, height);
           const mask = child.layer.mask
-            ? maskCanvas(child.layer.mask, width, height, lookup)
+            ? maskCanvas(
+                child.layer.mask,
+                width,
+                height,
+                lookup,
+                coordinateMatrix(child.layer.mask, child),
+              )
                 .getContext('2d')
                 .getImageData(0, 0, width, height).data
             : undefined;
@@ -146,10 +260,22 @@ export class SkiaRenderer implements Renderer {
     const renderNode = (node: ResolvedLayer): Canvas => {
       const hit = cache.get(node.layer.id);
       if (hit) return hit;
+      const key = keyFor(node),
+        saved = options.cache === false ? undefined : this.surfaces.get(key);
+      if (saved) {
+        statistics.cached_layers++;
+        this.surfaces.delete(key);
+        this.surfaces.set(key, saved);
+        text.push(...saved.text);
+        cache.set(node.layer.id, saved.canvas);
+        return saved.canvas;
+      }
+      statistics.rasterized_layers++;
+      const textStart = text.length;
       const layer = node.layer;
       let canvas = fresh();
       let ctx = canvas.getContext('2d');
-      if (!layer.visible) {
+      if (!layer.visible || options.excludeLayers?.includes(layer.id)) {
         cache.set(layer.id, canvas);
         return canvas;
       }
@@ -176,7 +302,7 @@ export class SkiaRenderer implements Renderer {
         }
       }
       if (layer.type === 'text') {
-        const diagnostic = layoutText(ctx, layer, w, h);
+        const diagnostic = layoutText(ctx, layer, w, h, customFonts.aliases);
         text.push(diagnostic);
         ctx.beginPath();
         ctx.rect(0, 0, w, h);
@@ -260,14 +386,29 @@ export class SkiaRenderer implements Renderer {
           [...row].forEach((key, x) => data.data.set(rgba(tile.palette[key]!), 4 * (y * tw + x))),
         );
         t.putImageData(data, 0, 0);
+        ctx.save();
+        if (tile.space === 'layer') ctx.setTransform(...coordinateMatrix(tile, node));
         ctx.imageSmoothingEnabled = false;
         ctx.drawImage(tc, ...tile.bounds);
-        ctx.imageSmoothingEnabled = true;
+        ctx.restore();
       }
-      for (const op of layer.operations) applyRasterOperation(canvas, op, lookup);
+      for (const op of layer.operations)
+        applyRasterOperation(
+          canvas,
+          op,
+          lookup,
+          coordinateMatrix(op, node),
+          op.mask ? coordinateMatrix(op.mask, node) : undefined,
+        );
+      for (const region of layer.regions ?? [])
+        renderDetail(canvas, region, node, lookup, assets.images);
       if (layer.mask) {
         ctx.globalCompositeOperation = 'destination-in';
-        ctx.drawImage(maskCanvas(layer.mask, width, height, lookup), 0, 0);
+        ctx.drawImage(
+          maskCanvas(layer.mask, width, height, lookup, coordinateMatrix(layer.mask, node)),
+          0,
+          0,
+        );
         ctx.globalCompositeOperation = 'source-over';
       }
       if (layer.opacity !== 1) {
@@ -278,6 +419,7 @@ export class SkiaRenderer implements Renderer {
         canvas = next;
       }
       cache.set(layer.id, canvas);
+      if (options.cache !== false) this.remember(key, canvas, text.slice(textStart));
       return canvas;
     };
     let output = fresh();
@@ -320,6 +462,7 @@ export class SkiaRenderer implements Renderer {
       width: output.width,
       height: output.height,
       text,
+      statistics: { ...statistics, cache_bytes: this.cacheBytes },
       evidence: {
         renderer: {
           name: 'rtistree-skia',
@@ -340,6 +483,7 @@ export class SkiaRenderer implements Renderer {
           region: options.region,
           layer: options.layer,
           png_hash: sha256(png),
+          ...(options.excludeLayers?.length ? { excluded_layers: options.excludeLayers } : {}),
         },
       },
     };

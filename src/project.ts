@@ -1,17 +1,23 @@
+import { readJournal, compressJournal } from './history-storage.js';
+import { mergeSource } from './merge.js';
+import { validateCritique, type VisualCritique } from './critique.js';
+import { writeArtifact } from './artifacts.js';
 import { mkdir, open, readFile, unlink } from 'node:fs/promises';
 import { basename, join } from 'node:path';
 import { canonical, localAssetPath, sceneHash, sha256 } from './assets.js';
 import { writeSceneBundle } from './artifacts.js';
-import { applyCommand, commandScope, patchSchema, type Patch } from './commands.js';
+import { applyCommand, commandScopes, patchSchema, type Patch } from './commands.js';
 import { flattenResolved, intersects, resolveLayout } from './layout.js';
 import { loadScene, type SceneSource } from './loader.js';
 import { defaultRenderer, type Renderer, type RenderOptions, type RenderResult } from './render.js';
 import { boundsSchema, parseScene, type Bounds, type Scene } from './schema.js';
-import { measureLocality, verifyScene, type LocalityEvidence } from './verify.js';
+import { measureLocality, verifyRendered, type LocalityEvidence } from './verify.js';
 
 export interface HistoryEntry {
   sequence: number;
-  kind: 'apply' | 'undo' | 'redo';
+  kind: 'apply' | 'undo' | 'redo' | 'rebase';
+  baseline?: Scene;
+  font_hashes?: Record<string, string>;
   reason: string;
   timestamp: string;
   source_hash: string;
@@ -30,6 +36,8 @@ interface State {
   undo: Scene[];
   redo: Scene[];
   entries: HistoryEntry[];
+  baseline: Scene;
+  incoming: Scene;
 }
 function missing(error: unknown): boolean {
   return (error as NodeJS.ErrnoException).code === 'ENOENT';
@@ -48,29 +56,38 @@ export class Project {
   get journal() {
     return join(this.root, 'history', `${basename(this.source.file)}.operations.jsonl`);
   }
-  private async state(): Promise<State> {
+  private async state(allowSourceChange = false): Promise<State> {
     // Re-read authoring files on every request, including long-lived MCP sessions.
     const current = await loadScene(this.source.file),
       sourceHash = sceneHash(current.scene);
-    let raw = '';
-    try {
-      raw = await readFile(this.journal, 'utf8');
-    } catch (error) {
-      if (!missing(error)) throw error;
-    }
+    const raw = await readJournal(this.journal);
     if (raw && !raw.endsWith('\n'))
       throw new Error(
         'History has an incomplete final record. Restore the journal from backup before editing.',
       );
-    const state: State = { sourceHash, scene: current.scene, undo: [], redo: [], entries: [] };
+    const initial = raw
+      ? ((JSON.parse(raw.split('\n')[0]!) as HistoryEntry).baseline ?? current.scene)
+      : current.scene;
+    const state: State = {
+      sourceHash: sceneHash(initial),
+      baseline: initial,
+      incoming: current.scene,
+      scene: initial,
+      undo: [],
+      redo: [],
+      entries: [],
+    };
     for (const line of raw.split('\n').filter(Boolean)) {
       const entry = JSON.parse(line) as HistoryEntry;
       const { hash, ...payload } = entry;
       if (sha256(canonical(payload)) !== hash) throw new Error('History integrity check failed');
-      if (entry.source_hash !== sourceHash)
-        throw new Error(
-          'Authoring files changed after edits were recorded. Restore the original authoring files, export the working scene, then start a new history.',
-        );
+      if (entry.kind === 'rebase') {
+        if (!entry.baseline || sceneHash(entry.baseline) !== entry.source_hash)
+          throw new Error('Invalid rebase baseline');
+        state.baseline = parseScene(entry.baseline);
+        state.sourceHash = entry.source_hash;
+      } else if (entry.source_hash !== state.sourceHash)
+        throw new Error('History source chain is inconsistent');
       if (
         entry.sequence !== state.entries.length + 1 ||
         entry.previous_hash !== (state.entries.at(-1)?.hash ?? null) ||
@@ -79,7 +96,7 @@ export class Project {
         throw new Error('History chain is inconsistent');
       const after = parseScene(entry.after);
       if (sceneHash(after) !== entry.after_hash) throw new Error('History state hash mismatch');
-      if (entry.kind === 'apply') {
+      if (entry.kind === 'apply' || entry.kind === 'rebase') {
         state.undo.push(state.scene);
         state.redo = [];
       } else if (entry.kind === 'undo') {
@@ -95,8 +112,22 @@ export class Project {
       state.scene = after;
       state.entries.push(entry);
     }
+    if (!allowSourceChange && state.sourceHash !== sourceHash)
+      throw new Error(
+        'Authoring files changed after edits were recorded. Run rebase to merge source changes, or restore the original source.',
+      );
     const last = state.entries.at(-1);
-    if (last) await this.checkAssets(state.scene, last.asset_hashes);
+    if (last) {
+      await this.checkAssets(state.scene, last.asset_hashes);
+      for (const [id, font] of Object.entries(state.scene.fonts ?? {})) {
+        if (
+          last.font_hashes &&
+          sha256(await readFile(await localAssetPath(this.root, font.source))) !==
+            last.font_hashes[`custom:${id}`]
+        )
+          throw new Error(`Font changed since the recorded edit: ${id}`);
+      }
+    }
     return state;
   }
   private async checkAssets(scene: Scene, expected: Record<string, string>) {
@@ -120,7 +151,44 @@ export class Project {
   }
   async verify() {
     const scene = await this.scene();
-    return verifyScene(scene, await this.renderer.render(scene, this.root));
+    return verifyRendered(scene, this.root, this.renderer);
+  }
+  async recordCritique(raw: unknown) {
+    const scene = await this.scene(),
+      render = await this.renderer.render(scene, this.root),
+      critique = validateCritique(raw, scene, render);
+    await writeArtifact(
+      join(
+        this.root,
+        'verification',
+        `${basename(this.source.file)}.${render.evidence.scene.hash.slice(7)}.critique.json`,
+      ),
+      JSON.stringify(critique, null, 2) + '\n',
+    );
+    return critique;
+  }
+  async critique(): Promise<VisualCritique | null> {
+    const scene = await this.scene(),
+      render = await this.renderer.render(scene, this.root);
+    try {
+      return validateCritique(
+        JSON.parse(
+          await readFile(
+            join(
+              this.root,
+              'verification',
+              `${basename(this.source.file)}.${render.evidence.scene.hash.slice(7)}.critique.json`,
+            ),
+            'utf8',
+          ),
+        ),
+        scene,
+        render,
+      );
+    } catch (e) {
+      if (missing(e)) return null;
+      throw e;
+    }
   }
   async inspect() {
     const state = await this.state(),
@@ -143,6 +211,12 @@ export class Project {
         children: n.children.map((c) => c.layer.id),
         operations: n.layer.operations.length,
         tiles: n.layer.tiles.length,
+        regions: n.layer.regions?.map((r) => ({
+          id: r.id,
+          bounds: r.bounds,
+          scale: r.scale,
+          resolution: [Math.ceil(r.bounds[2] * r.scale), Math.ceil(r.bounds[3] * r.scale)],
+        })),
       })),
     };
   }
@@ -203,21 +277,23 @@ export class Project {
     }
     try {
       await lock.writeFile(JSON.stringify({ pid: process.pid, created: new Date().toISOString() }));
-      const state = await this.state(),
+      const state = await this.state(kind === 'rebase'),
         beforeHash = sceneHash(state.scene);
       if (patch?.expected_hash && patch.expected_hash !== beforeHash)
         throw new Error('Stale scene hash: inspect again before applying edits');
       let after = state.scene;
       const locality: LocalityEvidence[] = [];
-      if (kind === 'apply') {
+      if (kind === 'rebase') {
+        after = parseScene(mergeSource(state.baseline, state.scene, state.incoming));
+      } else if (kind === 'apply') {
         for (const command of patch!.commands) {
           const next = applyCommand(after, command),
-            scope = commandScope(command);
-          if (scope) {
+            scopes = commandScopes(command, after, next);
+          if (scopes.length) {
             const evidence = measureLocality(
               await this.renderer.render(after, this.root),
               await this.renderer.render(next, this.root),
-              [scope],
+              scopes,
             );
             if (evidence.outside_changed_pixels)
               throw new Error(
@@ -237,9 +313,9 @@ export class Project {
       await this.checkAssets(after, rendered.evidence.assets);
       const sourceNow = await loadScene(this.source.file),
         sourceHash = sceneHash(sourceNow.scene);
-      if (sourceHash !== state.sourceHash) throw new Error('Source changed during transaction');
-      if (state.entries[0] && state.entries[0].source_hash !== sourceHash)
+      if (sourceHash !== (kind === 'rebase' ? sceneHash(state.incoming) : state.sourceHash))
         throw new Error('Source changed during transaction');
+
       const payload: Omit<HistoryEntry, 'hash'> = {
         sequence: state.entries.length + 1,
         kind,
@@ -251,6 +327,12 @@ export class Project {
         previous_hash: state.entries.at(-1)?.hash ?? null,
         commands: patch?.commands ?? [],
         asset_hashes: rendered.evidence.assets,
+        font_hashes: rendered.evidence.fonts,
+        ...(kind === 'rebase'
+          ? { baseline: state.incoming }
+          : state.entries.length === 0
+            ? { baseline: state.baseline }
+            : {}),
         after,
         locality,
       };
@@ -277,6 +359,21 @@ export class Project {
   }
   async redo(reason = 'Redo the previous edit') {
     return this.transaction('redo', reason);
+  }
+  async rebase(reason = 'Merge nonconflicting authoring changes') {
+    return this.transaction('rebase', reason);
+  }
+  async compactHistory() {
+    await mkdir(join(this.root, 'history'), { recursive: true });
+    const lockPath = `${this.journal}.lock`,
+      lock = await open(lockPath, 'wx');
+    try {
+      await this.state();
+      return await compressJournal(this.journal);
+    } finally {
+      await lock.close();
+      await unlink(lockPath);
+    }
   }
   async exportScene(file: string) {
     await writeSceneBundle(await this.scene(), this.root, file);

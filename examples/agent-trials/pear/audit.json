@@ -1,0 +1,682 @@
+[
+  {
+    "sequence": 1,
+    "kind": "apply",
+    "reason": "Initial composition planned from the natural-language brief",
+    "timestamp": "2026-09-08T19:23:30.787Z",
+    "source_hash": "sha256:7704107958d48bd15ef921a9ddb693b5eb0f4357a378beba98cee62c949aeaf1",
+    "before_hash": "sha256:7704107958d48bd15ef921a9ddb693b5eb0f4357a378beba98cee62c949aeaf1",
+    "after_hash": "sha256:9108b817c2a3b8606b593672c84116887c378791c98be356320300e5eed322e1",
+    "previous_hash": null,
+    "commands": [
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "still-life",
+          "type": "asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 768, 768],
+          "anchor": "top-left",
+          "source": "rough",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "setVerification",
+        "rules": []
+      }
+    ],
+    "asset_hashes": {
+      "rough": "sha256:ac45bb7055f0820750207710a92af4626aa15dd26afd05188c53583119c61cdb"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "baseline": {
+      "version": 1,
+      "canvas": {
+        "width": 768,
+        "height": 768,
+        "colour_space": "srgb",
+        "background": "#e6d9bd"
+      },
+      "metadata": {},
+      "assets": {
+        "rough": {
+          "type": "image",
+          "source": "assets/rough.png"
+        }
+      },
+      "layers": [],
+      "verification": {
+        "rules": []
+      }
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 768,
+        "height": 768,
+        "colour_space": "srgb",
+        "background": "#e6d9bd"
+      },
+      "metadata": {},
+      "assets": {
+        "rough": {
+          "type": "image",
+          "source": "assets/rough.png"
+        }
+      },
+      "layers": [
+        {
+          "id": "still-life",
+          "type": "asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 768, 768],
+          "anchor": "top-left",
+          "source": "rough",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:19b32647990883565e3576696889c7a914edd47a7c7fd409fae28f40d571c9fa"
+  },
+  {
+    "sequence": 2,
+    "kind": "apply",
+    "reason": "The supplied pear has a completely uniform fill, a flat silhouette and no skin texture. Light should fall along its upper-left shoulder with a cooler right edge. The following changes respond to the inspected PNG.",
+    "timestamp": "2026-09-08T19:24:51.453Z",
+    "source_hash": "sha256:7704107958d48bd15ef921a9ddb693b5eb0f4357a378beba98cee62c949aeaf1",
+    "before_hash": "sha256:9108b817c2a3b8606b593672c84116887c378791c98be356320300e5eed322e1",
+    "after_hash": "sha256:1afa0e0b297b6887c2caaebb8a8193e9ba0755ade5c1735c8bbc58a68f6f7c46",
+    "previous_hash": "sha256:19b32647990883565e3576696889c7a914edd47a7c7fd409fae28f40d571c9fa",
+    "commands": [
+      {
+        "type": "applyRasterOperation",
+        "target": "still-life",
+        "operation": {
+          "type": "paintStroke",
+          "bounds": [260, 180, 240, 340],
+          "mask": {
+            "type": "polygon",
+            "points": [
+              [350, 210],
+              [369, 210],
+              [383, 262],
+              [414, 309],
+              [441, 360],
+              [453, 412],
+              [440, 464],
+              [411, 489],
+              [367, 500],
+              [327, 482],
+              [291, 439],
+              [286, 390],
+              [300, 341],
+              [326, 285],
+              [340, 245]
+            ],
+            "feather": 7
+          },
+          "path": [
+            [351, 251],
+            [331, 324],
+            [322, 397],
+            [337, 442]
+          ],
+          "radius": 39,
+          "hardness": 0.05,
+          "colour": "#d3bb63",
+          "opacity": 0.56
+        }
+      },
+      {
+        "type": "applyRasterOperation",
+        "target": "still-life",
+        "operation": {
+          "type": "paintStroke",
+          "bounds": [260, 180, 240, 340],
+          "mask": {
+            "type": "polygon",
+            "points": [
+              [350, 210],
+              [369, 210],
+              [383, 262],
+              [414, 309],
+              [441, 360],
+              [453, 412],
+              [440, 464],
+              [411, 489],
+              [367, 500],
+              [327, 482],
+              [291, 439],
+              [286, 390],
+              [300, 341],
+              [326, 285],
+              [340, 245]
+            ],
+            "feather": 7
+          },
+          "path": [
+            [413, 327],
+            [437, 391],
+            [421, 455]
+          ],
+          "radius": 26,
+          "hardness": 0.08,
+          "colour": "#365c50",
+          "opacity": 0.4
+        }
+      },
+      {
+        "type": "applyRasterOperation",
+        "target": "still-life",
+        "operation": {
+          "type": "noise",
+          "bounds": [260, 180, 240, 340],
+          "mask": {
+            "type": "polygon",
+            "points": [
+              [350, 210],
+              [369, 210],
+              [383, 262],
+              [414, 309],
+              [441, 360],
+              [453, 412],
+              [440, 464],
+              [411, 489],
+              [367, 500],
+              [327, 482],
+              [291, 439],
+              [286, 390],
+              [300, 341],
+              [326, 285],
+              [340, 245]
+            ],
+            "feather": 7
+          },
+          "amount": 0.028,
+          "seed": 830241
+        }
+      }
+    ],
+    "asset_hashes": {
+      "rough": "sha256:ac45bb7055f0820750207710a92af4626aa15dd26afd05188c53583119c61cdb"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 768,
+        "height": 768,
+        "colour_space": "srgb",
+        "background": "#e6d9bd"
+      },
+      "metadata": {},
+      "assets": {
+        "rough": {
+          "type": "image",
+          "source": "assets/rough.png"
+        }
+      },
+      "layers": [
+        {
+          "id": "still-life",
+          "type": "asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 768, 768],
+          "anchor": "top-left",
+          "source": "rough",
+          "fit": "contain",
+          "effects": [],
+          "operations": [
+            {
+              "type": "paintStroke",
+              "bounds": [260, 180, 240, 340],
+              "mask": {
+                "type": "polygon",
+                "points": [
+                  [350, 210],
+                  [369, 210],
+                  [383, 262],
+                  [414, 309],
+                  [441, 360],
+                  [453, 412],
+                  [440, 464],
+                  [411, 489],
+                  [367, 500],
+                  [327, 482],
+                  [291, 439],
+                  [286, 390],
+                  [300, 341],
+                  [326, 285],
+                  [340, 245]
+                ],
+                "feather": 7
+              },
+              "path": [
+                [351, 251],
+                [331, 324],
+                [322, 397],
+                [337, 442]
+              ],
+              "radius": 39,
+              "hardness": 0.05,
+              "colour": "#d3bb63",
+              "opacity": 0.56
+            },
+            {
+              "type": "paintStroke",
+              "bounds": [260, 180, 240, 340],
+              "mask": {
+                "type": "polygon",
+                "points": [
+                  [350, 210],
+                  [369, 210],
+                  [383, 262],
+                  [414, 309],
+                  [441, 360],
+                  [453, 412],
+                  [440, 464],
+                  [411, 489],
+                  [367, 500],
+                  [327, 482],
+                  [291, 439],
+                  [286, 390],
+                  [300, 341],
+                  [326, 285],
+                  [340, 245]
+                ],
+                "feather": 7
+              },
+              "path": [
+                [413, 327],
+                [437, 391],
+                [421, 455]
+              ],
+              "radius": 26,
+              "hardness": 0.08,
+              "colour": "#365c50",
+              "opacity": 0.4
+            },
+            {
+              "type": "noise",
+              "bounds": [260, 180, 240, 340],
+              "mask": {
+                "type": "polygon",
+                "points": [
+                  [350, 210],
+                  [369, 210],
+                  [383, 262],
+                  [414, 309],
+                  [441, 360],
+                  [453, 412],
+                  [440, 464],
+                  [411, 489],
+                  [367, 500],
+                  [327, 482],
+                  [291, 439],
+                  [286, 390],
+                  [300, 341],
+                  [326, 285],
+                  [340, 245]
+                ],
+                "feather": 7
+              },
+              "amount": 0.028,
+              "seed": 830241
+            }
+          ],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [
+      {
+        "changed_pixels": 31147,
+        "outside_changed_pixels": 0,
+        "changed_bounds": [275, 200, 143, 303],
+        "scopes": [[260, 180, 240, 340]]
+      },
+      {
+        "changed_pixels": 15395,
+        "outside_changed_pixels": 0,
+        "changed_bounds": [362, 279, 100, 216],
+        "scopes": [[260, 180, 240, 340]]
+      },
+      {
+        "changed_pixels": 32521,
+        "outside_changed_pixels": 0,
+        "changed_bounds": [277, 201, 184, 307],
+        "scopes": [[260, 180, 240, 340]]
+      }
+    ],
+    "hash": "sha256:8bc107738c118363bf6b171082e591f068b371aab9a75e0d296e03fa988fcfb1"
+  },
+  {
+    "sequence": 3,
+    "kind": "apply",
+    "reason": "Tighten the interior mask feather to protect the exact background and silhouette pixels.",
+    "timestamp": "2026-09-08T19:26:20.486Z",
+    "source_hash": "sha256:7704107958d48bd15ef921a9ddb693b5eb0f4357a378beba98cee62c949aeaf1",
+    "before_hash": "sha256:1afa0e0b297b6887c2caaebb8a8193e9ba0755ade5c1735c8bbc58a68f6f7c46",
+    "after_hash": "sha256:383d7be500c836a1a6e5888a51b37a3b8914c0ca4a26871cb55458d82f54cd7d",
+    "previous_hash": "sha256:8bc107738c118363bf6b171082e591f068b371aab9a75e0d296e03fa988fcfb1",
+    "commands": [
+      {
+        "type": "updateRasterOperation",
+        "target": "still-life",
+        "index": 0,
+        "operation": {
+          "type": "paintStroke",
+          "bounds": [260, 180, 240, 340],
+          "mask": {
+            "type": "polygon",
+            "points": [
+              [350, 210],
+              [369, 210],
+              [383, 262],
+              [414, 309],
+              [441, 360],
+              [453, 412],
+              [440, 464],
+              [411, 489],
+              [367, 500],
+              [327, 482],
+              [291, 439],
+              [286, 390],
+              [300, 341],
+              [326, 285],
+              [340, 245]
+            ],
+            "feather": 2
+          },
+          "path": [
+            [351, 251],
+            [331, 324],
+            [322, 397],
+            [337, 442]
+          ],
+          "radius": 39,
+          "hardness": 0.05,
+          "colour": "#d3bb63",
+          "opacity": 0.56
+        }
+      },
+      {
+        "type": "updateRasterOperation",
+        "target": "still-life",
+        "index": 1,
+        "operation": {
+          "type": "paintStroke",
+          "bounds": [260, 180, 240, 340],
+          "mask": {
+            "type": "polygon",
+            "points": [
+              [350, 210],
+              [369, 210],
+              [383, 262],
+              [414, 309],
+              [441, 360],
+              [453, 412],
+              [440, 464],
+              [411, 489],
+              [367, 500],
+              [327, 482],
+              [291, 439],
+              [286, 390],
+              [300, 341],
+              [326, 285],
+              [340, 245]
+            ],
+            "feather": 2
+          },
+          "path": [
+            [413, 327],
+            [437, 391],
+            [421, 455]
+          ],
+          "radius": 26,
+          "hardness": 0.08,
+          "colour": "#365c50",
+          "opacity": 0.4
+        }
+      },
+      {
+        "type": "updateRasterOperation",
+        "target": "still-life",
+        "index": 2,
+        "operation": {
+          "type": "noise",
+          "bounds": [260, 180, 240, 340],
+          "mask": {
+            "type": "polygon",
+            "points": [
+              [350, 210],
+              [369, 210],
+              [383, 262],
+              [414, 309],
+              [441, 360],
+              [453, 412],
+              [440, 464],
+              [411, 489],
+              [367, 500],
+              [327, 482],
+              [291, 439],
+              [286, 390],
+              [300, 341],
+              [326, 285],
+              [340, 245]
+            ],
+            "feather": 2
+          },
+          "amount": 0.028,
+          "seed": 830241
+        }
+      }
+    ],
+    "asset_hashes": {
+      "rough": "sha256:ac45bb7055f0820750207710a92af4626aa15dd26afd05188c53583119c61cdb"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 768,
+        "height": 768,
+        "colour_space": "srgb",
+        "background": "#e6d9bd"
+      },
+      "metadata": {},
+      "assets": {
+        "rough": {
+          "type": "image",
+          "source": "assets/rough.png"
+        }
+      },
+      "layers": [
+        {
+          "id": "still-life",
+          "type": "asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 768, 768],
+          "anchor": "top-left",
+          "source": "rough",
+          "fit": "contain",
+          "effects": [],
+          "operations": [
+            {
+              "type": "paintStroke",
+              "bounds": [260, 180, 240, 340],
+              "mask": {
+                "type": "polygon",
+                "points": [
+                  [350, 210],
+                  [369, 210],
+                  [383, 262],
+                  [414, 309],
+                  [441, 360],
+                  [453, 412],
+                  [440, 464],
+                  [411, 489],
+                  [367, 500],
+                  [327, 482],
+                  [291, 439],
+                  [286, 390],
+                  [300, 341],
+                  [326, 285],
+                  [340, 245]
+                ],
+                "feather": 2
+              },
+              "path": [
+                [351, 251],
+                [331, 324],
+                [322, 397],
+                [337, 442]
+              ],
+              "radius": 39,
+              "hardness": 0.05,
+              "colour": "#d3bb63",
+              "opacity": 0.56
+            },
+            {
+              "type": "paintStroke",
+              "bounds": [260, 180, 240, 340],
+              "mask": {
+                "type": "polygon",
+                "points": [
+                  [350, 210],
+                  [369, 210],
+                  [383, 262],
+                  [414, 309],
+                  [441, 360],
+                  [453, 412],
+                  [440, 464],
+                  [411, 489],
+                  [367, 500],
+                  [327, 482],
+                  [291, 439],
+                  [286, 390],
+                  [300, 341],
+                  [326, 285],
+                  [340, 245]
+                ],
+                "feather": 2
+              },
+              "path": [
+                [413, 327],
+                [437, 391],
+                [421, 455]
+              ],
+              "radius": 26,
+              "hardness": 0.08,
+              "colour": "#365c50",
+              "opacity": 0.4
+            },
+            {
+              "type": "noise",
+              "bounds": [260, 180, 240, 340],
+              "mask": {
+                "type": "polygon",
+                "points": [
+                  [350, 210],
+                  [369, 210],
+                  [383, 262],
+                  [414, 309],
+                  [441, 360],
+                  [453, 412],
+                  [440, 464],
+                  [411, 489],
+                  [367, 500],
+                  [327, 482],
+                  [291, 439],
+                  [286, 390],
+                  [300, 341],
+                  [326, 285],
+                  [340, 245]
+                ],
+                "feather": 2
+              },
+              "amount": 0.028,
+              "seed": 830241
+            }
+          ],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [
+      {
+        "changed_pixels": 11458,
+        "outside_changed_pixels": 0,
+        "changed_bounds": [275, 200, 139, 303],
+        "scopes": [
+          [260, 180, 240, 340],
+          [260, 180, 240, 340]
+        ]
+      },
+      {
+        "changed_pixels": 5075,
+        "outside_changed_pixels": 0,
+        "changed_bounds": [395, 286, 67, 209],
+        "scopes": [
+          [260, 180, 240, 340],
+          [260, 180, 240, 340]
+        ]
+      },
+      {
+        "changed_pixels": 7139,
+        "outside_changed_pixels": 0,
+        "changed_bounds": [277, 201, 184, 307],
+        "scopes": [
+          [260, 180, 240, 340],
+          [260, 180, 240, 340]
+        ]
+      }
+    ],
+    "hash": "sha256:bdebc1dabf24a6524d0b9a676c23200cff9f37a3494d3604d2f36a3d86481ccc"
+  }
+]

@@ -1,14 +1,16 @@
+import { validateCritique, type VisualCritic, type VisualCritique } from './critique.js';
 import type { Patch } from './commands.js';
 import { Project } from './project.js';
 import type { RenderResult } from './render.js';
 import type { Scene } from './schema.js';
-import { verifyScene, type VerificationReport } from './verify.js';
+import { verifyRendered, type VerificationReport } from './verify.js';
 
 export interface Observation {
   iteration: number;
   scene: Scene;
   render: RenderResult;
   verification: VerificationReport;
+  critique?: VisualCritique;
 }
 export type EditingAgent = (observation: Observation) => Promise<Patch | null>;
 export interface IterationOptions {
@@ -17,6 +19,8 @@ export interface IterationOptions {
   minimumImprovement?: number;
   stopOnPass?: boolean;
   signal?: AbortSignal;
+  critic?: VisualCritic;
+  requireCritique?: boolean;
 }
 /** The agent is injected. This module contains no model credentials or graphics algorithms. */
 export async function runIterations(
@@ -44,27 +48,49 @@ export async function runIterations(
     options.signal?.throwIfAborted();
     const scene = await project.scene(),
       render = await project.renderer.render(scene, project.root),
-      verification = verifyScene(scene, render);
+      verification = await verifyRendered(scene, project.root, project.renderer, render);
+    const critique = options.critic
+      ? validateCritique(
+          await options.critic({ scene, render, verification, signal: options.signal }),
+          scene,
+          render,
+        )
+      : await project.critique();
+    if (critique) await project.recordCritique(critique);
     observations.push({
       iteration,
       score: verification.score,
       status: verification.status,
       scene_hash: render.evidence.scene.hash,
     });
+    const qualityScore = critique ? (verification.score + critique.score) / 2 : verification.score;
     const result = (reason: string) => ({
       reason,
       iterations: iteration,
       observations,
       render,
       verification,
+      critique,
     });
-    if ((options.stopOnPass ?? true) && verification.status === 'pass') return result('passed');
+    if (
+      (options.stopOnPass ?? true) &&
+      verification.status === 'pass' &&
+      (!options.requireCritique || !!critique) &&
+      (!critique || !critique.issues.some((i) => i.severity === 'high' || i.severity === 'medium'))
+    )
+      return result('passed');
     if (iteration === max) return result('iteration-budget');
-    if (previous >= 0 && verification.score - previous < threshold) stalled++;
+    if (previous >= 0 && qualityScore - previous < threshold) stalled++;
     else stalled = 0;
     if (stalled >= stallLimit) return result('stalled');
-    previous = verification.score;
-    const patch = await agent({ iteration, scene, render, verification });
+    previous = qualityScore;
+    const patch = await agent({
+      iteration,
+      scene,
+      render,
+      verification,
+      critique: critique ?? undefined,
+    });
     options.signal?.throwIfAborted();
     if (!patch) return result('agent-finished');
     await project.apply({ ...patch, expected_hash: render.evidence.scene.hash });

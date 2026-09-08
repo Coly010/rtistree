@@ -1,0 +1,68 @@
+{
+  "brief": {
+    "id": "reading-club",
+    "category": "poster",
+    "prompt": "Create a square editorial invitation for AFTER HOURS, a reading club evening featuring The Quiet Atlas. Use the supplied book cover intact. Include OCT 17 / 7PM, EAST ROOM and READ SOMETHING DIFFERENT. Midnight blue and warm amber should feel intimate and literary. Keep the hierarchy clear and all copy readable.",
+    "max_edits": 5
+  },
+  "agent": "Codex assistant, interactive visual inspection in this task",
+  "method": "interactive-agent",
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:89e1111c38faf685061c740aaaf591f272f3e2441e0c18e6bd5883a37bc197b4",
+      "png_hash": "sha256:35f2fee77a4d7f464adce18cc47334cf4c86a3e180d215a53590975e1dd0005c",
+      "png": "/Users/colum/dev/personal/rtistree/examples/agent-trials/reading-club/benchmarks/reading-club/before.png",
+      "verification_status": "fail",
+      "score": 0.9,
+      "critique": {
+        "scene_hash": "sha256:89e1111c38faf685061c740aaaf591f272f3e2441e0c18e6bd5883a37bc197b4",
+        "png_hash": "sha256:35f2fee77a4d7f464adce18cc47334cf4c86a3e180d215a53590975e1dd0005c",
+        "reviewer": "Codex assistant",
+        "method": "vision-agent",
+        "summary": "The opaque oval competes with the headline and makes the book feel pasted on. The subhead box also reports overflow.",
+        "score": 0.68,
+        "issues": [
+          {
+            "id": "halo",
+            "category": "composition",
+            "severity": "medium",
+            "target": "halo",
+            "message": "The large opaque blue oval dominates the central-right region.",
+            "suggestion": "Soften it into ambient light and separate the book with a subtle shadow."
+          },
+          {
+            "id": "copy",
+            "category": "typography",
+            "severity": "medium",
+            "target": "subhead",
+            "message": "The three-line subhead needs a slightly taller box."
+          }
+        ]
+      },
+      "history_length": 1,
+      "timestamp": "2026-09-08T19:24:50.585Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:58f687c90c579cbc6c53d7493a74620ef8dd4b2fa8b948c89263945ffcbbb76a",
+      "png_hash": "sha256:664b954aa3fe6b34ab852b103b69e96bb264687bab87597c0db75e07cd29aa10",
+      "png": "/Users/colum/dev/personal/rtistree/examples/agent-trials/reading-club/benchmarks/reading-club/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:58f687c90c579cbc6c53d7493a74620ef8dd4b2fa8b948c89263945ffcbbb76a",
+        "png_hash": "sha256:664b954aa3fe6b34ab852b103b69e96bb264687bab87597c0db75e07cd29aa10",
+        "reviewer": "Codex assistant",
+        "method": "vision-agent",
+        "summary": "The softened ambient light supports the intact book cover, the headline remains dominant, and all required event copy is readable. The caption sizing regression is resolved.",
+        "score": 0.86,
+        "issues": []
+      },
+      "history_length": 3,
+      "timestamp": "2026-09-08T19:27:09.937Z",
+      "tokens": null
+    }
+  ]
+}

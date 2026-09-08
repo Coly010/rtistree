@@ -3,6 +3,7 @@ import { parseArgs } from 'node:util';
 import { readFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { z } from 'zod';
+import { BenchmarkSession, briefSchema } from './benchmark.js';
 import { Project } from './project.js';
 import { boundsSchema, sceneSchema } from './schema.js';
 import { commandSchema } from './commands.js';
@@ -19,6 +20,10 @@ const help = `Rtistree — deterministic graphics for agents
   graphics undo <scene.yaml>
   graphics redo <scene.yaml>
   graphics history <scene.yaml>
+  graphics rebase <scene.yaml>
+  graphics compact <scene.yaml>
+  graphics critique <scene.yaml> <critique.json>
+  graphics benchmark <scene.yaml> <brief.json> <checkpoint-label|finish>
   graphics verify <scene.yaml> [-o report.json] [--heatmap heatmap.png]
   graphics export <scene.yaml> -o <new-project/scene.json>
   graphics schema [--kind scene|command]
@@ -48,7 +53,9 @@ async function main() {
   if (command === 'schema') {
     if (values.kind && !['scene', 'command'].includes(values.kind))
       throw new Error('Unknown schema kind');
-    print(z.toJSONSchema(values.kind === 'command' ? commandSchema : sceneSchema));
+    print(
+      z.toJSONSchema(values.kind === 'command' ? commandSchema : sceneSchema, { reused: 'ref' }),
+    );
     return;
   }
   if (!file) throw new Error('A scene file is required');
@@ -103,6 +110,25 @@ async function main() {
       print({ sequence: entry.sequence, hash: entry.after_hash });
       break;
     }
+    case 'benchmark': {
+      if (args.length !== 2) throw new Error('Expected brief JSON and checkpoint label or finish');
+      const brief = briefSchema.parse(JSON.parse(await readFile(args[0]!, 'utf8'))),
+        session = new BenchmarkSession(project, brief, 'Interactive agent using CLI');
+      print(args[1] === 'finish' ? await session.finish() : await session.checkpoint(args[1]!));
+      break;
+    }
+    case 'rebase': {
+      const entry = await project.rebase();
+      print({ sequence: entry.sequence, hash: entry.after_hash });
+      break;
+    }
+    case 'compact':
+      print(await project.compactHistory());
+      break;
+    case 'critique':
+      if (args.length !== 1) throw new Error('Expected critique JSON');
+      print(await project.recordCritique(JSON.parse(await readFile(args[0]!, 'utf8'))));
+      break;
     case 'history':
       print((await project.history()).map(({ after, ...entry }) => entry));
       break;

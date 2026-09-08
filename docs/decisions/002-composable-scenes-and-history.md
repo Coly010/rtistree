@@ -1,6 +1,6 @@
 # ADR 002: Composable scene sources with a transactional resolved state
 
-Status: accepted for the MVP.
+Status: accepted for the MVP. Later extensions and superseded limitations are documented in [ADR 003](003-editing-refinement-and-agent-validation.md).
 
 ## Context
 

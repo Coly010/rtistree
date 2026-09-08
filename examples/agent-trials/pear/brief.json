@@ -1,0 +1,7 @@
+{
+  "id": "pear",
+  "category": "raster-refinement",
+  "prompt": "Refine the supplied rough winter pear still life. Give the pear a warmer lit side, subtle skin texture and better material definition while keeping the silhouette, background, label and placement intact. Every changed pixel must stay within [260,180,240,340].",
+  "max_edits": 5,
+  "allowed_bounds": [260, 180, 240, 340]
+}

@@ -1,4 +1,10 @@
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { critiqueSchema } from './critique.js';
+import {
+  ListToolsRequestSchema,
+  type Tool,
+  type ToolAnnotations,
+} from '@modelcontextprotocol/sdk/types.js';
+import { McpServer, type ToolCallback } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import { join } from 'node:path';
@@ -17,10 +23,29 @@ const image = (render: RenderResult) => ({
   mimeType: 'image/png',
 });
 export function createServer(project: Project): McpServer {
-  const server = new McpServer({ name: 'rtistree', version: '0.1.0' });
+  const server = new McpServer({ name: 'rtistree', version: '0.2.0' });
+  const definitions: Tool[] = [];
+  // Share recursive definitions in discovery while retaining SDK runtime validation.
+  function registerTool<Args extends z.ZodRawShape>(
+    name: string,
+    config: { description: string; inputSchema: Args; annotations: ToolAnnotations },
+    callback: ToolCallback<Args>,
+  ) {
+    definitions.push({
+      name,
+      description: config.description,
+      annotations: config.annotations,
+      inputSchema: z.toJSONSchema(z.object(config.inputSchema), {
+        reused: 'ref',
+        target: 'draft-7',
+        io: 'input',
+      }) as Tool['inputSchema'],
+    });
+    return server.registerTool(name, config, callback);
+  }
   const readOnly = { readOnlyHint: true, destructiveHint: false, openWorldHint: false };
   const mutate = { readOnlyHint: false, destructiveHint: false, openWorldHint: false };
-  server.registerTool(
+  registerTool(
     'inspectScene',
     {
       description:
@@ -30,7 +55,7 @@ export function createServer(project: Project): McpServer {
     },
     async () => json(await project.inspect()),
   );
-  server.registerTool(
+  registerTool(
     'inspectLayer',
     {
       description:
@@ -40,7 +65,7 @@ export function createServer(project: Project): McpServer {
     },
     async ({ id }) => json(await project.inspectLayer(id)),
   );
-  server.registerTool(
+  registerTool(
     'inspectRegion',
     {
       description:
@@ -53,7 +78,7 @@ export function createServer(project: Project): McpServer {
       return { content: [...json(region).content, image(render)] };
     },
   );
-  server.registerTool(
+  registerTool(
     'render',
     {
       description:
@@ -70,7 +95,7 @@ export function createServer(project: Project): McpServer {
       return { content: [...json(artifact).content, image(render)] };
     },
   );
-  server.registerTool(
+  registerTool(
     'renderRegion',
     {
       description:
@@ -83,7 +108,7 @@ export function createServer(project: Project): McpServer {
       return { content: [...json(render.evidence).content, image(render)] };
     },
   );
-  server.registerTool(
+  registerTool(
     'apply',
     {
       description:
@@ -107,7 +132,7 @@ export function createServer(project: Project): McpServer {
       }
     },
   );
-  server.registerTool(
+  registerTool(
     'undo',
     {
       description: 'Undo the last transaction; record the reversal in append-only history.',
@@ -119,7 +144,7 @@ export function createServer(project: Project): McpServer {
       return json({ scene_hash: entry.after_hash });
     },
   );
-  server.registerTool(
+  registerTool(
     'redo',
     {
       description: 'Redo the last undone transaction; new edits clear the redo branch.',
@@ -131,7 +156,7 @@ export function createServer(project: Project): McpServer {
       return json({ scene_hash: entry.after_hash });
     },
   );
-  server.registerTool(
+  registerTool(
     'verify',
     {
       description:
@@ -141,7 +166,7 @@ export function createServer(project: Project): McpServer {
     },
     async () => json(await project.verify()),
   );
-  server.registerTool(
+  registerTool(
     'history',
     {
       description:
@@ -151,6 +176,49 @@ export function createServer(project: Project): McpServer {
     },
     async () => json((await project.history()).map(({ after, ...entry }) => entry)),
   );
+  registerTool(
+    'recordCritique',
+    {
+      description:
+        'Record a human or vision-agent critique of the actual current image, with exact scene/PNG hashes. Findings can block the iterative pass condition.',
+      inputSchema: { critique: critiqueSchema },
+      annotations: mutate,
+    },
+    async ({ critique }) => json(await project.recordCritique(critique)),
+  );
+  registerTool(
+    'readCritique',
+    {
+      description:
+        'Read the critique for the current scene/render, or null if it has not been reviewed.',
+      inputSchema: {},
+      annotations: readOnly,
+    },
+    async () => json(await project.critique()),
+  );
+  registerTool(
+    'rebase',
+    {
+      description:
+        'Merge nonconflicting manual source changes into the working scene; conflicting paths are reported without committing.',
+      inputSchema: {},
+      annotations: mutate,
+    },
+    async () => {
+      const e = await project.rebase();
+      return json({ hash: e.after_hash });
+    },
+  );
+  registerTool(
+    'compactHistory',
+    {
+      description: 'Compress the full audit trail while retaining every undo/redo state.',
+      inputSchema: {},
+      annotations: mutate,
+    },
+    async () => json(await project.compactHistory()),
+  );
+  server.server.setRequestHandler(ListToolsRequestSchema, () => ({ tools: definitions }));
   return server;
 }
 export async function serve(project: Project) {

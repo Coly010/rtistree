@@ -31,7 +31,7 @@
   "export_identical": true,
   "renderer": {
     "name": "rtistree-skia",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "backend": "@napi-rs/canvas@1.0.8",
     "node": "v24.14.0",
     "platform": "darwin",

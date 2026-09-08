@@ -1,3 +1,4 @@
+import { componentsSchema, expandComponents, type Component } from './components.js';
 import { readFile, realpath } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parse } from 'yaml';
@@ -16,6 +17,8 @@ export async function loadScene(file: string): Promise<SceneSource> {
     root = dirname(absolute),
     files: string[] = [],
     active = new Set<string>();
+  const components: Record<string, Component> = Object.create(null);
+  const fonts: Record<string, unknown> = Object.create(null);
   const assets: Record<string, unknown> = Object.create(null);
   async function read(path: string, isRoot = false): Promise<Record<string, unknown>> {
     const safe = await localAssetPath(root, relative(root, path));
@@ -30,7 +33,7 @@ export async function loadScene(file: string): Promise<SceneSource> {
       throw new Error(`Expected an object in ${safe}`);
     if (!isRoot)
       for (const key of Object.keys(doc))
-        if (!['include', 'assets', 'layers'].includes(key))
+        if (!['include', 'assets', 'layers', 'components', 'fonts'].includes(key))
           throw new Error(`Unknown fragment field: ${key}`);
     const layers: unknown[] = [];
     if (doc.include !== undefined) {
@@ -57,14 +60,44 @@ export async function loadScene(file: string): Promise<SceneSource> {
         assets[id] = { ...asset, source: relative(root, resolve(dirname(safe), asset.source)) };
       }
     }
+    if (doc.components) {
+      for (const [id, component] of Object.entries(componentsSchema.parse(doc.components))) {
+        if (Object.hasOwn(components, id)) throw new Error(`Duplicate component: ${id}`);
+        components[id] = component;
+      }
+    }
+    if (doc.fonts) {
+      if (typeof doc.fonts !== 'object' || Array.isArray(doc.fonts))
+        throw new Error('fonts must be a mapping');
+      for (const [id, font] of Object.entries(doc.fonts as Record<string, any>)) {
+        if (Object.hasOwn(fonts, id)) throw new Error('Duplicate font');
+        if (
+          typeof font?.source !== 'string' ||
+          font.source.startsWith('/') ||
+          /^[a-z]+:/i.test(font.source)
+        )
+          throw new Error('Font requires a relative source');
+        fonts[id] = { ...font, source: relative(root, resolve(dirname(safe), font.source)) };
+      }
+    }
     if (doc.layers !== undefined) {
       if (!Array.isArray(doc.layers)) throw new Error('layers must be an array');
       layers.push(...doc.layers);
     }
     active.delete(safe);
-    const { include: _include, ...rest } = doc;
+    const { include: _include, components: _components, ...rest } = doc;
     return { ...rest, layers };
   }
   const document = await read(absolute, true);
-  return { scene: parseScene({ ...document, assets }), root, file: absolute, files };
+  return {
+    scene: parseScene({
+      ...document,
+      assets,
+      ...(Object.keys(fonts).length ? { fonts } : {}),
+      layers: expandComponents(document.layers as unknown[], components),
+    }),
+    root,
+    file: absolute,
+    files,
+  };
 }

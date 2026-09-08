@@ -1,0 +1,1489 @@
+[
+  {
+    "sequence": 1,
+    "kind": "apply",
+    "reason": "Initial composition planned from the natural-language brief",
+    "timestamp": "2026-09-08T19:23:30.558Z",
+    "source_hash": "sha256:041d4b90817f342d7c92eb12b3df12b139a27175d05b89f67a109174023be0cd",
+    "before_hash": "sha256:041d4b90817f342d7c92eb12b3df12b139a27175d05b89f67a109174023be0cd",
+    "after_hash": "sha256:89e1111c38faf685061c740aaaf591f272f3e2441e0c18e6bd5883a37bc197b4",
+    "previous_hash": null,
+    "commands": [
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "wash",
+          "type": "procedural",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "anchor": "top-left",
+          "fit": "contain",
+          "generator": {
+            "type": "gradient",
+            "from": "#14233b",
+            "to": "#253d4d",
+            "angle": 100
+          },
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "halo",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [408, 134, 300, 400],
+          "anchor": "top-left",
+          "shape": {
+            "type": "ellipse",
+            "fill": "#587e90",
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "brand",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 44, 560, 32],
+          "anchor": "top-left",
+          "content": "THE EAST ROOM / READING CLUB",
+          "style": {
+            "font": "inter",
+            "size": 14,
+            "weight": "bold",
+            "colour": "#e5b87f",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "divider",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 101, 672, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#78929b",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "headline",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [45, 158, 410, 230],
+          "anchor": "top-left",
+          "content": "AFTER\nHOURS",
+          "style": {
+            "font": "display",
+            "size": 89,
+            "weight": "regular",
+            "colour": "#f3dfb8",
+            "line_height": 0.98,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "subhead",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 395, 324, 89],
+          "anchor": "top-left",
+          "content": "An evening for readers, wanderers, and the beautifully lost.",
+          "style": {
+            "font": "inter",
+            "size": 22,
+            "weight": "regular",
+            "colour": "#b7c5c6",
+            "line_height": 1.4,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "book",
+          "role": "hero-product",
+          "type": "asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [453, 227, 216, 324],
+          "anchor": "top-left",
+          "transform": {
+            "rotation": 8,
+            "scale": [1, 1]
+          },
+          "source": "cover",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "featured",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [449, 591, 240, 35],
+          "anchor": "top-left",
+          "content": "THE QUIET ATLAS",
+          "style": {
+            "font": "inter",
+            "size": 13,
+            "weight": "regular",
+            "colour": "#91a7af",
+            "line_height": 1.2,
+            "align": "center"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "date",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 590, 365, 40],
+          "anchor": "top-left",
+          "content": "OCT 17 / 7PM",
+          "style": {
+            "font": "inter",
+            "size": 30,
+            "weight": "bold",
+            "colour": "#e6ba7e",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "place",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 640, 240, 30],
+          "anchor": "top-left",
+          "content": "EAST ROOM",
+          "style": {
+            "font": "inter",
+            "size": 16,
+            "weight": "regular",
+            "colour": "#91a7af",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "footer-rule",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 705, 672, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#78929b",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "footer",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 727, 672, 23],
+          "anchor": "top-left",
+          "content": "READ SOMETHING DIFFERENT.",
+          "style": {
+            "font": "inter",
+            "size": 11,
+            "weight": "bold",
+            "colour": "#c1c9c4",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "setVerification",
+        "rules": [
+          {
+            "type": "required-role",
+            "role": "hero-product"
+          },
+          {
+            "type": "pixel-contrast",
+            "target": "subhead",
+            "minimum": 4.5,
+            "percentile": 0.1
+          },
+          {
+            "type": "safe-area",
+            "target": "headline",
+            "minimum": 36
+          }
+        ]
+      }
+    ],
+    "asset_hashes": {
+      "cover": "sha256:7fa6fe83cfae6d6942c9589ab2bdb311b1cc1d5ff3de6cb13be2ad6c830301ff"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "baseline": {
+      "version": 1,
+      "canvas": {
+        "width": 768,
+        "height": 768,
+        "colour_space": "srgb",
+        "background": "#122136"
+      },
+      "metadata": {},
+      "assets": {
+        "cover": {
+          "type": "image",
+          "source": "assets/cover.png"
+        }
+      },
+      "layers": [],
+      "verification": {
+        "rules": []
+      }
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 768,
+        "height": 768,
+        "colour_space": "srgb",
+        "background": "#122136"
+      },
+      "metadata": {},
+      "assets": {
+        "cover": {
+          "type": "image",
+          "source": "assets/cover.png"
+        }
+      },
+      "layers": [
+        {
+          "id": "wash",
+          "type": "procedural",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "anchor": "top-left",
+          "fit": "contain",
+          "generator": {
+            "type": "gradient",
+            "from": "#14233b",
+            "to": "#253d4d",
+            "angle": 100
+          },
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "halo",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [408, 134, 300, 400],
+          "anchor": "top-left",
+          "shape": {
+            "type": "ellipse",
+            "fill": "#587e90",
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "brand",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 44, 560, 32],
+          "anchor": "top-left",
+          "content": "THE EAST ROOM / READING CLUB",
+          "style": {
+            "font": "inter",
+            "size": 14,
+            "weight": "bold",
+            "colour": "#e5b87f",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "divider",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 101, 672, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#78929b",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [45, 158, 410, 230],
+          "anchor": "top-left",
+          "content": "AFTER\nHOURS",
+          "style": {
+            "font": "display",
+            "size": 89,
+            "weight": "regular",
+            "colour": "#f3dfb8",
+            "line_height": 0.98,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "subhead",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 395, 324, 89],
+          "anchor": "top-left",
+          "content": "An evening for readers, wanderers, and the beautifully lost.",
+          "style": {
+            "font": "inter",
+            "size": 22,
+            "weight": "regular",
+            "colour": "#b7c5c6",
+            "line_height": 1.4,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "book",
+          "role": "hero-product",
+          "type": "asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [453, 227, 216, 324],
+          "anchor": "top-left",
+          "transform": {
+            "rotation": 8,
+            "scale": [1, 1]
+          },
+          "source": "cover",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "featured",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [449, 591, 240, 35],
+          "anchor": "top-left",
+          "content": "THE QUIET ATLAS",
+          "style": {
+            "font": "inter",
+            "size": 13,
+            "weight": "regular",
+            "colour": "#91a7af",
+            "line_height": 1.2,
+            "align": "center"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "date",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 590, 365, 40],
+          "anchor": "top-left",
+          "content": "OCT 17 / 7PM",
+          "style": {
+            "font": "inter",
+            "size": 30,
+            "weight": "bold",
+            "colour": "#e6ba7e",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "place",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 640, 240, 30],
+          "anchor": "top-left",
+          "content": "EAST ROOM",
+          "style": {
+            "font": "inter",
+            "size": 16,
+            "weight": "regular",
+            "colour": "#91a7af",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "footer-rule",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 705, 672, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#78929b",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "footer",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 727, 672, 23],
+          "anchor": "top-left",
+          "content": "READ SOMETHING DIFFERENT.",
+          "style": {
+            "font": "inter",
+            "size": 11,
+            "weight": "bold",
+            "colour": "#c1c9c4",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": [
+          {
+            "type": "required-role",
+            "role": "hero-product"
+          },
+          {
+            "type": "pixel-contrast",
+            "target": "subhead",
+            "minimum": 4.5,
+            "percentile": 0.1
+          },
+          {
+            "type": "safe-area",
+            "target": "headline",
+            "minimum": 36
+          }
+        ]
+      }
+    },
+    "locality": [],
+    "hash": "sha256:19a28cb23a504881eb00b5b63ab587dba5ec11d68f1b4df0ad7e662d7e424c83"
+  },
+  {
+    "sequence": 2,
+    "kind": "apply",
+    "reason": "The opaque oval competes with the headline and makes the book feel pasted on. The subhead box also reports overflow. The following changes respond to the inspected PNG.",
+    "timestamp": "2026-09-08T19:24:50.654Z",
+    "source_hash": "sha256:041d4b90817f342d7c92eb12b3df12b139a27175d05b89f67a109174023be0cd",
+    "before_hash": "sha256:89e1111c38faf685061c740aaaf591f272f3e2441e0c18e6bd5883a37bc197b4",
+    "after_hash": "sha256:384af6ca00a1e2672320fbc29ca116c5dfc0d6e8680b0a3f1389723ba194138c",
+    "previous_hash": "sha256:19a28cb23a504881eb00b5b63ab587dba5ec11d68f1b4df0ad7e662d7e424c83",
+    "commands": [
+      {
+        "type": "resizeLayer",
+        "target": "subhead",
+        "width": 324,
+        "height": 104
+      },
+      {
+        "type": "applyEffect",
+        "target": "halo",
+        "effect": {
+          "type": "blur",
+          "radius": 45
+        }
+      },
+      {
+        "type": "setOpacity",
+        "target": "halo",
+        "opacity": 0.26
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "book-shadow",
+          "type": "vector",
+          "visible": true,
+          "opacity": 0.5,
+          "blend_mode": "normal",
+          "z": 1,
+          "bounds": [461, 240, 216, 324],
+          "anchor": "top-left",
+          "transform": {
+            "rotation": 8,
+            "scale": [1, 1]
+          },
+          "shape": {
+            "type": "rectangle",
+            "fill": "#030b17",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [
+            {
+              "type": "blur",
+              "radius": 18
+            }
+          ],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "setZ",
+        "target": "book",
+        "z": 2
+      },
+      {
+        "type": "setStyle",
+        "target": "featured",
+        "style": {
+          "font": "inter",
+          "size": 32,
+          "weight": "regular",
+          "colour": "#bac9c7",
+          "line_height": 1.2,
+          "align": "left"
+        }
+      }
+    ],
+    "asset_hashes": {
+      "cover": "sha256:7fa6fe83cfae6d6942c9589ab2bdb311b1cc1d5ff3de6cb13be2ad6c830301ff"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 768,
+        "height": 768,
+        "colour_space": "srgb",
+        "background": "#122136"
+      },
+      "metadata": {},
+      "assets": {
+        "cover": {
+          "type": "image",
+          "source": "assets/cover.png"
+        }
+      },
+      "layers": [
+        {
+          "id": "wash",
+          "type": "procedural",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "anchor": "top-left",
+          "fit": "contain",
+          "generator": {
+            "type": "gradient",
+            "from": "#14233b",
+            "to": "#253d4d",
+            "angle": 100
+          },
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "halo",
+          "type": "vector",
+          "visible": true,
+          "opacity": 0.26,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [408, 134, 300, 400],
+          "anchor": "top-left",
+          "shape": {
+            "type": "ellipse",
+            "fill": "#587e90",
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [
+            {
+              "type": "blur",
+              "radius": 45
+            }
+          ],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "brand",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 44, 560, 32],
+          "anchor": "top-left",
+          "content": "THE EAST ROOM / READING CLUB",
+          "style": {
+            "font": "inter",
+            "size": 14,
+            "weight": "bold",
+            "colour": "#e5b87f",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "divider",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 101, 672, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#78929b",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [45, 158, 410, 230],
+          "anchor": "top-left",
+          "content": "AFTER\nHOURS",
+          "style": {
+            "font": "display",
+            "size": 89,
+            "weight": "regular",
+            "colour": "#f3dfb8",
+            "line_height": 0.98,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "subhead",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 395, 324, 104],
+          "anchor": "top-left",
+          "content": "An evening for readers, wanderers, and the beautifully lost.",
+          "style": {
+            "font": "inter",
+            "size": 22,
+            "weight": "regular",
+            "colour": "#b7c5c6",
+            "line_height": 1.4,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "book",
+          "role": "hero-product",
+          "type": "asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 2,
+          "bounds": [453, 227, 216, 324],
+          "anchor": "top-left",
+          "transform": {
+            "rotation": 8,
+            "scale": [1, 1]
+          },
+          "source": "cover",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "featured",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [449, 591, 240, 35],
+          "anchor": "top-left",
+          "content": "THE QUIET ATLAS",
+          "style": {
+            "font": "inter",
+            "size": 32,
+            "weight": "regular",
+            "colour": "#bac9c7",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "date",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 590, 365, 40],
+          "anchor": "top-left",
+          "content": "OCT 17 / 7PM",
+          "style": {
+            "font": "inter",
+            "size": 30,
+            "weight": "bold",
+            "colour": "#e6ba7e",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "place",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 640, 240, 30],
+          "anchor": "top-left",
+          "content": "EAST ROOM",
+          "style": {
+            "font": "inter",
+            "size": 16,
+            "weight": "regular",
+            "colour": "#91a7af",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "footer-rule",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 705, 672, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#78929b",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "footer",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 727, 672, 23],
+          "anchor": "top-left",
+          "content": "READ SOMETHING DIFFERENT.",
+          "style": {
+            "font": "inter",
+            "size": 11,
+            "weight": "bold",
+            "colour": "#c1c9c4",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "book-shadow",
+          "type": "vector",
+          "visible": true,
+          "opacity": 0.5,
+          "blend_mode": "normal",
+          "z": 1,
+          "bounds": [461, 240, 216, 324],
+          "anchor": "top-left",
+          "transform": {
+            "rotation": 8,
+            "scale": [1, 1]
+          },
+          "shape": {
+            "type": "rectangle",
+            "fill": "#030b17",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [
+            {
+              "type": "blur",
+              "radius": 18
+            }
+          ],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": [
+          {
+            "type": "required-role",
+            "role": "hero-product"
+          },
+          {
+            "type": "pixel-contrast",
+            "target": "subhead",
+            "minimum": 4.5,
+            "percentile": 0.1
+          },
+          {
+            "type": "safe-area",
+            "target": "headline",
+            "minimum": 36
+          }
+        ]
+      }
+    },
+    "locality": [],
+    "hash": "sha256:9f75b04abddd6cc8d67f0442885bdaa714a29d698e28ba3e86c708bee400f4e0"
+  },
+  {
+    "sequence": 3,
+    "kind": "apply",
+    "reason": "Restore the small centered book caption after fixing the partial-style default regression.",
+    "timestamp": "2026-09-08T19:26:20.039Z",
+    "source_hash": "sha256:041d4b90817f342d7c92eb12b3df12b139a27175d05b89f67a109174023be0cd",
+    "before_hash": "sha256:384af6ca00a1e2672320fbc29ca116c5dfc0d6e8680b0a3f1389723ba194138c",
+    "after_hash": "sha256:58f687c90c579cbc6c53d7493a74620ef8dd4b2fa8b948c89263945ffcbbb76a",
+    "previous_hash": "sha256:9f75b04abddd6cc8d67f0442885bdaa714a29d698e28ba3e86c708bee400f4e0",
+    "commands": [
+      {
+        "type": "setStyle",
+        "target": "featured",
+        "style": {
+          "font": "inter",
+          "size": 13,
+          "weight": "regular",
+          "line_height": 1.2,
+          "align": "center"
+        }
+      }
+    ],
+    "asset_hashes": {
+      "cover": "sha256:7fa6fe83cfae6d6942c9589ab2bdb311b1cc1d5ff3de6cb13be2ad6c830301ff"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 768,
+        "height": 768,
+        "colour_space": "srgb",
+        "background": "#122136"
+      },
+      "metadata": {},
+      "assets": {
+        "cover": {
+          "type": "image",
+          "source": "assets/cover.png"
+        }
+      },
+      "layers": [
+        {
+          "id": "wash",
+          "type": "procedural",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "anchor": "top-left",
+          "fit": "contain",
+          "generator": {
+            "type": "gradient",
+            "from": "#14233b",
+            "to": "#253d4d",
+            "angle": 100
+          },
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "halo",
+          "type": "vector",
+          "visible": true,
+          "opacity": 0.26,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [408, 134, 300, 400],
+          "anchor": "top-left",
+          "shape": {
+            "type": "ellipse",
+            "fill": "#587e90",
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [
+            {
+              "type": "blur",
+              "radius": 45
+            }
+          ],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "brand",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 44, 560, 32],
+          "anchor": "top-left",
+          "content": "THE EAST ROOM / READING CLUB",
+          "style": {
+            "font": "inter",
+            "size": 14,
+            "weight": "bold",
+            "colour": "#e5b87f",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "divider",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 101, 672, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#78929b",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [45, 158, 410, 230],
+          "anchor": "top-left",
+          "content": "AFTER\nHOURS",
+          "style": {
+            "font": "display",
+            "size": 89,
+            "weight": "regular",
+            "colour": "#f3dfb8",
+            "line_height": 0.98,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "subhead",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 395, 324, 104],
+          "anchor": "top-left",
+          "content": "An evening for readers, wanderers, and the beautifully lost.",
+          "style": {
+            "font": "inter",
+            "size": 22,
+            "weight": "regular",
+            "colour": "#b7c5c6",
+            "line_height": 1.4,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "book",
+          "role": "hero-product",
+          "type": "asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 2,
+          "bounds": [453, 227, 216, 324],
+          "anchor": "top-left",
+          "transform": {
+            "rotation": 8,
+            "scale": [1, 1]
+          },
+          "source": "cover",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "featured",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [449, 591, 240, 35],
+          "anchor": "top-left",
+          "content": "THE QUIET ATLAS",
+          "style": {
+            "font": "inter",
+            "size": 13,
+            "weight": "regular",
+            "colour": "#bac9c7",
+            "line_height": 1.2,
+            "align": "center"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "date",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 590, 365, 40],
+          "anchor": "top-left",
+          "content": "OCT 17 / 7PM",
+          "style": {
+            "font": "inter",
+            "size": 30,
+            "weight": "bold",
+            "colour": "#e6ba7e",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "place",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 640, 240, 30],
+          "anchor": "top-left",
+          "content": "EAST ROOM",
+          "style": {
+            "font": "inter",
+            "size": 16,
+            "weight": "regular",
+            "colour": "#91a7af",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "footer-rule",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 705, 672, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#78929b",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "footer",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [48, 727, 672, 23],
+          "anchor": "top-left",
+          "content": "READ SOMETHING DIFFERENT.",
+          "style": {
+            "font": "inter",
+            "size": 11,
+            "weight": "bold",
+            "colour": "#c1c9c4",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "book-shadow",
+          "type": "vector",
+          "visible": true,
+          "opacity": 0.5,
+          "blend_mode": "normal",
+          "z": 1,
+          "bounds": [461, 240, 216, 324],
+          "anchor": "top-left",
+          "transform": {
+            "rotation": 8,
+            "scale": [1, 1]
+          },
+          "shape": {
+            "type": "rectangle",
+            "fill": "#030b17",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [
+            {
+              "type": "blur",
+              "radius": 18
+            }
+          ],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": [
+          {
+            "type": "required-role",
+            "role": "hero-product"
+          },
+          {
+            "type": "pixel-contrast",
+            "target": "subhead",
+            "minimum": 4.5,
+            "percentile": 0.1
+          },
+          {
+            "type": "safe-area",
+            "target": "headline",
+            "minimum": 36
+          }
+        ]
+      }
+    },
+    "locality": [],
+    "hash": "sha256:d0fc23f857c70194f0c5a6346bdb642c712a2c1f8b5ee6cde56062a42fd367f0"
+  }
+]

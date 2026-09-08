@@ -2,7 +2,7 @@ import { sceneHash } from './assets.js';
 import { createCanvas } from './native.js';
 import { flattenResolved, intersects, resolveLayout } from './layout.js';
 import { rgba } from './paint.js';
-import type { RenderEvidence, RenderResult } from './render.js';
+import type { Renderer, RenderEvidence, RenderResult } from './render.js';
 import type { Bounds, Scene } from './schema.js';
 
 export interface Issue {
@@ -37,13 +37,18 @@ export function contrastRatio(a: string, b: string): number {
     y = luminance(b);
   return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
 }
-export function verifyScene(scene: Scene, render: RenderResult): VerificationReport {
+export function verifyScene(
+  scene: Scene,
+  render: RenderResult,
+  pixels?: Map<string, { contrast: number[]; visible: number; samples: number }>,
+): VerificationReport {
   if (
     render.evidence.scene.hash !== sceneHash(scene) ||
     render.width !== scene.canvas.width ||
     render.height !== scene.canvas.height ||
     render.evidence.render.region ||
-    render.evidence.render.layer
+    render.evidence.render.layer ||
+    render.evidence.render.excluded_layers?.length
   )
     throw new Error('Verification requires a full-resolution render of this exact scene');
   const all = flattenResolved(resolveLayout(scene)),
@@ -88,6 +93,46 @@ export function verifyScene(scene: Scene, render: RenderResult): VerificationRep
       continue;
     }
     checks++;
+    if (rule.type === 'pixel-contrast' || rule.type === 'visible-area') {
+      const measured = pixels?.get(rule.target);
+      if (!measured)
+        issue({
+          category: 'composition',
+          severity: 'high',
+          target: rule.target,
+          message: 'This rule requires verifyRendered / Project.verify to measure the composite.',
+        });
+      else if (rule.type === 'visible-area') {
+        if (measured.visible < rule.minimum)
+          issue({
+            category: 'composition',
+            severity: 'high',
+            target: rule.target,
+            region: node!.worldBounds,
+            message: 'Insufficient visible contribution from the target layer.',
+            measured: measured.visible,
+            expected: rule.minimum,
+          });
+      } else {
+        const ratio =
+          measured.contrast[
+            Math.min(
+              measured.contrast.length - 1,
+              Math.floor(rule.percentile * measured.contrast.length),
+            )
+          ] ?? 1;
+        if (!measured.samples || ratio < rule.minimum)
+          issue({
+            category: 'typography',
+            severity: 'high',
+            target: rule.target,
+            region: node!.worldBounds,
+            message: 'Rendered foreground contrast is below the target.',
+            measured: ratio,
+            expected: rule.minimum,
+          });
+      }
+    }
     if (rule.type === 'region-luma') {
       const [x, y, w, h] = rule.bounds;
       let sum = 0,
@@ -185,7 +230,7 @@ export function verifyScene(scene: Scene, render: RenderResult): VerificationRep
     evidence: render.evidence,
     limitations: [
       'Rule checks do not judge aesthetic quality or semantic image content.',
-      'Contrast uses declared colours, not sampled composited pixels.',
+      'The legacy contrast rule uses declared colours; pixel-contrast measures the rendered composite.',
       'Overlap and safe areas use transformed layer boxes.',
     ],
   };
@@ -244,4 +289,64 @@ export async function verificationHeatmap(
       ctx.strokeRect(...issue.region);
     }
   return canvas.encode('png');
+}
+
+function luminance(pixels: Uint8ClampedArray, i: number) {
+  const channel = (v: number) => {
+    const s = v / 255;
+    return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  };
+  return (
+    0.2126 * channel(pixels[i]!) +
+    0.7152 * channel(pixels[i + 1]!) +
+    0.0722 * channel(pixels[i + 2]!)
+  );
+}
+/** Counterfactual renders measure visible contrast and occlusion, including opacity and overlays. */
+export async function verifyRendered(
+  scene: Scene,
+  root: string,
+  renderer: Renderer,
+  full?: RenderResult,
+): Promise<VerificationReport> {
+  const render = full ?? (await renderer.render(scene, root)),
+    measurements = new Map<string, { contrast: number[]; visible: number; samples: number }>();
+  const targets = new Set(
+    scene.verification.rules.flatMap((rule) =>
+      rule.type === 'pixel-contrast' || rule.type === 'visible-area' ? [rule.target] : [],
+    ),
+  );
+  for (const target of targets) {
+    const without = await renderer.render(scene, root, { excludeLayers: [target] }),
+      isolated = await renderer.render(scene, root, { layer: target });
+    let maximum = 0;
+    for (let i = 3; i < isolated.pixels.length; i += 4)
+      maximum = Math.max(maximum, isolated.pixels[i]!);
+    let total = 0,
+      visible = 0;
+    const contrast: number[] = [];
+    for (let i = 0; i < isolated.pixels.length; i += 4) {
+      if (!maximum || isolated.pixels[i + 3]! < maximum * 0.9) continue;
+      total++;
+      const delta = Math.max(
+        ...[0, 1, 2, 3].map((c) => Math.abs(render.pixels[i + c]! - without.pixels[i + c]!)),
+      );
+      if (delta < 2) continue;
+      visible++;
+      const a = luminance(render.pixels, i),
+        b = luminance(without.pixels, i);
+      contrast.push((Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05));
+    }
+    contrast.sort((a, b) => a - b);
+    measurements.set(target, {
+      contrast,
+      visible: total ? visible / total : 0,
+      samples: contrast.length,
+    });
+  }
+  const report = verifyScene(scene, render, measurements);
+  report.limitations.push(
+    'Pixel contrast compares the final composite with the target omitted, sampling solid glyph/shape interiors. It is not an accessibility certification.',
+  );
+  return report;
 }

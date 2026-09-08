@@ -1,0 +1,24 @@
+{
+  "scene": [1024, 1024],
+  "layers": 16,
+  "cold_ms": 165.842292,
+  "warm_ms": 92.88699999999997,
+  "incremental_ms": 84.64695799999998,
+  "fresh_ms": 89.01799999999997,
+  "incremental_statistics": {
+    "rasterized_layers": 1,
+    "cached_layers": 15,
+    "cache_bytes": 71303168
+  },
+  "viewport_ms": 1.833167000000003,
+  "full_crop_ms": 4.616415999999958,
+  "viewport_statistics": {
+    "rasterized_layers": 16,
+    "cached_layers": 0,
+    "cache_bytes": 72351744,
+    "viewport_pixels": 16384
+  },
+  "incremental_identical": true,
+  "region_identical": true,
+  "note": "Single local measurements, including PNG encoding; not a throughput guarantee."
+}

@@ -1,0 +1,75 @@
+{
+  "brief": {
+    "id": "pear",
+    "category": "raster-refinement",
+    "prompt": "Refine the supplied rough winter pear still life. Give the pear a warmer lit side, subtle skin texture and better material definition while keeping the silhouette, background, label and placement intact. Every changed pixel must stay within [260,180,240,340].",
+    "max_edits": 5,
+    "allowed_bounds": [260, 180, 240, 340]
+  },
+  "agent": "Codex assistant, interactive visual inspection in this task",
+  "method": "interactive-agent",
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:9108b817c2a3b8606b593672c84116887c378791c98be356320300e5eed322e1",
+      "png_hash": "sha256:ac45bb7055f0820750207710a92af4626aa15dd26afd05188c53583119c61cdb",
+      "png": "/Users/colum/dev/personal/rtistree/examples/agent-trials/pear/benchmarks/pear/before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:9108b817c2a3b8606b593672c84116887c378791c98be356320300e5eed322e1",
+        "png_hash": "sha256:ac45bb7055f0820750207710a92af4626aa15dd26afd05188c53583119c61cdb",
+        "reviewer": "Codex assistant",
+        "method": "vision-agent",
+        "summary": "The supplied pear has a completely uniform fill, a flat silhouette and no skin texture. Light should fall along its upper-left shoulder with a cooler right edge.",
+        "score": 0.42,
+        "issues": [
+          {
+            "id": "volume",
+            "category": "lighting",
+            "severity": "medium",
+            "region": [260, 180, 240, 340],
+            "message": "The single green fill does not establish the fruit volume."
+          },
+          {
+            "id": "skin",
+            "category": "texture",
+            "severity": "medium",
+            "region": [260, 180, 240, 340],
+            "message": "The surface has no fine variation or material detail."
+          }
+        ]
+      },
+      "history_length": 1,
+      "timestamp": "2026-09-08T19:24:51.191Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:383d7be500c836a1a6e5888a51b37a3b8914c0ca4a26871cb55458d82f54cd7d",
+      "png_hash": "sha256:2a0c5087d2585c0c888a3c9e052a1dd450a88263cca98b3589044ff31eccad84",
+      "png": "/Users/colum/dev/personal/rtistree/examples/agent-trials/pear/benchmarks/pear/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:383d7be500c836a1a6e5888a51b37a3b8914c0ca4a26871cb55458d82f54cd7d",
+        "png_hash": "sha256:2a0c5087d2585c0c888a3c9e052a1dd450a88263cca98b3589044ff31eccad84",
+        "reviewer": "Codex assistant",
+        "method": "vision-agent",
+        "summary": "The upper-left highlight and cooler right-side shade give the pear volume, with fine skin variation. The silhouette, stem, background, shadow and label remain unchanged.",
+        "score": 0.79,
+        "issues": [
+          {
+            "id": "finish",
+            "category": "texture",
+            "severity": "low",
+            "message": "The grain is more uniform than a natural pear skin, though the flat fill is materially improved."
+          }
+        ]
+      },
+      "history_length": 3,
+      "timestamp": "2026-09-08T19:27:10.496Z",
+      "tokens": null
+    }
+  ]
+}

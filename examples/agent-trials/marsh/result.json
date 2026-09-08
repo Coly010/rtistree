@@ -1,0 +1,49 @@
+{
+  "status": "pass",
+  "brief": {
+    "id": "marsh",
+    "category": "illustration",
+    "prompt": "Illustrate a quiet moonlit salt marsh from primitives. A small amber-lit cabin is the focal point, with three pale birds, dark reed beds and a broken reflection leading the eye toward the cabin. Use indigo, muted teal and warm cream. A small caption may sit beneath the scene. Preserve a feeling of stillness.",
+    "max_edits": 5
+  },
+  "agent": "Codex assistant, interactive visual inspection in this task",
+  "review_method": "same-agent visual critique; not independent human evaluation",
+  "edits": 1,
+  "commands": 9,
+  "tokens": null,
+  "token_note": "null means the host did not expose token usage",
+  "critique_before": 0.59,
+  "critique_after": 0.78,
+  "locality": {
+    "changed_pixels": 23300,
+    "outside_changed_pixels": 0,
+    "changed_bounds": [38, 76, 702, 499],
+    "scopes": [[0, 0, 768, 768]]
+  },
+  "cold_identical": true,
+  "export_identical": true,
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:e960b4de3435cfffe1102be94883d6b1a8de03578b0a8e5f48fba1d4cd86a8c6",
+      "png_hash": "sha256:497f152d270dcde689c8ab2894c84bdef7fb0f304289b6ab4e645ecd127ed9ad",
+      "png": "before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 1,
+      "timestamp": "2026-09-08T19:24:50.908Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:53e217bc2006b321f9d56c801983b298c7994c82e6f95c36b90a753e24ac949f",
+      "png_hash": "sha256:fe0a4db072f1fa6eee3fb32f64443230e78b12e5fc86b7254b6269f810c0c8e5",
+      "png": "after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 2,
+      "timestamp": "2026-09-08T19:27:10.250Z",
+      "tokens": null
+    }
+  ]
+}

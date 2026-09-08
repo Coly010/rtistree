@@ -1,0 +1,42 @@
+{
+  "method": "Interactive authoring and same-agent visual critique in this Codex task. Corrections were chosen after viewing the PNGs. These are not independent or held-out quality evaluations.",
+  "tokens": null,
+  "trials": [
+    {
+      "id": "reading-club",
+      "status": "pass",
+      "edits": 2,
+      "commands": 7,
+      "critique_before": 0.68,
+      "critique_after": 0.86,
+      "changed_pixels": 130006,
+      "outside_changed_pixels": 0,
+      "cold_identical": true,
+      "export_identical": true
+    },
+    {
+      "id": "marsh",
+      "status": "pass",
+      "edits": 1,
+      "commands": 9,
+      "critique_before": 0.59,
+      "critique_after": 0.78,
+      "changed_pixels": 23300,
+      "outside_changed_pixels": 0,
+      "cold_identical": true,
+      "export_identical": true
+    },
+    {
+      "id": "pear",
+      "status": "pass",
+      "edits": 2,
+      "commands": 6,
+      "critique_before": 0.42,
+      "critique_after": 0.79,
+      "changed_pixels": 33367,
+      "outside_changed_pixels": 0,
+      "cold_identical": true,
+      "export_identical": true
+    }
+  ]
+}

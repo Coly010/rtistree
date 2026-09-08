@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["poster", "illustration", "raster-refinement"]
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 30
+    },
+    "max_edits": {
+      "default": 6,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "allowed_bounds": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/__schema0"
+        },
+        {
+          "$ref": "#/$defs/__schema0"
+        },
+        {
+          "$ref": "#/$defs/__schema1"
+        },
+        {
+          "$ref": "#/$defs/__schema1"
+        }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    }
+  },
+  "required": ["id", "category", "prompt", "max_edits"],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "number"
+    },
+    "__schema1": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 8192,
+      "$ref": "#/$defs/__schema0"
+    }
+  }
+}

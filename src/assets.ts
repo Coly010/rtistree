@@ -77,3 +77,23 @@ export async function loadAssets(scene: Scene, root: string): Promise<LoadedAsse
   }
   return { images, hashes };
 }
+
+const projectFonts = new Set<string>();
+export async function registerProjectFonts(scene: Scene, root: string) {
+  const hashes: Record<string, string> = {},
+    aliases: Record<string, string> = {};
+  for (const [id, font] of Object.entries(scene.fonts ?? {})) {
+    const bytes = await readFile(await localAssetPath(root, font.source)),
+      hash = sha256(bytes);
+    if (bytes.length > 20 * 1024 * 1024) throw new Error('Font exceeds 20 MiB');
+    if (font.hash && font.hash !== hash) throw new Error(`Font hash mismatch: ${id}`);
+    const alias = `Rtistree-custom-${hash.slice(7)}`;
+    if (!projectFonts.has(hash)) {
+      if (!GlobalFonts.register(bytes, alias)) throw new Error(`Invalid font: ${id}`);
+      projectFonts.add(hash);
+    }
+    hashes[`custom:${id}`] = hash;
+    aliases[id] = alias;
+  }
+  return { hashes, aliases };
+}

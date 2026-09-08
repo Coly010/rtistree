@@ -21,30 +21,38 @@ export const blendSchema = z.enum([
   'soft-light',
   'hard-light',
 ]);
+export const coordinateSchema = {
+  space: z.enum(['canvas', 'layer']).optional(),
+  reference_size: z.tuple([positive, positive]).optional(),
+};
 export const maskSchema = z.discriminatedUnion('type', [
   z.strictObject({
     type: z.literal('rectangle'),
     bounds: boundsSchema,
+    ...coordinateSchema,
     feather: finite.min(0).max(128).default(0),
   }),
   z.strictObject({
     type: z.literal('ellipse'),
     bounds: boundsSchema,
+    ...coordinateSchema,
     feather: finite.min(0).max(128).default(0),
   }),
   z.strictObject({
     type: z.literal('polygon'),
     points: z.array(pointSchema).min(3).max(4096),
+    ...coordinateSchema,
     feather: finite.min(0).max(128).default(0),
   }),
   z.strictObject({
     type: z.literal('semantic-object'),
     target: idSchema,
+    ...coordinateSchema,
     feather: finite.min(0).max(128).default(0),
   }),
 ]);
 export type Mask = z.infer<typeof maskSchema>;
-const scope = { bounds: boundsSchema, mask: maskSchema.optional() };
+const scope = { ...coordinateSchema, bounds: boundsSchema, mask: maskSchema.optional() };
 export const rasterOperationSchema = z.discriminatedUnion('type', [
   z.strictObject({ type: z.literal('fill'), ...scope, colour: colourSchema }),
   z.strictObject({
@@ -91,11 +99,20 @@ export const rasterOperationSchema = z.discriminatedUnion('type', [
   }),
 ]);
 export type RasterOperation = z.infer<typeof rasterOperationSchema>;
+export const rasterRegionSchema = z.strictObject({
+  id: idSchema,
+  ...coordinateSchema,
+  bounds: boundsSchema,
+  scale: z.number().int().min(1).max(4).default(2),
+  source: idSchema.optional(),
+  operations: z.array(rasterOperationSchema).max(256).default([]),
+});
+export type RasterRegion = z.infer<typeof rasterRegionSchema>;
 export const effectSchema = z.discriminatedUnion('type', [
   z.strictObject({ type: z.literal('blur'), radius: finite.min(0).max(128) }),
 ]);
 export const styleSchema = z.strictObject({
-  font: z.enum(['inter', 'display']).default('inter'),
+  font: idSchema.default('inter'),
   size: finite.positive().max(1024).default(32),
   weight: z.enum(['regular', 'bold']).default('regular'),
   colour: colourSchema.default('#ffffff'),
@@ -119,6 +136,7 @@ export const generatorSchema = z.discriminatedUnion('type', [
 ]);
 export const paletteSchema = z
   .strictObject({
+    ...coordinateSchema,
     bounds: boundsSchema,
     palette: z.record(z.string().length(1), colourSchema),
     pixels: z.array(z.string().min(1).max(256)).min(1).max(256),
@@ -155,6 +173,7 @@ export const shapeSchema = z.discriminatedUnion('type', [
 const dimension = z.union([positive, z.string().regex(/^(?:100|\d{1,2})(?:\.\d+)?%$/)]);
 export const layoutSchema = z.strictObject({
   type: z.enum(['absolute', 'horizontal', 'vertical']).default('absolute'),
+  justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
   padding: finite.min(0).max(4096).default(0),
   gap: finite.min(0).max(4096).default(0),
   align: z.enum(['start', 'center', 'end']).default('start'),
@@ -189,6 +208,8 @@ export const layerSchema = z.strictObject({
   z: finite.default(0),
   bounds: boundsSchema.optional(),
   width: dimension.optional(),
+  aspect_ratio: finite.positive().max(100).optional(),
+  grow: finite.min(0).max(100).optional(),
   height: dimension.optional(),
   anchor: z
     .enum(['top-left', 'center', 'top-right', 'bottom-left', 'bottom-right'])
@@ -209,6 +230,7 @@ export const layerSchema = z.strictObject({
   mask: maskSchema.optional(),
   effects: z.array(effectSchema).max(16).default([]),
   operations: z.array(rasterOperationSchema).max(1000).default([]),
+  regions: z.array(rasterRegionSchema).max(256).optional(),
   tiles: z.array(paletteSchema).max(4096).default([]),
   get children() {
     return z.array(layerSchema).max(256).default([]);
@@ -216,6 +238,14 @@ export const layerSchema = z.strictObject({
 });
 export type Layer = z.infer<typeof layerSchema>;
 export const ruleSchema = z.discriminatedUnion('type', [
+  z.strictObject({
+    type: z.literal('pixel-contrast'),
+    target: idSchema,
+    minimum: finite.min(1).max(21).default(4.5),
+    percentile: unit.default(0.1),
+  }),
+  z.strictObject({ type: z.literal('visible-area'), target: idSchema, minimum: unit.default(0.5) }),
+
   z.strictObject({
     type: z.literal('region-luma'),
     bounds: boundsSchema,
@@ -234,6 +264,13 @@ export const ruleSchema = z.discriminatedUnion('type', [
   }),
   z.strictObject({ type: z.literal('no-overlap'), target: idSchema, other: idSchema }),
 ]);
+export const fontSchema = z.strictObject({
+  source: z.string().min(1),
+  hash: z
+    .string()
+    .regex(/^sha256:[a-f0-9]{64}$/)
+    .optional(),
+});
 export const sceneSchema = z.strictObject({
   version: z.literal(1),
   canvas: z.strictObject({
@@ -242,6 +279,7 @@ export const sceneSchema = z.strictObject({
     colour_space: z.literal('srgb').default('srgb'),
     background: colourSchema.default('#00000000'),
   }),
+  fonts: z.record(idSchema, fontSchema).optional(),
   metadata: z.record(z.string(), z.json()).default({}),
   assets: z.record(idSchema, assetSchema).default({}),
   layers: z.array(layerSchema).max(256),
@@ -257,6 +295,9 @@ export function flattenLayers(layers: Layer[]): Layer[] {
 
 export function parseScene(input: unknown): Scene {
   const scene = sceneSchema.parse(input);
+  for (const id of Object.keys(scene.fonts ?? {}))
+    if (['inter', 'display', 'inter-bold'].includes(id))
+      throw new Error('Cannot replace a bundled font name');
   const all = flattenLayers(scene.layers);
   if (all.length > 256) throw new Error('A scene may contain at most 256 layers');
   const ids = new Set<string>();
@@ -291,16 +332,35 @@ export function parseScene(input: unknown): Scene {
       layer.type === 'adjustment' &&
       (layer.effects.length ||
         layer.tiles.length ||
+        (layer.regions?.length ?? 0) ||
         layer.blend_mode !== 'normal' ||
         layer.transform)
     )
       throw new Error(`${layer.id}: adjustment layers support operations, masks and opacity only`);
-    if (layer.type === 'text') layer.style = styleSchema.parse(layer.style ?? {});
+    if (layer.type === 'text') {
+      layer.style = styleSchema.parse(layer.style ?? {});
+      if (
+        !['inter', 'display'].includes(layer.style.font) &&
+        !Object.hasOwn(scene.fonts ?? {}, layer.style.font)
+      )
+        throw new Error(`Unknown font: ${layer.style.font}`);
+    }
+    const regionIds = new Set<string>();
+    for (const region of layer.regions ?? []) {
+      if (regionIds.has(region.id)) throw new Error('Duplicate region id');
+      regionIds.add(region.id);
+      if (region.source && !Object.hasOwn(scene.assets, region.source))
+        throw new Error(`Unknown region asset: ${region.source}`);
+    }
     if (layer.source && !Object.hasOwn(scene.assets, layer.source))
       throw new Error(`Unknown asset: ${layer.source}`);
   }
   for (const layer of all)
-    for (const mask of [layer.mask, ...layer.operations.map((op) => op.mask)])
+    for (const mask of [
+      layer.mask,
+      ...layer.operations.map((op) => op.mask),
+      ...(layer.regions ?? []).flatMap((r) => r.operations.map((op) => op.mask)),
+    ])
       if (
         mask?.type === 'semantic-object' &&
         all.find((target) => target.id === mask.target)?.type === 'adjustment'
@@ -311,9 +371,11 @@ export function parseScene(input: unknown): Scene {
       layer.id,
       [
         ...layer.children.map((child) => child.id),
-        ...[layer.mask, ...layer.operations.map((op) => op.mask)].flatMap((mask) =>
-          mask?.type === 'semantic-object' ? [mask.target] : [],
-        ),
+        ...[
+          layer.mask,
+          ...layer.operations.map((op) => op.mask),
+          ...(layer.regions ?? []).flatMap((r) => r.operations.map((op) => op.mask)),
+        ].flatMap((mask) => (mask?.type === 'semantic-object' ? [mask.target] : [])),
       ],
     ]),
   );

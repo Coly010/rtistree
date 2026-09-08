@@ -1,0 +1,493 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 768,
+    "height": 768,
+    "colour_space": "srgb",
+    "background": "#122e3a"
+  },
+  "metadata": {},
+  "assets": {},
+  "layers": [
+    {
+      "id": "sky",
+      "type": "procedural",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "anchor": "top-left",
+      "fit": "contain",
+      "generator": {
+        "type": "gradient",
+        "from": "#14223b",
+        "to": "#73978f",
+        "angle": 90
+      },
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "moon",
+      "type": "vector",
+      "visible": true,
+      "opacity": 0.72,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [536, 76, 105, 105],
+      "anchor": "top-left",
+      "shape": {
+        "type": "ellipse",
+        "fill": "#eadfb8",
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "horizon",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M0 334 Q120 298 237 328 Q430 277 569 325 Q668 301 768 338 L768 440 L0 440 Z",
+        "fill": "#385e63",
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "water",
+      "type": "procedural",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 370, 768, 398],
+      "anchor": "top-left",
+      "fit": "contain",
+      "generator": {
+        "type": "gradient",
+        "from": "#668c89",
+        "to": "#254b58",
+        "angle": 90
+      },
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "bank",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M0 355 Q150 326 263 361 L411 390 L213 409 L0 414 Z",
+        "fill": "#23474e",
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "cabin",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [160, 304, 108, 69],
+      "anchor": "top-left",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#455f5c",
+        "radius": 0,
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "regions": [
+        {
+          "id": "planks",
+          "space": "layer",
+          "reference_size": [108, 69],
+          "bounds": [0, 0, 108, 69],
+          "scale": 2,
+          "operations": [
+            {
+              "type": "paintStroke",
+              "bounds": [0, 0, 108, 69],
+              "path": [
+                [5, 51],
+                [27, 51]
+              ],
+              "radius": 0.45,
+              "hardness": 1,
+              "colour": "#b4b69a",
+              "opacity": 0.25
+            },
+            {
+              "type": "paintStroke",
+              "bounds": [0, 0, 108, 69],
+              "path": [
+                [65, 38],
+                [78, 38]
+              ],
+              "radius": 0.45,
+              "hardness": 1,
+              "colour": "#b4b69a",
+              "opacity": 0.25
+            }
+          ]
+        }
+      ],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "roof",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M145 304 L214 254 L282 304 Z",
+        "fill": "#172c38",
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "window",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [192, 324, 25, 26],
+      "anchor": "top-left",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#f0c17b",
+        "radius": 0,
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "door",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [240, 329, 13, 44],
+      "anchor": "top-left",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#213841",
+        "radius": 0,
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "reflections",
+      "type": "raster",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "anchor": "top-left",
+      "fit": "contain",
+      "effects": [],
+      "operations": [
+        {
+          "type": "paintStroke",
+          "bounds": [150, 402, 190, 170],
+          "path": [
+            [184, 416],
+            [229, 416]
+          ],
+          "radius": 1,
+          "hardness": 1,
+          "colour": "#ceb780",
+          "opacity": 0.5
+        },
+        {
+          "type": "paintStroke",
+          "bounds": [150, 402, 190, 170],
+          "path": [
+            [169, 442],
+            [241, 442]
+          ],
+          "radius": 1,
+          "hardness": 1,
+          "colour": "#ceb780",
+          "opacity": 0.4
+        },
+        {
+          "type": "paintStroke",
+          "bounds": [150, 402, 190, 170],
+          "path": [
+            [181, 471],
+            [253, 471]
+          ],
+          "radius": 1,
+          "hardness": 1,
+          "colour": "#ceb780",
+          "opacity": 0.3
+        },
+        {
+          "type": "paintStroke",
+          "bounds": [150, 475, 190, 105],
+          "path": [
+            [160, 497],
+            [226, 496]
+          ],
+          "radius": 1,
+          "hardness": 1,
+          "colour": "#d1b575",
+          "opacity": 0.22
+        },
+        {
+          "type": "paintStroke",
+          "bounds": [150, 475, 190, 105],
+          "path": [
+            [198, 531],
+            [276, 530]
+          ],
+          "radius": 0.8,
+          "hardness": 1,
+          "colour": "#d1b575",
+          "opacity": 0.15
+        }
+      ],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "bird1",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M388 188 Q399 181 409 190 Q417 180 429 185",
+        "fill": "#00000000",
+        "stroke": "#d8ded0",
+        "stroke_width": 2
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "bird2",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M439 211 Q447 205 455 212 Q463 203 473 208",
+        "fill": "#00000000",
+        "stroke": "#d8ded0",
+        "stroke_width": 2
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "bird3",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M472 170 Q480 165 486 172 Q493 164 501 169",
+        "fill": "#00000000",
+        "stroke": "#d8ded0",
+        "stroke_width": 2
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "front",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M0 590 Q129 537 276 600 Q398 652 581 577 Q673 552 768 573 L768 768 L0 768 Z",
+        "fill": "#142e3e",
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "caption",
+      "type": "text",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [48, 683, 672, 45],
+      "anchor": "top-left",
+      "content": "When the marsh falls quiet",
+      "style": {
+        "font": "display",
+        "size": 32,
+        "weight": "regular",
+        "colour": "#d2d9c4",
+        "line_height": 1.2,
+        "align": "left"
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "window-glow",
+      "type": "vector",
+      "visible": true,
+      "opacity": 0.22,
+      "blend_mode": "normal",
+      "z": 2,
+      "bounds": [172, 308, 65, 58],
+      "anchor": "top-left",
+      "shape": {
+        "type": "ellipse",
+        "fill": "#e3ad62",
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [
+        {
+          "type": "blur",
+          "radius": 17
+        }
+      ],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "reeds-left",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 3,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M49 594 Q55 553 40 529 M65 590 Q73 540 67 507 M81 587 Q83 552 95 532 M109 584 Q115 554 113 542 M140 587 Q142 553 130 535 M159 590 Q166 560 179 548",
+        "fill": "#00000000",
+        "stroke": "#142e3e",
+        "stroke_width": 3
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "reeds-right",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 3,
+      "bounds": [0, 0, 768, 768],
+      "anchor": "top-left",
+      "shape": {
+        "type": "path",
+        "d": "M623 579 Q616 534 600 516 M640 576 Q638 521 648 493 M656 574 Q666 539 682 519 M695 577 Q691 528 706 502 M715 579 Q719 553 739 536",
+        "fill": "#00000000",
+        "stroke": "#142e3e",
+        "stroke_width": 3
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    }
+  ],
+  "verification": {
+    "rules": []
+  }
+}

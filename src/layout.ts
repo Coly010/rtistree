@@ -59,17 +59,55 @@ export function resolveLayout(scene: Scene): ResolvedLayer[] {
     // Percentages on the flow axis share space remaining after gaps.
     const aw = w - (horizontal ? gap * Math.max(0, count - 1) : 0),
       ah = h - (vertical ? gap * Math.max(0, count - 1) : 0);
-    return layers.map((layer) => {
-      const width = dimension(
-        layer.width,
-        aw,
-        layer.bounds?.[2] ?? (horizontal ? aw / Math.max(1, count) : w),
+    const axis = horizontal ? 'width' : 'height',
+      baseSize = horizontal ? aw : ah;
+    const growing = layers.filter((l) => (l.grow ?? 0) > 0),
+      totalGrow = growing.reduce((sum, l) => sum + l.grow!, 0);
+    const fixed = layers
+      .filter((l) => !growing.includes(l))
+      .reduce(
+        (sum, l) =>
+          sum +
+          dimension(
+            l[axis],
+            baseSize,
+            l.bounds?.[horizontal ? 2 : 3] ?? baseSize / Math.max(1, count),
+          ),
+        0,
       );
-      const height = dimension(
-        layer.height,
-        ah,
-        layer.bounds?.[3] ?? (vertical ? ah / Math.max(1, count) : h),
-      );
+    const free = Math.max(0, baseSize - fixed);
+    const sizes = layers.map((layer) => {
+      const width =
+        horizontal && layer.grow
+          ? (free * layer.grow) / totalGrow
+          : dimension(
+              layer.width,
+              aw,
+              layer.bounds?.[2] ?? (horizontal ? aw / Math.max(1, count) : w),
+            );
+      let height =
+        vertical && layer.grow
+          ? (free * layer.grow) / totalGrow
+          : dimension(
+              layer.height,
+              ah,
+              layer.bounds?.[3] ?? (vertical ? ah / Math.max(1, count) : h),
+            );
+      if (layer.aspect_ratio && layer.height === undefined) height = width / layer.aspect_ratio;
+      return [width, height] as [number, number];
+    });
+    const remaining =
+      (horizontal ? w : h) -
+      sizes.reduce((sum, s) => sum + s[horizontal ? 0 : 1], 0) -
+      gap * Math.max(0, count - 1);
+    let effectiveGap = gap;
+    if (horizontal || vertical) {
+      if (layout?.justify === 'center') cursor += remaining / 2;
+      if (layout?.justify === 'end') cursor += remaining;
+      if (layout?.justify === 'space-between' && count > 1) effectiveGap += remaining / (count - 1);
+    }
+    return layers.map((layer, layerIndex) => {
+      const [width, height] = sizes[layerIndex]!;
       if (width <= 0 || height <= 0 || width > 8192 || height > 8192)
         throw new Error(`Invalid resolved size: ${layer.id}`);
       let x = layer.bounds?.[0] ?? padding,
@@ -82,11 +120,11 @@ export function resolveLayout(scene: Scene): ResolvedLayer[] {
         if (horizontal) {
           x = cursor;
           y = cross;
-          cursor += width + gap;
+          cursor += width + effectiveGap;
         } else {
           y = cursor;
           x = cross;
-          cursor += height + gap;
+          cursor += height + effectiveGap;
         }
       } else if (layer.anchor !== 'top-left') {
         if (layer.anchor === 'center') {
