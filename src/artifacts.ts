@@ -1,0 +1,33 @@
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { dirname, extname, join } from 'node:path';
+import { randomUUID } from 'node:crypto';
+import { localAssetPath, sha256 } from './assets.js';
+import type { Scene } from './schema.js';
+import type { RenderResult } from './render.js';
+export async function writeArtifact(file: string, data: string | Uint8Array): Promise<void> {
+  await mkdir(dirname(file), { recursive: true });
+  const temporary = `${file}.${randomUUID()}.tmp`;
+  await writeFile(temporary, data);
+  await rename(temporary, file);
+}
+export async function writeRender(file: string, result: RenderResult) {
+  await writeArtifact(file, result.png);
+  await writeArtifact(`${file}.evidence.json`, JSON.stringify(result.evidence, null, 2) + '\n');
+  return { image: file, evidence: `${file}.evidence.json`, ...result.evidence.render };
+}
+
+/** Write a fresh baseline with immutable local assets, without any history. */
+export async function writeSceneBundle(input: Scene, root: string, file: string) {
+  const scene = structuredClone(input);
+  for (const asset of Object.values(scene.assets)) {
+    const source = await localAssetPath(root, asset.source),
+      bytes = await readFile(source),
+      hash = sha256(bytes);
+    if (asset.hash && asset.hash !== hash) throw new Error('Asset changed before export');
+    const relative = join('assets', `${hash.slice(7)}${extname(source).toLowerCase()}`);
+    await writeArtifact(join(dirname(file), relative), bytes);
+    asset.source = relative;
+    asset.hash = hash;
+  }
+  await writeArtifact(file, JSON.stringify(scene, null, 2) + '\n');
+}

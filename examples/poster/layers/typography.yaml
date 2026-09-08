@@ -1,0 +1,53 @@
+layers:
+  - id: brand
+    type: text
+    bounds: [72, 72, 520, 32]
+    content: 'FIELDNOTES / INDEPENDENT PUBLISHING'
+    style: { size: 13, weight: bold, colour: '#deceac' }
+  - id: edition
+    type: text
+    bounds: [756, 72, 196, 32]
+    content: 'THE AUTUMN EDITION'
+    style: { size: 11, colour: '#a4b6ae', align: right }
+  - id: eyebrow
+    type: text
+    bounds: [72, 227, 390, 28]
+    content: 'FOR THE WANDERER IN ALL OF US'
+    style: { size: 11, weight: bold, colour: '#e2ad7c' }
+  - id: headline
+    type: text
+    role: headline
+    bounds: [68, 285, 482, 222]
+    content: "A field guide\nto elsewhere."
+    style: { font: display, size: 72, colour: '#f1e6cf', line_height: 1.12 }
+  - id: description
+    type: text
+    role: body-copy
+    bounds: [72, 533, 350, 104]
+    content: 'Take the long way home. Discover the landscapes, small wonders, and quiet places that make a life feel larger.'
+    style: { size: 18, colour: '#afc0b6', line_height: 1.65 }
+  - id: cta-background
+    type: vector
+    bounds: [72, 704, 226, 60]
+    shape: { type: rectangle, fill: '#e2ad7c', radius: 3 }
+  - id: cta
+    type: text
+    role: CTA
+    bounds: [91, 725, 188, 25]
+    content: 'EXPLORE THE BOOK'
+    style: { size: 13, weight: bold, colour: '#122c31', align: center }
+  - id: cta-note
+    type: text
+    bounds: [72, 786, 350, 25]
+    content: 'Clothbound. Made to keep.'
+    style: { size: 12, colour: '#829f97' }
+  - id: footer
+    type: text
+    bounds: [72, 938, 580, 26]
+    content: 'GOOD BOOKS TAKE YOU SOMEWHERE.'
+    style: { size: 11, weight: bold, colour: '#a4b6ae' }
+  - id: folio
+    type: text
+    bounds: [820, 936, 132, 26]
+    content: 'VOL. 04 / 2026'
+    style: { size: 11, colour: '#a4b6ae', align: right }

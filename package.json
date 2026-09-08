@@ -1,0 +1,48 @@
+{
+  "name": "rtistree",
+  "version": "0.1.0",
+  "description": "Deterministic, agent-operable raster graphics engine",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "check": "npm run build && npm test",
+    "graphics": "node --import tsx src/cli.ts",
+    "demo": "node --import tsx scripts/demo.ts",
+    "schema": "node --import tsx scripts/schema.ts",
+    "format": "prettier --write src tests scripts docs examples schemas README.md package.json tsconfig.json .github .prettierrc.json",
+    "format:check": "prettier --check src tests scripts docs examples schemas README.md package.json tsconfig.json .github .prettierrc.json"
+  },
+  "keywords": [],
+  "type": "module",
+  "dependencies": {
+    "@fontsource/dm-serif-display": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "@napi-rs/canvas": "1.0.8",
+    "yaml": "2.9.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "26.5.0",
+    "prettier": "3.9.6",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "bin": {
+    "graphics": "./dist/cli.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "docs"
+  ]
+}

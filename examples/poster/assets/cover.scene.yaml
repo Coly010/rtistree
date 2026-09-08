@@ -1,0 +1,71 @@
+version: 1
+canvas: { width: 400, height: 600, background: '#ddae78' }
+layers:
+  - id: sky
+    type: procedural
+    generator: { type: gradient, from: '#edcda4', to: '#b86548', angle: 90 }
+  - id: sun
+    type: vector
+    bounds: [230, 203, 122, 122]
+    shape: { type: ellipse, fill: '#f7ddb0' }
+  - id: distant
+    type: vector
+    bounds: [0, 0, 400, 600]
+    shape:
+      {
+        type: path,
+        fill: '#a26656',
+        d: 'M0 372 L63 283 L109 340 L170 255 L273 368 L343 292 L400 350 L400 600 L0 600 Z',
+      }
+  - id: mountain
+    type: vector
+    bounds: [0, 0, 400, 600]
+    shape:
+      {
+        type: path,
+        fill: '#344b49',
+        d: 'M0 348 L76 411 L149 339 L228 428 L321 365 L400 427 L400 600 L0 600 Z',
+      }
+  - id: foreground
+    type: vector
+    bounds: [0, 0, 400, 600]
+    shape:
+      {
+        type: path,
+        fill: '#193b3e',
+        d: 'M0 460 Q100 403 203 466 Q295 414 400 482 L400 600 L0 600 Z',
+      }
+  - id: river
+    type: vector
+    bounds: [0, 0, 400, 600]
+    shape:
+      {
+        type: path,
+        fill: '#b9c3a4',
+        d: 'M207 429 Q176 465 216 492 Q255 527 151 600 L268 600 Q306 536 252 493 Q197 456 216 429 Z',
+      }
+  - id: texture
+    type: procedural
+    generator: { type: noise, seed: 84719, amount: 0.18, colour: '#888888' }
+    blend_mode: soft-light
+    opacity: 0.28
+  - id: edition
+    type: text
+    bounds: [38, 35, 324, 28]
+    content: 'FIELDNOTES PRESS / 004'
+    style: { size: 12, weight: bold, colour: '#29433e' }
+  - id: title
+    type: text
+    bounds: [36, 80, 340, 150]
+    content: "The quiet\natlas"
+    style: { font: display, size: 64, line_height: 1.03, colour: '#233e3d' }
+  - id: subtitle
+    type: text
+    bounds: [39, 228, 190, 55]
+    content: "A guide to getting\nbeautifully lost"
+    style: { size: 12, line_height: 1.4, colour: '#29433e' }
+  - id: author
+    type: text
+    bounds: [38, 551, 324, 24]
+    content: 'ELENA MARLOW'
+    style: { size: 13, weight: bold, colour: '#f0dfbc' }

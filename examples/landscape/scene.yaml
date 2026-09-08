@@ -1,0 +1,21 @@
+version: 1
+canvas: { width: 1024, height: 1024, background: '#f1d9b0' }
+metadata:
+  { title: Last light at Alder Lake, intent: Illustration from primitives and scoped paint. }
+include: [layers/sky.yaml, layers/land.yaml]
+layers:
+  - id: caption
+    type: text
+    role: headline
+    bounds: [64, 883, 840, 70]
+    content: 'Last light at Alder Lake'
+    style: { font: display, size: 48, colour: '#f0e4c7' }
+  - id: location
+    type: text
+    bounds: [67, 961, 800, 20]
+    content: '48° NORTH / AN EXERCISE IN SHAPE, LIGHT, AND STILLNESS'
+    style: { size: 11, colour: '#b7c0a5' }
+verification:
+  rules:
+    - { type: safe-area, target: caption, minimum: 48 }
+    - { type: required-role, role: primary-subject }

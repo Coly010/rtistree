@@ -1,0 +1,17 @@
+version: 1
+canvas: { width: 1024, height: 1024, colour_space: srgb, background: '#102c31' }
+metadata:
+  title: The Quiet Atlas — launch poster
+  intent: An editorial book poster, with one underlit local detail to refine.
+include:
+  - layers/background.yaml
+  - layers/product.yaml
+  - layers/typography.yaml
+verification:
+  rules:
+    - { type: required-role, role: hero-product }
+    - { type: required-role, role: headline }
+    - { type: safe-area, target: headline, minimum: 64 }
+    - { type: text-equals, target: headline, expected: "A field guide\nto elsewhere." }
+    - { type: contrast, target: headline, against: '#102c31', minimum: 4.5 }
+    - { type: region-luma, bounds: [755, 610, 56, 84], minimum: 0.52 }

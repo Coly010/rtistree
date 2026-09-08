@@ -1,0 +1,10 @@
+{
+  "reason": "Restore the underlit detail of the book illustration while preserving the poster's layout, typography, and every pixel outside the selected region.",
+  "commands": [
+    {
+      "type": "applyRasterOperation",
+      "target": "cover",
+      "operation": { "type": "brightness", "bounds": [755, 610, 56, 84], "amount": 0.06 }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "before": {
+    "status": "fail",
+    "score": 0.9375,
+    "issues": [
+      {
+        "id": "issue-1",
+        "category": "composition",
+        "severity": "medium",
+        "region": [755, 610, 56, 84],
+        "message": "Rendered region luma is outside the requested range.",
+        "measured": 0.4914004455115222,
+        "expected": 0.52
+      }
+    ]
+  },
+  "after": {
+    "status": "pass",
+    "score": 1
+  },
+  "iterations": 1,
+  "locality": {
+    "changed_pixels": 4704,
+    "outside_changed_pixels": 0,
+    "changed_bounds": [755, 610, 56, 84],
+    "scopes": [[755, 610, 56, 84]]
+  },
+  "reopened_identical": true,
+  "undo_identical": true,
+  "redo_identical": true,
+  "export_identical": true,
+  "renderer": {
+    "name": "rtistree-skia",
+    "version": "0.1.0",
+    "backend": "@napi-rs/canvas@1.0.8",
+    "node": "v24.14.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "scene_hash": "sha256:80c2bd4d6de618e31d54f5b547ad72682713a7f0241ff51a15b1639bb1347149",
+  "png_hash": "sha256:65ba24cef903f57275c743ec04acc37f0fc38d9fe848b7bdcc7970298fbb0bde"
+}

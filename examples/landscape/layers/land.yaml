@@ -1,0 +1,94 @@
+layers:
+  - id: distant-ridge
+    type: vector
+    role: primary-subject
+    shape:
+      type: path
+      fill: '#647572'
+      d: 'M0 487 L110 378 L190 423 L356 284 L454 388 L526 347 L655 489 L760 405 L851 478 L968 395 L1024 437 L1024 700 L0 700 Z'
+  - id: far-ridge
+    type: vector
+    shape:
+      type: path
+      fill: '#3d5e60'
+      d: 'M0 545 L180 457 L280 515 L413 421 L538 537 L692 447 L831 542 L928 489 L1024 561 L1024 750 L0 750 Z'
+  - id: lake
+    type: procedural
+    bounds: [0, 586, 1024, 250]
+    generator: { type: gradient, from: '#a8ad91', to: '#426a69', angle: 90 }
+  - id: reflection
+    type: raster
+    opacity: 0.55
+    operations:
+      - {
+          type: paintStroke,
+          bounds: [520, 602, 338, 165],
+          path: [[635, 612], [743, 612]],
+          radius: 2,
+          colour: '#efd297',
+          opacity: 0.9,
+        }
+      - {
+          type: paintStroke,
+          bounds: [520, 602, 338, 165],
+          path: [[601, 631], [765, 631]],
+          radius: 2,
+          colour: '#efd297',
+          opacity: 0.7,
+        }
+      - {
+          type: paintStroke,
+          bounds: [520, 602, 338, 165],
+          path: [[620, 647], [750, 647]],
+          radius: 1,
+          colour: '#efd297',
+          opacity: 0.8,
+        }
+      - {
+          type: paintStroke,
+          bounds: [520, 602, 338, 165],
+          path: [[563, 672], [785, 672]],
+          radius: 2,
+          colour: '#efd297',
+          opacity: 0.6,
+        }
+      - {
+          type: paintStroke,
+          bounds: [520, 602, 338, 165],
+          path: [[588, 703], [763, 703]],
+          radius: 1,
+          colour: '#efd297',
+          opacity: 0.5,
+        }
+  - id: near-shore
+    type: vector
+    shape: { type: path, fill: '#244b50', d: 'M0 665 Q180 610 315 681 L503 709 L309 730 L0 724 Z' }
+  - id: foreground
+    type: vector
+    shape:
+      {
+        type: path,
+        fill: '#183b42',
+        d: 'M0 739 Q154 703 322 772 Q483 845 692 784 Q864 725 1024 782 L1024 1024 L0 1024 Z',
+      }
+  - id: pine-left
+    type: vector
+    shape:
+      {
+        type: path,
+        fill: '#163a40',
+        d: 'M100 420 L60 527 L82 522 L43 604 L73 598 L25 687 L93 671 L89 777 L110 777 L108 670 L168 687 L127 601 L150 607 L118 523 L136 527 Z',
+      }
+  - id: pine-right
+    type: vector
+    shape:
+      {
+        type: path,
+        fill: '#163a40',
+        d: 'M905 520 L868 610 L889 605 L850 692 L879 684 L837 768 L899 750 L896 832 L915 832 L913 750 L972 768 L932 684 L956 692 L923 608 L942 611 Z',
+      }
+  - id: atmosphere
+    type: procedural
+    generator: { type: noise, seed: 19371, amount: 0.18, colour: '#808080' }
+    blend_mode: soft-light
+    opacity: 0.18

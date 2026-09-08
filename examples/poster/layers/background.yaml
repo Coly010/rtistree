@@ -1,0 +1,35 @@
+layers:
+  - id: background
+    type: procedural
+    role: background
+    generator: { type: gradient, from: '#163e41', to: '#081f27', angle: 125 }
+  - id: halo
+    type: vector
+    bounds: [538, 193, 432, 432]
+    shape: { type: ellipse, fill: '#528982' }
+    effects: [{ type: blur, radius: 95 }]
+    opacity: 0.26
+  - id: orbit-outer
+    type: vector
+    bounds: [493, 189, 542, 542]
+    shape: { type: ellipse, fill: '#00000000', stroke: '#76938c', stroke_width: 1 }
+    opacity: 0.2
+  - id: orbit-inner
+    type: vector
+    bounds: [537, 233, 454, 454]
+    shape: { type: ellipse, fill: '#00000000', stroke: '#76938c', stroke_width: 1 }
+    opacity: 0.15
+  - id: paper-grain
+    type: procedural
+    role: texture
+    generator: { type: noise, seed: 4510, amount: 0.2, colour: '#808080' }
+    opacity: 0.1
+    blend_mode: soft-light
+  - id: top-rule
+    type: vector
+    bounds: [72, 133, 880, 1]
+    shape: { type: rectangle, fill: '#7b989166' }
+  - id: bottom-rule
+    type: vector
+    bounds: [72, 903, 880, 1]
+    shape: { type: rectangle, fill: '#7b989166' }

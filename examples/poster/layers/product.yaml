@@ -1,0 +1,41 @@
+assets:
+  book-cover: { type: image, source: ../assets/cover.png }
+layers:
+  - id: book-shadow
+    type: vector
+    bounds: [602, 738, 322, 41]
+    shape: { type: ellipse, fill: '#020e18' }
+    effects: [{ type: blur, radius: 24 }]
+    opacity: 0.8
+  - id: book
+    type: group
+    role: hero-product
+    bounds: [576, 237, 322, 483]
+    transform: { rotation: -7 }
+    children:
+      - id: page-block
+        type: vector
+        bounds: [8, 8, 320, 483]
+        shape: { type: rectangle, fill: '#b3b7a2', radius: 2 }
+      - id: cover
+        type: asset
+        source: book-cover
+        bounds: [0, 0, 322, 483]
+        fit: stretch
+        operations:
+          - type: brightness
+            bounds: [755, 610, 56, 84]
+            amount: -0.06
+      - id: spine
+        type: vector
+        bounds: [0, 0, 7, 483]
+        shape: { type: rectangle, fill: '#142f3555' }
+      - id: spine-highlight
+        type: vector
+        bounds: [8, 0, 1, 483]
+        shape: { type: rectangle, fill: '#ffffff33' }
+  - id: product-caption
+    type: text
+    bounds: [601, 791, 328, 24]
+    content: '400 PAGES. ENDLESS POSSIBILITY.'
+    style: { size: 11, colour: '#a4b6ae', align: center }

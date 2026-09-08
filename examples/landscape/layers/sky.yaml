@@ -1,0 +1,25 @@
+layers:
+  - id: sky
+    type: procedural
+    role: background
+    generator: { type: gradient, from: '#264950', to: '#f0bd86', angle: 90 }
+  - id: sun-glow
+    type: vector
+    bounds: [506, 170, 370, 370]
+    shape: { type: ellipse, fill: '#f8c986' }
+    effects: [{ type: blur, radius: 60 }]
+    opacity: 0.55
+  - id: sun
+    type: vector
+    bounds: [592, 255, 198, 198]
+    shape: { type: ellipse, fill: '#f6d69b' }
+  - id: cloud
+    type: raster
+    operations:
+      - type: paintStroke
+        bounds: [0, 100, 540, 260]
+        path: [[70, 240], [230, 220], [420, 242]]
+        radius: 22
+        hardness: 0.05
+        opacity: 0.12
+        colour: '#efc193'

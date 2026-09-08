@@ -1,0 +1,7 @@
+node_modules/
+dist/
+examples/**/renders/
+examples/**/verification/
+examples/**/history/
+examples/**/raster/
+package-lock.json
