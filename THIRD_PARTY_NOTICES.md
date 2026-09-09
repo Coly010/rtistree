@@ -18,7 +18,7 @@ The following direct runtime dependencies are installed separately by npm; their
 | yaml                         | 2.9.0   | ISC        |
 | zod                          | 4.5.4   | MIT        |
 
-Inter and DM Serif Display are redistributed under SIL OFL 1.1. Full copyright and license texts are in `licenses/`. Website font copies retain the Inter notice. Fontsource distributes these fonts; the font licenses are distinct from package code licenses.
+Inter and DM Serif Display are redistributed under SIL OFL 1.1. Full copyright and license texts are in `licenses/`. Website font copies retain both font families’ OFL notices. Fontsource distributes these fonts; the font licenses are distinct from package code licenses.
 
 Native Skia, sharp/libvips and their transitive libraries retain their upstream licenses and notices in the distributed dependency packages. Preserve those notices when redistributing a bundled application.
 

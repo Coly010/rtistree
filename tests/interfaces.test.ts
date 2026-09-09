@@ -68,6 +68,10 @@ test('MCP discovery, typed edits, PNG crops and verification work through a clie
   await server.connect(a);
   await client.connect(b);
   try {
+    const packageInfo = JSON.parse(
+      await readFile(new URL('../package.json', import.meta.url), 'utf8'),
+    );
+    assert.equal(client.getServerVersion()?.version, packageInfo.version);
     // A fresh client receives the core workflow before requesting tools or studioHelp.
     assert.equal(client.getInstructions(), rtistreeAgentInstructions);
     assert.match(

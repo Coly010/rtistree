@@ -1,5 +1,9 @@
 # Revision 4 — no visual pass
 
+**Later user feedback:** revision 4 was called “much better.” This records relative
+improvement, not approval of every asset or a production-quality certification.
+The earlier review and `visual_pass: false` audit below remain as recorded evidence.
+
 The user rejected the original: the walk ran backward, the chest was unacceptable,
 and the poses were weak. That verdict supersedes my earlier favourable observations.
 The full original source, assets, recipes and review are in `rejected-v1/`.
@@ -22,7 +26,7 @@ separate raised sword and forward shield arm paths.
 
 The new helmet uses a rounded dome, narrow eye slit, continuous lower visor and
 rounded jaw rim. It replaces the pointed nose and disconnected angular plates.
-The user has not yet reviewed this helmet or guard revision. The viewer keeps
+At the time this review was recorded, the user had not yet reviewed this helmet or guard revision. The viewer keeps
 revision 3 available under Previous, alongside the rejected original.
 
 ## What the previous review missed

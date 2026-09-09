@@ -17,19 +17,19 @@ If npm asks to install Rtistree for the first command, accept. `init` creates a 
 It refuses existing paths, so choose a different name if `my-art` already exists.
 
 Open **hello.png** in the new directory. You should see a green disc and the text
-“Hello, Rtistree.” on a dark background. Rendering also writes an evidence JSON file.
+“Hello, Rtistree.” on a dark background. Rendering also writes `hello.png.evidence.json`.
 
 The commands below run from inside `my-art` and use the locally installed package.
 The executable is `rtistree`; older installations used `graphics`, which remains an alias.
 
 ## Understand the starter
 
-| File           | Purpose                                                |
-| -------------- | ------------------------------------------------------ |
-| `scene.json`   | Canvas, disc and title, each with an editable ID       |
-| `refine.json`  | A sample patch that brightens only the disc            |
-| `render.mjs`   | The same rendering workflow through the JavaScript SDK |
-| `package.json` | Pinned dependency and the `npm run render` script      |
+| File           | Purpose                                                 |
+| -------------- | ------------------------------------------------------- |
+| `scene.json`   | Canvas settings and disc/title layers with editable IDs |
+| `refine.json`  | A sample patch that brightens only the disc             |
+| `render.mjs`   | The same rendering workflow through the JavaScript SDK  |
+| `package.json` | Pinned dependency and the `npm run render` script       |
 
 `npm run render` runs `rtistree render scene.json -o hello.png`.
 To inspect the scene's layers and bounds:
@@ -86,7 +86,9 @@ npx rtistree export scene.json -o portable/scene.json
 npx rtistree render portable/scene.json -o portable.png
 ```
 
-The export includes referenced assets and fonts. Keep the exported directory together.
+The export includes the current resolved scene, referenced assets, fonts and any baked
+program recipes. It starts a new baseline: edit history, critiques and production-session
+reviews are not copied. Keep the exported directory together.
 
 ## Use an agent
 

@@ -1,4 +1,4 @@
-# Programmable digital art in v0.4
+# Programmable digital art
 
 The studio is the escape hatch below scene abstractions. An agent can build an image using paths and gradients, paint pressure-sensitive strokes, calculate pixel colours, sample textures, or write a custom image-processing algorithm. No image-generation model is used by these tools.
 
@@ -6,9 +6,14 @@ Scene layers still describe composition. Programs produce ordinary pinned PNG as
 
 ## First painting
 
+Run these commands from a directory where `npm install rtistree` has already completed.
+`project new` creates a scene project; unlike `init`, it does not create a package.json
+or install Rtistree. The custom size `100x100` is in millimetres and gives this example
+a 400 × 400 design canvas.
+
 ```sh
-rtistree project new study --size 100x100
-rtistree studio-help
+npx rtistree project new study --size 100x100
+npx rtistree studio-help
 ```
 
 Save this as `study/programs/rubber.js`:
@@ -41,9 +46,9 @@ Save a request as `study/paint.json`:
 ```
 
 ```sh
-rtistree program study study/paint.json
-rtistree render study -o study/output/rubber.png
-rtistree program-replay study rubberPaint
+npx rtistree program study study/paint.json
+npx rtistree render study -o study/output/rubber.png
+npx rtistree program-replay study rubberPaint
 ```
 
 Supply exactly one of `source` (a project-local JavaScript file) or `code` (an inline function body). A program receives `art` and `parameters`, runs synchronously and returns one Canvas with the declared dimensions. It cannot import modules through the public API. A new `target` creates a raster layer; an existing target must accept an image source. Omit `target` to register an asset for subsequent mask, region or layer operations. The runner captures the starting scene hash and rejects a concurrent edit before committing.
@@ -72,7 +77,8 @@ Height-field lighting is an artistic 2.5D calculation, with the viewer along pos
 
 ## Dense regional edits
 
-`readRasterRegion` / `rtistree raster-read PROJECT request.json` read a PNG crop of the composite or an isolated layer. The request contains integer canvas-space `bounds` and an optional `target`. The result includes the scene hash and an asset descriptor ready for `registerAsset`.
+`readRasterRegion` / `rtistree raster-read PROJECT request.json` read a PNG crop of the composite or an isolated layer. The request contains integer canvas-space `bounds` and an optional `target`. The result includes the scene hash and an asset descriptor (`source` and `hash`). Wrap
+that descriptor in a `registerAsset` command with an `id` before using it as a program input.
 
 `writeRasterRegion` / `rtistree raster-write PROJECT request.json` consumes:
 
@@ -89,7 +95,8 @@ Height-field lighting is an artistic 2.5D calculation, with the viewer along pos
 }
 ```
 
-The source must be a project-local PNG matching the region's exact dimensions. `replace` clears/replaces the region, including alpha; `over` composites it onto the previous pixels. The command creates or updates a named promoted region at scale 1 and stores an immutable copy of the PNG. `space: layer` captures reference dimensions, so the patch follows later transforms and resizing. `space: canvas` stays at canvas coordinates. Existing layer masks/effects still apply; locality validation rejects changes leaking outside the declared region. Undo/redo restores the prior image.
+The source must be a project-local PNG matching the region's exact dimensions. `replace` clears/replaces the region, including alpha; `over` composites it onto the previous pixels. The command creates or updates a named promoted region at scale 1 and stores an immutable copy of the PNG. `space: layer` captures reference dimensions, so the patch follows later transforms and resizing. `space: canvas` stays at canvas coordinates. The patch is composited after the target layer’s effects and ordinary operations, but
+before its mask and opacity. Ancestor effects can still change its appearance; locality validation rejects changes leaking outside the declared region. Undo/redo restores the prior image.
 
 For a custom filter, register the descriptor returned by the read, pass that asset to `runProgram.inputs`, calculate the new pixels, and write the returned PNG into a region. Use the latest scene hash returned by each mutation. Canvas-space reads cannot automatically become local-space reads of a rotated object; use canvas-space patch coordinates for a direct read/edit/write round trip.
 
@@ -101,8 +108,9 @@ Programs execute only when explicitly requested and must be trusted code. A work
 
 The runner checks a 16-megapixel output limit, 16 input images, an 8,192-pixel edge, 256 KiB source, 64 KiB parameters, and up to 30 seconds of execution. The parent watchdog allows two additional seconds for worker setup. Studio helper allocations are capped at 32 cumulative megapixels including inputs; V8's heap limit is 256 MiB. Native Canvas buffers and arbitrary allocations made through exposed native objects are outside the V8 accounting, so these limits are not an OS memory quota. Scene rendering retains its separate surface budget.
 
-The studio has no live dependency graph. Changing program code, parameters or an input does not automatically rebake dependent assets. Explicit execution replaces a target source through the existing transaction/history mechanism. If execution or commit fails, the scene is unchanged; a late failed commit can leave unreferenced content-addressed artifacts.
+Programs do not rebake automatically. The [pipeline API](atelier.md) provides an explicit
+dependency graph with caching; run it when you want to rebuild changed nodes. Changing program code, parameters or an input does not automatically rebake dependent assets. Explicit execution replaces a target source through the existing transaction/history mechanism. If execution or commit fails, the scene is unchanged; a late failed commit can leave unreferenced content-addressed artifacts.
 
 ## Trial
 
-The [manual wheel trial](../examples/manual-wheel-trial/README.md) used no model-generated or downloaded imagery. Its eight layers were painted with code, geometry, material fields, text and brushes. Source, recipes, initial/refined images, critiques and replay checks are retained. The result demonstrates a reproducible digital illustration; its visual evaluation explicitly leaves photographic realism unachieved.
+The [manual wheel trial](https://github.com/Coly010/rtistree/blob/main/examples/manual-wheel-trial/README.md) used no model-generated or downloaded imagery. Its eight layers were painted with code, geometry, material fields, text and brushes. Source, recipes, initial/refined images, critiques and replay checks are retained. The result demonstrates a reproducible digital illustration; its visual evaluation explicitly leaves photographic realism unachieved.

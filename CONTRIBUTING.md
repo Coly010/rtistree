@@ -11,12 +11,14 @@ Use Node.js 22 or newer and npm:
 npm ci
 npm run check
 npm run format:check
+npm run docs:check
 npm run demo
 ```
 
 Use `npm run package:check` to build, pack and test an actual installation outside the checkout.
 It downloads package dependencies from npm and creates a temporary directory.
 
+Website development requires Node.js 22.12+ (or Node.js 24), as declared in `website/package.json`.
 For the website, run `npm ci --prefix website` followed by `npm run dev --prefix website`.
 Run `npm run build --prefix website` to synchronize the root Markdown docs, example assets
 and fonts, and build the complete static site. Edit documentation in `docs/`, not the generated website copies.

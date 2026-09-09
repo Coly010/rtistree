@@ -50,5 +50,5 @@ export const studioReference = {
   example:
     'return art.raster((x,y) => { const n=art.fbm(x/35,y/35); return [35+n*40,40+n*35,45+n*30,255]; });',
   edits:
-    'readRasterRegion reads exact canvas-space PNG pixels and a scene hash. writeRasterRegion consumes an exact-size project-local PNG and that expected_hash, with replace/over semantics and canvas/layer coordinates. Layer-space patches capture reference dimensions and follow transforms. Layer effects/masks can change patch appearance; locality guards reject outward leakage.',
+    'readRasterRegion reads exact canvas-space PNG pixels and a scene hash. writeRasterRegion consumes an exact-size project-local PNG and that expected_hash, with replace/over semantics and canvas/layer coordinates. Layer-space patches capture reference dimensions and follow transforms. Patches follow target effects/operations and precede its mask/opacity; ancestor effects can change appearance; locality guards reject outward leakage.',
 };

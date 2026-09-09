@@ -41,7 +41,8 @@ of the files, image comparisons, undo, portable export and SDK usage.
 
 For an existing Node project, use `npm install rtistree`. The primary executable is
 **`rtistree`**; **`graphics` remains a compatibility alias**. `npx rtistree --help` lists commands.
-Structured output is JSON. Verification failures exit 2; other errors exit 1.
+Structured results are JSON (help is plain text). Verification/preflight failures and
+non-identical recipe replay exit 2; input/runtime errors exit 1.
 
 ## Use with an agent
 
@@ -69,7 +70,7 @@ not guarantee that every client supplies the guidance or every model follows it.
 - [Agent setup](docs/agent-setup.md) and [art-direction workflow](docs/agent-art-workflow.md)
 - [Scene format](docs/scene-format.md) and [programmable studio](docs/studio.md)
 - [Staged production](docs/atelier.md) and [print/export](docs/production.md)
-- [Recorded asset trial](examples/warden-asset-trial/README.md)
+- [Recorded asset trial](https://github.com/Coly010/rtistree/blob/main/examples/warden-asset-trial/README.md)
 - [Architecture and evidence](docs/engine-overview.md), [changelog](CHANGELOG.md), [release process](docs/releasing.md)
 
 The npm package includes a small runnable starter, documentation and schemas. Larger trials

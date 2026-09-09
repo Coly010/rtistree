@@ -1,8 +1,10 @@
 # Editing and agent workflows
 
-## Complete edits
+## Core edit commands
 
 `apply` is still a transaction containing `reason`, optional `expected_hash` and `commands`. The generated [command schema](../schemas/command.schema.json) is authoritative.
+The table covers core edits; [print production and editing](production.md) lists the
+additional document, path, crop, text and adjustment commands.
 
 | Area             | Commands                                                                                                                   |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -110,7 +112,7 @@ For visual critique, render and inspect the PNG, then submit:
 }
 ```
 
-`graphics critique scene.yaml critique.json` or the MCP `recordCritique` tool stores it. Stale scene/PNG hashes are rejected. `readCritique` returns only the current critique. A callback of type `VisualCritic` can perform this review in `runIterations`; use `requireCritique: true` to require it for success. Visual and rule scores inform stall detection; unresolved medium/high visual findings prevent a pass. The adapter is provider-neutral and requires the caller to supply the actual vision-capable reviewer. No synthetic review is substituted when one is absent.
+`rtistree critique scene.yaml critique.json` or the MCP `recordCritique` tool stores it. Stale scene/PNG hashes are rejected. `readCritique` returns only the current critique. A callback of type `VisualCritic` can perform this review in `runIterations`; use `requireCritique: true` to require it for success. Visual and rule scores inform stall detection; unresolved medium/high visual findings prevent a pass. The adapter is provider-neutral and requires the caller to supply the actual vision-capable reviewer. No synthetic review is substituted when one is absent.
 
 ## Components and fonts
 
@@ -142,7 +144,7 @@ Components can live in included fragments. Instance children become `new-badge-p
 fonts:
   brand-display:
     source: fonts/BrandDisplay.otf
-    hash: sha256:...
+    # Optional hash: sha256: followed by the font file’s 64 hex digest characters
 ```
 
 Choose `style.font: brand-display`. Fonts are registered under content-based aliases; changing a font file without updating its expected hash fails. History checks custom-font provenance, and exports copy font files. A custom file supplies one face; register a separate ID for another weight. Bundled names are reserved.
@@ -154,13 +156,13 @@ Layout supports `aspect_ratio`, positive `grow` weights and `layout.justify: sta
 After changing a source fragment or a component definition:
 
 ```sh
-graphics rebase scene.yaml
+npx rtistree rebase scene.yaml
 ```
 
 This merges disjoint source and agent changes using the retained authoring baseline. Conflicts report paths such as `/layers/headline/style/colour` and leave history untouched. Resolve the conflicting source fields and retry, or export the working scene into a new project. Rebase is audited and undoable. Histories created before baseline retention require their original source to be restored and exported first.
 
 ```sh
-graphics compact scene.yaml
+npx rtistree compact scene.yaml
 ```
 
 Compaction compresses full records into an immutable gzip archive with a content-hashed pointer, then starts an empty active log. Every undo/redo state remains accessible. It reduces storage; replay still reads all records. Missing/tampered archives fail closed. Do not delete archives referenced by the pointer.
@@ -170,10 +172,11 @@ Compaction compresses full records into an immutable gzip archive with a content
 `BenchmarkSession` requires visual review before each checkpoint. Briefs describe the objective and optional allowed region; the driver does not contain a solution or choose an edit.
 
 ```sh
-graphics benchmark scene.yaml brief.json before
+# Render and record a current critique before the first checkpoint.
+npx rtistree benchmark scene.yaml brief.json before
 # Inspect, critique, apply edits, then inspect and critique again.
-graphics benchmark scene.yaml brief.json after
-graphics benchmark scene.yaml brief.json finish
+npx rtistree benchmark scene.yaml brief.json after
+npx rtistree benchmark scene.yaml brief.json finish
 ```
 
-The report records actual edit/command counts, rule results, visual scores, locality, uncached equality and self-contained export equality. Token counts are nullable rather than guessed. The [recorded trials](../examples/agent-trials/results.json) were performed interactively by the assistant in this task, with self-authored briefs and same-agent visual critique. They establish a usable end-to-end workflow; broader held-out evaluation and independent human review remain future evidence to collect.
+The report records actual edit/command counts, rule results, visual scores, locality, uncached equality and self-contained export equality. Token counts are nullable rather than guessed. The [recorded trials](https://github.com/Coly010/rtistree/blob/main/examples/agent-trials/results.json) were performed interactively by the assistant in this task, with self-authored briefs and same-agent visual critique. They establish a usable end-to-end workflow; broader held-out evaluation and independent human review remain future evidence to collect.

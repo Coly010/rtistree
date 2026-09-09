@@ -12,11 +12,19 @@ async function walk(dir) {
     else if (entry.name.endsWith('.html')) {
       pages++;
       const html = await readFile(path, 'utf8');
-      for (const match of html.matchAll(/(?:href|src)="([^"#?]+)(?:[?#][^"]*)?"/g)) {
+      for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
         const href = match[1];
         if (/^(?:[a-z]+:|\/\/)/i.test(href)) continue;
-        const target = href.startsWith('/') ? resolve(output, `.${decodeURIComponent(href)}`) : resolve(dirname(path), decodeURIComponent(href));
-        if (!(await exists(extname(target) ? target : resolve(target, 'index.html')))) errors.push(`${path}: ${href}`);
+        const [location, fragment] = href.split('#');
+        const pathname = location.split('?')[0];
+        const target = !pathname ? path : pathname.startsWith('/') ? resolve(output, `.${decodeURIComponent(pathname)}`) : resolve(dirname(path), decodeURIComponent(pathname));
+        const file = extname(target) ? target : resolve(target, 'index.html');
+        if (!(await exists(file))) { errors.push(`${path}: ${href}`); continue; }
+        if (fragment && extname(file) === '.html') {
+          const targetHtml = file === path ? html : await readFile(file, 'utf8');
+          const ids = new Set([...targetHtml.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]));
+          if (!ids.has(decodeURIComponent(fragment))) errors.push(`${path}: missing anchor ${href}`);
+        }
       }
     }
   }
@@ -24,3 +32,12 @@ async function walk(dir) {
 await walk(output);
 if (errors.length) throw new Error(`Broken local links:\n${[...new Set(errors)].join('\n')}`);
 console.log(`Checked local page and asset links in ${pages} HTML files.`);
+
+for (const route of ['releasing', 'next-milestone', 'decisions']) {
+  for (const base of ['docs', 'docs-source']) {
+    if (await exists(resolve(output, base, route)) || await exists(resolve(output, base, `${route}.md`))) {
+      throw new Error(`Repository-only documentation leaked into the site: ${base}/${route}`);
+    }
+  }
+}
+if (!(await exists(resolve(output, 'docs/changelog/index.html')))) throw new Error('Public changelog is missing');

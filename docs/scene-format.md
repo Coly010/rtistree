@@ -1,21 +1,26 @@
 # Scene format v1
 
-The examples in this document are the implemented format. The original proposal is exploratory; unsupported fields are rejected, not silently interpreted. Generate machine-readable schemas with `npm run schema` or `rtistree schema`.
+The examples in this document are the implemented format. The original proposal is exploratory; unsupported fields are rejected, not silently interpreted. The package ships schemas in `node_modules/rtistree/schemas/`. Use `authoring.schema.json`
+for source scenes with includes/components and `fragment.schema.json` for included files.
+`npx rtistree schema --kind scene` prints the resolved scene schema; `--kind command` prints
+a single-command schema. A transaction uses `patch.schema.json`. Repository contributors
+can regenerate all schemas with `npm run schema`.
 
-The [production guide](production.md) describes v0.3 physical documents, exports, affine and perspective transforms, extended masks, adjustments, path commands and typography.
+The [production guide](production.md) describes physical documents, exports, affine and perspective transforms, extended masks, adjustments, path commands and typography.
 
-The [studio guide](studio.md) describes v0.4 programmable assets and dense editing. Assets may carry a `recipe: {source, hash}` reference to a frozen program manifest. Promoted regions accept `composite: replace|over` (default replacement). Programs are executed explicitly and baked; scenes never execute referenced recipes while rendering.
+The [studio guide](studio.md) describes programmable assets and dense editing. Assets may carry a `recipe: {source, hash}` reference to a frozen program manifest. Promoted regions accept `composite: replace|over` (default replacement). Programs are executed explicitly and baked; scenes never execute referenced recipes while rendering.
 
 ## Files and assets
 
-Root documents contain `version: 1`, `canvas`, `layers` and/or `include`, optional `assets`, `metadata`, and `verification: {rules: [...]}`. Fragments contain `include`, `assets`, `fonts`, `components` and `layers`. JSON and YAML can be mixed. There can be at most 128 included documents and 256 total layers.
+Root documents contain `version: 1`, `canvas`, optional `layers` and/or `include`, optional `assets`, `metadata`, and `verification: {rules: [...]}`. Fragments contain `include`, `assets`, `fonts`, `components` and `layers`. JSON and YAML can be mixed. Root scenes can also declare `fonts`, `components`, `document` and `paragraph_styles`.
+The loader permits at most 128 document reads including the root, and 256 total layers after expansion.
 
 ```yaml
 assets:
   portrait:
     type: image # or generated-image; provenance category only
     source: ./assets/portrait.png
-    hash: sha256:... # optional on input; checked when supplied
+    # hash is optional; when supplied, use sha256: followed by the file’s 64 hex digest characters
 ```
 
 PNG, JPEG, WebP and TIFF assets are supported. ICC-tagged input is normalised to sRGB. The separate `import-svg` command converts a closed static geometry subset into scene layers. No URL loading or external resource resolution is permitted. Asset paths must resolve inside the root scene directory, including after symlink resolution. File size is limited to 64 MiB and decoded dimensions to 32 megapixels. Large rasters belong in binary image files, not YAML arrays.
@@ -66,7 +71,7 @@ Shapes are `rectangle` (optional radius), `ellipse`, or `path` with SVG path dat
 
 Text is retained as semantic content. It wraps at whitespace and respects explicit newlines. `style` supports `font: inter|display`, `size`, `weight: regular|bold`, `colour`, `line_height` as a multiplier, and `align: left|center|right`. `display` uses DM Serif Display regular; its bold variant is not supplied. Text is clipped to its box, and the verifier reports overflow. Bundled Latin fonts provide reproducible typography; a custom font can be registered in the scene fonts map and selected by its ID.
 
-Generators: `solid` (`colour`); `gradient` (`from`, `to`, `angle`, with 0° horizontal and 90° vertical); `noise` (`seed`, `amount`, optional base `colour`). Every random generator requires an integer seed. Noise is sampled in a stable row-major order.
+Generators: `solid` (`colour`); `gradient` (`from`, `to`, `angle`, with 0° horizontal and 90° vertical); `noise` (`seed`, `amount`, optional base `colour`). Every noise generator requires an explicit integer seed. Noise is sampled in a stable row-major order.
 
 Blend modes: normal, multiply, screen, overlay, darken, lighten, difference, soft-light, hard-light. Compositing and colour adjustments use Skia's sRGB path; this is not a linear-light color grading engine.
 
@@ -121,6 +126,7 @@ Tiles have canvas bounds, a single-character palette, and rows of keys. Rows mus
 
 Verification always checks rendered text overflow. Optional rules cover safe-area, text-overflow, text-equals, required-role, contrast, no-overlap and region-luma. Luma is a mean weighted sRGB channel value in [0,1], not perceptual luminance. `contrast` uses declared foreground and explicit background colours. `pixel-contrast` and `visible-area` use counterfactual rendered samples through `verifyRendered` / `Project.verify`. Geometry checks use transformed bounding boxes, not exact silhouettes. A heatmap marks issue bounds. All reports state these limitations.
 
-`render-region` requires an integer rectangle fully inside the canvas and equals an exact crop of the full render. `draft` halves both output dimensions after rendering; preview and final currently use the same full-quality pipeline. PNG output includes renderer evidence in a sidecar. Canonical scene hashes omit timestamps; history includes timestamps for audit purposes without influencing pixel output.
+`render-region` requires an integer rectangle fully inside the canvas and equals an exact crop of the full render. `draft` halves both output dimensions after rendering; preview and final currently use the same full-quality pipeline. PNG output includes renderer evidence in a sidecar. Scene hashes cover the resolved scene, including authored metadata. Journal timestamps are outside
+that scene hash and do not influence pixel output; a timestamp you put in scene metadata does change the hash.
 
 The [evolution guide](evolution.md) documents the expanded command surface, coordinates, components, fonts, adaptive regions, critiques, rebase, compaction, and agent trials.

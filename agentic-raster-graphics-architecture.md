@@ -1,7 +1,8 @@
 # Agentic Raster Graphics Engine
 ## Architecture and Design Document
 
-**Status:** Proposed  
+**Status:** Historical proposal — not the implemented API. See [the current engine overview](docs/engine-overview.md) and [scene format](docs/scene-format.md).
+
 **Purpose:** Build a deterministic, agent-operable image creation system that combines declarative composition, raster editing, layered scene structure, and iterative visual verification.
 
 ---

@@ -1,5 +1,9 @@
 # Verdigris Watch — revised procedural asset trial
 
+**Later user feedback:** revision 4 was called “much better.” This records relative
+improvement, not approval of every asset or a production-quality certification.
+The earlier review and `visual_pass: false` audit below remain as recorded evidence.
+
 **The original failed user review. The current revision has no visual approval.**
 
 ![Current trial](output/contact-sheet.png)

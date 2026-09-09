@@ -17,6 +17,13 @@ CLI actions also have SDK equivalents (`buildPipeline`, `production`) and MCP to
 
 ## Editable dependency graph
 
+These examples assume an installed package and an existing scene project; see
+[the first painting](studio.md#first-painting). Save the graph as `pipeline.json`,
+create `programs/ground.js` inside the artwork project, and make that program return
+a Canvas of the requested dimensions. For a minimal ground program, use
+`return art.raster(() => [38, 62, 69, 255]);`. Source paths inside the graph resolve
+from the artwork project root; the CLI request filename resolves from your shell directory.
+
 ```json
 {
   "version": 1,
@@ -46,9 +53,13 @@ CLI actions also have SDK equivalents (`buildPipeline`, `production`) and MCP to
 
 `rtistree pipeline my-project pipeline.json` reports `built` or `cached` for each node. An input can instead use `{ "asset": "registered-asset-id" }`. Source and inline code are mutually exclusive. Only subscribed shared parameters enter a node's key. Per-node parameters override nothing implicitly: an explicit binding takes precedence over a parameter of the same name. A changed node whose PNG is identical need not rebuild its dependants. Node array order defines auto-created layer order; dependency order defines execution order. Existing layer geometry is preserved. Changing output resolution changes cache keys. Removing a node does not remove previously authored layers or assets; use normal scene commands for removal.
 
-All node artifacts are baked before one scene transaction. A failed build can leave unused immutable files in the cache, but never a partially updated scene. Identical builds add no history. Use `expected_hash` with the SDK/MCP to reject a scene changed since inspection.
+All node artifacts are baked before one scene transaction. The CLI takes the graph
+as the request file directly. To pass a previously inspected `expected_hash`, use
+the SDK third argument or MCP’s separate `expected_hash` field. A failed build can leave unused immutable files in the cache, but never a partially updated scene. Identical builds add no history. Use `expected_hash` with the SDK/MCP to reject a scene changed since inspection.
 
 The exact executed graph, including inline source, is stored under `scene.metadata.pipeline_<id>`. After restoring a candidate, use that graph to resume its settings; a working `pipeline.json` file is deliberately not overwritten by selection. Portable export includes the selected graph and registered input assets, so it can rebuild without the original source files.
+It does not copy production sessions, rejected candidates, reviews or edit history; retain
+the original project if you need those records.
 
 ## Production requests
 

@@ -48,6 +48,6 @@ Program source contains four painting passes with shared helpers. The engine acc
 | Unchanged pipeline                      | All four nodes cached                                                         |
 | Composition edit                        | Landscape cached; dragon, fire and finish rebuilt                             |
 | Undo composition edit                   | Identical original PNG                                                        |
-| Aesthetic assessment                    | Useful stylized result; further work needed for excellent traditional oil art |
+| Aesthetic assessment                    | Rejected by the user; earlier positive ratings do not establish a visual pass |
 
 See `output/audit.json`, `output/code-only-replay.json`, `review-*.json`, `output/thumbnails.png`, and the candidate evidence under `studio/`. Technical scene verification had zero authored scene rules, which is explicitly recorded; the separate reproduction checks supply the technical evidence above.

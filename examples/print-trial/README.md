@@ -24,8 +24,8 @@ After `npm run build`, from the repository root:
 
 ```sh
 node examples/print-trial/replay.mjs
-graphics render examples/print-trial/final.scene.json -o /tmp/vase.png
-graphics export examples/print-trial/benchmarks/masked-vase/export --preset print -o /tmp/vase-print.pdf
+node dist/cli.js render examples/print-trial/final.scene.json -o /tmp/vase.png
+node dist/cli.js export examples/print-trial/benchmarks/masked-vase/export --preset print -o /tmp/vase-print.pdf
 ```
 
 The replay script starts with a fresh copied project, applies the recorded patch and checks the final PNG against the saved composition on the same runtime/platform. It also performs a fresh CMYK PDF export/read-back. It does not make a new generation request or constitute a new unscripted agent trial.

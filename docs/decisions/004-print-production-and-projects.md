@@ -16,4 +16,4 @@ Hybrid PDF preserves supported text, vectors, gradients and isolation-free group
 
 The print trial revealed two defects that were fixed during implementation: metadata configuration could overwrite the requested CMYK conversion, and mask inversion after erosion expanded the selected foreground instead of shrinking it. Actual-file tests and visual proof inspection cover these cases. The original engine regression suite remains in place, alongside production and editing tests.
 
-See [the production guide](../production.md) for capabilities and operational limits, [the A3 evidence](../previews/a3-production.json), and [the generated-asset print trial](../../examples/print-trial/README.md).
+See [the production guide](../production.md) for capabilities and operational limits, [the A3 evidence](../previews/a3-production.json), and [the generated-asset print trial](https://github.com/Coly010/rtistree/blob/main/examples/print-trial/README.md).

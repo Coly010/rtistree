@@ -1,4 +1,4 @@
-import { access, cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -15,12 +15,14 @@ if (standalone) {
 }
 const docs = resolve(root, 'docs');
 const output = resolve(site, 'src/content/docs/docs');
-await mkdir(output, { recursive: true });
 const publicDir = resolve(site, 'public');
-const preferred = ['getting-started.md', 'agent-setup.md', 'agent-art-workflow.md', 'cli-reference.md', 'scene-format.md', 'studio.md', 'atelier.md', 'production.md'];
-async function syncDoc(path) {
+// These directories contain generated content only. Remove stale routes/raw sources.
+await rm(output, { recursive: true, force: true });
+await rm(resolve(publicDir, 'docs-source'), { recursive: true, force: true });
+await mkdir(output, { recursive: true });
+const preferred = ['getting-started.md', 'agent-setup.md', 'agent-art-workflow.md', 'cli-reference.md', 'scene-format.md', 'studio.md', 'atelier.md', 'production.md', 'evolution.md', 'engine-overview.md', 'changelog.md'];
+async function syncDoc(path, rel = relative(docs, path).split('\\').join('/')) {
   const source = await readFile(path, 'utf8');
-  const rel = relative(docs, path).split('\\').join('/');
   const title = source.match(/^# (.+)$/m)?.[1] ?? rel;
   const order = preferred.indexOf(rel);
   const body = source.replace(/^# .+\n/, '').replace(/(!?)\[([^\]]*)\]\(([^\s)]+)\)/g, (match, image, label, href) => {
@@ -30,26 +32,22 @@ async function syncDoc(path) {
     const anchor = hash ? `#${hash}` : '';
     const inDocs = relative(docs, target).split('\\').join('/');
     let url;
-    if (!inDocs.startsWith('../') && extname(target) === '.md') url = `/docs/${inDocs.replace(/\.md$/, '')}/${anchor}`;
+    if (preferred.includes(inDocs) && extname(target) === '.md') url = `/docs/${inDocs.replace(/\.md$/, '')}/${anchor}`;
     else if (!inDocs.startsWith('../') && inDocs.startsWith('previews/')) url = `/assets/docs/${inDocs.slice(9)}${anchor}`;
     else url = `${repo}${relative(root, target).split('\\').join('/')}${anchor}`;
     return `${image}[${label}](${url})`;
   });
   const destination = resolve(output, rel);
   await mkdir(dirname(destination), { recursive: true });
-  await writeFile(destination, `---\ntitle: ${JSON.stringify(title)}\nsidebar:\n  order: ${order < 0 ? 50 : order}\neditUrl: ${repo}docs/${rel}\n---\n\n${body}`);
+  await writeFile(destination, `---\ntitle: ${JSON.stringify(title)}\nsidebar:\n  order: ${order < 0 ? 50 : order}\neditUrl: ${repo}${relative(root, path).split('\\').join('/')}\n---\n\n${body}`);
   const raw = resolve(publicDir, 'docs-source', rel);
   await mkdir(dirname(raw), { recursive: true });
   await writeFile(raw, source);
 }
-async function walk(dir) {
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
-    const path = resolve(dir, entry.name);
-    if (entry.isDirectory()) await walk(path);
-    else if (entry.name.endsWith('.md')) await syncDoc(path);
-  }
+// Public docs are opt-in. Maintainer procedures and historical decisions stay in GitHub.
+for (const rel of preferred) {
+  await syncDoc(rel === 'changelog.md' ? resolve(root, 'CHANGELOG.md') : resolve(docs, rel), rel);
 }
-await walk(docs);
 await mkdir(resolve(publicDir, 'assets'), { recursive: true });
 await cp(resolve(docs, 'previews'), resolve(publicDir, 'assets/docs'), { recursive: true });
 for (const name of ['watch', 'guard', 'stride', 'sword', 'shield', 'coffer', 'lantern', 'potion', 'axe', 'contact-sheet']) {

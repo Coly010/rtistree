@@ -92,6 +92,7 @@ A failed publish can also be retried by rerunning failed jobs from its original 
 npm ci
 npm run check
 npm run format:check
+npm run docs:check
 npm run package:check
 npm ci --prefix website
 npm run build --prefix website
@@ -104,8 +105,10 @@ Large trial assets stay in the repository; only the small hello example ships in
 ## Website deployment
 
 The website is an Astro/Starlight static build in `website/`. `docs/` is the source of truth;
-the content sync script generates Starlight pages, remaps repository links and copies curated
-assets. Generated files are ignored by Git but included in a standalone Sites source snapshot.
+the content sync script publishes an explicit list of current user guides plus the changelog,
+remaps repository links and copies curated assets. Maintainer procedures and historical proposals/
+decisions remain in the repository. Removed generated routes and raw source copies are deleted
+during synchronization. Generated files are ignored by Git but included in a standalone Sites source snapshot.
 
 `npm run build --prefix website` produces `website/dist`. The `website.yml` workflow validates
 and uploads that static artifact. **npm releases do not deploy the live website.** Publish the

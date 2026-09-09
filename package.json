@@ -16,7 +16,8 @@
     "performance": "node --import tsx scripts/performance.ts",
     "prepack": "npm run build",
     "package:check": "node scripts/package-smoke.mjs",
-    "rtistree": "node --import tsx src/cli.ts"
+    "rtistree": "node --import tsx src/cli.ts",
+    "docs:check": "npm run build && node scripts/docs-smoke.mjs"
   },
   "keywords": [
     "graphics",
@@ -68,7 +69,9 @@
     "CHANGELOG.md",
     "THIRD_PARTY_NOTICES.md",
     "licenses",
-    "examples/hello"
+    "examples/hello",
+    "SECURITY.md",
+    "CONTRIBUTING.md"
   ],
   "license": "MIT",
   "author": "Colum Ferry",

@@ -21,4 +21,4 @@ node examples/generated-asset-trial/replay.mjs
 
 The replay command copies the initial project into a fresh temporary directory, applies the recorded patch, checks the photograph's pixel preservation and compares with the saved final PNG. It replays the actual edits; it is not a new unscripted agent run. PNG byte identity is supported on the same renderer/runtime/platform as the saved evidence.
 
-The source is 1254 pixels square: at 300 ppi it supplies approximately 106.2 mm square of native image detail. Larger physical placements need lower effective ppi or resampling, which is why the proposed print preflight must inspect source resolution.
+The source is 1254 pixels square: at 300 ppi it supplies approximately 106.2 mm square of native image detail. Larger physical placements need lower effective ppi or resampling, which is why the current print preflight checks effective source resolution.

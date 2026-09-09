@@ -175,7 +175,7 @@ export async function createProject(
     }),
     '.gitignore': `${output}/\nhistory/*.lock\n`,
     'README.md':
-      '# Your Rtistree project\n\nEdit scene.yaml and layers/. Assets, fonts and ICC profiles stay local. Read graphics studio-help for the foundation-first art-direction protocol. Author 2D painting code in programs/; use graphics pipeline . pipeline.json and graphics production . request.json for staged art. Cache and candidate records live in studio/.\n\nRun graphics render . --preset screen, graphics export . --format pdf --preset screen, or graphics preflight . --preset print.\n\nBefore CMYK print export, copy your printer/paper ICC profile to profiles/ and set presets.print.profile plus profile_hash in rtistree.yaml. Print preflight rejects a missing profile. Existing scene-file commands remain available.\n',
+      '# Your Rtistree project\n\nEdit scene.yaml and layers/. Assets, fonts and ICC profiles stay local. Read npx rtistree studio-help for the foundation-first art-direction protocol. Author 2D painting code in programs/; use npx rtistree pipeline . pipeline.json and npx rtistree production . request.json for staged art. Cache and candidate records live in studio/.\n\nRun npx rtistree render . --preset screen, npx rtistree export . --format pdf --preset screen, or npx rtistree preflight . --preset print.\n\nBefore CMYK print export, copy your printer/paper ICC profile to profiles/ and set presets.print.profile plus profile_hash in rtistree.yaml. Print preflight rejects a missing profile. Existing scene-file commands remain available.\n',
   };
   for (const name of [
     'project',

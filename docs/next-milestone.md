@@ -1,4 +1,4 @@
-# Proposed next milestone: print documents and coherent projects
+# Historical proposal: print documents and coherent projects
 
 Status: delivered as the v0.3 milestone. This document retains the original proposal; see [the production guide](production.md) and [ADR 004](decisions/004-print-production-and-projects.md) for the implemented scope, selected backends and explicit limits.
 
@@ -9,11 +9,11 @@ Status: delivered as the v0.3 milestone. This document retains the original prop
 3. Preserve text and vector geometry in PDF; add practical compositing, selection and path tools.
 4. Run a more demanding generated-asset integration trial, including subject extraction or seamless extension, and print the result through the new export pipeline.
 
-The first generated-asset fitting trial is already recorded in [the example](../examples/generated-asset-trial/README.md). It uses one built-in image-generation call followed by deterministic Rtistree composition. It establishes asset ingestion, aspect-preserving placement, editable surrounding content and exact preservation of the placed photograph. It does not establish seamless photographic outpainting, segmentation or print readiness.
+The first generated-asset fitting trial is already recorded in [the example](https://github.com/Coly010/rtistree/blob/main/examples/generated-asset-trial/README.md). It uses one built-in image-generation call followed by deterministic Rtistree composition. It establishes asset ingestion, aspect-preserving placement, editable surrounding content and exact preservation of the placed photograph. It does not establish seamless photographic outpainting, segmentation or print readiness.
 
 ## Project creation
 
-Proposed syntax (not current commands):
+Syntax proposed at the time (now implemented; use the current production guide):
 
 ```sh
 rtistree project new alpine --size A3 --orientation landscape --ppi 300 --bleed 3mm --output-dir output
@@ -32,7 +32,7 @@ Keep physical trim dimensions authoritative, independently of pixel dimensions. 
 
 Record the PDF MediaBox, TrimBox and BleedBox correctly; actually render artwork into the bleed. Offer crop marks as an explicit option outside trim. Report effective ppi of placed source images and whether the requested output resamples them. The file can encode exact size, but downstream printer/viewer scaling remains outside the engine's control.
 
-The current schema caps canvas dimensions at 4,096 pixels and the renderer holds full-canvas layer surfaces. A3 at 300 ppi is about 4,961 by 3,508 pixels before bleed. Print therefore needs a bounded-memory strategy and expanded dimension support, not merely a new encoder or a higher schema limit. Tiled rendering must retain context for filters and match reference crops.
+At the time of this proposal, the schema capped canvas dimensions at 4,096 pixels and the renderer held full-canvas layer surfaces. A3 at 300 ppi is about 4,961 by 3,508 pixels before bleed. Print therefore needs a bounded-memory strategy and expanded dimension support, not merely a new encoder or a higher schema limit. Tiled rendering must retain context for filters and match reference crops.
 
 ## Colour and formats
 

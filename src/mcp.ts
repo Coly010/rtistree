@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module';
 import { buildPipeline, pipelineSchema } from './pipeline.js';
 import { production, productionRequestSchema } from './production-workflow.js';
 import { exportArtwork, preflight, softProof } from './export.js';
@@ -41,7 +42,7 @@ const image = (render: RenderResult) => ({
 });
 export function createServer(project: Project): McpServer {
   const server = new McpServer(
-    { name: 'rtistree', version: '0.5.0' },
+    { name: 'rtistree', version: createRequire(import.meta.url)('../package.json').version },
     { instructions: rtistreeAgentInstructions },
   );
   server.registerResource(

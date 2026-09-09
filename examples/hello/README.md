@@ -1,5 +1,9 @@
 # Your first Rtistree project
 
+Run these commands inside a project created by `npx rtistree@latest init my-art`.
+If you are reading this in the repository’s `examples/hello` directory, create a project
+first: these are template files, and `init` supplies the package.json and npm scripts.
+
 ```sh
 npm install
 npm run render

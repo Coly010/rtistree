@@ -1,16 +1,22 @@
-# Projects, print production and editing in v0.3
+# Projects, print production and editing
 
 ## Start a project
 
+Run these commands from a directory where `npm install rtistree` has completed.
+`project new` creates the artwork files and presets, not a Node package or dependency installation.
+
 ```sh
-rtistree project new alpine --size A3 --orientation landscape --ppi 300 --bleed 3mm --output-dir output
-rtistree render alpine --preset screen
-rtistree preflight alpine --preset print
+npx rtistree project new alpine --size A3 --orientation landscape --ppi 300 --bleed 3mm --output-dir output
+npx rtistree render alpine --preset screen
+npx rtistree preflight alpine --preset screen
 ```
 
 `project new` accepts A3, A4, A5, Letter, or a custom pair such as `160x100` (mm) or `8.5inx11in`. It creates `rtistree.yaml`, a scene with layer fragments, assets/fonts/profiles/history directories, local JSON Schemas, a README and a designated output directory. The destination must be new. Existing scene-file commands remain available; opening a configured entry-point scene also discovers its project settings.
 
-Generated projects start with an sRGB screen preset and a CMYK print preset. Before using the print preset, copy your printer/paper ICC file into `profiles/` and set `presets.print.profile`. Set `profile_hash` to its SHA-256 digest to pin it. CMYK export rejects missing, invalid, changed or non-CMYK profiles. The demo profile is for exercising the pipeline, not a recommendation for a printing process.
+Generated projects start with an sRGB screen preset and a CMYK print preset. Before using the print preset, copy your printer/paper ICC file into `profiles/` and set `presets.print.profile`. Set `profile_hash` to `sha256:` followed by its 64-character hexadecimal digest to pin it. CMYK export rejects missing, invalid, changed or non-CMYK profiles. The demo profile is for exercising the pipeline, not a recommendation for a printing process.
+An unconfigured print preset fails preflight with exit code 2; the first example deliberately
+uses the screen preset. After configuring a real profile, run `npx rtistree preflight alpine --preset print`
+before the CMYK export and proof commands below.
 
 Project paths are local to the project root. CLI/MCP renders and artwork exports use `output_dir`; CLI verification and preflight reports use it too. History and critique records remain persistent project state. Explicit CLI `--output` paths override artifact destinations.
 
@@ -37,12 +43,12 @@ The renderer accepts edges up to 8,192 pixels. Print preflight also enforces a 3
 ## Formats and colour
 
 ```sh
-rtistree export alpine --preset print --format pdf
-rtistree export alpine --preset print --format tiff
-rtistree export alpine --preset screen --format jpeg
-rtistree export alpine --format svg -o alpine/output/artwork.svg
-rtistree proof alpine --preset print
-rtistree export alpine --format project -o /tmp/alpine-copy/scene.json
+npx rtistree export alpine --preset print --format pdf
+npx rtistree export alpine --preset print --format tiff
+npx rtistree export alpine --preset screen --format jpeg
+npx rtistree export alpine --format svg -o alpine/output/artwork.svg
+npx rtistree proof alpine --preset print
+npx rtistree export alpine --format project -o /tmp/alpine-copy/scene.json
 ```
 
 Known artwork extensions are inferred for `export` and full `render`. Region renders remain PNG. A filename extension must agree with the actual format. Portable scene export keeps its original meaning with `--format project` or a JSON/YAML destination, and copies configured print profiles/presets when exporting a project.
@@ -71,7 +77,7 @@ Preflight checks physical geometry, render capacity, output profiles, font glyph
 
 Each artwork export has a `.evidence.json` containing the scene hash, output hash, resolved settings, ICC hash, backend versions and inspection of the actual encoded bytes. Raster inspection reads format, dimensions, channels, profile and density. PDF inspection reads page boxes, image colour-space declarations, embedded font descriptors and profile streams. This complements visual proof inspection; it does not replace press validation.
 
-## New editing operations
+## Editing operations
 
 Commands are available through `apply` in the CLI, SDK and MCP. See generated command/patch schemas for complete inputs.
 
@@ -93,15 +99,15 @@ Shapes support stroke caps, joins, dash arrays and dash offsets. Text styles sup
 
 Masks now support editable SVG-style paths, image alpha/luminance/colour-range selections, and union/intersection/subtraction/XOR. Combined masks use one coordinate space; children inherit the outer space and reference size. The processing order is selection/algebra, inversion, grow/shrink, then feathering. Image masks reference an asset directly, making external segmentation masks usable without a visible mask layer.
 
-New scoped operations are levels, piecewise-linear RGB/channel curves, white balance, clone and heal. Cloning samples a frozen copy of the target using `source_offset`. Healing adds a local mean-colour correction to that cloned texture; this is a deterministic colour-matched clone, not a Poisson or learned healing algorithm. All operate non-destructively through the existing history and scoped-pixel checks.
+Additional scoped operations are levels, piecewise-linear RGB/channel curves, white balance, clone and heal. Cloning samples a frozen copy of the target using `source_offset`. Healing adds a local mean-colour correction to that cloned texture; this is a deterministic colour-matched clone, not a Poisson or learned healing algorithm. All operate non-destructively through the existing history and scoped-pixel checks.
 
 ## SVG interchange and trial
 
 ```sh
-rtistree import-svg drawing.svg -o drawing.scene.json
-rtistree export drawing.scene.json --format svg -o drawing.svg
+npx rtistree import-svg drawing.svg -o drawing.scene.json
+npx rtistree export drawing.scene.json --format svg -o drawing.svg
 ```
 
 The importer supports static paths, rectangles, circles, ellipses, lines, polygons, polylines, groups, transforms and basic stroke/fill styling. Unsupported elements/attributes, remote resources, scripts and entities are rejected rather than silently dropped. Text, filters and arbitrary CSS are not imported. Exported text is outlined; complex export fallbacks are embedded images. Full round-trip equivalence for arbitrary SVG is not promised.
 
-The [print trial](../examples/print-trial/README.md) generates a ceramic vase/leaf photograph, extracts its silhouette using the new masks, adds a contact shadow and colour adjustment, adapts it to two aspect ratios, and exports CMYK PDF/TIFF/JPEG. The source, exact prompt, edits, critiques, final scenes and output evidence are retained.
+The [print trial](https://github.com/Coly010/rtistree/blob/main/examples/print-trial/README.md) used an external image-generation tool to create a ceramic vase/leaf photograph. Rtistree then extracted its silhouette with masks, added a contact shadow and colour adjustment, adapted it to two aspect ratios, and exported CMYK PDF/TIFF/JPEG. The source, exact prompt, edits, critiques, final scenes and output evidence are retained.
