@@ -8,3 +8,15 @@ examples/**/history/
 examples/**/raster/
 *.lock.tmp
 
+website/.astro/
+website/src/content/docs/
+website/public/assets/
+website/public/downloads/
+website/public/fonts/
+.env
+.env.*
+!.env.example
+*.tgz
+examples/hello/*.png
+examples/hello/*.evidence.json
+website/public/docs-source/

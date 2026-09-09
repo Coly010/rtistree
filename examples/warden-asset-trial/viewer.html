@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verdigris Watch — asset trial</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font:
+        14px system-ui,
+        sans-serif;
+      color: #dce4d7;
+      background: #101d20;
+      --line: #314347;
+      --muted: #9cafa8;
+      --gold: #ddc58d;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+    }
+    header {
+      padding: 25px 32px 22px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+    }
+    h1 {
+      font:
+        34px Georgia,
+        serif;
+      margin: 5px 0 9px;
+      color: #f0edda;
+    }
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+    p {
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .badge {
+      border: 1px solid #706647;
+      padding: 7px 12px;
+      border-radius: 20px;
+      color: var(--gold);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    main {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      min-height: 740px;
+    }
+    .workspace {
+      padding: 24px 30px;
+      border-right: 1px solid var(--line);
+    }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    button,
+    select,
+    a.control {
+      font: inherit;
+      background: #1c3034;
+      color: #dce4d7;
+      border: 1px solid #3c5053;
+      border-radius: 5px;
+      padding: 8px 12px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    button:hover,
+    a.control:hover {
+      border-color: var(--gold);
+    }
+    button[aria-pressed='true'] {
+      background: #405b50;
+      color: #fff2ca;
+      border-color: #849d7e;
+    }
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+    label {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    select {
+      padding: 7px;
+    }
+    .stage {
+      display: grid;
+      place-items: center;
+      min-height: 485px;
+      margin: 20px 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #20383a;
+      overflow: auto;
+    }
+    .stage.checker {
+      background-color: #c0c7bb;
+      background-image:
+        linear-gradient(45deg, #a9b4a7 25%, transparent 25%),
+        linear-gradient(-45deg, #a9b4a7 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #a9b4a7 75%),
+        linear-gradient(-45deg, transparent 75%, #a9b4a7 75%);
+      background-size: 24px 24px;
+      background-position:
+        0 0,
+        0 12px,
+        12px -12px,
+        -12px 0;
+    }
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+    .playback {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    input[type='range'] {
+      accent-color: var(--gold);
+      width: 130px;
+    }
+    .frame-label {
+      font:
+        12px ui-monospace,
+        monospace;
+      color: var(--muted);
+      min-width: 68px;
+    }
+    .asset-title {
+      font:
+        22px Georgia,
+        serif;
+      color: #ebe8d2;
+      margin-bottom: 7px;
+    }
+    .info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 25px;
+      gap: 20px;
+    }
+    .note {
+      font-size: 12px;
+      margin-top: 22px;
+      max-width: 650px;
+    }
+    aside {
+      padding: 24px 20px;
+    }
+    h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--muted);
+      font-weight: 500;
+      margin: 0 0 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .tile {
+      padding: 0 0 9px;
+      font-size: 11px;
+      overflow: hidden;
+      min-width: 0;
+      text-transform: capitalize;
+    }
+    .tile img {
+      display: block;
+      width: 100%;
+      height: 112px;
+      object-fit: contain;
+    }
+    .links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .links a {
+      font-size: 12px;
+      color: #d9c591;
+    }
+    .small {
+      font-size: 11px;
+    }
+    footer {
+      padding: 18px 30px;
+      color: var(--muted);
+      font-size: 11px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        border-top: 1px solid var(--line);
+      }
+      .workspace {
+        border-right: 0;
+      }
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      header {
+        padding: 20px;
+      }
+      .badge {
+        white-space: normal;
+      }
+      .stage {
+        min-height: 400px;
+      }
+    }
+  </style>
+  <header>
+    <div>
+      <div class="eyebrow">RTISTREE / ASSET LAB / 01</div>
+      <h1>Verdigris Watch</h1>
+      <p>A woodland sentinel & six objects from the same drawing vocabulary.</p>
+    </div>
+    <span class="badge" id="verdict">REVISION 4 · NOT VISUALLY APPROVED</span>
+  </header>
+  <main>
+    <section class="workspace" aria-label="Asset inspection">
+      <div class="toolbar">
+        <label
+          >Version
+          <select id="version">
+            <option value="current">Revision 4</option>
+            <option value="previous">Previous (revision 3)</option>
+            <option value="rejected">Rejected original</option>
+          </select></label
+        >
+        <label
+          >Background
+          <select id="background">
+            <option value="dark">Forest</option>
+            <option value="light">Light</option>
+            <option value="checker">Transparency</option>
+          </select></label
+        ><label
+          >Size
+          <select id="size">
+            <option value="160">160 px</option>
+            <option value="320" selected>320 px</option>
+            <option value="640">640 px</option>
+          </select></label
+        ><button id="mirror" aria-pressed="false">Mirror</button
+        ><button id="pivot" aria-pressed="false">Show pivot</button
+        ><button id="ground" aria-pressed="true">Ground motion</button>
+      </div>
+      <div id="stage" class="stage">
+        <canvas
+          id="preview"
+          width="512"
+          height="640"
+          style="width: 256px"
+          role="img"
+          aria-label="Sentinel watch pose"
+        ></canvas>
+      </div>
+      <div class="playback">
+        <button id="play" aria-pressed="false">Play walk</button
+        ><button id="previous" aria-label="Previous walk frame">←</button
+        ><button id="next" aria-label="Next walk frame">→</button
+        ><span class="frame-label" id="frame">Still pose</span
+        ><label
+          >Speed <input id="speed" type="range" min="2" max="16" value="8" /><output id="fps"
+            >8 fps</output
+          ></label
+        >
+      </div>
+      <div class="info">
+        <div>
+          <div id="asset-title" class="asset-title">Sentinel / Watch</div>
+          <p class="small" id="metadata">512 × 640 · transparent PNG · fixed foot pivot</p>
+        </div>
+        <a class="control" id="download" href="output/watch.png" download>Save PNG ↗</a>
+      </div>
+      <p class="note">
+        Revision 4 reduces knee bend, replaces the helmet and raises the sword arm clear of the
+        shield arm. Forward foot travel is preserved. Compare with revision 3 or the rejected
+        original using Version.
+      </p>
+    </section>
+    <aside>
+      <h2>Character poses</h2>
+      <div class="grid" id="characters"></div>
+      <h2>Equipment & objects</h2>
+      <div class="grid" id="props"></div>
+      <h2>Trial record</h2>
+      <p class="small">
+        17 transparent assets. Shared sword, shield and motif functions. Saved procedural recipes.
+        No image inputs.
+      </p>
+      <div class="links">
+        <a href="output/contact-sheet.png">Contact sheet</a
+        ><a href="output/atlas.png" download>Atlas PNG</a
+        ><a href="output/atlas.json" download>Atlas data</a
+        ><a href="output/asset-pack.zip" download>Asset pack</a
+        ><a href="output/foundation-r4.png">Revised foundation</a
+        ><a href="output/audit.json">Replay audit</a><a href="review.md">Review notes</a>
+      </div>
+    </aside>
+  </main>
+  <footer>
+    All drawing source and rebuild commands live in examples/warden-asset-trial. This viewer only
+    inspects the baked assets.
+  </footer>
+  <script>
+    const $ = (id) => document.getElementById(id),
+      names = [
+        'watch',
+        'stride',
+        'guard',
+        'sword',
+        'shield',
+        'axe',
+        'lantern',
+        'coffer',
+        'potion',
+        ...Array.from({ length: 8 }, (_, i) => 'walk_' + i),
+      ],
+      images = {};
+    const state = {
+      id: 'watch',
+      frame: 0,
+      playing: false,
+      mirror: false,
+      pivot: false,
+      ground: true,
+      version: 'current',
+      last: 0,
+    };
+    const ctx = $('preview').getContext('2d');
+    const versionRoot = (version) =>
+      ({ current: '', previous: 'previous-v3/', rejected: 'rejected-v1/' })[version];
+    for (const version of ['current', 'previous', 'rejected'])
+      for (const id of names) {
+        const img = new Image();
+        img.src = versionRoot(version) + 'output/' + id + '.png';
+        img.onload = () => {
+          images[version + ':' + id] = img;
+          if (state.id === id) draw();
+        };
+        img.onerror = () => {
+          $('metadata').textContent = 'Asset missing. Run the trial render command first.';
+        };
+      }
+    for (const id of names.slice(0, 9)) {
+      const b = document.createElement('button');
+      b.className = 'tile';
+      b.setAttribute('aria-label', 'Inspect ' + id);
+      b.setAttribute('aria-pressed', String(id === 'watch'));
+      b.dataset.asset = id;
+      const img = document.createElement('img');
+      img.src = 'output/' + id + '.png';
+      img.alt = '';
+      b.append(img, document.createTextNode(id));
+      b.onclick = () => {
+        state.playing = false;
+        select(id);
+      };
+      $(names.indexOf(id) < 3 ? 'characters' : 'props').append(b);
+    }
+    function draw() {
+      ctx.clearRect(0, 0, 512, 640);
+      ctx.save();
+      if (state.mirror) {
+        ctx.translate(512, 0);
+        ctx.scale(-1, 1);
+      }
+      if (images[state.version + ':' + state.id])
+        ctx.drawImage(images[state.version + ':' + state.id], 0, 0);
+      if (state.ground && state.id.startsWith('walk_')) {
+        const offset = (state.frame / 8) * (52 / 0.6) * 2,
+          spacing = ((52 / 0.6) * 2) / 4;
+        ctx.strokeStyle = '#829a8c';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(12, 574);
+        ctx.lineTo(500, 574);
+        ctx.stroke();
+        for (let x = -spacing; x < 550; x += spacing) {
+          const px = x - (offset % spacing);
+          ctx.beginPath();
+          ctx.moveTo(px, 579);
+          ctx.lineTo(px - 8, 587);
+          ctx.stroke();
+        }
+        ctx.font = '18px system-ui';
+        ctx.fillStyle = '#c7d4bc';
+        ctx.fillText('TRAVEL →', 337, 622);
+      }
+      ctx.restore();
+      if (state.pivot) {
+        const y = names.indexOf(state.id) < 3 || state.id.startsWith('walk_') ? 570 : 320;
+        ctx.strokeStyle = '#eead72';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(242, y);
+        ctx.lineTo(270, y);
+        ctx.moveTo(256, y - 14);
+        ctx.lineTo(256, y + 14);
+        ctx.stroke();
+      }
+    }
+    function select(id) {
+      state.id = id;
+      const walk = id.startsWith('walk_');
+      if (walk) state.frame = Number(id.split('_')[1]);
+      $('frame').textContent = walk ? 'Frame ' + (state.frame + 1) + ' / 8' : 'Still pose';
+      $('asset-title').textContent =
+        (names.indexOf(id) < 3 || walk ? 'Sentinel / ' : '') +
+        id.replace('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+      $('preview').setAttribute('aria-label', $('asset-title').textContent);
+      $('metadata').textContent =
+        '512 × 640 · transparent PNG · ' +
+        (names.indexOf(id) < 3 || walk ? 'foot pivot 256, 570' : 'centre pivot 256, 320');
+      $('download').href = versionRoot(state.version) + 'output/' + id + '.png';
+      $('play').textContent = state.playing ? 'Pause walk' : 'Play walk';
+      $('play').setAttribute('aria-pressed', String(state.playing));
+      document
+        .querySelectorAll('[data-asset]')
+        .forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.asset === id)));
+      draw();
+    }
+    $('play').onclick = () => {
+      state.playing = !state.playing;
+      state.last = performance.now();
+      select('walk_' + state.frame);
+    };
+    function step(delta) {
+      state.playing = false;
+      state.frame = (state.frame + delta + 8) % 8;
+      select('walk_' + state.frame);
+    }
+    $('previous').onclick = () => step(-1);
+    $('next').onclick = () => step(1);
+    $('speed').oninput = () => {
+      $('fps').textContent = $('speed').value + ' fps';
+    };
+    for (const key of ['mirror', 'pivot', 'ground'])
+      $(key).onclick = () => {
+        state[key] = !state[key];
+        $(key).setAttribute('aria-pressed', String(state[key]));
+        draw();
+      };
+    $('version').onchange = () => {
+      state.version = $('version').value;
+      $('verdict').textContent =
+        state.version === 'rejected'
+          ? 'ORIGINAL · FAILED USER REVIEW'
+          : state.version === 'previous'
+            ? 'PREVIOUS · HELMET AND POSE NEED REVISION'
+            : 'REVISION 4 · NOT VISUALLY APPROVED';
+      document
+        .querySelectorAll('[data-asset]')
+        .forEach(
+          (b) =>
+            (b.querySelector('img').src =
+              versionRoot(state.version) + 'output/' + b.dataset.asset + '.png'),
+        );
+      select(state.id);
+    };
+    $('size').onchange = () => {
+      $('preview').style.width = Number($('size').value) * 0.8 + 'px';
+    };
+    $('background').onchange = () => {
+      const bg = $('background').value;
+      $('stage').classList.toggle('checker', bg === 'checker');
+      $('stage').style.backgroundColor =
+        bg === 'light' ? '#c2c9bd' : bg === 'dark' ? '#20383a' : '';
+    };
+    document.addEventListener('keydown', (e) => {
+      if (['INPUT', 'SELECT', 'BUTTON', 'A'].includes(e.target.tagName)) return;
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        step(1);
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        step(-1);
+      }
+    });
+    function tick(now) {
+      if (state.playing && now - state.last >= 1000 / Number($('speed').value)) {
+        state.last = now;
+        state.frame = (state.frame + 1) % 8;
+        select('walk_' + state.frame);
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  </script>
+</html>

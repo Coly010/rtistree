@@ -1,0 +1,10 @@
+{
+  "reason": "Brighten the disc while preserving the title and background",
+  "commands": [
+    {
+      "type": "applyRasterOperation",
+      "target": "disc",
+      "operation": { "type": "brightness", "bounds": [360, 60, 200, 200], "amount": 0.15 }
+    }
+  ]
+}

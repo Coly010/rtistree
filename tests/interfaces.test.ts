@@ -10,6 +10,13 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { createServer } from '../src/mcp.js';
 import { Project } from '../src/project.js';
+import {
+  artDirectionGuide,
+  artDirectionResourceUri,
+  rtistreeAgentInstructions,
+  sceneHash,
+} from '../src/index.js';
+import { production, productionPlanSchema } from '../src/production-workflow.js';
 
 const exec = promisify(execFile),
   cli = resolve('src/cli.ts');
@@ -61,6 +68,23 @@ test('MCP discovery, typed edits, PNG crops and verification work through a clie
   await server.connect(a);
   await client.connect(b);
   try {
+    // A fresh client receives the core workflow before requesting tools or studioHelp.
+    assert.equal(client.getInstructions(), rtistreeAgentInstructions);
+    assert.match(
+      client.getInstructions()!,
+      /technical correctness, functional checks and visual acceptance separately/,
+    );
+    const resources = await client.listResources();
+    assert.ok(resources.resources.some((resource) => resource.uri === artDirectionResourceUri));
+    const guide = await client.readResource({ uri: artDirectionResourceUri });
+    assert.equal(guide.contents[0]!.mimeType, 'application/json');
+    assert.ok('text' in guide.contents[0]!);
+    assert.deepEqual(JSON.parse(guide.contents[0]!.text as string), artDirectionGuide);
+    const studioHelp = await client.callTool({ name: 'studioHelp', arguments: {} });
+    assert.deepEqual(
+      JSON.parse((studioHelp.content as any[])[0].text).art_direction,
+      artDirectionGuide,
+    );
     const list = await client.listTools();
     assert.ok(list.tools.some((tool) => tool.name === 'apply'));
     assert.equal(list.tools.length, 24);
@@ -122,6 +146,37 @@ test('MCP discovery, typed edits, PNG crops and verification work through a clie
     await client.close();
     await server.close();
   }
+});
+test('art guide works without a project and its starter plan is accepted by the production API', async () => {
+  const result = await exec(process.execPath, ['--import', 'tsx', cli, 'art-guide']);
+  assert.deepEqual(JSON.parse(result.stdout), artDirectionGuide);
+  const plan = productionPlanSchema.parse(artDirectionGuide.starter_plan);
+  assert.equal(plan.stages[0]!.minimum_alternatives, 3);
+  assert.equal(plan.stages[0]!.require_references, true);
+  assert.ok(
+    plan.stages.every((stage) => stage.required_reviewer !== 'human'),
+    'The guide must not invent a mandatory human approval for every caller',
+  );
+  const { file } = await fixture(),
+    project = await Project.open(file);
+  await production(project, { action: 'plan', plan });
+  const hash = sceneHash(await project.scene());
+  await production(project, {
+    action: 'capture',
+    session: plan.id,
+    candidate: 'sample',
+    expected_hash: hash,
+  });
+  await assert.rejects(
+    () =>
+      production(project, {
+        action: 'select',
+        session: plan.id,
+        candidate: 'sample',
+        expected_hash: hash,
+      }),
+    /Visual review required/,
+  );
 });
 test('MCP stdio server starts with protocol-only stdout and closes cleanly', async () => {
   const { file } = await fixture();

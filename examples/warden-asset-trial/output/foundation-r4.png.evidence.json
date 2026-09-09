@@ -1,0 +1,34 @@
+{
+  "renderer": {
+    "name": "rtistree-skia",
+    "version": "0.4.0",
+    "backend": "@napi-rs/canvas@1.0.8",
+    "node": "v24.14.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "scene": {
+    "version": 1,
+    "hash": "sha256:65ed90f332fe62e287a374c2b2295818b5645195c22d6125d232c9039a2312d9"
+  },
+  "assets": {
+    "silhouette_watch_r4": "sha256:ede214a15c430bde6d1850e6e0699fb84b9d8864f45a825139676e00efb5ed16",
+    "silhouette_stride_r4": "sha256:0bc28be63852f33382ae4c3f68104d710f5f64366f55e50c3bc925a4cb849bdb",
+    "silhouette_guard_r4": "sha256:9d77d1ad67081e1c86cb256f2ef5327a132c12d3a2ab22212e916a4bb25051f9",
+    "values_watch_r4": "sha256:7ddc7a13e304799836a33c44ede59aaaf54c221509a796fa842f2480271e45c2",
+    "values_stride_r4": "sha256:2f125ece92bc81828f579665ad9dad039df959c2b154a1b3706220eed54b4259",
+    "values_guard_r4": "sha256:131faf65bed22c3b54351e27e8cc75404af04ff0a4668717fda8d4dae0ff58d2"
+  },
+  "fonts": {
+    "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+    "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+    "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+  },
+  "render": {
+    "width": 1120,
+    "height": 870,
+    "colour_space": "srgb",
+    "quality": "final",
+    "png_hash": "sha256:c9388c1d41cab6fedfef35670bb10df41d02a5f70738d02a4e8e4d9a3c2c4e3a"
+  }
+}

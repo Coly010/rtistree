@@ -1,0 +1,22 @@
+---
+import '../styles/home.css';
+const repository = 'https://github.com/Coly010/rtistree';
+const assets = [['watch', 'Watch'], ['stride', 'Stride'], ['guard', 'Guard'], ['sword', 'Sword'], ['shield', 'Shield'], ['coffer', 'Coffer']];
+---
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Examples — Rtistree</title><meta name="description" content="Reproducible Rtistree artwork with source, exported assets and an honest account of the refinement process." /><link rel="canonical" href="https://rtistree.dev/examples/" /><link rel="icon" href="/favicon.svg" type="image/svg+xml" /></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header wrap"><a class="wordmark" href="/"><span class="brand-mark" aria-hidden="true">r.</span>rtistree</a><nav aria-label="Main navigation"><a href="/docs/getting-started/">Docs</a><a href="/examples/" aria-current="page">Examples</a><a href={repository}>GitHub ↗</a></nav></header>
+<main id="main" class="example-page wrap">
+<p class="eyebrow">MADE WITH RTISTREE</p><h1>Explore the source.<br />Change the result.</h1><p>These assets were drawn with Rtistree’s programmable 2D studio. The source, recipes and exports are available so you can reproduce the work and take it somewhere else.</p>
+<section><p class="eyebrow">ASSET TRIAL / REVISION 004</p><h2>Verdigris Watch</h2><p>Three knight poses, six matching props and an eight-frame walk. Shared drawing functions keep the sword and shield consistent across character and inventory assets. No image generation or 3D renderer was used in this trial.</p>
+<div class="gallery-grid">{assets.map(([id,label]) => <figure><img src={`/assets/${id}.png`} width="512" height="640" alt={`Verdigris Watch ${label.toLowerCase()} asset`} loading="lazy" /><figcaption>{label}</figcaption></figure>)}</div>
+<div class="trial-links"><a class="button primary" href="/downloads/verdigris-watch.zip" download>Download assets + viewer ↓</a><a class="text-link" href={`${repository}/tree/main/examples/warden-asset-trial`}>Explore source on GitHub ↗</a><a class="text-link" href={`${repository}/blob/main/examples/warden-asset-trial/README.md`}>Rebuild instructions ↗</a></div>
+<h3 style="margin-top:40px">What changed through review</h3><p>The original walk moved backwards. The coffer’s perspective and the poses also failed user review, despite passing technical checks. Later feedback corrected excess knee bend, an odd helmet and crossed guard arms. The final feedback was “much better”; it was an improvement in a trial, not an independent production certification.</p><p>The engine now ships the lessons: separate technical, functional and visual checks, inspect ground contact, construct connected anatomy, and use shared perspective for props.</p>
+<details><summary>See the rejected first attempt</summary><p>Preserved as evidence of why technical validation alone is insufficient.</p><img src="/assets/rejected-contact-sheet.png" alt="Rejected first version of the knight asset family" width="1200" height="1400" loading="lazy" /></details>
+</section>
+<section><p class="eyebrow">A SMALLER START</p><h2>One scene. One focused edit.</h2><p>The quickstart uses a disc and a title to demonstrate rendering, a local brightness edit, undo and portable export. It is included in the npm package and checked from a clean installation.</p><div class="trial-links"><a class="button primary" href="/docs/getting-started/">Follow the quickstart ↗</a><a class="text-link" href="/downloads/hello/scene.json" download>Download scene.json ↓</a></div></section>
+</main><footer class="wrap"><a class="wordmark" href="/">rtistree</a><p>Built by Colum Ferry. Released under MIT.</p><a href={repository}>Contribute on GitHub ↗</a></footer>
+</body></html>

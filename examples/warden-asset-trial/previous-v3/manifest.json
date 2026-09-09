@@ -1,0 +1,379 @@
+{
+  "title": "Verdigris Watch",
+  "status": "revision-awaiting-visual-review",
+  "previous_version": "failed-user-review",
+  "visual_pass": false,
+  "method": "Rtistree 2D studio programs, no image inputs",
+  "source": "programs/assets.js",
+  "shared_sources": [
+    "programs/motion.mjs"
+  ],
+  "seed": 7319,
+  "items": [
+    {
+      "id": "watch",
+      "file": "output/watch.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "watch",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/cf38e14e1ad479136f2abbf1f4e1b3aac11d549a9f99fc17a0bdae956e0dbfe3/recipe.json",
+        "hash": "sha256:cf38e14e1ad479136f2abbf1f4e1b3aac11d549a9f99fc17a0bdae956e0dbfe3"
+      },
+      "hash": "sha256:000bb071102a8fbff57aefb696567beb60fcdbb00838021898caaca027086175"
+    },
+    {
+      "id": "stride",
+      "file": "output/stride.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "stride",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/67a72c793caeff51929680ef204a455b6e8eb50977c953f62a9a70a542828cf0/recipe.json",
+        "hash": "sha256:67a72c793caeff51929680ef204a455b6e8eb50977c953f62a9a70a542828cf0"
+      },
+      "hash": "sha256:67060a21da7b1a782da1c8c3816ffadc9eb6c89a4092f10c459c53a66b7b428b"
+    },
+    {
+      "id": "guard",
+      "file": "output/guard.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "guard",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/068f75c86f609365c0edac34d821056ed474fefdac4c696e527714170c136aeb/recipe.json",
+        "hash": "sha256:068f75c86f609365c0edac34d821056ed474fefdac4c696e527714170c136aeb"
+      },
+      "hash": "sha256:3559881e4ae497a39562b5662e72e5a71781b83b9e741392c2f0b78b36ea4b9a"
+    },
+    {
+      "id": "sword",
+      "file": "output/sword.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        320
+      ],
+      "parameters": {
+        "kind": "sword",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/7e47c94eba253c474598bd7a9a90c4208f7adb47414c10c053946efbeaa3cc77/recipe.json",
+        "hash": "sha256:7e47c94eba253c474598bd7a9a90c4208f7adb47414c10c053946efbeaa3cc77"
+      },
+      "hash": "sha256:a3ffb2f8506b2b0a6e19cd6f13c81b6f6c19bc31de620be8bb0b744a1bcdd292"
+    },
+    {
+      "id": "shield",
+      "file": "output/shield.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        320
+      ],
+      "parameters": {
+        "kind": "shield",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/99a1c3941e704019fd926063c345c66f1998efbf094ccdf0599bc9f6d23a50c4/recipe.json",
+        "hash": "sha256:99a1c3941e704019fd926063c345c66f1998efbf094ccdf0599bc9f6d23a50c4"
+      },
+      "hash": "sha256:0c9436455d8bb3378300b925c1e46349237829568843f9eae72e0cd114921ba1"
+    },
+    {
+      "id": "axe",
+      "file": "output/axe.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        320
+      ],
+      "parameters": {
+        "kind": "axe",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/29dcc0416bea89ec864b048f2a2a43596c75f5e51372106812cfd596862d782e/recipe.json",
+        "hash": "sha256:29dcc0416bea89ec864b048f2a2a43596c75f5e51372106812cfd596862d782e"
+      },
+      "hash": "sha256:419a58a7e9be076ab57cbdc100c3351522396a7a794260879d0f3003a10a6dc2"
+    },
+    {
+      "id": "lantern",
+      "file": "output/lantern.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        320
+      ],
+      "parameters": {
+        "kind": "lantern",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/20e80fbefa962d5740b3531ecec2d05839d8fa7710d0df56ad739b73faa3df0e/recipe.json",
+        "hash": "sha256:20e80fbefa962d5740b3531ecec2d05839d8fa7710d0df56ad739b73faa3df0e"
+      },
+      "hash": "sha256:dbb8fa1b72a036adb133cb7f1ed9f3deb4837a5ccf69b74ca7093f1e57e0f887"
+    },
+    {
+      "id": "coffer",
+      "file": "output/coffer.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        320
+      ],
+      "parameters": {
+        "kind": "coffer",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/dd0cd2e073e51d234c01dd0d32a40ca63a3f80f638421ac4a2922be4d5f4e62d/recipe.json",
+        "hash": "sha256:dd0cd2e073e51d234c01dd0d32a40ca63a3f80f638421ac4a2922be4d5f4e62d"
+      },
+      "hash": "sha256:2cde1d06862217fe2f8186366825db5e9b4a26996da6435270900c4391fa007d"
+    },
+    {
+      "id": "potion",
+      "file": "output/potion.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        320
+      ],
+      "parameters": {
+        "kind": "potion",
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/dedbca77ff116895775cb41a6f2545b5c582cd493ae87102115bfc05f7a2843d/recipe.json",
+        "hash": "sha256:dedbca77ff116895775cb41a6f2545b5c582cd493ae87102115bfc05f7a2843d"
+      },
+      "hash": "sha256:ea1c586c5d1e7dd0d14c1a1813cacb0bc00b9d8804ba240f7c65f21b74106180"
+    },
+    {
+      "id": "walk_0",
+      "file": "output/walk_0.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "walk",
+        "phase": 0,
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/4ce954e4f19f788ea46e310c59b5c8869de4d199e631481f6f47739e27b73bfe/recipe.json",
+        "hash": "sha256:4ce954e4f19f788ea46e310c59b5c8869de4d199e631481f6f47739e27b73bfe"
+      },
+      "hash": "sha256:7eebcc58db3088b88245739f41744dda67113cd87258a15c3b0967ba09d92df5"
+    },
+    {
+      "id": "walk_1",
+      "file": "output/walk_1.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "walk",
+        "phase": 0.125,
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/5984a74c9f7385394e193916a09e6c358fd0d2e0ec69d9671106c5e00fc27fd0/recipe.json",
+        "hash": "sha256:5984a74c9f7385394e193916a09e6c358fd0d2e0ec69d9671106c5e00fc27fd0"
+      },
+      "hash": "sha256:c949b0e363a3ca676d4577e7b13c8e438bbe5b28782fff93dc11f3ab8963d349"
+    },
+    {
+      "id": "walk_2",
+      "file": "output/walk_2.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "walk",
+        "phase": 0.25,
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/f409f350fd777cd4cdf07d65ff26ea49acdb88469a711b7a1636450f3d71405f/recipe.json",
+        "hash": "sha256:f409f350fd777cd4cdf07d65ff26ea49acdb88469a711b7a1636450f3d71405f"
+      },
+      "hash": "sha256:05feaade88bd81b1ae42414d8dcde91aa45707a50436f91cd1c794ec426d31b2"
+    },
+    {
+      "id": "walk_3",
+      "file": "output/walk_3.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "walk",
+        "phase": 0.375,
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/cd6ce961694687244753f36d4320aa662929eb9e4386dfcf91112db7f7b9a164/recipe.json",
+        "hash": "sha256:cd6ce961694687244753f36d4320aa662929eb9e4386dfcf91112db7f7b9a164"
+      },
+      "hash": "sha256:89945b3c5610d54f1dbaa2ef226210fa8cf59da6effe3186f25a872dab332ef9"
+    },
+    {
+      "id": "walk_4",
+      "file": "output/walk_4.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "walk",
+        "phase": 0.5,
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/b7e2085557da0efc71eeef75cee424d11047987b0a8edf7db32311b40bc3a004/recipe.json",
+        "hash": "sha256:b7e2085557da0efc71eeef75cee424d11047987b0a8edf7db32311b40bc3a004"
+      },
+      "hash": "sha256:388b95933d793e8ae48e394596dbea836f8637e819700f7e415cbd1335ab5c9c"
+    },
+    {
+      "id": "walk_5",
+      "file": "output/walk_5.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "walk",
+        "phase": 0.625,
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/12c2f732a7b496ba835f85e9193354326cd1dd50d53647b90e3a9ceb2b9fc691/recipe.json",
+        "hash": "sha256:12c2f732a7b496ba835f85e9193354326cd1dd50d53647b90e3a9ceb2b9fc691"
+      },
+      "hash": "sha256:5bea0fc812e030988299d267244263b8e5a4974e7422903f92dbc550f665b80c"
+    },
+    {
+      "id": "walk_6",
+      "file": "output/walk_6.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "walk",
+        "phase": 0.75,
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/d25272d4c3f439cd1a9e2dc1c4ee7481b4ca2177511568f775eb2e956bc611e7/recipe.json",
+        "hash": "sha256:d25272d4c3f439cd1a9e2dc1c4ee7481b4ca2177511568f775eb2e956bc611e7"
+      },
+      "hash": "sha256:4060c74291c88aace9aaf9b01f2150af95cdd75097ce75b5fa1022ff39d45c00"
+    },
+    {
+      "id": "walk_7",
+      "file": "output/walk_7.png",
+      "width": 512,
+      "height": 640,
+      "pivot": [
+        256,
+        570
+      ],
+      "parameters": {
+        "kind": "knight",
+        "pose": "walk",
+        "phase": 0.875,
+        "stage": "finish",
+        "revision": 3
+      },
+      "recipe": {
+        "source": "recipes/eadee0f58b311b0c518c3132a17f835bba4f4f396f3bb4f31a124b456412c910/recipe.json",
+        "hash": "sha256:eadee0f58b311b0c518c3132a17f835bba4f4f396f3bb4f31a124b456412c910"
+      },
+      "hash": "sha256:e454e198b96da3c9b6489ecad38f5cf4306ea3e50988f229a3c404064553ff75"
+    }
+  ],
+  "user_feedback": {
+    "walking_direction": "forward",
+    "legs": "too bent",
+    "helmet": "very odd",
+    "guard": "right arm under left arm"
+  }
+}

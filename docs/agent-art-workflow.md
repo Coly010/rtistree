@@ -1,6 +1,18 @@
 # Art direction for agents
 
-Read this before creating illustration or painting. The same protocol is returned by `graphics studio-help` and MCP `studioHelp`, and exported as `artDirectionGuide` by the SDK.
+Read this before creating illustration, painting or procedural assets. The versioned
+protocol is returned by `graphics art-guide`, included in `graphics studio-help`
+and MCP `studioHelp`, and exported as `artDirectionGuide` by the SDK.
+
+MCP connections receive the core rules in the server's initialization
+`instructions`. The full guide is also a discoverable JSON resource at
+`rtistree://guides/art-direction`. Authoring tool descriptions point agents to it.
+All of these surfaces share `src/art-direction.ts`; consumers do not need access
+to this repository or its example files. SDK hosts should put the exported
+`rtistreeAgentInstructions` in their agent context and expose the full guide.
+CLI hosts should read `graphics art-guide` before authoring. A client decides how
+to present instructions to its model; shipping guidance cannot force every client
+or agent to read it, follow it, or exercise good visual judgment.
 
 This is a repeatable process for detecting and correcting failures. It cannot guarantee better art on every attempt. The agent must be capable of drawing, observing and revising; the software cannot certify taste, anatomical understanding or the truth of a review.
 
@@ -14,6 +26,14 @@ For an unfamiliar subject, include both a structural reference and an example of
 
 ## Follow the dependency of artistic decisions
 
+For an asset family, begin with a representative sample: one character and one
+prop that exercise the difficult construction. Establish their quality before
+multiplying variants. The guide's `starter_plan` is a valid production plan
+template with exploration, sample review and family review stages. Replace its
+brief and adapt criteria before submitting it to `production`. Reference studies
+can be supplied with the plan or appended through `study`. The template uses
+the existing gates; it does not create an automatic visual critic.
+
 1. **Gesture and composition.** Produce at least three substantially different proposals. Change action, balance, overlap and negative space. Scaling or translating the same drawing does not explore a new pose.
 2. **Silhouette.** Inspect the subject at thumbnail size. Identify the focal contour, negative spaces and accidental mergers. A head merging into a wing is a drawing failure even if shading might reveal it later.
 3. **Construction.** Name landmarks and connect them through guide curves. Establish coherent mass, joints, perspective and overlap. Attach contours to shared landmarks so corrections propagate. In a creature, distinguish the skeleton, muscle masses and surface; in lettering, establish stroke proportions and spacing; in a product illustration, establish axes, proportions and perspective.
@@ -24,7 +44,45 @@ For an unfamiliar subject, include both a structural reference and an example of
 
 If two structural revisions do not improve the drawing, revisit the construction model or the pose. Further detail is unlikely to rescue it. If there are local improvements but the overall result is still weak, say so explicitly and retain the failed gate.
 
-## What the tool enforces
+## Subject-specific checks learned from the asset trial
+
+**Figures:** name and trace each shoulder–elbow–wrist and hip–knee–ankle chain,
+including hidden portions. State which hand holds each object. In the Verdigris
+Watch trial, the sword elbow crossed the torso beneath the shield arm. Moving
+the elbow outside and above the body fixed that relationship. A valid landmark
+graph can encode a bad pose; inspect balance, joint angles and negative spaces.
+Helmet dome, eye slit, visor and jaw must read as connected forms.
+
+**Props:** use one shared perspective grid for the body, lid, planks and fittings.
+The first chest used unrelated angles. A reconstruction also briefly showed the
+hidden backs of its hoops over the near lid, where they looked like handles.
+Both shared geometry and correct occlusion matter. Distinct shaded faces and a
+common palette are insufficient evidence of sound construction.
+
+**Animation:** declare facing, travel direction, ground plane, stride distance,
+cycle duration and contact/recovery phases. Play a full loop against ground
+markers and inspect contact, passing and recovery frames at the intended size.
+For ordinary forward walking, planted feet move backward relative to the body;
+their relative velocity plus body velocity should approximately cancel in world
+space. Recovering feet move forward while lifted. Check reachability, segment
+lengths, knee flexion, lift, pivots, frame order and the loop boundary. Bind those
+checks to the actual rig source used to draw the frames.
+
+The original trial produced eight different PNGs but walked backward. Correcting
+direction still left excessive knee bend, an odd helmet and crossed guard arms.
+The user eventually called revision 4 “much better.” Record that as relative
+improvement, without extrapolating it into approval of every asset. The distilled
+lessons are embedded in the shipped guide; the full trial history lives in
+`examples/warden-asset-trial` in the source repository and is not required by the
+installed package.
+
+Report three separate axes: **technical** (valid files and reproducibility),
+**functional** (subject-specific behaviour/geometry), and **visual** (observed
+appearance against the brief). An unobserved image or loop is unreviewed. A user
+rejection supersedes an earlier favourable agent review. Keep failed candidates
+and parent-linked corrections. Technical checks cannot override visual failures.
+
+## Enforced gates and their limits
 
 Production plans support these stage fields:
 
@@ -36,7 +94,10 @@ Production plans support these stage fields:
 }
 ```
 
-Use minimum alternatives on the exploration stage; use the human checkpoint on the foundation stage. Set concrete `criteria` and appropriate numerical thresholds as well. Do not lower thresholds after seeing a weak result merely to advance.
+Use minimum alternatives on the exploration stage. Use the human checkpoint when
+the user or agreed plan requires human acceptance; do not invent an approval
+requirement for every task. Set concrete `criteria` and appropriate numerical
+thresholds as well. Do not lower thresholds after seeing a weak result merely to advance.
 
 - `minimum_alternatives` counts initial candidates with distinct PNG hashes. Revisions do not count as independent alternatives. The software can verify pixel differences; the reviewer must verify meaningful compositional differences.
 - `require_references` requires a reference log. The software does not know whether the agent actually studied it.

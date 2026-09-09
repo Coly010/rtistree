@@ -1,0 +1,285 @@
+{
+  "status": "revision-awaiting-visual-review",
+  "visual_pass": false,
+  "production_ready": false,
+  "validation_status": "blocked-on-visual-quality",
+  "previous_visual_status": "failed-user-review",
+  "motion": {
+    "stance_samples": 1200,
+    "recovery_samples": 800,
+    "max_ground_slip": 2.8770301696567913e-9,
+    "min_recovery_velocity": 0.9640554623047136,
+    "minimum_lift": 0.0903205566475352,
+    "max_leg_length_error": 4.263256414560601e-14,
+    "pass": true
+  },
+  "image_inputs": 0,
+  "asset_count": 17,
+  "unique_walk_frames": 8,
+  "cold_render_identical": true,
+  "portable_render_identical": true,
+  "contact_sheet_hash": "sha256:d6636c2a142c7a4e8a4d3ff844d466f0a9892eccb186d44e060fda87c719e458",
+  "results": [
+    {
+      "id": "watch",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        97,
+        86,
+        401,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "stride",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        126,
+        90,
+        435,
+        567
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "guard",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        70,
+        51,
+        399,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "sword",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        207,
+        109,
+        355,
+        543
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "shield",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        130,
+        149,
+        381,
+        507
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "axe",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        213,
+        70,
+        401,
+        508
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "lantern",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        163,
+        99,
+        348,
+        526
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "coffer",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        40,
+        154,
+        445,
+        491
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "potion",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        144,
+        127,
+        372,
+        514
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_0",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        125,
+        95,
+        412,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_1",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        112,
+        90,
+        430,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_2",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        107,
+        85,
+        438,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_3",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        112,
+        90,
+        430,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_4",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        125,
+        95,
+        412,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_5",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        137,
+        90,
+        394,
+        567
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_6",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        143,
+        85,
+        386,
+        567
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_7",
+      "motion_source_matches": true,
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        137,
+        90,
+        394,
+        567
+      ],
+      "nonempty": true
+    }
+  ],
+  "limitations": [
+    "One facing only; simplified illustrated forms.",
+    "Walk cycle needs user assessment; no locomotion integration or independent animation review.",
+    "Replay correctness does not certify visual quality."
+  ],
+  "technical_pass": true
+}

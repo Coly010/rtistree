@@ -8,3 +8,6 @@ examples/**/recipes/
 package-lock.json
 
 examples/**/studio/
+
+# Recorded trial exports retain their original bytes.
+examples/warden-asset-trial/**/*.json

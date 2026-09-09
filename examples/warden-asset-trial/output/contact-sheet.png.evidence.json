@@ -1,0 +1,45 @@
+{
+  "renderer": {
+    "name": "rtistree-skia",
+    "version": "0.4.0",
+    "backend": "@napi-rs/canvas@1.0.8",
+    "node": "v24.14.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "scene": {
+    "version": 1,
+    "hash": "sha256:f493f9ca0e629ddb86e7fc437bb26916ec3c4a8ce1c04da603cc1479c2d55901"
+  },
+  "assets": {
+    "watch": "sha256:95fef05c5393488de64f87b9af65145ac7ae1c5030ebf1268d1106771e6626ed",
+    "stride": "sha256:f534e45052dacadacfae7f694a3885427fc0a8da957a01a60d6cb09814e96b53",
+    "guard": "sha256:29384598e7d430e9f145ec60e250a19042a24ad1f2c23dbc1e198d3f541c8c42",
+    "sword": "sha256:a3ffb2f8506b2b0a6e19cd6f13c81b6f6c19bc31de620be8bb0b744a1bcdd292",
+    "shield": "sha256:0c9436455d8bb3378300b925c1e46349237829568843f9eae72e0cd114921ba1",
+    "axe": "sha256:419a58a7e9be076ab57cbdc100c3351522396a7a794260879d0f3003a10a6dc2",
+    "lantern": "sha256:dbb8fa1b72a036adb133cb7f1ed9f3deb4837a5ccf69b74ca7093f1e57e0f887",
+    "coffer": "sha256:2cde1d06862217fe2f8186366825db5e9b4a26996da6435270900c4391fa007d",
+    "potion": "sha256:ea1c586c5d1e7dd0d14c1a1813cacb0bc00b9d8804ba240f7c65f21b74106180",
+    "walk_0": "sha256:d653fe9d9f45f0eff95b022eeb265cb2284fc9b1bec19d53b3798415fee6a5d2",
+    "walk_1": "sha256:cbe22ad72b43f4d2116badba804376d750d42e8a7ff47af7d0a5ac81e1a32b69",
+    "walk_2": "sha256:fdcf5020944428422c4630f67ac0a448f85cd24ced3915351c5577e8c16f2f03",
+    "walk_3": "sha256:e291e79f3da777ab0d55379133500cde7c658b21b03fca8c1d7e3c0afd78ca52",
+    "walk_4": "sha256:13bdef7b4a164d7c92728869cc656c59f231fc17e31129dd8b8f846e96309662",
+    "walk_5": "sha256:0d1ba6864147a8071069ff5781c1f3a0c63e4daccd3e025a00b055b86f7e292e",
+    "walk_6": "sha256:2c5174f4cd2c44d19636c100a76774ffb2048da3cbcf783945ae84da85f6b8ac",
+    "walk_7": "sha256:70d784ef585c06ab4f4e0464040163df4e0072b9745e8157a9f59dc8c9ba9765"
+  },
+  "fonts": {
+    "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+    "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+    "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+  },
+  "render": {
+    "width": 1120,
+    "height": 1220,
+    "colour_space": "srgb",
+    "quality": "final",
+    "png_hash": "sha256:79f813a86e1fc4c3478279d6bc2158f218de947adca6c3b6f584ba3df52917bc"
+  }
+}

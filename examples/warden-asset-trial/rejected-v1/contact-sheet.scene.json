@@ -1,0 +1,603 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 1120,
+    "height": 1220,
+    "background": "#152a2c"
+  },
+  "assets": {
+    "watch": {
+      "type": "image",
+      "source": "recipes/bd9050a9188ca32cc9ea0f021344d20fea590fe93922d7f42a9875f9f2dfc983/output.png",
+      "hash": "sha256:413d261342d554ad671596ba3a52708fb40fd54f64454bf9a57a99ac2d70b6d6",
+      "recipe": {
+        "source": "recipes/bd9050a9188ca32cc9ea0f021344d20fea590fe93922d7f42a9875f9f2dfc983/recipe.json",
+        "hash": "sha256:bd9050a9188ca32cc9ea0f021344d20fea590fe93922d7f42a9875f9f2dfc983"
+      }
+    },
+    "stride": {
+      "type": "image",
+      "source": "recipes/472596f6ecd0ea48986c974ec6565993c50c90c0b15ca0dae603924357c085eb/output.png",
+      "hash": "sha256:cfa0072e1267ae3236c3f6da929401f2866400fd254f98885a68581301738093",
+      "recipe": {
+        "source": "recipes/472596f6ecd0ea48986c974ec6565993c50c90c0b15ca0dae603924357c085eb/recipe.json",
+        "hash": "sha256:472596f6ecd0ea48986c974ec6565993c50c90c0b15ca0dae603924357c085eb"
+      }
+    },
+    "guard": {
+      "type": "image",
+      "source": "recipes/20683785d95d46fa67a64a91a0442540f8067129d7a7866ce95c53b2e614ed6a/output.png",
+      "hash": "sha256:1388c9f57eb14423cb6b0939af410a3e8a7665e36f6d9b93d1d7073ec596b080",
+      "recipe": {
+        "source": "recipes/20683785d95d46fa67a64a91a0442540f8067129d7a7866ce95c53b2e614ed6a/recipe.json",
+        "hash": "sha256:20683785d95d46fa67a64a91a0442540f8067129d7a7866ce95c53b2e614ed6a"
+      }
+    },
+    "sword": {
+      "type": "image",
+      "source": "recipes/466637004b5008f3920fad6125ef054f9690eb24852c580ac4d21166ae5cb99b/output.png",
+      "hash": "sha256:a3ffb2f8506b2b0a6e19cd6f13c81b6f6c19bc31de620be8bb0b744a1bcdd292",
+      "recipe": {
+        "source": "recipes/466637004b5008f3920fad6125ef054f9690eb24852c580ac4d21166ae5cb99b/recipe.json",
+        "hash": "sha256:466637004b5008f3920fad6125ef054f9690eb24852c580ac4d21166ae5cb99b"
+      }
+    },
+    "shield": {
+      "type": "image",
+      "source": "recipes/1babb1195aa81c18adf2c0216286dc2951acd428730da323c5ac812d6b07656e/output.png",
+      "hash": "sha256:0c9436455d8bb3378300b925c1e46349237829568843f9eae72e0cd114921ba1",
+      "recipe": {
+        "source": "recipes/1babb1195aa81c18adf2c0216286dc2951acd428730da323c5ac812d6b07656e/recipe.json",
+        "hash": "sha256:1babb1195aa81c18adf2c0216286dc2951acd428730da323c5ac812d6b07656e"
+      }
+    },
+    "axe": {
+      "type": "image",
+      "source": "recipes/ad1be065966bbf213a30a4d24a7bbdbd4ea7f2aa4546c9bae720a841f4ae3dc1/output.png",
+      "hash": "sha256:419a58a7e9be076ab57cbdc100c3351522396a7a794260879d0f3003a10a6dc2",
+      "recipe": {
+        "source": "recipes/ad1be065966bbf213a30a4d24a7bbdbd4ea7f2aa4546c9bae720a841f4ae3dc1/recipe.json",
+        "hash": "sha256:ad1be065966bbf213a30a4d24a7bbdbd4ea7f2aa4546c9bae720a841f4ae3dc1"
+      }
+    },
+    "lantern": {
+      "type": "image",
+      "source": "recipes/0b9be79956df0243110b368edf68b4662ed9a55e5e47981f59d211c02c1c52c6/output.png",
+      "hash": "sha256:dbb8fa1b72a036adb133cb7f1ed9f3deb4837a5ccf69b74ca7093f1e57e0f887",
+      "recipe": {
+        "source": "recipes/0b9be79956df0243110b368edf68b4662ed9a55e5e47981f59d211c02c1c52c6/recipe.json",
+        "hash": "sha256:0b9be79956df0243110b368edf68b4662ed9a55e5e47981f59d211c02c1c52c6"
+      }
+    },
+    "coffer": {
+      "type": "image",
+      "source": "recipes/10cbd9e95b6ab33e75682c758aa020180a7bcfed504c9d56705b75cacc9f9c42/output.png",
+      "hash": "sha256:7b0770ff0a5ecae61165d42d00deccc66b5f6dfdf0353871ab1e373cc1cf2bca",
+      "recipe": {
+        "source": "recipes/10cbd9e95b6ab33e75682c758aa020180a7bcfed504c9d56705b75cacc9f9c42/recipe.json",
+        "hash": "sha256:10cbd9e95b6ab33e75682c758aa020180a7bcfed504c9d56705b75cacc9f9c42"
+      }
+    },
+    "potion": {
+      "type": "image",
+      "source": "recipes/52006019b25ffcffea291625a57a483ebb18b718cc6878c539fe8a3d02f94f64/output.png",
+      "hash": "sha256:ea1c586c5d1e7dd0d14c1a1813cacb0bc00b9d8804ba240f7c65f21b74106180",
+      "recipe": {
+        "source": "recipes/52006019b25ffcffea291625a57a483ebb18b718cc6878c539fe8a3d02f94f64/recipe.json",
+        "hash": "sha256:52006019b25ffcffea291625a57a483ebb18b718cc6878c539fe8a3d02f94f64"
+      }
+    },
+    "walk_0": {
+      "type": "image",
+      "source": "recipes/e14f089942bcc6f462d28266782747c781a60fd8c244795d828119c5eebf725c/output.png",
+      "hash": "sha256:6af1a0bf9066f23f2f87c095708712a89ece6ec645e489bef041ebde34ff094e",
+      "recipe": {
+        "source": "recipes/e14f089942bcc6f462d28266782747c781a60fd8c244795d828119c5eebf725c/recipe.json",
+        "hash": "sha256:e14f089942bcc6f462d28266782747c781a60fd8c244795d828119c5eebf725c"
+      }
+    },
+    "walk_1": {
+      "type": "image",
+      "source": "recipes/36b213dc13d7748d26bc10aae1c82a009d0b28662335cc094973562ba7847768/output.png",
+      "hash": "sha256:2b3f5a9a8780e3c0a602f86656704ced81654f46e70011e7c5803e6ddaa2f818",
+      "recipe": {
+        "source": "recipes/36b213dc13d7748d26bc10aae1c82a009d0b28662335cc094973562ba7847768/recipe.json",
+        "hash": "sha256:36b213dc13d7748d26bc10aae1c82a009d0b28662335cc094973562ba7847768"
+      }
+    },
+    "walk_2": {
+      "type": "image",
+      "source": "recipes/877997d615a9a8415a93fa538633f67d172b6f8da9c035c5568ec979014dac68/output.png",
+      "hash": "sha256:8c5941b9558356c41b98c3f83808badfa644b3d2e2b75a57adaae89044e87247",
+      "recipe": {
+        "source": "recipes/877997d615a9a8415a93fa538633f67d172b6f8da9c035c5568ec979014dac68/recipe.json",
+        "hash": "sha256:877997d615a9a8415a93fa538633f67d172b6f8da9c035c5568ec979014dac68"
+      }
+    },
+    "walk_3": {
+      "type": "image",
+      "source": "recipes/a2e028c34bdb9d476888f51df6375638a975eba0153b795faf0c41661159a7cb/output.png",
+      "hash": "sha256:390eb3e538cf8e99ce940234a2d2cddba4bbc3dcc9d6ddc1281af03d883905e6",
+      "recipe": {
+        "source": "recipes/a2e028c34bdb9d476888f51df6375638a975eba0153b795faf0c41661159a7cb/recipe.json",
+        "hash": "sha256:a2e028c34bdb9d476888f51df6375638a975eba0153b795faf0c41661159a7cb"
+      }
+    },
+    "walk_4": {
+      "type": "image",
+      "source": "recipes/a680ca3c658e062a6788a030553412794b82906a6463a69ef7a03d945c802b95/output.png",
+      "hash": "sha256:49277674e0010624676dd44c533e81a02ced6eb523bcc8ed59de491eead42386",
+      "recipe": {
+        "source": "recipes/a680ca3c658e062a6788a030553412794b82906a6463a69ef7a03d945c802b95/recipe.json",
+        "hash": "sha256:a680ca3c658e062a6788a030553412794b82906a6463a69ef7a03d945c802b95"
+      }
+    },
+    "walk_5": {
+      "type": "image",
+      "source": "recipes/43493a48ec795cac7d01e15cf16cfbe7eca1d3278b47c645d0acb1c57c0bc7ae/output.png",
+      "hash": "sha256:ebd03e1d07d4ec6b69026bd3df26d15dd1e089b477be8c4b2304699fb2a6c9d6",
+      "recipe": {
+        "source": "recipes/43493a48ec795cac7d01e15cf16cfbe7eca1d3278b47c645d0acb1c57c0bc7ae/recipe.json",
+        "hash": "sha256:43493a48ec795cac7d01e15cf16cfbe7eca1d3278b47c645d0acb1c57c0bc7ae"
+      }
+    },
+    "walk_6": {
+      "type": "image",
+      "source": "recipes/9a46e26240634cdc2a75347d7759e60a90558362ca27651429c486c76593b2b2/output.png",
+      "hash": "sha256:e3a64927d3839dca83eab5901c503ac84780e00f57e1c9b005014c84bb14f490",
+      "recipe": {
+        "source": "recipes/9a46e26240634cdc2a75347d7759e60a90558362ca27651429c486c76593b2b2/recipe.json",
+        "hash": "sha256:9a46e26240634cdc2a75347d7759e60a90558362ca27651429c486c76593b2b2"
+      }
+    },
+    "walk_7": {
+      "type": "image",
+      "source": "recipes/12cb387cf513f91f959ba9bf6e7a31dea2006ba2af2a38774a3fe5aab4300ac3/output.png",
+      "hash": "sha256:66a0bed791061d17e39d0eb3cadd0396dfee5a98224a8a3b4b03df34dd0308ef",
+      "recipe": {
+        "source": "recipes/12cb387cf513f91f959ba9bf6e7a31dea2006ba2af2a38774a3fe5aab4300ac3/recipe.json",
+        "hash": "sha256:12cb387cf513f91f959ba9bf6e7a31dea2006ba2af2a38774a3fe5aab4300ac3"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "content": "RTISTREE  /  ASSET LAB  /  TRIAL 01",
+      "bounds": [
+        46,
+        27,
+        1030,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 13,
+        "colour": "#9eac99",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "content": "Verdigris Watch",
+      "bounds": [
+        43,
+        58,
+        1030,
+        58
+      ],
+      "style": {
+        "font": "display",
+        "size": 42,
+        "colour": "#ebead6",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "content": "Three character poses + six matching props · original procedural artwork · awaiting review",
+      "bounds": [
+        46,
+        122,
+        1040,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 15,
+        "colour": "#a8b9ad",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-watch",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        46,
+        176,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-watch",
+      "type": "asset",
+      "source": "watch",
+      "bounds": [
+        93.33333333333334,
+        172,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-watch",
+      "type": "text",
+      "content": "Watch",
+      "bounds": [
+        61,
+        467,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-stride",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        388.6666666666667,
+        176,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-stride",
+      "type": "asset",
+      "source": "stride",
+      "bounds": [
+        436,
+        172,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-stride",
+      "type": "text",
+      "content": "Stride",
+      "bounds": [
+        403.6666666666667,
+        467,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-guard",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        731.3333333333334,
+        176,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-guard",
+      "type": "asset",
+      "source": "guard",
+      "bounds": [
+        778.6666666666667,
+        172,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-guard",
+      "type": "text",
+      "content": "Guard",
+      "bounds": [
+        746.3333333333334,
+        467,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-sword",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        46,
+        526,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-sword",
+      "type": "asset",
+      "source": "sword",
+      "bounds": [
+        93.33333333333334,
+        522,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-sword",
+      "type": "text",
+      "content": "Sword",
+      "bounds": [
+        61,
+        817,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-shield",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        388.6666666666667,
+        526,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-shield",
+      "type": "asset",
+      "source": "shield",
+      "bounds": [
+        436,
+        522,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-shield",
+      "type": "text",
+      "content": "Shield",
+      "bounds": [
+        403.6666666666667,
+        817,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-axe",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        731.3333333333334,
+        526,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-axe",
+      "type": "asset",
+      "source": "axe",
+      "bounds": [
+        778.6666666666667,
+        522,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-axe",
+      "type": "text",
+      "content": "Axe",
+      "bounds": [
+        746.3333333333334,
+        817,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-lantern",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        46,
+        876,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-lantern",
+      "type": "asset",
+      "source": "lantern",
+      "bounds": [
+        93.33333333333334,
+        872,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-lantern",
+      "type": "text",
+      "content": "Lantern",
+      "bounds": [
+        61,
+        1167,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-coffer",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        388.6666666666667,
+        876,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-coffer",
+      "type": "asset",
+      "source": "coffer",
+      "bounds": [
+        436,
+        872,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-coffer",
+      "type": "text",
+      "content": "Coffer",
+      "bounds": [
+        403.6666666666667,
+        1167,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-potion",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#233b3c"
+      },
+      "bounds": [
+        731.3333333333334,
+        876,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-potion",
+      "type": "asset",
+      "source": "potion",
+      "bounds": [
+        778.6666666666667,
+        872,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-potion",
+      "type": "text",
+      "content": "Potion",
+      "bounds": [
+        746.3333333333334,
+        1167,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#d2dccb",
+        "weight": "regular"
+      }
+    }
+  ]
+}

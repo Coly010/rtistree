@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "canvas": { "width": 640, "height": 400, "background": "#14251f" },
+  "layers": [
+    {
+      "id": "disc",
+      "type": "vector",
+      "bounds": [360, 60, 200, 200],
+      "shape": { "type": "ellipse", "fill": "#95b85c" }
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "bounds": [48, 275, 544, 80],
+      "content": "Hello, Rtistree.",
+      "style": { "font": "inter", "size": 44, "weight": "bold", "colour": "#edf3e8" }
+    }
+  ]
+}

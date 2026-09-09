@@ -1,0 +1,261 @@
+{
+  "status": "rejected",
+  "image_inputs": 0,
+  "asset_count": 17,
+  "unique_walk_frames": 8,
+  "cold_render_identical": true,
+  "portable_render_identical": true,
+  "contact_sheet_hash": "sha256:79d1e0dabc4cd84b10867758aae2acd6537526dd59654d724f81714725cf19c1",
+  "results": [
+    {
+      "id": "watch",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        90,
+        73,
+        407,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "stride",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        102,
+        73,
+        405,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "guard",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        109,
+        58,
+        495,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "sword",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        207,
+        109,
+        355,
+        543
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "shield",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        130,
+        149,
+        381,
+        507
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "axe",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        213,
+        70,
+        401,
+        508
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "lantern",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        163,
+        99,
+        348,
+        526
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "coffer",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        75,
+        153,
+        439,
+        513
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "potion",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        144,
+        127,
+        372,
+        514
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_0",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        90,
+        73,
+        407,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_1",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        99,
+        69,
+        404,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_2",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        102,
+        67,
+        405,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_3",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        99,
+        69,
+        404,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_4",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        90,
+        73,
+        407,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_5",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        81,
+        69,
+        412,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_6",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        78,
+        67,
+        414,
+        571
+      ],
+      "nonempty": true
+    },
+    {
+      "id": "walk_7",
+      "replay_identical": true,
+      "output_hash_matches": true,
+      "atlas_pixels_identical": true,
+      "transparent_margin": true,
+      "alpha_bounds": [
+        81,
+        69,
+        412,
+        571
+      ],
+      "nonempty": true
+    }
+  ],
+  "limitations": [
+    "One facing only; simplified illustrated forms.",
+    "Walk cycle needs user assessment; no locomotion integration or independent animation review.",
+    "Replay correctness does not certify visual quality."
+  ],
+  "technical_pass": true,
+  "visual_status": "failed-user-review",
+  "user_feedback": {
+    "walk": "going backwards",
+    "coffer": "awful and should not have passed validation",
+    "poses": "naff"
+  }
+}

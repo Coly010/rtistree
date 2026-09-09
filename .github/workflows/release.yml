@@ -1,0 +1,48 @@
+name: Publish npm release
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - name: Check release tag
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: node -e 'const p = require("./package.json"); if (process.env.RELEASE_TAG !== `v${p.version}`) throw new Error("Release tag does not match package version");'
+      - run: npm ci
+      - run: npm run check
+      - run: npm run format:check
+      - run: npm ci --prefix website
+      - run: npm run build --prefix website
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+      - name: Pack and check the actual release artifact
+        run: npm run package:check
+        env:
+          RTISTREE_PACKAGE_DIR: ${{ runner.temp }}
+      - name: Publish checked tarball
+        if: vars.NPM_TRUSTED_PUBLISHING_ENABLED == 'true'
+        run: |
+          VERSION=$(node -p 'require("./package.json").version')
+          if npm view "rtistree@$VERSION" version >/dev/null 2>&1; then
+            echo "Version $VERSION is already published; skipping bootstrap release."
+          else
+            npm publish "$RUNNER_TEMP/rtistree-$VERSION.tgz" --access public --provenance
+          fi

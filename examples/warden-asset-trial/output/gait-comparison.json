@@ -1,0 +1,11 @@
+{
+  "previous": {
+    "mean_bend_degrees": 65.96410821243862,
+    "max_bend_degrees": 98.14388130933149
+  },
+  "current": {
+    "mean_bend_degrees": 46.90086787046709,
+    "max_bend_degrees": 73.4993309698303
+  },
+  "forward_speed_unchanged": true
+}

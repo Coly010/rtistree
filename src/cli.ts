@@ -5,6 +5,7 @@ import { importSvg } from './svg.js';
 import { runProgram, replayRecipe } from './program.js';
 import { readRasterRegion, writeRasterRegion } from './raster-edit.js';
 import { studioReference } from './studio-reference.js';
+import { artDirectionGuide } from './art-direction.js';
 import { createProject } from './project-config.js';
 import { exportArtwork, preflight, softProof } from './export.js';
 import { exportPresetSchema } from './document.js';
@@ -24,6 +25,7 @@ const help = `Rtistree — deterministic graphics for agents
   graphics pipeline <project> <pipeline.json>
   graphics production <project> <request.json>
   graphics studio-help
+  graphics art-guide  (read before creating artwork; includes trial lessons and a plan template)
   graphics program <project> <program.json>  (execute trusted local JavaScript and bake a raster asset)
   graphics program-replay <project> <asset-id>
   graphics raster-read <project> <request.json>
@@ -50,6 +52,7 @@ const help = `Rtistree — deterministic graphics for agents
   graphics schema [--kind scene|command]
   graphics serve <scene.yaml>  (MCP over stdio)
 
+Before creating artwork, read graphics art-guide. Technical verification does not rate artistic quality.
 All structured output is JSON. Verification failure exits 2; invalid input exits 1.
 Raster scopes, masks and palette tiles default to canvas coordinates; space: layer attaches them to objects. See docs/scene-format.md.
 `;
@@ -81,6 +84,10 @@ async function main() {
     return;
   }
   const print = (value: unknown) => process.stdout.write(JSON.stringify(value, null, 2) + '\n');
+  if (command === 'art-guide') {
+    print(artDirectionGuide);
+    return;
+  }
   if (command === 'studio-help') {
     print(studioReference);
     return;

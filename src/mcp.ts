@@ -6,6 +6,11 @@ import { critiqueSchema } from './critique.js';
 import { programSchema, runProgram, replayRecipe } from './program.js';
 import { studioReference } from './studio-reference.js';
 import {
+  artDirectionGuide,
+  artDirectionResourceUri,
+  rtistreeAgentInstructions,
+} from './art-direction.js';
+import {
   rasterReadSchema,
   rasterWriteSchema,
   readRasterRegion,
@@ -35,7 +40,25 @@ const image = (render: RenderResult) => ({
   mimeType: 'image/png',
 });
 export function createServer(project: Project): McpServer {
-  const server = new McpServer({ name: 'rtistree', version: '0.5.0' });
+  const server = new McpServer(
+    { name: 'rtistree', version: '0.5.0' },
+    { instructions: rtistreeAgentInstructions },
+  );
+  server.registerResource(
+    'art-direction',
+    artDirectionResourceUri,
+    {
+      title: 'Rtistree art direction and trial lessons',
+      description:
+        'Read before creating artwork: representative samples, subject-specific construction and motion checks, separate acceptance axes, calibration failures and a production plan template.',
+      mimeType: 'application/json',
+    },
+    async (uri) => ({
+      contents: [
+        { uri: uri.href, mimeType: 'application/json', text: JSON.stringify(artDirectionGuide) },
+      ],
+    }),
+  );
   const definitions: Tool[] = [];
   // Share recursive definitions in discovery while retaining SDK runtime validation.
   function registerTool<Args extends z.ZodRawShape>(
@@ -61,7 +84,7 @@ export function createServer(project: Project): McpServer {
     'buildPipeline',
     {
       description:
-        'Explicitly execute trusted local 2D painting code in a dependency graph. Reuse unchanged nodes and atomically commit all changed outputs. Graph code and parameters are retained in scene metadata. Native code is not sandboxed.',
+        'Before creating artwork, read studioHelp for construction and review guidance. Explicitly execute trusted local 2D painting code in a dependency graph. Reuse unchanged nodes and atomically commit all changed outputs. Graph code and parameters are retained in scene metadata. Build success is not a visual-quality pass. Native code is not sandboxed.',
       inputSchema: { pipeline: pipelineSchema, expected_hash: z.string().optional() },
       annotations: { ...mutate, openWorldHint: true },
     },
@@ -82,7 +105,7 @@ export function createServer(project: Project): McpServer {
     'studioHelp',
     {
       description:
-        'Read the art-direction protocol before creating artwork: reference study, distinct poses, construction, grayscale values, targeted revision, blocking defects and honest human checkpoints. Also includes named 2D guides, the raster authoring API and trusted-code limits.',
+        'Read before creating artwork: representative samples, reference study, distinct poses, connected construction, shared perspective, functional motion checks, observed visual review, targeted revision and blocking defects. Includes trial lessons, a starter production plan, named 2D guides, the raster API and trusted-code limits.',
       inputSchema: {},
       annotations: readOnly,
     },
@@ -92,7 +115,7 @@ export function createServer(project: Project): McpServer {
     'runProgram',
     {
       description:
-        'Execute a trusted local JavaScript raster program with seeded studio helpers; bake and pin its output, recipe and input snapshots, optionally update a target layer. Native worker isolation is not a security sandbox; only run code you trust. Scene rendering never executes programs.',
+        'Before creating artwork, read studioHelp for construction and review guidance. Execute a trusted local JavaScript raster program with seeded studio helpers; bake and pin its output, recipe and input snapshots, optionally update a target layer. Successful execution is not a visual-quality pass. Native worker isolation is not a security sandbox; only run code you trust. Scene rendering never executes programs.',
       inputSchema: { program: programSchema },
       annotations: { ...mutate, openWorldHint: true },
     },

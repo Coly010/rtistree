@@ -1,0 +1,375 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 1120,
+    "height": 870,
+    "background": "#798b83"
+  },
+  "assets": {
+    "silhouette_watch_r3": {
+      "type": "image",
+      "source": "recipes/e311791532c0593f535ae68ac003d34395113aafb146397fcecfa83846195a81/output.png",
+      "hash": "sha256:b5f78c0983c4c35d6b5478f09309ab153adc453ffd4d8b6c6e64226fd949105c",
+      "recipe": {
+        "source": "recipes/e311791532c0593f535ae68ac003d34395113aafb146397fcecfa83846195a81/recipe.json",
+        "hash": "sha256:e311791532c0593f535ae68ac003d34395113aafb146397fcecfa83846195a81"
+      }
+    },
+    "silhouette_stride_r3": {
+      "type": "image",
+      "source": "recipes/a31cbefa0dc3e4c2bf74512f07a1774ae49453ad38241028a8bf47f9713c6d16/output.png",
+      "hash": "sha256:7a5f3e11cbea57d0991d810c00db45cccb0b2d7861737a3b95fc199d5fc40703",
+      "recipe": {
+        "source": "recipes/a31cbefa0dc3e4c2bf74512f07a1774ae49453ad38241028a8bf47f9713c6d16/recipe.json",
+        "hash": "sha256:a31cbefa0dc3e4c2bf74512f07a1774ae49453ad38241028a8bf47f9713c6d16"
+      }
+    },
+    "silhouette_guard_r3": {
+      "type": "image",
+      "source": "recipes/523ac723c2eb9bd1ad2ba6f18fc0060f129f4eb33de98249f0867658e13ad3b9/output.png",
+      "hash": "sha256:82f12766c400ad57abd19818067b536371edb5cfbe631c3d9a710b1388620bf1",
+      "recipe": {
+        "source": "recipes/523ac723c2eb9bd1ad2ba6f18fc0060f129f4eb33de98249f0867658e13ad3b9/recipe.json",
+        "hash": "sha256:523ac723c2eb9bd1ad2ba6f18fc0060f129f4eb33de98249f0867658e13ad3b9"
+      }
+    },
+    "values_watch_r3": {
+      "type": "image",
+      "source": "recipes/8600a0d541b32b1124f139dcf42b9253d537de63bc3d9d21a88b532ae8c1463c/output.png",
+      "hash": "sha256:073f585eff0e3132aac8a38fb14324178da06dd1337e1a38a16b661c06aeb3e0",
+      "recipe": {
+        "source": "recipes/8600a0d541b32b1124f139dcf42b9253d537de63bc3d9d21a88b532ae8c1463c/recipe.json",
+        "hash": "sha256:8600a0d541b32b1124f139dcf42b9253d537de63bc3d9d21a88b532ae8c1463c"
+      }
+    },
+    "values_stride_r3": {
+      "type": "image",
+      "source": "recipes/273f7b580b87186250c0f2ce4ec9ed558ca5594fb1865513a9e935bde3edffbc/output.png",
+      "hash": "sha256:8d28bdb628e3d3e0b201158bc321bc65bee76e919664ca772c9e10bcd28e66de",
+      "recipe": {
+        "source": "recipes/273f7b580b87186250c0f2ce4ec9ed558ca5594fb1865513a9e935bde3edffbc/recipe.json",
+        "hash": "sha256:273f7b580b87186250c0f2ce4ec9ed558ca5594fb1865513a9e935bde3edffbc"
+      }
+    },
+    "values_guard_r3": {
+      "type": "image",
+      "source": "recipes/c932d335bec6dac6aba90d93789e9490bd8a0720235939bf524b2795d41b27f1/output.png",
+      "hash": "sha256:2359fc72e540766e1564970f2ee3025468cbc572351d177d7b4cd4a2f3268c0c",
+      "recipe": {
+        "source": "recipes/c932d335bec6dac6aba90d93789e9490bd8a0720235939bf524b2795d41b27f1/recipe.json",
+        "hash": "sha256:c932d335bec6dac6aba90d93789e9490bd8a0720235939bf524b2795d41b27f1"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "content": "RTISTREE  /  ASSET LAB  /  TRIAL 01",
+      "bounds": [
+        46,
+        27,
+        1030,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 13,
+        "colour": "#9eac99",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "content": "Foundation / revision 3",
+      "bounds": [
+        43,
+        58,
+        1030,
+        58
+      ],
+      "style": {
+        "font": "display",
+        "size": 42,
+        "colour": "#ebead6",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "content": "Watch · split stride · raised guard — silhouette and grayscale before surface detail",
+      "bounds": [
+        46,
+        122,
+        1040,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 15,
+        "colour": "#a8b9ad",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-silhouette_watch_r3",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#c1c9b9"
+      },
+      "bounds": [
+        46,
+        176,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-silhouette_watch_r3",
+      "type": "asset",
+      "source": "silhouette_watch_r3",
+      "bounds": [
+        93.33333333333334,
+        172,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-silhouette_watch_r3",
+      "type": "text",
+      "content": "Silhouette Watch R3",
+      "bounds": [
+        61,
+        467,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#344a42",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-silhouette_stride_r3",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#c1c9b9"
+      },
+      "bounds": [
+        388.6666666666667,
+        176,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-silhouette_stride_r3",
+      "type": "asset",
+      "source": "silhouette_stride_r3",
+      "bounds": [
+        436,
+        172,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-silhouette_stride_r3",
+      "type": "text",
+      "content": "Silhouette Stride R3",
+      "bounds": [
+        403.6666666666667,
+        467,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#344a42",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-silhouette_guard_r3",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#c1c9b9"
+      },
+      "bounds": [
+        731.3333333333334,
+        176,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-silhouette_guard_r3",
+      "type": "asset",
+      "source": "silhouette_guard_r3",
+      "bounds": [
+        778.6666666666667,
+        172,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-silhouette_guard_r3",
+      "type": "text",
+      "content": "Silhouette Guard R3",
+      "bounds": [
+        746.3333333333334,
+        467,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#344a42",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-values_watch_r3",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#c1c9b9"
+      },
+      "bounds": [
+        46,
+        526,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-values_watch_r3",
+      "type": "asset",
+      "source": "values_watch_r3",
+      "bounds": [
+        93.33333333333334,
+        522,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-values_watch_r3",
+      "type": "text",
+      "content": "Values Watch R3",
+      "bounds": [
+        61,
+        817,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#344a42",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-values_stride_r3",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#c1c9b9"
+      },
+      "bounds": [
+        388.6666666666667,
+        526,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-values_stride_r3",
+      "type": "asset",
+      "source": "values_stride_r3",
+      "bounds": [
+        436,
+        522,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-values_stride_r3",
+      "type": "text",
+      "content": "Values Stride R3",
+      "bounds": [
+        403.6666666666667,
+        817,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#344a42",
+        "weight": "regular"
+      }
+    },
+    {
+      "id": "panel-values_guard_r3",
+      "type": "vector",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#c1c9b9"
+      },
+      "bounds": [
+        731.3333333333334,
+        526,
+        330.6666666666667,
+        326
+      ]
+    },
+    {
+      "id": "img-values_guard_r3",
+      "type": "asset",
+      "source": "values_guard_r3",
+      "bounds": [
+        778.6666666666667,
+        522,
+        236,
+        295
+      ],
+      "fit": "contain"
+    },
+    {
+      "id": "label-values_guard_r3",
+      "type": "text",
+      "content": "Values Guard R3",
+      "bounds": [
+        746.3333333333334,
+        817,
+        304.6666666666667,
+        25
+      ],
+      "style": {
+        "font": "inter",
+        "size": 14,
+        "colour": "#344a42",
+        "weight": "regular"
+      }
+    }
+  ]
+}
