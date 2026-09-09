@@ -1,5 +1,8 @@
 # Connect an agent
 
+New to Rtistree? Read [Core concepts: an agent is the interface](core-concepts.md)
+for how you, your agent and the engine work together.
+
 Rtistree provides a CLI, an MCP server and a TypeScript SDK. The engine renders locally;
 your host supplies the model and any vision capability.
 

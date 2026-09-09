@@ -20,3 +20,6 @@ website/public/fonts/
 examples/hello/*.png
 examples/hello/*.evidence.json
 website/public/docs-source/
+
+# Local marketing artwork, source campaigns and delivery media.
+/marketing/

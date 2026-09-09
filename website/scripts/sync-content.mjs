@@ -20,7 +20,7 @@ const publicDir = resolve(site, 'public');
 await rm(output, { recursive: true, force: true });
 await rm(resolve(publicDir, 'docs-source'), { recursive: true, force: true });
 await mkdir(output, { recursive: true });
-const preferred = ['getting-started.md', 'agent-setup.md', 'agent-art-workflow.md', 'cli-reference.md', 'scene-format.md', 'studio.md', 'atelier.md', 'production.md', 'evolution.md', 'engine-overview.md', 'changelog.md'];
+const preferred = ['core-concepts.md', 'getting-started.md', 'agent-setup.md', 'agent-art-workflow.md', 'cli-reference.md', 'scene-format.md', 'studio.md', 'atelier.md', 'production.md', 'evolution.md', 'engine-overview.md', 'changelog.md'];
 async function syncDoc(path, rel = relative(docs, path).split('\\').join('/')) {
   const source = await readFile(path, 'utf8');
   const title = source.match(/^# (.+)$/m)?.[1] ?? rel;

@@ -14,6 +14,10 @@ Rendering uses native CPU Skia and requires no model API key, browser or GPU.
 
 ![Poster rendered by Rtistree](https://raw.githubusercontent.com/Coly010/rtistree/main/docs/previews/poster.png)
 
+Rtistree is agent-first: you direct the work, your agent operates the tools, and
+together you inspect and refine the result. Read [the core concepts](docs/core-concepts.md)
+for the roles of the user, agent and engine.
+
 ## Make your first image
 
 Requires **Node.js 22+** and npm. Linux and macOS are covered by CI.

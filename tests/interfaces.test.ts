@@ -225,3 +225,29 @@ test('CLI init creates a runnable starter and refuses existing paths without cha
     exec(process.execPath, ['--import', 'tsx', cli, 'init', join(parent, 'unused'), 'extra']),
   );
 });
+
+test('source CLI runs painting workers from another project directory', async () => {
+  const { file } = await fixture();
+  const cwd = join(file, '..');
+  const request = join(cwd, 'program.json');
+  await writeFile(
+    request,
+    JSON.stringify({
+      code: 'return art.raster(() => [20, 80, 40, 255]);',
+      asset_id: 'sourcePaint',
+      target: 'painting',
+      width: 32,
+      height: 32,
+      seed: 17,
+      reason: 'Check source launcher outside the repository',
+    }),
+  );
+  const loader = resolve('node_modules/tsx/dist/loader.mjs');
+  await exec(process.execPath, ['--import', loader, cli, 'program', file, request], { cwd });
+  const { stdout } = await exec(
+    process.execPath,
+    ['--import', loader, cli, 'program-replay', file, 'sourcePaint'],
+    { cwd },
+  );
+  assert.equal(JSON.parse(stdout).identical, true);
+});

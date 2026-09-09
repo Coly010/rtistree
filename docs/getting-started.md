@@ -1,5 +1,8 @@
 # Make your first image
 
+New to Rtistree? Read [Core concepts: an agent is the interface](core-concepts.md)
+for how you, your agent and the engine work together.
+
 Create a small artwork, render it, change one part, and undo that change.
 You need **Node.js 22 or newer** and npm. No GPU or model API key is required.
 

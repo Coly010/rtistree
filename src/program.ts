@@ -1,3 +1,5 @@
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
 import { TECHNIQUE_VERSION } from './techniques.js';
 import { Worker } from 'node:worker_threads';
 import { readFile } from 'node:fs/promises';
@@ -83,7 +85,7 @@ export async function executeRasterProgram(
   const ts = import.meta.url.endsWith('.ts'),
     url = new URL(ts ? './program-worker.ts' : './program-worker.js', import.meta.url).href;
   const bootstrap = ts
-    ? `import('tsx/esm/api').then(({tsImport}) => tsImport(${JSON.stringify(url)}, ${JSON.stringify(import.meta.url)}))`
+    ? `import(${JSON.stringify(pathToFileURL(createRequire(import.meta.url).resolve('tsx/esm/api')).href)}).then(({tsImport}) => tsImport(${JSON.stringify(url)}, ${JSON.stringify(import.meta.url)}))`
     : `import(${JSON.stringify(url)})`;
   const png = await new Promise<Buffer>((resolve, reject) => {
     const worker = new Worker(bootstrap, {
