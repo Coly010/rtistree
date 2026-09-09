@@ -2,7 +2,7 @@
 
 Start with [Art direction for agents](agent-art-workflow.md): reference study, distinct silhouettes, construction, grayscale values and targeted revision. Its protocol is included in CLI/MCP `studioHelp`.
 
-Rtistree provides the tools and records; a human or agent still makes visual decisions. No image-generation service or 3D renderer is required. Start with `graphics studio-help` for the synchronous painting API and technique catalogue.
+Rtistree provides the tools and records; a human or agent still makes visual decisions. No image-generation service or 3D renderer is required. Start with `rtistree studio-help` for the synchronous painting API and technique catalogue.
 
 ## Working sequence
 
@@ -44,7 +44,7 @@ CLI actions also have SDK equivalents (`buildPipeline`, `production`) and MCP to
 }
 ```
 
-`graphics pipeline my-project pipeline.json` reports `built` or `cached` for each node. An input can instead use `{ "asset": "registered-asset-id" }`. Source and inline code are mutually exclusive. Only subscribed shared parameters enter a node's key. Per-node parameters override nothing implicitly: an explicit binding takes precedence over a parameter of the same name. A changed node whose PNG is identical need not rebuild its dependants. Node array order defines auto-created layer order; dependency order defines execution order. Existing layer geometry is preserved. Changing output resolution changes cache keys. Removing a node does not remove previously authored layers or assets; use normal scene commands for removal.
+`rtistree pipeline my-project pipeline.json` reports `built` or `cached` for each node. An input can instead use `{ "asset": "registered-asset-id" }`. Source and inline code are mutually exclusive. Only subscribed shared parameters enter a node's key. Per-node parameters override nothing implicitly: an explicit binding takes precedence over a parameter of the same name. A changed node whose PNG is identical need not rebuild its dependants. Node array order defines auto-created layer order; dependency order defines execution order. Existing layer geometry is preserved. Changing output resolution changes cache keys. Removing a node does not remove previously authored layers or assets; use normal scene commands for removal.
 
 All node artifacts are baked before one scene transaction. A failed build can leave unused immutable files in the cache, but never a partially updated scene. Identical builds add no history. Use `expected_hash` with the SDK/MCP to reject a scene changed since inspection.
 
@@ -52,7 +52,7 @@ The exact executed graph, including inline source, is stored under `scene.metada
 
 ## Production requests
 
-Create a plan with `graphics production my-project plan.json`:
+Create a plan with `rtistree production my-project plan.json`:
 
 ```json
 {

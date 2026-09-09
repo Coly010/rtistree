@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { createStarter } from './starter.js';
 import { buildPipeline } from './pipeline.js';
 import { production } from './production-workflow.js';
 import { importSvg } from './svg.js';
@@ -22,37 +23,39 @@ import { verificationHeatmap } from './verify.js';
 
 const help = `Rtistree — deterministic graphics for agents
 
-  graphics pipeline <project> <pipeline.json>
-  graphics production <project> <request.json>
-  graphics studio-help
-  graphics art-guide  (read before creating artwork; includes trial lessons and a plan template)
-  graphics program <project> <program.json>  (execute trusted local JavaScript and bake a raster asset)
-  graphics program-replay <project> <asset-id>
-  graphics raster-read <project> <request.json>
-  graphics raster-write <project> <request.json>
-  graphics import-svg <input.svg> -o <scene.json>
-  graphics project new <directory> [--size A3] [--orientation landscape] [--ppi 300] [--bleed 3mm] [--output-dir output]
-  graphics proof <project-or-scene> --preset print [-o proof.png]
-  graphics preflight <project-or-scene> [--preset print]
-  graphics export <project-or-scene> --format png|jpeg|tiff|pdf|svg|project [--preset print] [-o file]
-  graphics render <scene.yaml> [-o render.png] [--quality draft|preview|final]
-  graphics render-region <scene.yaml> <x> <y> <width> <height> [-o region.png]
-  graphics inspect <scene.yaml> [--layer <id>]
-  graphics inspect-region <scene.yaml> <x> <y> <width> <height>
-  graphics apply <scene.yaml> <patch.json>
-  graphics undo <scene.yaml>
-  graphics redo <scene.yaml>
-  graphics history <scene.yaml>
-  graphics rebase <scene.yaml>
-  graphics compact <scene.yaml>
-  graphics critique <scene.yaml> <critique.json>
-  graphics benchmark <scene.yaml> <brief.json> <checkpoint-label|finish>
-  graphics verify <scene.yaml> [-o report.json] [--heatmap heatmap.png]
-  graphics export <scene.yaml> -o <new-project/scene.json>
-  graphics schema [--kind scene|command]
-  graphics serve <scene.yaml>  (MCP over stdio)
+  rtistree init <directory>  (create a ready-to-render starter in a new directory)
+  rtistree pipeline <project> <pipeline.json>
+  rtistree production <project> <request.json>
+  rtistree studio-help
+  rtistree art-guide  (read before creating artwork; includes trial lessons and a plan template)
+  rtistree program <project> <program.json>  (execute trusted local JavaScript and bake a raster asset)
+  rtistree program-replay <project> <asset-id>
+  rtistree raster-read <project> <request.json>
+  rtistree raster-write <project> <request.json>
+  rtistree import-svg <input.svg> -o <scene.json>
+  rtistree project new <directory> [--size A3] [--orientation landscape] [--ppi 300] [--bleed 3mm] [--output-dir output]
+  rtistree proof <project-or-scene> --preset print [-o proof.png]
+  rtistree preflight <project-or-scene> [--preset print]
+  rtistree export <project-or-scene> --format png|jpeg|tiff|pdf|svg|project [--preset print] [-o file]
+  rtistree render <scene.yaml> [-o render.png] [--quality draft|preview|final]
+  rtistree render-region <scene.yaml> <x> <y> <width> <height> [-o region.png]
+  rtistree inspect <scene.yaml> [--layer <id>]
+  rtistree inspect-region <scene.yaml> <x> <y> <width> <height>
+  rtistree apply <scene.yaml> <patch.json>
+  rtistree undo <scene.yaml>
+  rtistree redo <scene.yaml>
+  rtistree history <scene.yaml>
+  rtistree rebase <scene.yaml>
+  rtistree compact <scene.yaml>
+  rtistree critique <scene.yaml> <critique.json>
+  rtistree benchmark <scene.yaml> <brief.json> <checkpoint-label|finish>
+  rtistree verify <scene.yaml> [-o report.json] [--heatmap heatmap.png]
+  rtistree export <scene.yaml> -o <new-project/scene.json>
+  rtistree schema [--kind scene|command]
+  rtistree serve <scene.yaml>  (MCP over stdio)
 
-Before creating artwork, read graphics art-guide. Technical verification does not rate artistic quality.
+Before creating artwork, read rtistree art-guide. Technical verification does not rate artistic quality.
+The graphics executable remains available as a compatibility alias.
 All structured output is JSON. Verification failure exits 2; invalid input exits 1.
 Raster scopes, masks and palette tiles default to canvas coordinates; space: layer attaches them to objects. See docs/scene-format.md.
 `;
@@ -84,6 +87,11 @@ async function main() {
     return;
   }
   const print = (value: unknown) => process.stdout.write(JSON.stringify(value, null, 2) + '\n');
+  if (command === 'init') {
+    if (!file || args.length) throw new Error('Expected init <new-directory>');
+    print(await createStarter(file));
+    return;
+  }
   if (command === 'art-guide') {
     print(artDirectionGuide);
     return;

@@ -1,56 +1,49 @@
 # Make your first image
 
-Rtistree runs locally on Node.js 22 or newer. It needs no GPU or model API key.
-Start in an empty directory:
+Create a small artwork, render it, change one part, and undo that change.
+You need **Node.js 22 or newer** and npm. No GPU or model API key is required.
+
+## Create your project
 
 ```sh
-mkdir my-art
+npx rtistree@latest init my-art
 cd my-art
-npm init -y
-npm install rtistree
+npm install
+npm run render
 ```
 
-The same release is also available as a [downloadable package](https://github.com/Coly010/rtistree/releases/download/v0.5.0/rtistree-0.5.0.tgz) on GitHub.
+If npm asks to install Rtistree for the first command, accept. `init` creates a new
+`my-art` directory with a starter scene and a package.json that pins the Rtistree version.
+It refuses existing paths, so choose a different name if `my-art` already exists.
 
-## Render a scene
+Open **hello.png** in the new directory. You should see a green disc and the text
+“Hello, Rtistree.” on a dark background. Rendering also writes an evidence JSON file.
 
-Save this as `scene.json`:
+The commands below run from inside `my-art` and use the locally installed package.
+The executable is `rtistree`; older installations used `graphics`, which remains an alias.
 
-```json
-{
-  "version": 1,
-  "canvas": { "width": 640, "height": 400, "background": "#14251f" },
-  "layers": [
-    {
-      "id": "disc",
-      "type": "vector",
-      "bounds": [360, 60, 200, 200],
-      "shape": { "type": "ellipse", "fill": "#95b85c" }
-    },
-    {
-      "id": "title",
-      "type": "text",
-      "bounds": [48, 275, 544, 80],
-      "content": "Hello, Rtistree.",
-      "style": { "font": "inter", "size": 44, "weight": "bold", "colour": "#edf3e8" }
-    }
-  ]
-}
-```
+## Understand the starter
 
-Or copy the same scene from `node_modules/rtistree/examples/hello/scene.json`.
+| File           | Purpose                                                |
+| -------------- | ------------------------------------------------------ |
+| `scene.json`   | Canvas, disc and title, each with an editable ID       |
+| `refine.json`  | A sample patch that brightens only the disc            |
+| `render.mjs`   | The same rendering workflow through the JavaScript SDK |
+| `package.json` | Pinned dependency and the `npm run render` script      |
+
+`npm run render` runs `rtistree render scene.json -o hello.png`.
+To inspect the scene's layers and bounds:
 
 ```sh
-npx graphics render scene.json -o hello.png
-npx graphics inspect scene.json
+npx rtistree inspect scene.json
 ```
 
-Open `hello.png`: a green disc and a title on a dark background. An adjacent evidence JSON
-records the scene hash, dimensions, fonts and renderer/runtime information.
+The starter is deliberately small so you can see what each edit does. Once comfortable,
+use the [scene format](scene-format.md) to add shapes, text, images and masks.
 
-## Change one part
+## Make a focused edit
 
-Save this as `refine.json`:
+The supplied `refine.json` applies a brightness operation to the disc:
 
 ```json
 {
@@ -65,29 +58,58 @@ Save this as `refine.json`:
 }
 ```
 
+Apply it and save a second image:
+
 ```sh
-npx graphics apply scene.json refine.json
-npx graphics render scene.json -o brighter.png
-npx graphics undo scene.json
-npx graphics render scene.json -o restored.png
+npx rtistree apply scene.json refine.json
+npx rtistree render scene.json -o brighter.png
 ```
 
-The disc becomes brighter. Undo restores the first image. Changes are journaled beside
-the scene; the original authoring file remains intact. On the same runtime and platform,
-`restored.png` should have the same bytes as `hello.png`.
+Compare **hello.png** and **brighter.png**. Only the disc becomes brighter; the title and
+background stay the same. The reason and edit are recorded in `history/`. The authoring
+JSON remains intact; the rendered state includes the journaled edits.
 
-## Export a portable project
+## Undo and export
 
 ```sh
-npx graphics export scene.json -o portable/scene.json
-npx graphics render portable/scene.json -o portable.png
+npx rtistree undo scene.json
+npx rtistree render scene.json -o restored.png
+```
+
+**restored.png** should match **hello.png** byte for byte on the same runtime and platform.
+Use `npx rtistree redo scene.json` if you want to restore the edit again.
+
+Export the current state as a portable project:
+
+```sh
+npx rtistree export scene.json -o portable/scene.json
+npx rtistree render portable/scene.json -o portable.png
 ```
 
 The export includes referenced assets and fonts. Keep the exported directory together.
 
+## Use an agent
+
+Read the built-in art-direction guidance, then follow [agent setup](agent-setup.md)
+to connect an MCP client or your own agent host:
+
+```sh
+npx rtistree art-guide
+```
+
+A useful first task is: “Inspect this scene, render it, and change the disc while preserving
+the title and background.” For art creation, ask the agent to inspect silhouettes, values
+and intended display size. Technical verification does not establish artistic quality.
+
 ## Use the SDK
 
-Save this as `render.mjs` beside `scene.json`:
+The starter includes `render.mjs`. Run it with:
+
+```sh
+npm run render:sdk
+```
+
+Its core is:
 
 ```js
 import { Project } from 'rtistree';
@@ -98,9 +120,12 @@ const result = await project.render();
 await writeFile('sdk-output.png', result.png);
 ```
 
-Run `node render.mjs`. The SDK and CLI use the same engine.
+The SDK and CLI use the same engine. For an existing Node project, install with
+`npm install rtistree` and import from `rtistree` directly.
 
-## Next steps
+## Where next?
 
-Read [agent setup](agent-setup.md) to connect an MCP client, or the [scene format](scene-format.md)
-to add layers, text, assets and masks. For generated painting programs, use the [studio guide](studio.md).
+- [CLI reference](cli-reference.md) — inspect, edit, render and export commands.
+- [Scene format](scene-format.md) — layers, coordinates, assets and effects.
+- [Studio](studio.md) — trusted JavaScript painting programs and replayable recipes.
+- [Staged production](atelier.md) — compare candidates and record visual review.

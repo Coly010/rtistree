@@ -3,9 +3,9 @@
 ## Start a project
 
 ```sh
-graphics project new alpine --size A3 --orientation landscape --ppi 300 --bleed 3mm --output-dir output
-graphics render alpine --preset screen
-graphics preflight alpine --preset print
+rtistree project new alpine --size A3 --orientation landscape --ppi 300 --bleed 3mm --output-dir output
+rtistree render alpine --preset screen
+rtistree preflight alpine --preset print
 ```
 
 `project new` accepts A3, A4, A5, Letter, or a custom pair such as `160x100` (mm) or `8.5inx11in`. It creates `rtistree.yaml`, a scene with layer fragments, assets/fonts/profiles/history directories, local JSON Schemas, a README and a designated output directory. The destination must be new. Existing scene-file commands remain available; opening a configured entry-point scene also discovers its project settings.
@@ -37,12 +37,12 @@ The renderer accepts edges up to 8,192 pixels. Print preflight also enforces a 3
 ## Formats and colour
 
 ```sh
-graphics export alpine --preset print --format pdf
-graphics export alpine --preset print --format tiff
-graphics export alpine --preset screen --format jpeg
-graphics export alpine --format svg -o alpine/output/artwork.svg
-graphics proof alpine --preset print
-graphics export alpine --format project -o /tmp/alpine-copy/scene.json
+rtistree export alpine --preset print --format pdf
+rtistree export alpine --preset print --format tiff
+rtistree export alpine --preset screen --format jpeg
+rtistree export alpine --format svg -o alpine/output/artwork.svg
+rtistree proof alpine --preset print
+rtistree export alpine --format project -o /tmp/alpine-copy/scene.json
 ```
 
 Known artwork extensions are inferred for `export` and full `render`. Region renders remain PNG. A filename extension must agree with the actual format. Portable scene export keeps its original meaning with `--format project` or a JSON/YAML destination, and copies configured print profiles/presets when exporting a project.
@@ -98,8 +98,8 @@ New scoped operations are levels, piecewise-linear RGB/channel curves, white bal
 ## SVG interchange and trial
 
 ```sh
-graphics import-svg drawing.svg -o drawing.scene.json
-graphics export drawing.scene.json --format svg -o drawing.svg
+rtistree import-svg drawing.svg -o drawing.scene.json
+rtistree export drawing.scene.json --format svg -o drawing.svg
 ```
 
 The importer supports static paths, rectangles, circles, ellipses, lines, polygons, polylines, groups, transforms and basic stroke/fill styling. Unsupported elements/attributes, remote resources, scripts and entities are rejected rather than silently dropped. Text, filters and arbitrary CSS are not imported. Exported text is outlined; complex export fallbacks are embedded images. Full round-trip equivalence for arbitrary SVG is not promised.

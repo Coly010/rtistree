@@ -48,10 +48,10 @@ establish that an image looks good.
 ## CLI agents
 
 ```sh
-npx graphics art-guide
-npx graphics inspect scene.json
-npx graphics render scene.json -o review.png
-npx graphics studio-help
+npx rtistree art-guide
+npx rtistree inspect scene.json
+npx rtistree render scene.json -o review.png
+npx rtistree studio-help
 ```
 
 Read the JSON guide, open the rendered image, then choose a focused edit. Do not substitute a

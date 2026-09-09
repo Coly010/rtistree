@@ -194,3 +194,30 @@ test('MCP stdio server starts with protocol-only stdout and closes cleanly', asy
     await client.close();
   }
 });
+
+test('CLI init creates a runnable starter and refuses existing paths without changing them', async () => {
+  const parent = await mkdtemp(join(tmpdir(), 'rtistree-starter-'));
+  const directory = join(parent, 'art with spaces');
+  const created = await exec(process.execPath, ['--import', 'tsx', cli, 'init', directory]);
+  assert.equal(JSON.parse(created.stdout).directory, directory);
+  const manifest = JSON.parse(await readFile(join(directory, 'package.json'), 'utf8'));
+  const engine = JSON.parse(await readFile(resolve('package.json'), 'utf8'));
+  assert.equal(manifest.dependencies.rtistree, engine.version);
+  assert.equal(manifest.scripts.render, 'rtistree render scene.json -o hello.png');
+  const project = await Project.open(join(directory, 'scene.json'));
+  assert.equal((await project.render()).width, 640);
+  const scene = await readFile(join(directory, 'scene.json'));
+  await assert.rejects(
+    exec(process.execPath, ['--import', 'tsx', cli, 'init', directory]),
+    (error: any) => error.code === 1 && /Destination already exists/.test(error.stderr),
+  );
+  assert.deepEqual(await readFile(join(directory, 'scene.json')), scene);
+  const occupied = join(parent, 'existing-file');
+  await writeFile(occupied, 'keep me');
+  await assert.rejects(exec(process.execPath, ['--import', 'tsx', cli, 'init', occupied]));
+  assert.equal(await readFile(occupied, 'utf8'), 'keep me');
+  await assert.rejects(exec(process.execPath, ['--import', 'tsx', cli, 'init']));
+  await assert.rejects(
+    exec(process.execPath, ['--import', 'tsx', cli, 'init', join(parent, 'unused'), 'extra']),
+  );
+});

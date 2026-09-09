@@ -2,7 +2,7 @@
 export const artDirectionResourceUri = 'rtistree://guides/art-direction';
 export const rtistreeAgentInstructions = [
   'Rtistree renders deterministic graphics; successful rendering, verification, replay or export does not establish artistic quality.',
-  `Before creating or substantially revising artwork, read studioHelp or the ${artDirectionResourceUri} resource (CLI: graphics art-guide; SDK: artDirectionGuide).`,
+  `Before creating or substantially revising artwork, read studioHelp or the ${artDirectionResourceUri} resource (CLI: rtistree art-guide; SDK: artDirectionGuide).`,
   'Start with a representative sample before expanding an asset family. Explore distinct silhouettes, establish named connected landmarks and shared perspective guides, then inspect grayscale construction before adding detail.',
   'Define subject-specific checks: trace shoulder–elbow–wrist attachments and equipment ownership; construct prop surfaces and fittings in one perspective; inspect animation in playback against ground contact, including travel direction, joint bend and foot lift.',
   'Inspect actual rendered images at intended display size and full size. A contact sheet or unique frame hashes cannot establish correct motion. If vision or playback is unavailable, state that the corresponding visual review is incomplete.',

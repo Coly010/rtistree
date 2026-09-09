@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, writeFile, cp, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -48,14 +48,29 @@ try {
     join(artifactDir, pack.filename),
   ]);
   const installed = join(work, 'node_modules/rtistree');
-  await cp(join(installed, 'examples/hello'), join(work, 'hello'), { recursive: true });
   const cli = join(
+    work,
+    'node_modules/.bin',
+    process.platform === 'win32' ? 'rtistree.cmd' : 'rtistree',
+  );
+  const graphics = (...args) => run(cli, args);
+  assert.match(graphics('--help'), /rtistree init/);
+  const legacy = join(
     work,
     'node_modules/.bin',
     process.platform === 'win32' ? 'graphics.cmd' : 'graphics',
   );
-  const graphics = (...args) => run(cli, args);
-  assert.match(graphics('--help'), /Rtistree/);
+  assert.equal(run(legacy, ['--help']), graphics('--help'), 'Legacy alias must still work');
+  run(npm, ['exec', '--offline', '--', 'rtistree', 'init', 'hello']);
+  const starterManifest = JSON.parse(await readFile(join(work, 'hello/package.json'), 'utf8'));
+  assert.equal(starterManifest.dependencies.rtistree, pack.version);
+  // Install this unpublished tarball in the generated project; after publication, npm resolves the pinned version.
+  run(
+    npm,
+    ['install', '--no-audit', '--no-fund', join(artifactDir, pack.filename)],
+    join(work, 'hello'),
+  );
+  run(npm, ['run', 'render'], join(work, 'hello'));
   const guide = JSON.parse(graphics('art-guide'));
   assert.equal(guide.version, 'foundation-first/2');
   graphics('render', 'hello/scene.json', '-o', 'before.png');
@@ -63,6 +78,11 @@ try {
   graphics('render', 'hello/scene.json', '-o', 'after.png');
   const before = await readFile(join(work, 'before.png'));
   const after = await readFile(join(work, 'after.png'));
+  assert.deepEqual(
+    before,
+    await readFile(join(work, 'hello/hello.png')),
+    'Generated npm render script must produce the same image',
+  );
   assert.notDeepEqual(before, after, 'Documented edit must change the image');
   graphics('undo', 'hello/scene.json');
   graphics('render', 'hello/scene.json', '-o', 'restored.png');
@@ -110,7 +130,8 @@ try {
         files: pack.entryCount,
         bytes: pack.size,
         checks: [
-          'installed executable',
+          'installed executable and compatibility alias',
+          'init and generated project scripts',
           'art guide',
           'render',
           'edit',

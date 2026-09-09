@@ -1,14 +1,26 @@
-# First image
-
-From a directory with `rtistree` installed, copy these three files into your project.
+# Your first Rtistree project
 
 ```sh
-npx graphics render scene.json -o hello.png
-npx graphics apply scene.json refine.json
-npx graphics render scene.json -o brighter.png
-npx graphics undo scene.json
-npx graphics render scene.json -o restored.png
+npm install
+npm run render
+```
+
+Open `hello.png`. `scene.json` defines the disc and title; `refine.json` is a sample local edit.
+
+## Refine and undo
+
+```sh
+npx rtistree apply scene.json refine.json
+npx rtistree render scene.json -o brighter.png
+npx rtistree undo scene.json
+npx rtistree render scene.json -o restored.png
 ```
 
 `restored.png` should match `hello.png` byte for byte on the same runtime and platform.
-`render.mjs` demonstrates the SDK; run it with `node render.mjs`.
+The edit journal lives in `history/`; keep it with the scene to retain your current edits.
+
+## SDK
+
+Run `npm run render:sdk` to execute `render.mjs` and create `sdk-output.png`.
+
+[Getting started](https://rtistree.dev/docs/getting-started/) · [Agent setup](https://rtistree.dev/docs/agent-setup/)

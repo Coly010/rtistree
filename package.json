@@ -1,6 +1,6 @@
 {
   "name": "rtistree",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Deterministic, agent-operable raster graphics engine",
   "main": "./dist/index.js",
   "scripts": {
@@ -15,7 +15,8 @@
     "format:check": "prettier --check src tests scripts docs examples schemas README.md package.json tsconfig.json .github .prettierrc.json",
     "performance": "node --import tsx scripts/performance.ts",
     "prepack": "npm run build",
-    "package:check": "node scripts/package-smoke.mjs"
+    "package:check": "node scripts/package-smoke.mjs",
+    "rtistree": "node --import tsx src/cli.ts"
   },
   "keywords": [
     "graphics",
@@ -52,6 +53,7 @@
     ".": "./dist/index.js"
   },
   "bin": {
+    "rtistree": "./dist/cli.js",
     "graphics": "./dist/cli.js"
   },
   "engines": {

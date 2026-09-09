@@ -7,8 +7,8 @@ Scene layers still describe composition. Programs produce ordinary pinned PNG as
 ## First painting
 
 ```sh
-graphics project new study --size 100x100
-graphics studio-help
+rtistree project new study --size 100x100
+rtistree studio-help
 ```
 
 Save this as `study/programs/rubber.js`:
@@ -41,16 +41,16 @@ Save a request as `study/paint.json`:
 ```
 
 ```sh
-graphics program study study/paint.json
-graphics render study -o study/output/rubber.png
-graphics program-replay study rubberPaint
+rtistree program study study/paint.json
+rtistree render study -o study/output/rubber.png
+rtistree program-replay study rubberPaint
 ```
 
 Supply exactly one of `source` (a project-local JavaScript file) or `code` (an inline function body). A program receives `art` and `parameters`, runs synchronously and returns one Canvas with the declared dimensions. It cannot import modules through the public API. A new `target` creates a raster layer; an existing target must accept an image source. Omit `target` to register an asset for subsequent mask, region or layer operations. The runner captures the starting scene hash and rejects a concurrent edit before committing.
 
 ## Authoring vocabulary
 
-`graphics studio-help` and the MCP `studioHelp` tool expose the complete signatures and a runnable example. TypeScript consumers can use `RasterStudio` from the SDK.
+`rtistree studio-help` and the MCP `studioHelp` tool expose the complete signatures and a runnable example. TypeScript consumers can use `RasterStudio` from the SDK.
 
 | API                                             | Purpose                                                                         |
 | ----------------------------------------------- | ------------------------------------------------------------------------------- |
@@ -72,9 +72,9 @@ Height-field lighting is an artistic 2.5D calculation, with the viewer along pos
 
 ## Dense regional edits
 
-`readRasterRegion` / `graphics raster-read PROJECT request.json` read a PNG crop of the composite or an isolated layer. The request contains integer canvas-space `bounds` and an optional `target`. The result includes the scene hash and an asset descriptor ready for `registerAsset`.
+`readRasterRegion` / `rtistree raster-read PROJECT request.json` read a PNG crop of the composite or an isolated layer. The request contains integer canvas-space `bounds` and an optional `target`. The result includes the scene hash and an asset descriptor ready for `registerAsset`.
 
-`writeRasterRegion` / `graphics raster-write PROJECT request.json` consumes:
+`writeRasterRegion` / `rtistree raster-write PROJECT request.json` consumes:
 
 ```json
 {

@@ -1,6 +1,6 @@
 # Scene format v1
 
-The examples in this document are the implemented format. The original proposal is exploratory; unsupported fields are rejected, not silently interpreted. Generate machine-readable schemas with `npm run schema` or `graphics schema`.
+The examples in this document are the implemented format. The original proposal is exploratory; unsupported fields are rejected, not silently interpreted. Generate machine-readable schemas with `npm run schema` or `rtistree schema`.
 
 The [production guide](production.md) describes v0.3 physical documents, exports, affine and perspective transforms, extended masks, adjustments, path commands and typography.
 
@@ -117,7 +117,7 @@ Tiles have canvas bounds, a single-character palette, and rows of keys. Rows mus
 
 ## Commands and verification
 
-`apply` accepts `{reason, expected_hash?, commands: [...]}`. Commands include add/remove/move/resize layer, set opacity/blend/text/style, group siblings, align/distribute siblings, apply effect, apply raster operation, and replace tile. See `graphics schema --kind command` for exact fields. Removing referenced mask or verification targets is rejected unless the resulting scene is valid. Grouping can change compositing with interleaved siblings; it is an explicit structural edit without a locality promise.
+`apply` accepts `{reason, expected_hash?, commands: [...]}`. Commands include add/remove/move/resize layer, set opacity/blend/text/style, group siblings, align/distribute siblings, apply effect, apply raster operation, and replace tile. See `rtistree schema --kind command` for exact fields. Removing referenced mask or verification targets is rejected unless the resulting scene is valid. Grouping can change compositing with interleaved siblings; it is an explicit structural edit without a locality promise.
 
 Verification always checks rendered text overflow. Optional rules cover safe-area, text-overflow, text-equals, required-role, contrast, no-overlap and region-luma. Luma is a mean weighted sRGB channel value in [0,1], not perceptual luminance. `contrast` uses declared foreground and explicit background colours. `pixel-contrast` and `visible-area` use counterfactual rendered samples through `verifyRendered` / `Project.verify`. Geometry checks use transformed bounding boxes, not exact silhouettes. A heatmap marks issue bounds. All reports state these limitations.
 

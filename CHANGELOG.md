@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+- Make `rtistree` the primary CLI executable; retain `graphics` as a compatibility alias.
+- Add `rtistree init <directory>` to create a starter scene, sample edit, SDK example and npm render script without copying from node_modules. Existing paths are refused.
+- Align the README, npm package and getting-started guide around one tested workflow.
+
 ## 0.5.0 — Initial public alpha
 
 - Deterministic JSON/YAML scenes, CPU Skia rendering and portable project exports.

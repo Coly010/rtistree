@@ -1,7 +1,7 @@
 # Art direction for agents
 
 Read this before creating illustration, painting or procedural assets. The versioned
-protocol is returned by `graphics art-guide`, included in `graphics studio-help`
+protocol is returned by `rtistree art-guide`, included in `rtistree studio-help`
 and MCP `studioHelp`, and exported as `artDirectionGuide` by the SDK.
 
 MCP connections receive the core rules in the server's initialization
@@ -10,7 +10,7 @@ MCP connections receive the core rules in the server's initialization
 All of these surfaces share `src/art-direction.ts`; consumers do not need access
 to this repository or its example files. SDK hosts should put the exported
 `rtistreeAgentInstructions` in their agent context and expose the full guide.
-CLI hosts should read `graphics art-guide` before authoring. A client decides how
+CLI hosts should read `rtistree art-guide` before authoring. A client decides how
 to present instructions to its model; shipping guidance cannot force every client
 or agent to read it, follow it, or exercise good visual judgment.
 

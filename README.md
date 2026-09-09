@@ -10,46 +10,53 @@ JSON/YAML scenes retain structure; seeded painting programs bake to replayable r
 Edits have history and undo. PNG, JPEG, TIFF, PDF, SVG and portable projects are outputs.
 Rendering uses native CPU Skia and requires no model API key, browser or GPU.
 
-**Public alpha · v0.5.0 · MIT.** APIs may change before 1.0. Technical checks do not judge artistic quality.
+**Public alpha · v0.5.1 · MIT.** APIs may change before 1.0. Technical checks do not judge artistic quality.
 
 ![Poster rendered by Rtistree](https://raw.githubusercontent.com/Coly010/rtistree/main/docs/previews/poster.png)
 
-## Install and make your first image
+## Make your first image
 
-Requires Node.js 22 or newer. Linux and macOS are covered by CI.
+Requires **Node.js 22+** and npm. Linux and macOS are covered by CI.
 
 ```sh
-mkdir my-art
+npx rtistree@latest init my-art
 cd my-art
-npm init -y
-npm install rtistree
-mkdir hello
-cp node_modules/rtistree/examples/hello/scene.json hello/
-cp node_modules/rtistree/examples/hello/refine.json hello/
-npx graphics render hello/scene.json -o hello.png
-npx graphics apply hello/scene.json hello/refine.json
-npx graphics render hello/scene.json -o brighter.png
-npx graphics undo hello/scene.json
+npm install
+npm run render
 ```
 
-See the [complete quickstart](docs/getting-started.md) for the scene source, SDK example and export.
-`npx graphics --help` lists commands. Structured output is JSON. Verification failures exit 2;
-invalid input and other failures exit 1.
+Open **hello.png**. The starter includes an editable scene, a sample local edit,
+an SDK example and npm scripts. `init` creates a new directory and refuses existing paths.
+
+To brighten the disc and then undo the edit:
+
+```sh
+npx rtistree apply scene.json refine.json
+npx rtistree render scene.json -o brighter.png
+npx rtistree undo scene.json
+```
+
+Follow the [getting-started guide](https://rtistree.dev/docs/getting-started/) for a walkthrough
+of the files, image comparisons, undo, portable export and SDK usage.
+
+For an existing Node project, use `npm install rtistree`. The primary executable is
+**`rtistree`**; **`graphics` remains a compatibility alias**. `npx rtistree --help` lists commands.
+Structured output is JSON. Verification failures exit 2; other errors exit 1.
 
 ## Use with an agent
 
 Read the included guidance before creating artwork:
 
 ```sh
-npx graphics art-guide
-npx graphics serve /absolute/path/to/hello/scene.json
+npx rtistree art-guide
+npx rtistree serve /absolute/path/to/my-art/scene.json
 ```
 
 The second command starts the MCP server over stdio. See [agent setup](docs/agent-setup.md)
 for a client configuration and SDK integration.
 
 MCP clients receive concise instructions during initialization and can read the full guide
-through `studioHelp` or `rtistree://guides/art-direction`. CLI agents use `graphics art-guide`;
+through `studioHelp` or `rtistree://guides/art-direction`. CLI agents use `rtistree art-guide`;
 SDK hosts can expose `rtistreeAgentInstructions` and `artDirectionGuide`.
 
 The guide covers representative samples, silhouettes, connected anatomy, prop perspective,

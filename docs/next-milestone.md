@@ -4,7 +4,7 @@ Status: delivered as the v0.3 milestone. This document retains the original prop
 
 ## Recommended order
 
-1. Introduce a project manifest, physical document model, and `graphics project new` together.
+1. Introduce a project manifest, physical document model, and `rtistree project new` together.
 2. Add JPEG, TIFF and physically sized PDF exports, with colour management and output validation.
 3. Preserve text and vector geometry in PDF; add practical compositing, selection and path tools.
 4. Run a more demanding generated-asset integration trial, including subject extraction or seamless extension, and print the result through the new export pipeline.
@@ -16,10 +16,10 @@ The first generated-asset fitting trial is already recorded in [the example](../
 Proposed syntax (not current commands):
 
 ```sh
-graphics project new alpine --size A3 --orientation landscape --ppi 300 --bleed 3mm --output-dir output
-graphics render alpine --preset screen
-graphics export alpine --preset print
-graphics preflight alpine --preset print
+rtistree project new alpine --size A3 --orientation landscape --ppi 300 --bleed 3mm --output-dir output
+rtistree render alpine --preset screen
+rtistree export alpine --preset print
+rtistree preflight alpine --preset print
 ```
 
 Create a project manifest describing the scene entry point, output directory and export presets; a scene referencing layer fragments; `assets/`, `fonts/`, `profiles/`, `layers/`, `history/`, and the designated output directory. Include a useful starter scene, schema references, a short project README, and ignore rules for generated artifacts. Relative paths resolve consistently from the project root. Creating a project must not overwrite an existing one. Existing scene-file commands remain usable.
