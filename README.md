@@ -10,7 +10,7 @@ JSON/YAML scenes retain structure; seeded painting programs bake to replayable r
 Edits have history and undo. PNG, JPEG, TIFF, PDF, SVG and portable projects are outputs.
 Rendering uses native CPU Skia and requires no model API key, browser or GPU.
 
-**Public alpha · v0.5.1 · MIT.** APIs may change before 1.0. Technical checks do not judge artistic quality. <!-- x-release-please-version -->
+**Public alpha · v0.5.2 · MIT.** APIs may change before 1.0. Technical checks do not judge artistic quality. <!-- x-release-please-version -->
 
 ![Poster rendered by Rtistree](https://raw.githubusercontent.com/Coly010/rtistree/main/docs/previews/poster.png)
 

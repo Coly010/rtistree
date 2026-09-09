@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.2](https://github.com/Coly010/rtistree/compare/v0.5.1...v0.5.2) (2026-09-09)
+
+
+### Bug Fixes
+
+* **docs:** align guides and examples with current behavior ([0f73e58](https://github.com/Coly010/rtistree/commit/0f73e583e8a4c5ee0f597e1fa6419f33f43832a1))
+* **release:** automate changelogs and publish through npm OIDC ([31f6e78](https://github.com/Coly010/rtistree/commit/31f6e78db8d18e6d62ca9339d4ba635e8d0103cd))
+* run source CLI outside the checkout and document agent workflow ([b0ce587](https://github.com/Coly010/rtistree/commit/b0ce5873abf377d42441e42a524fcf43d3b0acf6))
+
 ## 0.5.1
 
 - Make `rtistree` the primary CLI executable; retain `graphics` as a compatibility alias.

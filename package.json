@@ -1,6 +1,6 @@
 {
   "name": "rtistree",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Deterministic, agent-operable raster graphics engine",
   "main": "./dist/index.js",
   "scripts": {
