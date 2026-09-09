@@ -1,3 +1,10 @@
+import { constructionSchema } from '../src/construction.js';
+import { pipelineSchema } from '../src/pipeline.js';
+import { productionRequestSchema } from '../src/production-workflow.js';
+import { projectConfigSchema } from '../src/project-config.js';
+import { programSchema } from '../src/program.js';
+import { rasterReadSchema, rasterWriteSchema } from '../src/raster-edit.js';
+import { documentSchema, exportPresetSchema } from '../src/document.js';
 import { z } from 'zod';
 import { resolve } from 'node:path';
 import { componentsSchema, instanceSchema } from '../src/components.js';
@@ -23,6 +30,15 @@ const fragment = z.strictObject({
   layers: z.array(authoredLayer).optional(),
 });
 for (const [name, schema] of Object.entries({
+  construction: constructionSchema,
+  pipeline: pipelineSchema,
+  production: productionRequestSchema,
+  program: programSchema,
+  'raster-read': rasterReadSchema,
+  'raster-write': rasterWriteSchema,
+  project: projectConfigSchema,
+  document: documentSchema,
+  export: exportPresetSchema,
   critique: critiqueSchema,
   brief: briefSchema,
   scene: sceneSchema,

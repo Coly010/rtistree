@@ -1,0 +1,7 @@
+version: 1
+canvas:
+  width: 1600
+  height: 1000
+  background: '#f2f0e7'
+include:
+  - layers/photograph.yaml

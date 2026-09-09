@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "id": "dragon",
+  "shared": {
+    "variant": 0,
+    "detail": 1.25
+  },
+  "nodes": [
+    {
+      "id": "landscape",
+      "target": "landscape",
+      "width": 1500,
+      "height": 1000,
+      "seed": 2718,
+      "source": "programs/painting.js",
+      "parameters": {
+        "pass": "landscape"
+      },
+      "bindings": {
+        "detail": "detail"
+      },
+      "inputs": {},
+      "timeout_ms": 30000
+    },
+    {
+      "id": "dragon",
+      "target": "dragon",
+      "width": 1500,
+      "height": 1000,
+      "seed": 2831,
+      "source": "programs/painting.js",
+      "parameters": {
+        "pass": "dragon"
+      },
+      "bindings": {
+        "detail": "detail",
+        "variant": "variant"
+      },
+      "inputs": {},
+      "timeout_ms": 30000
+    },
+    {
+      "id": "fire",
+      "target": "fire",
+      "width": 1500,
+      "height": 1000,
+      "seed": 2944,
+      "source": "programs/painting.js",
+      "parameters": {
+        "pass": "fire"
+      },
+      "bindings": {
+        "detail": "detail",
+        "variant": "variant"
+      },
+      "inputs": {},
+      "timeout_ms": 30000
+    },
+    {
+      "id": "finish",
+      "target": "finish",
+      "width": 1500,
+      "height": 1000,
+      "seed": 3057,
+      "source": "programs/painting.js",
+      "parameters": {
+        "pass": "finish"
+      },
+      "bindings": {
+        "detail": "detail"
+      },
+      "inputs": {
+        "landscape": {
+          "node": "landscape"
+        },
+        "dragon": {
+          "node": "dragon"
+        },
+        "fire": {
+          "node": "fire"
+        }
+      },
+      "timeout_ms": 30000
+    }
+  ]
+}

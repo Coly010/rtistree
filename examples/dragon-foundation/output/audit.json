@@ -1,0 +1,51 @@
+{
+  "cold_identical": true,
+  "portable_identical": true,
+  "code_only_rebuild_identical": true,
+  "png_hash": "sha256:9c874eab3d58d15dcbb7c0461fb7cbc628c22d87d62676d5947304f419de99f8",
+  "artistic_status": "needs_revision",
+  "stage_complete": false,
+  "selection_rejected": "Candidate has not passed technical, brief and stage quality gates: Brief fidelity below the stage threshold; Artistic quality below the stage threshold; Failed stage criteria; Human review required; Unresolved blocking issues",
+  "readiness": [
+    {
+      "candidate": "climb-value",
+      "eligible": false,
+      "blockers": [
+        "Brief fidelity below the stage threshold",
+        "Artistic quality below the stage threshold",
+        "Failed stage criteria",
+        "Human review required",
+        "Unresolved blocking issues"
+      ]
+    },
+    {
+      "candidate": "climb-revised-value",
+      "eligible": false,
+      "blockers": [
+        "Brief fidelity below the stage threshold",
+        "Artistic quality below the stage threshold",
+        "Failed stage criteria",
+        "Human review required",
+        "Unresolved blocking issues"
+      ]
+    },
+    {
+      "candidate": "climb-masses-value",
+      "eligible": false,
+      "blockers": [
+        "Brief fidelity below the stage threshold",
+        "Artistic quality below the stage threshold",
+        "Failed stage criteria",
+        "Human review required",
+        "Unresolved blocking issues"
+      ]
+    }
+  ],
+  "diagnostic_recipe": {
+    "source": "recipes/837606a3061d84cd48ab967e5eb39a15a6ff2c034b068d3d50f51958f2628124/recipe.json",
+    "hash": "sha256:837606a3061d84cd48ab967e5eb39a15a6ff2c034b068d3d50f51958f2628124"
+  },
+  "image_inputs": 0,
+  "no_image_generation": true,
+  "dimensional_method": "2D curves, masks and grayscale fields; no 3D scene or renderer"
+}

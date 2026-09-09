@@ -1,0 +1,23 @@
+{
+  "candidate": "thumbnails-1",
+  "scene_hash": "sha256:41333b79e8e7c3245c70d4a9f58558cdbc01a525b67a0fae1b0b50fe2f122e19",
+  "png_hash": "sha256:89e7e582b8c6ca8e8788cd966c1ca657b943fe42850c9c99528d43bf10e93948",
+  "reviewer": "Codex visual inspection of rendered comparison sheet",
+  "method": "vision-agent",
+  "fidelity": 0.83,
+  "quality": 0.72,
+  "criteria": [
+    {
+      "id": "read",
+      "evidence": "Horned dragon, raised wings and open-jaw green flame are identifiable at the 464 pixel comparison size.",
+      "pass": true
+    },
+    {
+      "id": "space",
+      "evidence": "More atmospheric space around the creature; both fire and hills are readable.",
+      "pass": true
+    }
+  ],
+  "strengths": "More atmospheric space around the creature; both fire and hills are readable.",
+  "weaknesses": "The dragon is comparatively small, weakening the requested subject as the centre of attention."
+}

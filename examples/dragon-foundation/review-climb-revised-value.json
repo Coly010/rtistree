@@ -1,0 +1,47 @@
+{
+  "candidate": "climb-revised-value",
+  "scene_hash": "sha256:cf7704cf0c9fbf898407879ad504676bf8f819b395c3e7c02f62c5b1246ad84d",
+  "png_hash": "sha256:7bde97bbc5e06f47a80b88de284b56f7070a3f034bd6fd678283ccf816437ff4",
+  "reviewer": "Codex, visual inspection of full-size grayscale render and comparison to earlier candidates",
+  "method": "vision-agent",
+  "fidelity": 0.72,
+  "quality": 0.5,
+  "criteria": [
+    {
+      "id": "construction",
+      "pass": false,
+      "evidence": "The forms read as smooth tubes, with the wing and foreleg sharing an unconvincing attachment and visible shading discontinuities."
+    },
+    {
+      "id": "values",
+      "pass": true,
+      "evidence": "Upper-left light and darker undersides explain the rounded form, though the result remains overly tubular."
+    },
+    {
+      "id": "quality",
+      "pass": false,
+      "evidence": "Recognizability and local improvements do not meet the intended standard of a convincing creature drawing."
+    }
+  ],
+  "strengths": "The jaw has clear sky beneath it and the hind foot no longer merges with the tail.",
+  "weaknesses": "The forms read as smooth tubes, with the wing and foreleg sharing an unconvincing attachment and visible shading discontinuities.",
+  "issues": [
+    {
+      "criterion": "construction",
+      "severity": "blocking",
+      "observation": "The forms read as smooth tubes, with the wing and foreleg sharing an unconvincing attachment and visible shading discontinuities.",
+      "correction": "Replace the generic tube construction at the shoulder and hips with a coherent arrangement of skeletal landmarks and muscle masses; study the skull separately."
+    },
+    {
+      "criterion": "quality",
+      "severity": "blocking",
+      "observation": "This is still an elementary construction study rather than a convincing foundation for excellent art.",
+      "correction": "Do not add texture, scenery or fire. Seek human judgment on a redesigned construction."
+    }
+  ],
+  "comparison": {
+    "parent": "climb-value",
+    "verdict": "improved",
+    "evidence": "The revised jaw/far-wing and hind-foot/tail gaps are visibly larger. Tail curvature is smoother and the original hard body bands are gone. These fixes improve the parent but do not establish convincing anatomy."
+  }
+}

@@ -1,7 +1,13 @@
+import { documentSchema } from './document.js';
+import { pathSegmentSchema, pathData } from './path-edit.js';
+import { shapePath } from './graphics.js';
+import { Path2D, PathOp } from './native.js';
+import { inverse } from './spatial.js';
 import { coordinateMatrix, worldScope, type Coordinates } from './spatial.js';
 import { z } from 'zod';
 import { resolveLayout, flattenResolved } from './layout.js';
 import {
+  sceneSchema,
   fontSchema,
   assetSchema,
   rasterRegionSchema,
@@ -31,6 +37,8 @@ const stylePatchSchema = z.strictObject({
   colour: styleSchema.shape.colour.removeDefault().optional(),
   line_height: styleSchema.shape.line_height.removeDefault().optional(),
   align: styleSchema.shape.align.removeDefault().optional(),
+  tracking: styleSchema.shape.tracking,
+  kerning: styleSchema.shape.kerning,
 });
 const geometryPatchSchema = z.strictObject({
   bounds: layerSchema.shape.bounds,
@@ -42,6 +50,48 @@ const geometryPatchSchema = z.strictObject({
 });
 
 export const commandSchema = z.discriminatedUnion('type', [
+  z.strictObject({ type: z.literal('restoreScene'), scene: sceneSchema }),
+  z.strictObject({ type: z.literal('setDocument'), document: documentSchema.nullable() }),
+  z.strictObject({
+    type: z.literal('setPath'),
+    ...target,
+    segments: z.array(pathSegmentSchema).min(1).max(4096),
+  }),
+  z.strictObject({
+    type: z.literal('setAffine'),
+    ...target,
+    matrix: layerSchema.shape.affine.unwrap().nullable(),
+  }),
+  z.strictObject({
+    type: z.literal('setCrop'),
+    ...target,
+    crop: boundsSchema.nullable(),
+    focal_point: layerSchema.shape.focal_point,
+  }),
+  z.strictObject({
+    type: z.literal('setPerspective'),
+    ...target,
+    corners: layerSchema.shape.perspective.unwrap().nullable(),
+  }),
+  z.strictObject({
+    type: z.literal('setTextRuns'),
+    ...target,
+    runs: layerSchema.shape.runs.unwrap(),
+  }),
+  z.strictObject({ type: z.literal('setParagraphStyle'), id: z.string(), style: styleSchema }),
+  z.strictObject({ type: z.literal('useParagraphStyle'), ...target, id: z.string() }),
+  z.strictObject({
+    type: z.literal('setAdjustmentStack'),
+    ...target,
+    operations: z.array(rasterOperationSchema).max(1000),
+  }),
+  z.strictObject({
+    type: z.literal('booleanPath'),
+    targets: z.array(z.string()).min(2).max(32),
+    id: z.string(),
+    operation: z.enum(['union', 'intersect', 'subtract', 'xor']),
+  }),
+
   z.strictObject({ type: z.literal('registerFont'), id: z.string(), font: fontSchema }),
   z.strictObject({ type: z.literal('removeFont'), id: z.string() }),
   z.strictObject({ type: z.literal('promoteRegion'), ...target, region: rasterRegionSchema }),
@@ -190,6 +240,112 @@ export function applyCommand(input: Scene, raw: unknown): Scene {
     else items[index] = value;
   }
   switch (command.type) {
+    case 'restoreScene':
+      return parseScene(command.scene);
+    case 'setDocument':
+      if (command.document) scene.document = command.document;
+      else delete scene.document;
+      break;
+    case 'setPath':
+      if (layer!.shape?.type !== 'path') throw new Error('setPath requires a path shape');
+      layer!.shape.d = pathData(command.segments);
+      break;
+    case 'setAffine':
+      if (command.matrix) {
+        layer!.affine = command.matrix;
+        delete layer!.transform;
+      } else delete layer!.affine;
+      break;
+    case 'setCrop':
+      if (!layer!.source) throw new Error('Crop requires an image layer');
+      if (command.crop) layer!.crop = command.crop;
+      else delete layer!.crop;
+      if (command.focal_point) layer!.focal_point = command.focal_point;
+      break;
+    case 'setPerspective':
+      if (!layer!.source) throw new Error('Perspective requires an image layer');
+      if (command.corners) layer!.perspective = command.corners;
+      else delete layer!.perspective;
+      break;
+    case 'setTextRuns':
+      if (layer!.type !== 'text') throw new Error('Text runs require text layer');
+      layer!.runs = command.runs;
+      layer!.content = command.runs.map((r) => r.text).join('');
+      break;
+    case 'setParagraphStyle':
+      (scene.paragraph_styles ??= {})[command.id] = command.style;
+      for (const l of flattenLayers(scene.layers))
+        if (l.paragraph_style === command.id) l.style = structuredClone(command.style);
+      break;
+    case 'useParagraphStyle':
+      if (layer!.type !== 'text' || !scene.paragraph_styles?.[command.id])
+        throw new Error('Unknown paragraph style or non-text target');
+      layer!.paragraph_style = command.id;
+      layer!.style = structuredClone(scene.paragraph_styles[command.id]);
+      break;
+    case 'setAdjustmentStack':
+      layer!.operations = command.operations.map(attach);
+      break;
+    case 'booleanPath': {
+      const selected = command.targets.map((id) => findLayer(scene, id));
+      if (new Set(command.targets).size !== selected.length)
+        throw new Error('Duplicate path operands');
+      if (
+        selected.some(
+          (l) =>
+            l.mask ||
+            l.operations.length ||
+            l.effects.length ||
+            l.tiles.length ||
+            l.regions?.length,
+        )
+      )
+        throw new Error('Boolean operands must be unmasked vector geometry without raster effects');
+      if (selected.some((l) => l.type !== 'vector'))
+        throw new Error('Path booleans require vector operands');
+      const parent = container(scene, selected[0]!.id).parent;
+      if (selected.some((l) => container(scene, l.id).parent !== parent))
+        throw new Error('Path operands must share a parent');
+      if (parent?.layout && parent.layout.type !== 'absolute')
+        throw new Error('Path booleans require absolute layout');
+      const parentMatrix = parent
+        ? nodes.find((n) => n.layer.id === parent.id)!.matrix
+        : ([1, 0, 0, 1, 0, 0] as const);
+      const inv = inverse([...parentMatrix]);
+      const map = {
+        union: PathOp.Union,
+        intersect: PathOp.Intersect,
+        subtract: PathOp.Difference,
+        xor: PathOp.Xor,
+      };
+      const transform = (p: Path2D, m: readonly number[]) =>
+        p.transform({ a: m[0]!, b: m[1]!, c: m[2]!, d: m[3]!, e: m[4]!, f: m[5]! });
+      const paths = selected.map((l) => {
+        const n = nodes.find((n) => n.layer.id === l.id)!;
+        return transform(transform(shapePath(l, n.bounds[2], n.bounds[3]), n.matrix), inv);
+      });
+      const path = paths.slice(1).reduce((p, q) => p.op(q, map[command.operation]), paths[0]!);
+      const [x, y, right, bottom] = path.computeTightBounds();
+      if (right <= x || bottom <= y) throw new Error('Boolean result is empty');
+      const result = layerSchema.parse({
+        id: command.id,
+        type: 'vector',
+        bounds: [x, y, right - x, bottom - y],
+        shape: {
+          type: 'path',
+          fill: selected[0]!.shape!.fill,
+          stroke: selected[0]!.shape!.stroke,
+          stroke_width: selected[0]!.shape!.stroke_width,
+          d: transform(path, [1, 0, 0, 1, -x, -y]).toSVGString(),
+        },
+      });
+      const siblings = container(scene, selected[0]!.id).siblings;
+      for (let i = siblings.length - 1; i >= 0; i--)
+        if (command.targets.includes(siblings[i]!.id)) siblings.splice(i, 1);
+      siblings.push(result);
+      break;
+    }
+
     case 'promoteRegion':
       if (layer!.regions?.some((r) => r.id === command.region.id))
         throw new Error('Region already exists');
@@ -228,6 +384,7 @@ export function applyCommand(input: Scene, raw: unknown): Scene {
       layer!.generator = command.generator;
       break;
     case 'setTransform':
+      delete layer!.affine;
       if (command.transform) layer!.transform = command.transform;
       else delete layer!.transform;
       break;
@@ -310,6 +467,7 @@ export function applyCommand(input: Scene, raw: unknown): Scene {
     case 'setText':
       if (layer!.type !== 'text') throw new Error('setText requires a text layer');
       layer!.content = command.content;
+      delete layer!.runs;
       break;
     case 'setStyle':
       if (layer!.type !== 'text') throw new Error('setStyle requires a text layer');
@@ -427,6 +585,10 @@ export function commandScopes(
       findLayer(before, command.target).regions!.find((r) => r.id === id)!,
       before,
     );
+  }
+  if (command.type === 'setAdjustmentStack') {
+    for (const value of findLayer(before, command.target).operations) add(value, before);
+    for (const value of findLayer(after, command.target).operations) add(value, after);
   }
   if (command.type === 'applyRasterOperation')
     add(findLayer(after, command.target).operations.at(-1)!, after);

@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 800,
+    "height": 1280,
+    "colour_space": "srgb",
+    "background": "#eee8da"
+  },
+  "document": {
+    "width": 100,
+    "height": 160,
+    "unit": "mm",
+    "ppi": 300,
+    "bleed": 3,
+    "safe_margin": 6
+  },
+  "metadata": {},
+  "assets": {
+    "vase": {
+      "type": "generated-image",
+      "source": "assets/vase.png"
+    }
+  },
+  "layers": [
+    {
+      "id": "backdrop",
+      "type": "procedural",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "anchor": "top-left",
+      "fit": "contain",
+      "generator": {
+        "type": "gradient",
+        "from": "#f4eedf",
+        "to": "#e1deca",
+        "angle": 115
+      },
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "vase",
+      "role": "hero-product",
+      "type": "generated-asset",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 2,
+      "bounds": [60, 360, 680, 680],
+      "anchor": "top-left",
+      "source": "vase",
+      "fit": "contain",
+      "mask": {
+        "type": "image",
+        "source": "vase",
+        "bounds": [0, 0, 600, 600],
+        "channel": "colour",
+        "colour": "#e4e4e4",
+        "tolerance": 0.13,
+        "space": "layer",
+        "reference_size": [600, 600],
+        "feather": 0.35,
+        "expand": -0.5,
+        "invert": true
+      },
+      "effects": [],
+      "operations": [
+        {
+          "type": "whiteBalance",
+          "space": "layer",
+          "reference_size": [600, 600],
+          "bounds": [0, 0, 600, 600],
+          "temperature": 0.035,
+          "tint": 0
+        }
+      ],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [65, 65, 650, 32],
+      "anchor": "top-left",
+      "content": "STILL LIFE / 01",
+      "style": {
+        "font": "inter",
+        "size": 16,
+        "weight": "regular",
+        "colour": "#293b32",
+        "line_height": 1.2,
+        "align": "left"
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [60, 150, 690, 195],
+      "anchor": "top-left",
+      "content": "Objects\nof quiet.",
+      "style": {
+        "font": "display",
+        "size": 76,
+        "weight": "regular",
+        "colour": "#293b32",
+        "line_height": 1.2,
+        "align": "left"
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [65, 1080, 670, 90],
+      "anchor": "top-left",
+      "content": "Clay, light\nand a little green.",
+      "style": {
+        "font": "inter",
+        "size": 24,
+        "weight": "regular",
+        "colour": "#293b32",
+        "line_height": 1.2,
+        "align": "left"
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "footer",
+      "type": "text",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [65, 1210, 650, 26],
+      "anchor": "top-left",
+      "content": "TERRACOTTA / LEAF / LIGHT",
+      "style": {
+        "font": "inter",
+        "size": 13,
+        "weight": "regular",
+        "colour": "#293b32",
+        "line_height": 1.2,
+        "align": "left"
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "contact-shadow",
+      "type": "vector",
+      "visible": true,
+      "opacity": 0.27,
+      "blend_mode": "normal",
+      "z": 1,
+      "bounds": [296, 965, 216, 28],
+      "anchor": "top-left",
+      "shape": {
+        "type": "ellipse",
+        "fill": "#796044",
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [
+        {
+          "type": "blur",
+          "radius": 7
+        }
+      ],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    },
+    {
+      "id": "rule",
+      "type": "vector",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [65, 1172, 670, 1],
+      "anchor": "top-left",
+      "shape": {
+        "type": "rectangle",
+        "fill": "#9b9e88",
+        "radius": 0,
+        "stroke_width": 1
+      },
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    }
+  ],
+  "verification": {
+    "rules": [
+      {
+        "type": "required-role",
+        "role": "hero-product"
+      },
+      {
+        "type": "text-equals",
+        "target": "title",
+        "expected": "Objects\nof quiet."
+      },
+      {
+        "type": "pixel-contrast",
+        "target": "description",
+        "minimum": 4.5,
+        "percentile": 0.1
+      },
+      {
+        "type": "no-overlap",
+        "target": "title",
+        "other": "vase"
+      }
+    ]
+  }
+}

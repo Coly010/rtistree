@@ -1,0 +1,6 @@
+{
+  "id": "generated-alpine",
+  "category": "poster",
+  "prompt": "Fit the generated square alpine photograph into a 1600 by 1000 editorial landscape composition. Preserve its aspect ratio and recognisable mountain and shoreline. Use Rtistree for the surrounding layout, editable title The quiet between., supporting copy, and graphic details. Keep text clear of the photograph. Inspect and refine the composition without further image generation.",
+  "max_edits": 5
+}

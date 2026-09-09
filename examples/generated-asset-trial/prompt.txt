@@ -1,0 +1,6 @@
+Use case: photorealistic-natural
+Asset type: base photographic asset for a graphics-engine compositing trial
+Primary request: Create a square editorial photograph of an alpine lake with a mountain ridge and soft morning mist.
+Composition/framing: Landscape detail fills the square photograph, with a clear shoreline and layered mountains. This is the photograph only; it will later be placed into a larger designed canvas by a separate graphics engine.
+Style/medium: Natural travel photography, believable fine detail and restrained colour.
+Constraints: No typography, captions, frames, logos or watermark. Do not make a poster or a finished page layout.

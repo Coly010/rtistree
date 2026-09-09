@@ -1,0 +1,16 @@
+version: 1
+scene: scene.json
+output_dir: output
+presets:
+  screen:
+    format: png
+    colour_space: srgb
+    intent: perceptual
+    quality: 90
+    chroma_subsampling: 4:4:4
+    background: '#ffffff'
+    crop_marks: false
+    minimum_ppi: 150
+    max_ink: 300
+    black: k-only
+    mode: hybrid

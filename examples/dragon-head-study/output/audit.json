@@ -1,0 +1,23 @@
+{
+  "cold_identical": true,
+  "portable_identical": true,
+  "code_only_rebuild_identical": true,
+  "png_hash": "sha256:d5ef15a1c1d8aa182fc274d2cc9f51a60db808e960da90f6a30afd44882f2c64",
+  "image_inputs": 0,
+  "method": "2D paths, gradients, authored light fields, irregular cells, seeded brush marks and noise-based flame. No image generation or 3D.",
+  "artistic_status": "below_target",
+  "stage_complete": false,
+  "selection_rejected": true,
+  "readiness": [
+    {
+      "candidate": "revision-2",
+      "eligible": false,
+      "blockers": [
+        "Artistic quality below the stage threshold",
+        "Failed stage criteria",
+        "Human review required",
+        "Unresolved blocking issues"
+      ]
+    }
+  ]
+}

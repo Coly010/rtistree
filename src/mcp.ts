@@ -1,4 +1,16 @@
+import { buildPipeline, pipelineSchema } from './pipeline.js';
+import { production, productionRequestSchema } from './production-workflow.js';
+import { exportArtwork, preflight, softProof } from './export.js';
+import { exportPresetSchema } from './document.js';
 import { critiqueSchema } from './critique.js';
+import { programSchema, runProgram, replayRecipe } from './program.js';
+import { studioReference } from './studio-reference.js';
+import {
+  rasterReadSchema,
+  rasterWriteSchema,
+  readRasterRegion,
+  writeRasterRegion,
+} from './raster-edit.js';
 import {
   ListToolsRequestSchema,
   type Tool,
@@ -23,7 +35,7 @@ const image = (render: RenderResult) => ({
   mimeType: 'image/png',
 });
 export function createServer(project: Project): McpServer {
-  const server = new McpServer({ name: 'rtistree', version: '0.2.0' });
+  const server = new McpServer({ name: 'rtistree', version: '0.5.0' });
   const definitions: Tool[] = [];
   // Share recursive definitions in discovery while retaining SDK runtime validation.
   function registerTool<Args extends z.ZodRawShape>(
@@ -45,6 +57,85 @@ export function createServer(project: Project): McpServer {
   }
   const readOnly = { readOnlyHint: true, destructiveHint: false, openWorldHint: false };
   const mutate = { readOnlyHint: false, destructiveHint: false, openWorldHint: false };
+  registerTool(
+    'buildPipeline',
+    {
+      description:
+        'Explicitly execute trusted local 2D painting code in a dependency graph. Reuse unchanged nodes and atomically commit all changed outputs. Graph code and parameters are retained in scene metadata. Native code is not sandboxed.',
+      inputSchema: { pipeline: pipelineSchema, expected_hash: z.string().optional() },
+      annotations: { ...mutate, openWorldHint: true },
+    },
+    async ({ pipeline, expected_hash }) =>
+      json(await buildPipeline(project, pipeline, expected_hash)),
+  );
+  registerTool(
+    'production',
+    {
+      description:
+        'Plan stages, capture image candidates and detail crops, record human/vision reviews, compare, restore the best candidate with undo, and advance gated stages. Reviews require actual visual observation; technical checks do not rate art. Read studioHelp first.',
+      inputSchema: { request: productionRequestSchema },
+      annotations: mutate,
+    },
+    async ({ request }) => json(await production(project, request)),
+  );
+  registerTool(
+    'studioHelp',
+    {
+      description:
+        'Read the art-direction protocol before creating artwork: reference study, distinct poses, construction, grayscale values, targeted revision, blocking defects and honest human checkpoints. Also includes named 2D guides, the raster authoring API and trusted-code limits.',
+      inputSchema: {},
+      annotations: readOnly,
+    },
+    async () => json(studioReference),
+  );
+  registerTool(
+    'runProgram',
+    {
+      description:
+        'Execute a trusted local JavaScript raster program with seeded studio helpers; bake and pin its output, recipe and input snapshots, optionally update a target layer. Native worker isolation is not a security sandbox; only run code you trust. Scene rendering never executes programs.',
+      inputSchema: { program: programSchema },
+      annotations: { ...mutate, openWorldHint: true },
+    },
+    async ({ program }) => json(await runProgram(project, program)),
+  );
+  registerTool(
+    'replayProgram',
+    {
+      description:
+        'Explicitly re-execute a trusted baked asset recipe and compare output hashes. This runs local code, not a security sandbox.',
+      inputSchema: { asset: z.string() },
+      annotations: { ...mutate, openWorldHint: true },
+    },
+    async ({ asset }) => {
+      const reference = (await project.scene()).assets[asset]?.recipe;
+      if (!reference) throw new Error('Asset has no recipe');
+      const { png, ...result } = await replayRecipe(project.root, reference);
+      return json(result);
+    },
+  );
+  registerTool(
+    'readRasterRegion',
+    {
+      description:
+        'Read an exact canvas-space PNG region of the composite or isolated layer, with a scene hash for subsequent dense edits.',
+      inputSchema: { request: rasterReadSchema },
+      annotations: mutate,
+    },
+    async ({ request }) => {
+      const { render, ...result } = await readRasterRegion(project, request);
+      return { content: [...json(result).content, image(render)] };
+    },
+  );
+  registerTool(
+    'writeRasterRegion',
+    {
+      description:
+        'Atomically replace or composite a dense local PNG patch into a layer, with exact dimensions, stale-scene protection, locality validation and undo. Layer-space patches follow later object transforms.',
+      inputSchema: { request: rasterWriteSchema },
+      annotations: mutate,
+    },
+    async ({ request }) => json(await writeRasterRegion(project, request)),
+  );
   registerTool(
     'inspectScene',
     {
@@ -89,7 +180,7 @@ export function createServer(project: Project): McpServer {
     async ({ quality }) => {
       const render = await project.render({ quality });
       const artifact = await writeRender(
-        join(project.root, 'renders', `${render.evidence.render.png_hash.slice(7)}.png`),
+        join(project.outputDirectory, `${render.evidence.render.png_hash.slice(7)}.png`),
         render,
       );
       return { content: [...json(artifact).content, image(render)] };
@@ -217,6 +308,43 @@ export function createServer(project: Project): McpServer {
       annotations: mutate,
     },
     async () => json(await project.compactHistory()),
+  );
+  registerTool(
+    'exportArtwork',
+    {
+      description:
+        'Export PNG, JPEG, TIFF, or physically sized PDF into the project output directory with profile and geometry read-back validation.',
+      inputSchema: { name: z.string().regex(/^[a-zA-Z0-9_-]+$/), options: exportPresetSchema },
+      annotations: mutate,
+    },
+    async ({ name, options }) =>
+      json(
+        await exportArtwork(
+          project,
+          join(project.outputDirectory, `${name}.${options.format}`),
+          options,
+        ),
+      ),
+  );
+  registerTool(
+    'softProof',
+    {
+      description: 'Create an sRGB preview of a round-trip through the project CMYK ICC profile.',
+      inputSchema: { options: exportPresetSchema },
+      annotations: mutate,
+    },
+    async ({ options }) =>
+      json(await softProof(project, join(project.outputDirectory, 'proof.png'), options)),
+  );
+  registerTool(
+    'preflight',
+    {
+      description:
+        'Inspect physical print geometry, source image resolution and ICC requirements before export.',
+      inputSchema: { options: exportPresetSchema },
+      annotations: readOnly,
+    },
+    async ({ options }) => json(await preflight(project, options)),
   );
   server.server.setRequestHandler(ListToolsRequestSchema, () => ({ tools: definitions }));
   return server;

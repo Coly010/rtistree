@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "points": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/__schema0"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema1"
+      }
+    },
+    "paths": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/__schema0"
+      },
+      "additionalProperties": {
+        "minItems": 1,
+        "maxItems": 4096,
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/__schema3"
+        }
+      }
+    }
+  },
+  "required": ["points", "paths"],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$"
+    },
+    "__schema1": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema2"
+        },
+        {
+          "$ref": "#/$defs/__schema0"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "anchor": {
+              "$ref": "#/$defs/__schema0"
+            },
+            "offset": {
+              "$ref": "#/$defs/__schema2"
+            }
+          },
+          "required": ["anchor", "offset"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "__schema2": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        {
+          "type": "number",
+          "minimum": -1000000,
+          "maximum": 1000000
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "__schema3": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "const": "M"
+            },
+            "to": {
+              "$ref": "#/$defs/__schema1"
+            }
+          },
+          "required": ["op", "to"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "const": "L"
+            },
+            "to": {
+              "$ref": "#/$defs/__schema1"
+            }
+          },
+          "required": ["op", "to"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "const": "Q"
+            },
+            "control": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "to": {
+              "$ref": "#/$defs/__schema1"
+            }
+          },
+          "required": ["op", "control", "to"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "const": "C"
+            },
+            "control1": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "control2": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "to": {
+              "$ref": "#/$defs/__schema1"
+            }
+          },
+          "required": ["op", "control1", "control2", "to"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "const": "Z"
+            }
+          },
+          "required": ["op"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

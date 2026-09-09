@@ -1,10 +1,26 @@
 # Rtistree
 
-A deterministic raster graphics engine that agents can inspect, edit, verify, and replay. A persistent scene is the source of truth; PNG is an output.
+A deterministic raster graphics engine that agents can inspect, edit, verify, and replay. A persistent scene is the source of truth; PNG, JPEG, TIFF, PDF and SVG are outputs.
+
+Version 0.4 adds a programmable digital-art studio: seeded raster programs, pressure brushes, texture fields, warps, displacement, height-field lighting and dense regional edits. Programs bake to pinned assets with portable, replayable recipes; normal rendering never executes code. See the [studio guide](docs/studio.md), [decision](docs/decisions/005-programmable-digital-art.md) and [wheel trial made without image generation](examples/manual-wheel-trial/README.md).
 
 TypeScript provides the scene schema, transactions, CLI, and MCP tool server. The next-stage implementation includes attached painting, adaptive patches, incremental layer rendering, visual critique and source rebasing. **Native CPU Skia** performs rendering through `@napi-rs/canvas`. No browser, WebGL, GPU, model API key, or external service is required.
 
 ![Poster rendered by Rtistree](docs/previews/poster.png)
+
+## Print production and new projects
+
+Version 0.3 adds physical documents, ICC-managed CMYK exports, embedded PDF fonts/vector geometry, project creation, source crops/perspective, mask algebra, tonal adjustments, clone/heal, path booleans and richer typography. See the [production guide](docs/production.md), [recorded decisions](docs/decisions/004-print-production-and-projects.md) and [masked generated-asset print trial](examples/print-trial/README.md).
+
+```sh
+graphics project new artwork --size A3 --orientation landscape --ppi 300 --bleed 3mm
+graphics render artwork --preset screen
+# Configure the printer/paper ICC profile in rtistree.yaml before CMYK export.
+graphics preflight artwork --preset print
+graphics export artwork --preset print --format pdf
+```
+
+Print PDFs encode exact trim/bleed dimensions and are reopened for validation. PDF/X certification, spot colours and overprint are not claimed. The engine remains an 8-bit sRGB working renderer with explicit colour-managed output.
 
 ## Run it
 
@@ -67,7 +83,7 @@ node dist/cli.js serve /absolute/path/to/scene.yaml
 
 Configure an MCP client to launch `node`, with the absolute path to `dist/cli.js`, `serve`, and the absolute scene path as arguments. Transport is stdio; the server writes only protocol messages to stdout.
 
-Tools: `inspectScene`, `inspectLayer`, `inspectRegion`, `render`, `renderRegion`, `apply`, `undo`, `redo`, `verify`, `history`, `recordCritique`, `readCritique`, `rebase`, `compactHistory`. Image tools return PNG image content so a vision-capable agent can inspect the result. `apply` advertises a typed command schema and requires an explanation. Supply the scene hash returned by inspection to reject stale edits.
+Tools: `inspectScene`, `inspectLayer`, `inspectRegion`, `render`, `renderRegion`, `apply`, `undo`, `redo`, `verify`, `history`, `recordCritique`, `readCritique`, `rebase`, `compactHistory`, `exportArtwork`, `preflight`, `softProof`, `studioHelp`, `runProgram`, `replayProgram`, `readRasterRegion`, `writeRasterRegion`. Image tools return PNG image content so a vision-capable agent can inspect the result. `apply` advertises a typed command schema and requires an explanation. Supply the scene hash returned by inspection to reject stale edits.
 
 ```json
 {
@@ -106,7 +122,7 @@ Exports copy raster assets and custom fonts into content-addressed files and pin
 - Exact region crops, structural/color inspection, append-only transactions, undo/redo, self-contained export, CLI, and MCP.
 - Text overflow, declared contrast, safe-area, overlap, copy/role and region-luma rules, issue heatmaps, measured edit locality, and bounded agent iterations.
 
-The remaining extensions are automatic quadtree subdivision, a general dirty-tile compositor, SVG export, warp/smudge/clone tools, segmentation, provider-specific model integrations, learned asset generation, and animation. Draft still downsamples after rendering. Safe pointwise region scenes use smaller viewport surfaces; antialias-sensitive scenes fall back to a full composite and exact crop.
+The remaining extensions are automatic quadtree subdivision, a general dirty-tile compositor, advanced SVG import, mesh warp/smudge, general segmentation, provider-specific model integrations, learned asset generation, and animation. Draft still downsamples after rendering. Safe pointwise region scenes use smaller viewport surfaces; antialias-sensitive scenes fall back to a full composite and exact crop.
 
 ## Next-stage examples and agent trials
 
@@ -135,3 +151,11 @@ npm run schema
 Subsystems are separate modules in `src/`: schema, loader, layout, assets, paint, renderer, commands, project transactions, verification, workflow, CLI and MCP. The `Renderer` interface makes backend replacement independent of scene authoring or agent logic. The original proposal's package boundaries are module boundaries until independent packaging has a concrete benefit.
 
 Bundled fonts are Inter and DM Serif Display from Fontsource, under their bundled SIL Open Font Licenses. They cover Latin text; custom project fonts can supply broader script coverage. Arbitrary system-font fallback remains disabled. Example artwork and book-cover raster are built from this engine's own primitives; regenerate the cover with `node --import tsx scripts/create-fixtures.ts`.
+
+## Staged 2D art production
+
+Dependency-aware painting pipelines, immutable candidate comparisons, hash-bound visual reviews and gated production stages are available through the CLI, SDK and MCP. Seeded oil/filbert/scumble/ink brushes complement native Canvas paths and raw pixels. See [the atelier workflow](docs/atelier.md) and the hand-authored dragon trial in `examples/dragon-oil-trial`. No image-generation or 3D dependency is used.
+
+Read [Art direction for agents](docs/agent-art-workflow.md) before making art. The foundation-first protocol, named 2D construction guides, explicit blocking issues and parent-linked revisions are also discoverable through `graphics studio-help`. The [grayscale dragon study](examples/dragon-foundation/README.md) demonstrates the process and records its unresolved artistic failures.
+
+The [dragon head lighting experiment](examples/dragon-head-study/README.md) uses the existing 2D tools for an original head, reflected green fire and two local revisions. It remains below the supplied artistic quality reference; code-only reproduction is verified separately from that verdict.

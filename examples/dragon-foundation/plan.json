@@ -1,0 +1,60 @@
+{
+  "id": "foundation",
+  "brief": "A convincing grayscale dragon in flight on a plain background. Establish articulated wings, connected anatomy, a banking gesture and coherent value masses. No landscape, fire, colour, surface texture or image generation. The foundation needs human judgment before any decorative stage.",
+  "references": [
+    {
+      "id": "wing-anatomy",
+      "source": "https://www.brh.co.jp/research/hisato_kondo/9/img/img_article04.jpg",
+      "observation": "Viewed the anatomical photograph: the arm has an elbow and wrist before the long finger fan; finger tips form unequal scallops, and the two wings are projected at different angles.",
+      "application": "Use separate shoulder, elbow and wrist landmarks; radiate digits from the wrist and vary the foreshortening of the two wings. Do not trace the photograph or copy pixels."
+    },
+    {
+      "id": "bat-flight",
+      "source": "https://www.si.edu/spotlight/bats/batfacts",
+      "observation": "The anatomy explanation describes the wing as elongated arm and finger bones supporting a membrane, with a separate clawed thumb.",
+      "application": "Construct a continuous arm chain and a free thumb. The six-limbed dragon is invented anatomy; bat references inform the wing mechanism, not the full creature."
+    }
+  ],
+  "stages": [
+    {
+      "id": "poses",
+      "goal": "Compare genuinely different flying gestures before committing to detail",
+      "minimum_alternatives": 3,
+      "require_references": true,
+      "minimum_fidelity": 0.6,
+      "minimum_quality": 0.6,
+      "criteria": [
+        {
+          "id": "gesture",
+          "description": "The spine and wings suggest a single readable flight action"
+        },
+        {
+          "id": "space",
+          "description": "Wings, head, limbs and tail have readable silhouettes and negative spaces"
+        }
+      ]
+    },
+    {
+      "id": "foundation",
+      "goal": "Resolve construction and values; request human judgment before advancing",
+      "require_references": true,
+      "required_reviewer": "human",
+      "minimum_fidelity": 0.75,
+      "minimum_quality": 0.8,
+      "criteria": [
+        {
+          "id": "construction",
+          "description": "Shoulder, elbow, wrist and finger chains connect plausibly; skull, neck, torso and limbs form coherent masses"
+        },
+        {
+          "id": "values",
+          "description": "Large grayscale light and shadow masses explain overlap and volume without texture"
+        },
+        {
+          "id": "quality",
+          "description": "The plain drawing is convincing enough to develop, without colour or scenery rescuing it"
+        }
+      ]
+    }
+  ]
+}

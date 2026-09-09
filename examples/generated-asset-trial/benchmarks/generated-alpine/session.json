@@ -1,0 +1,60 @@
+{
+  "brief": {
+    "id": "generated-alpine",
+    "category": "poster",
+    "prompt": "Fit the generated square alpine photograph into a 1600 by 1000 editorial landscape composition. Preserve its aspect ratio and recognisable mountain and shoreline. Use Rtistree for the surrounding layout, editable title The quiet between., supporting copy, and graphic details. Keep text clear of the photograph. Inspect and refine the composition without further image generation.",
+    "max_edits": 5
+  },
+  "agent": "Codex with built-in imagegen followed by Rtistree",
+  "method": "interactive-agent",
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:90acc0aa38c161ae259d447f124c4e668326bdc76b93a1bf7af3ed8cd7c9928c",
+      "png_hash": "sha256:fe0f952572d84d2bec43cbdd3bd5d4970c8098bee9f556ddbcced6878e93175c",
+      "png": "/Users/colum/dev/personal/rtistree/examples/generated-asset-trial/benchmarks/generated-alpine/before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:90acc0aa38c161ae259d447f124c4e668326bdc76b93a1bf7af3ed8cd7c9928c",
+        "png_hash": "sha256:fe0f952572d84d2bec43cbdd3bd5d4970c8098bee9f556ddbcced6878e93175c",
+        "reviewer": "Codex, same-agent visual inspection",
+        "method": "vision-agent",
+        "summary": "The square lake photograph is fully visible, with no distortion. The wider canvas is still an unfinished placement: the left column is blank and has none of the editorial content required by the brief.",
+        "score": 0.4,
+        "issues": [
+          {
+            "id": "unfinished-layout",
+            "category": "composition",
+            "severity": "high",
+            "region": [0, 0, 680, 1000],
+            "message": "The left column needs a clear title, supporting copy, and an intentional reading order."
+          }
+        ]
+      },
+      "history_length": 0,
+      "timestamp": "2026-09-08T19:52:26.671Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:2e66bdf8cefa3838a2e177cd4f30b67bdf299e3607b29f27e69b53f7334b99d9",
+      "png_hash": "sha256:82ae78eab24f3cd20fbfa3648363967e4be397b970291c5d321da8638a95a71d",
+      "png": "/Users/colum/dev/personal/rtistree/examples/generated-asset-trial/benchmarks/generated-alpine/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:2e66bdf8cefa3838a2e177cd4f30b67bdf299e3607b29f27e69b53f7334b99d9",
+        "png_hash": "sha256:82ae78eab24f3cd20fbfa3648363967e4be397b970291c5d321da8638a95a71d",
+        "reviewer": "Codex, same-agent visual inspection",
+        "method": "vision-agent",
+        "summary": "The photograph remains intact within a square frame. The dark green serif title and smaller supporting text form a clear left column, with aligned rules and captions tying both columns together. Text is readable and stays outside the photograph. This meets the fit-into-scene brief; seamless photographic extension was not attempted.",
+        "score": 0.84,
+        "issues": []
+      },
+      "history_length": 1,
+      "timestamp": "2026-09-08T19:53:41.726Z",
+      "tokens": null
+    }
+  ]
+}

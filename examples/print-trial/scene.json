@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 1280,
+    "height": 800,
+    "background": "#eee8da"
+  },
+  "document": {
+    "width": 160,
+    "height": 100,
+    "unit": "mm",
+    "ppi": 300,
+    "bleed": 3,
+    "safe_margin": 6
+  },
+  "assets": {
+    "vase": {
+      "source": "assets/vase.png",
+      "type": "generated-image"
+    }
+  },
+  "layers": [
+    {
+      "id": "backdrop",
+      "type": "procedural",
+      "generator": {
+        "type": "gradient",
+        "from": "#f4eedf",
+        "to": "#e1deca",
+        "angle": 115
+      }
+    },
+    {
+      "id": "vase",
+      "type": "generated-asset",
+      "role": "hero-product",
+      "source": "vase",
+      "bounds": [630, 80, 600, 600]
+    },
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "bounds": [65, 65, 500, 32],
+      "content": "STILL LIFE / 01",
+      "style": {
+        "size": 16,
+        "font": "inter",
+        "colour": "#293b32"
+      }
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "bounds": [60, 210, 570, 235],
+      "content": "Objects\nof quiet.",
+      "style": {
+        "size": 94,
+        "font": "display",
+        "colour": "#293b32"
+      }
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "bounds": [65, 488, 490, 105],
+      "content": "Clay, light\nand a little green.",
+      "style": {
+        "size": 27,
+        "font": "inter",
+        "colour": "#293b32"
+      }
+    },
+    {
+      "id": "footer",
+      "type": "text",
+      "bounds": [65, 736, 1000, 30],
+      "content": "TERRACOTTA / LEAF / LIGHT",
+      "style": {
+        "size": 13,
+        "font": "inter",
+        "colour": "#293b32"
+      }
+    }
+  ],
+  "verification": {
+    "rules": [
+      {
+        "type": "required-role",
+        "role": "hero-product"
+      },
+      {
+        "type": "text-equals",
+        "target": "title",
+        "expected": "Objects\nof quiet."
+      },
+      {
+        "type": "pixel-contrast",
+        "target": "description",
+        "minimum": 4.5
+      },
+      {
+        "type": "no-overlap",
+        "target": "title",
+        "other": "vase"
+      }
+    ]
+  }
+}

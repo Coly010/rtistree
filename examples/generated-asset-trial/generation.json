@@ -1,0 +1,13 @@
+{
+  "tool": "Codex built-in image_gen",
+  "mode": "generate",
+  "prompt_file": "prompt.txt",
+  "source_file": "assets/alpine-lake.png",
+  "source_hash": "sha256:19e7f923f49be066921d63ef3beef99d992c0ca5aa2565fca9b8e8c5f8662f60",
+  "width": 1254,
+  "height": 1254,
+  "generation_calls": 1,
+  "additional_generation_after_inspection": 0,
+  "composition": "Rtistree typed layer commands; image bytes and placed photo pixels preserved",
+  "note": "The original generated source is retained byte-for-byte. Generated subject is fictional, not a documented geographic location."
+}

@@ -1,0 +1,11 @@
+assets:
+  alpine:
+    type: generated-image
+    source: ../assets/alpine-lake.png
+layers:
+  - id: photograph
+    type: generated-asset
+    role: hero-image
+    source: alpine
+    bounds: [680, 80, 840, 840]
+    fit: contain

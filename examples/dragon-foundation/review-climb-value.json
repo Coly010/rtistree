@@ -1,0 +1,42 @@
+{
+  "candidate": "climb-value",
+  "scene_hash": "sha256:bd1cf2af32dc4f1cc4a168c7890a67491ad0b50c7e771bee7d4b049de9530ed1",
+  "png_hash": "sha256:3cd4e0bd0e52a2e2504e031fb881b423799a0141cc4e4263b868ef0e478a86be",
+  "reviewer": "Codex, visual inspection of full-size grayscale render and comparison to earlier candidates",
+  "method": "vision-agent",
+  "fidelity": 0.72,
+  "quality": 0.4,
+  "criteria": [
+    {
+      "id": "construction",
+      "pass": false,
+      "evidence": "Jaw/far-wing tangency, foot/tail merger, and hard value bands make the body read as cut paper."
+    },
+    {
+      "id": "values",
+      "pass": false,
+      "evidence": "Hard flat shading strips flatten the torso and neck."
+    },
+    {
+      "id": "quality",
+      "pass": false,
+      "evidence": "Recognizability and local improvements do not meet the intended standard of a convincing creature drawing."
+    }
+  ],
+  "strengths": "The head is readable and the wing hand fan is explicit.",
+  "weaknesses": "Jaw/far-wing tangency, foot/tail merger, and hard value bands make the body read as cut paper.",
+  "issues": [
+    {
+      "criterion": "construction",
+      "severity": "blocking",
+      "observation": "Jaw/far-wing tangency, foot/tail merger, and hard value bands make the body read as cut paper.",
+      "correction": "Replace the generic tube construction at the shoulder and hips with a coherent arrangement of skeletal landmarks and muscle masses; study the skull separately."
+    },
+    {
+      "criterion": "quality",
+      "severity": "blocking",
+      "observation": "This is still an elementary construction study rather than a convincing foundation for excellent art.",
+      "correction": "Do not add texture, scenery or fire. Seek human judgment on a redesigned construction."
+    }
+  ]
+}

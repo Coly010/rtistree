@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "shared": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/__schema0"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema1"
+      }
+    },
+    "nodes": {
+      "minItems": 1,
+      "maxItems": 32,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema2"
+      }
+    }
+  },
+  "required": ["version", "id", "shared", "nodes"],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+    },
+    "__schema1": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema1"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema1"
+          }
+        }
+      ]
+    },
+    "__schema2": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 262144
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "seed": {
+          "default": 0,
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "parameters": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema3"
+          }
+        },
+        "bindings": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          }
+        },
+        "inputs": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "node": {
+                    "$ref": "#/$defs/__schema0"
+                  }
+                },
+                "required": ["node"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "asset": {
+                    "$ref": "#/$defs/__schema0"
+                  }
+                },
+                "required": ["asset"],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "target": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "timeout_ms": {
+          "default": 10000,
+          "type": "integer",
+          "minimum": 50,
+          "maximum": 30000
+        }
+      },
+      "required": [
+        "id",
+        "width",
+        "height",
+        "seed",
+        "parameters",
+        "bindings",
+        "inputs",
+        "timeout_ms"
+      ],
+      "additionalProperties": false
+    },
+    "__schema3": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema3"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema3"
+          }
+        }
+      ]
+    }
+  }
+}

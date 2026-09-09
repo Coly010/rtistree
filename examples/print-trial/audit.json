@@ -1,0 +1,549 @@
+[
+  {
+    "sequence": 1,
+    "kind": "apply",
+    "reason": "Extract the grey backdrop with a colour-range mask, refine its edge, and ground the vase with a warm contact shadow after visual inspection.",
+    "timestamp": "2026-09-08T20:22:37.603Z",
+    "source_hash": "sha256:2ec3b0120e4ee4114ca71130b325f4158754b99c16d6afb9cbdb5715c0d0b47b",
+    "before_hash": "sha256:2ec3b0120e4ee4114ca71130b325f4158754b99c16d6afb9cbdb5715c0d0b47b",
+    "after_hash": "sha256:6cf53cd3a44f5bd854a8551ef696b496585bd7968e25dbb623298b097e4af425",
+    "previous_hash": null,
+    "commands": [
+      {
+        "type": "setMask",
+        "target": "vase",
+        "mask": {
+          "type": "image",
+          "source": "vase",
+          "bounds": [0, 0, 600, 600],
+          "channel": "colour",
+          "colour": "#e4e4e4",
+          "tolerance": 0.13,
+          "space": "layer",
+          "feather": 0.35,
+          "expand": -0.5,
+          "invert": true
+        }
+      },
+      {
+        "type": "setZ",
+        "target": "vase",
+        "z": 2
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "contact-shadow",
+          "type": "vector",
+          "visible": true,
+          "opacity": 0.27,
+          "blend_mode": "normal",
+          "z": 1,
+          "bounds": [842, 612, 192, 25],
+          "anchor": "top-left",
+          "shape": {
+            "type": "ellipse",
+            "fill": "#796044",
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [
+            {
+              "type": "blur",
+              "radius": 7
+            }
+          ],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      },
+      {
+        "type": "applyRasterOperation",
+        "target": "vase",
+        "operation": {
+          "type": "whiteBalance",
+          "space": "layer",
+          "bounds": [0, 0, 600, 600],
+          "temperature": 0.035,
+          "tint": 0
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "rule",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [65, 690, 490, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#9b9e88",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "vase": "sha256:e35e03bb20849c1cd29d6c625af1f352a3403e48f579a0275e8f826042afab5b"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "baseline": {
+      "version": 1,
+      "canvas": {
+        "width": 1280,
+        "height": 800,
+        "colour_space": "srgb",
+        "background": "#eee8da"
+      },
+      "document": {
+        "width": 160,
+        "height": 100,
+        "unit": "mm",
+        "ppi": 300,
+        "bleed": 3,
+        "safe_margin": 6
+      },
+      "metadata": {},
+      "assets": {
+        "vase": {
+          "type": "generated-image",
+          "source": "assets/vase.png"
+        }
+      },
+      "layers": [
+        {
+          "id": "backdrop",
+          "type": "procedural",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "anchor": "top-left",
+          "fit": "contain",
+          "generator": {
+            "type": "gradient",
+            "from": "#f4eedf",
+            "to": "#e1deca",
+            "angle": 115
+          },
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "vase",
+          "role": "hero-product",
+          "type": "generated-asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [630, 80, 600, 600],
+          "anchor": "top-left",
+          "source": "vase",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "eyebrow",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [65, 65, 500, 32],
+          "anchor": "top-left",
+          "content": "STILL LIFE / 01",
+          "style": {
+            "font": "inter",
+            "size": 16,
+            "weight": "regular",
+            "colour": "#293b32",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [60, 210, 570, 235],
+          "anchor": "top-left",
+          "content": "Objects\nof quiet.",
+          "style": {
+            "font": "display",
+            "size": 94,
+            "weight": "regular",
+            "colour": "#293b32",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "description",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [65, 488, 490, 105],
+          "anchor": "top-left",
+          "content": "Clay, light\nand a little green.",
+          "style": {
+            "font": "inter",
+            "size": 27,
+            "weight": "regular",
+            "colour": "#293b32",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "footer",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [65, 736, 1000, 30],
+          "anchor": "top-left",
+          "content": "TERRACOTTA / LEAF / LIGHT",
+          "style": {
+            "font": "inter",
+            "size": 13,
+            "weight": "regular",
+            "colour": "#293b32",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": [
+          {
+            "type": "required-role",
+            "role": "hero-product"
+          },
+          {
+            "type": "text-equals",
+            "target": "title",
+            "expected": "Objects\nof quiet."
+          },
+          {
+            "type": "pixel-contrast",
+            "target": "description",
+            "minimum": 4.5,
+            "percentile": 0.1
+          },
+          {
+            "type": "no-overlap",
+            "target": "title",
+            "other": "vase"
+          }
+        ]
+      }
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1280,
+        "height": 800,
+        "colour_space": "srgb",
+        "background": "#eee8da"
+      },
+      "document": {
+        "width": 160,
+        "height": 100,
+        "unit": "mm",
+        "ppi": 300,
+        "bleed": 3,
+        "safe_margin": 6
+      },
+      "metadata": {},
+      "assets": {
+        "vase": {
+          "type": "generated-image",
+          "source": "assets/vase.png"
+        }
+      },
+      "layers": [
+        {
+          "id": "backdrop",
+          "type": "procedural",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "anchor": "top-left",
+          "fit": "contain",
+          "generator": {
+            "type": "gradient",
+            "from": "#f4eedf",
+            "to": "#e1deca",
+            "angle": 115
+          },
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "vase",
+          "role": "hero-product",
+          "type": "generated-asset",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 2,
+          "bounds": [630, 80, 600, 600],
+          "anchor": "top-left",
+          "source": "vase",
+          "fit": "contain",
+          "mask": {
+            "type": "image",
+            "source": "vase",
+            "bounds": [0, 0, 600, 600],
+            "channel": "colour",
+            "colour": "#e4e4e4",
+            "tolerance": 0.13,
+            "space": "layer",
+            "reference_size": [600, 600],
+            "feather": 0.35,
+            "expand": -0.5,
+            "invert": true
+          },
+          "effects": [],
+          "operations": [
+            {
+              "type": "whiteBalance",
+              "space": "layer",
+              "reference_size": [600, 600],
+              "bounds": [0, 0, 600, 600],
+              "temperature": 0.035,
+              "tint": 0
+            }
+          ],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "eyebrow",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [65, 65, 500, 32],
+          "anchor": "top-left",
+          "content": "STILL LIFE / 01",
+          "style": {
+            "font": "inter",
+            "size": 16,
+            "weight": "regular",
+            "colour": "#293b32",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [60, 210, 570, 235],
+          "anchor": "top-left",
+          "content": "Objects\nof quiet.",
+          "style": {
+            "font": "display",
+            "size": 94,
+            "weight": "regular",
+            "colour": "#293b32",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "description",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [65, 488, 490, 105],
+          "anchor": "top-left",
+          "content": "Clay, light\nand a little green.",
+          "style": {
+            "font": "inter",
+            "size": 27,
+            "weight": "regular",
+            "colour": "#293b32",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "footer",
+          "type": "text",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [65, 736, 1000, 30],
+          "anchor": "top-left",
+          "content": "TERRACOTTA / LEAF / LIGHT",
+          "style": {
+            "font": "inter",
+            "size": 13,
+            "weight": "regular",
+            "colour": "#293b32",
+            "line_height": 1.2,
+            "align": "left"
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "contact-shadow",
+          "type": "vector",
+          "visible": true,
+          "opacity": 0.27,
+          "blend_mode": "normal",
+          "z": 1,
+          "bounds": [842, 612, 192, 25],
+          "anchor": "top-left",
+          "shape": {
+            "type": "ellipse",
+            "fill": "#796044",
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [
+            {
+              "type": "blur",
+              "radius": 7
+            }
+          ],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rule",
+          "type": "vector",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [65, 690, 490, 1],
+          "anchor": "top-left",
+          "shape": {
+            "type": "rectangle",
+            "fill": "#9b9e88",
+            "radius": 0,
+            "stroke_width": 1
+          },
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": [
+          {
+            "type": "required-role",
+            "role": "hero-product"
+          },
+          {
+            "type": "text-equals",
+            "target": "title",
+            "expected": "Objects\nof quiet."
+          },
+          {
+            "type": "pixel-contrast",
+            "target": "description",
+            "minimum": 4.5,
+            "percentile": 0.1
+          },
+          {
+            "type": "no-overlap",
+            "target": "title",
+            "other": "vase"
+          }
+        ]
+      }
+    },
+    "locality": [
+      {
+        "changed_pixels": 57126,
+        "outside_changed_pixels": 0,
+        "changed_bounds": [630, 80, 600, 600],
+        "scopes": [[630, 80, 600, 600]]
+      }
+    ],
+    "hash": "sha256:319b9e893d38753312b6eaadf0f5b844c3084cf28c05d9db645190abcc80ec29"
+  }
+]

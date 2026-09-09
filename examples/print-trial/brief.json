@@ -1,0 +1,6 @@
+{
+  "id": "masked-vase",
+  "category": "poster",
+  "prompt": "Extract the generated terracotta vase and leafy sprig from its neutral background. Integrate it into an editable still-life design with a believable contact shadow and matching colours, preserve the delicate leaves, adapt it to landscape and portrait, then produce a 160 by 100 mm CMYK print PDF with 3 mm bleed.",
+  "max_edits": 5
+}

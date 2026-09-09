@@ -1,0 +1,61 @@
+{
+  "method": "Only inline JavaScript and JSON parameters copied into an empty project",
+  "identical": true,
+  "expected_hash": "sha256:d1ece1b118eb3fdf3f11e38ca637769617d94b1ea9a46dd1db6ea7c515b013de",
+  "output_hash": "sha256:d1ece1b118eb3fdf3f11e38ca637769617d94b1ea9a46dd1db6ea7c515b013de",
+  "nodes": [
+    {
+      "id": "landscape",
+      "status": "built"
+    },
+    {
+      "id": "dragon",
+      "status": "built"
+    },
+    {
+      "id": "fire",
+      "status": "built"
+    },
+    {
+      "id": "finish",
+      "status": "built"
+    }
+  ],
+  "unchanged_build": [
+    {
+      "id": "landscape",
+      "status": "cached"
+    },
+    {
+      "id": "dragon",
+      "status": "cached"
+    },
+    {
+      "id": "fire",
+      "status": "cached"
+    },
+    {
+      "id": "finish",
+      "status": "cached"
+    }
+  ],
+  "composition_edit": [
+    {
+      "id": "landscape",
+      "status": "cached"
+    },
+    {
+      "id": "dragon",
+      "status": "built"
+    },
+    {
+      "id": "fire",
+      "status": "built"
+    },
+    {
+      "id": "finish",
+      "status": "built"
+    }
+  ],
+  "undo_identical": true
+}

@@ -144,14 +144,16 @@ export function resolveLayout(scene: Scene): ResolvedLayer[] {
         0,
         0,
       ];
-      const local = multiply(multiply([1, 0, 0, 1, x + width / 2, y + height / 2], rotation), [
-        1,
-        0,
-        0,
-        1,
-        -width / 2,
-        -height / 2,
-      ]);
+      const local =
+        layer.affine ??
+        multiply(multiply([1, 0, 0, 1, x + width / 2, y + height / 2], rotation), [
+          1,
+          0,
+          0,
+          1,
+          -width / 2,
+          -height / 2,
+        ]);
       const world = multiply(matrix, local);
       return {
         layer,
@@ -174,4 +176,28 @@ export function resolveLayout(scene: Scene): ResolvedLayer[] {
 }
 export function flattenResolved(nodes: ResolvedLayer[]): ResolvedLayer[] {
   return nodes.flatMap((node) => [node, ...flattenResolved(node.children)]);
+}
+
+/** Flatten only isolation-free groups for vector export; preserve groups with compositing context. */
+export function exportLayers(nodes: ResolvedLayer[]): ResolvedLayer[] {
+  const contextFree = (n: ResolvedLayer): boolean =>
+    n.layer.blend_mode === 'normal' &&
+    n.layer.type !== 'adjustment' &&
+    n.children.every(contextFree);
+  return [...nodes]
+    .sort((a, b) => a.layer.z - b.layer.z)
+    .flatMap((n) => {
+      const l = n.layer;
+      if (!n.visible) return [];
+      return l.type === 'group' &&
+        l.opacity === 1 &&
+        !l.mask &&
+        !l.effects.length &&
+        !l.operations.length &&
+        !l.tiles.length &&
+        !l.regions?.length &&
+        contextFree(n)
+        ? exportLayers(n.children)
+        : [n];
+    });
 }

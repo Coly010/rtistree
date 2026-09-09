@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "canvas": { "width": 1200, "height": 1600, "background": "#00000000" },
+  "metadata": {
+    "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+    "image_generation": "forbidden",
+    "image_inputs": [],
+    "method": "Hand-authored 2D raster programs and digital painting"
+  },
+  "layers": []
+}

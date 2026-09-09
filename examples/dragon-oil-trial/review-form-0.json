@@ -1,0 +1,23 @@
+{
+  "candidate": "form-0",
+  "scene_hash": "sha256:168405ad83de2e6a056748f29d86c662aa485e19b63b14176c8f4337994d1386",
+  "png_hash": "sha256:7233c5878858751e786d5d7bda8f8289a4d892d4597ab0da414e71aed7fa4a42",
+  "reviewer": "Codex visual inspection of rendered image and requested detail crops",
+  "method": "vision-agent",
+  "fidelity": 0.86,
+  "quality": 0.74,
+  "criteria": [
+    {
+      "id": "anatomy",
+      "pass": true,
+      "evidence": "Wing tendons meet at the shoulder, the neck joins the skull, and the hocks, toes and counterbalancing tail are distinguishable."
+    },
+    {
+      "id": "light",
+      "pass": true,
+      "evidence": "Lighter upper neck and membrane planes contrast with the underside and cooler far wing; the result remains a stylized painted form rather than realism."
+    }
+  ],
+  "strengths": "The shoulder, neck and ribcage now have broken light and shadow planes; the wings separate with warmer near and cooler far paint.",
+  "weaknesses": "The wing pose remains stiff and the head stylized. The canvas weave is too prominent and hill edges are too mechanically smooth; reduce these in materials and finish."
+}

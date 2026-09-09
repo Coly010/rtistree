@@ -1,0 +1,23 @@
+{
+  "candidate": "materials-0",
+  "scene_hash": "sha256:62cf46fd2a390598d2081effdbc40426c5441d9fb3e78312108233b902d9a37d",
+  "png_hash": "sha256:b53d556a766d522f9e0603db000a1ae8dc33d3fae94e2fd2a7f2fd95a14328d4",
+  "reviewer": "Codex visual inspection of rendered image and requested detail crops",
+  "method": "vision-agent",
+  "fidelity": 0.87,
+  "quality": 0.76,
+  "criteria": [
+    {
+      "id": "paint",
+      "pass": true,
+      "evidence": "Membrane strokes follow the wing fingers, smaller curved marks follow the torso and neck, and horizontal marks build the landscape."
+    },
+    {
+      "id": "depth",
+      "pass": true,
+      "evidence": "Distant hills are lighter and less detailed than the foreground vegetation; reduced weave no longer dominates the canvas."
+    }
+  ],
+  "strengths": "Broken directional marks describe membrane, scales and clouds; the lighter distance and darker foreground remain coherent.",
+  "weaknesses": "Hill silhouettes remain mathematically smooth, and the dragon head and feet still have a cut-paper quality. This is an oil-inspired illustration rather than a convincing traditional oil study."
+}

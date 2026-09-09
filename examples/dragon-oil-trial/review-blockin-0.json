@@ -1,0 +1,23 @@
+{
+  "candidate": "blockin-0",
+  "scene_hash": "sha256:64e002723525af94f516cb44d8a459f40745da7f6649def4432cf078f8c4e440",
+  "png_hash": "sha256:12004dfb241cf335b827e38f2eaa98a106bb2fdfd1f452161f0f56f877083832",
+  "reviewer": "Codex visual inspection of rendered image and requested detail crops",
+  "method": "vision-agent",
+  "fidelity": 0.88,
+  "quality": 0.76,
+  "criteria": [
+    {
+      "id": "values",
+      "pass": true,
+      "evidence": "Four hill planes grow darker toward the foreground; the dark wing silhouette separates from the pale sky."
+    },
+    {
+      "id": "brief",
+      "pass": true,
+      "evidence": "The dragon has visible airborne feet and raised wings, an open jaw emitting green fire, and a clearly hilly setting."
+    }
+  ],
+  "strengths": "Dragon separates against a light cloud opening; green fire leads toward the layered rolling landscape.",
+  "weaknesses": "Rigid wing edges and broad flat contour bands still dominate the creature. The next stage must develop form before adding more noise."
+}

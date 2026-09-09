@@ -15,6 +15,8 @@ export function viewportScene(scene: Scene, bounds: Bounds): Scene | null {
     all.some(
       (l) =>
         l.transform ||
+        l.affine ||
+        l.perspective ||
         l.source ||
         (l.shape && (l.shape.type !== 'rectangle' || l.shape.radius !== 0 || l.shape.stroke)) ||
         (l.mask && l.mask.type !== 'rectangle' && l.mask.type !== 'semantic-object') ||
@@ -22,6 +24,8 @@ export function viewportScene(scene: Scene, bounds: Bounds): Scene | null {
           (op) =>
             op.type === 'paintStroke' ||
             op.type === 'eraseStroke' ||
+            op.type === 'clone' ||
+            op.type === 'heal' ||
             (op.mask && op.mask.type !== 'rectangle' && op.mask.type !== 'semantic-object'),
         ),
     )
@@ -35,6 +39,8 @@ export function viewportScene(scene: Scene, bounds: Bounds): Scene | null {
         l.effects.length ||
         (l.regions?.length ?? 0) > 0 ||
         l.mask?.feather ||
+        l.mask?.expand ||
+        l.mask?.invert ||
         l.operations.some(
           (op) =>
             op.type === 'blur' ||

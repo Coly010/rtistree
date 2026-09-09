@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "image_inputs": 0,
+  "recipes_rebuilt": 8,
+  "final_png_hash": "sha256:54604a839036206ccfc7bfc224989e8265b59b466a432c2b6996cc1e14348741",
+  "composite_identical": true,
+  "macro_identical": true,
+  "outputs": {
+    "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+    "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+    "tyrePaint": "sha256:43abd6b174c848f1b5137c18e24cebf7281941056fb13177f5f0ea3fce82117a",
+    "treadPaint": "sha256:1c9d08c9d06e73354b5ff713cdddf283d607d4c4b0692883e798aa4c10028d57",
+    "rimPaint": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3",
+    "letteringPaint": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f",
+    "wearPaint": "sha256:0daa24fc7d44e6d2ccdb5e74e5557f948f54bcc37354b1e9e8b0f9e4c3aeb3e3",
+    "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+  }
+}

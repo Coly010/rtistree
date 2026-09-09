@@ -1,3 +1,5 @@
+import { richLayout, type TextSpan } from './rich-text.js';
+import { imagePlacement, perspectiveImage } from './graphics.js';
 import { viewportScene } from './viewport.js';
 import { renderDetail } from './detail.js';
 import { createRequire } from 'node:module';
@@ -10,12 +12,12 @@ import {
   sceneHash,
   sha256,
 } from './assets.js';
-import { flattenResolved, resolveLayout, type ResolvedLayer } from './layout.js';
+import { flattenResolved, resolveLayout, type ResolvedLayer, type Matrix } from './layout.js';
 import { applyRasterOperation, maskCanvas, rgba, seededRandom } from './paint.js';
 import { coordinateMatrix } from './spatial.js';
-import { parseScene, type Bounds, type Layer, type Scene } from './schema.js';
+import { layerMasks, parseScene, type Bounds, type Layer, type Scene } from './schema.js';
 
-export const RENDERER_VERSION = '0.2.0';
+export const RENDERER_VERSION = '0.4.0';
 const require = createRequire(import.meta.url);
 const canvasVersion = (require('@napi-rs/canvas/package.json') as { version: string }).version;
 export interface TextDiagnostic {
@@ -25,6 +27,7 @@ export interface TextDiagnostic {
   height: number;
   available: [number, number];
   overflow: boolean;
+  spans?: TextSpan[][];
 }
 export interface RenderOptions {
   region?: Bounds;
@@ -33,6 +36,7 @@ export interface RenderOptions {
   cache?: boolean;
   regionMode?: 'auto' | 'full';
   excludeLayers?: string[];
+  canvasTransform?: Matrix;
 }
 export interface RenderEvidence {
   renderer: {
@@ -55,6 +59,7 @@ export interface RenderEvidence {
     layer?: string;
     png_hash: string;
     excluded_layers?: string[];
+    canvas_transform?: Matrix;
   };
 }
 export interface RenderResult {
@@ -87,6 +92,22 @@ export function layoutText(
   aliases: Record<string, string> = {},
 ): TextDiagnostic {
   ctx.font = fontStyle(layer, aliases);
+  ctx.letterSpacing = `${layer.style!.tracking ?? 0}px`;
+  ctx.fontKerning = layer.style!.kerning === false ? 'none' : 'normal';
+  if (layer.runs) {
+    const spans = richLayout(ctx, layer, width, (l) => fontStyle(l, aliases)),
+      measured = Math.max(0, ...spans.map((line) => line.reduce((a, b) => a + b.width, 0))),
+      total = spans.length * layer.style!.size * layer.style!.line_height;
+    return {
+      layer: layer.id,
+      lines: spans.map((l) => l.map((s) => s.text).join('')),
+      width: measured,
+      height: total,
+      available: [width, height],
+      overflow: measured > width + 0.5 || total > height + 0.5,
+      spans,
+    };
+  }
   const lines: string[] = [];
   for (const paragraph of layer.content!.split('\n')) {
     let line = '';
@@ -132,7 +153,7 @@ export class SkiaRenderer implements Renderer {
   }
 
   async render(input: Scene, root: string, options: RenderOptions = {}): Promise<RenderResult> {
-    if (options.region && options.regionMode !== 'full') {
+    if (options.region && !options.canvasTransform && options.regionMode !== 'full') {
       const original = parseScene(input),
         [x, y, w, h] = options.region;
       if (
@@ -168,23 +189,48 @@ export class SkiaRenderer implements Renderer {
       nodes = resolveLayout(scene),
       all = flattenResolved(nodes),
       index = new Map(all.map((n) => [n.layer.id, n]));
-    if (width * height * (all.length + 6) > 128 * 1024 * 1024)
+    const retained = new Set(
+      all.flatMap((n) =>
+        layerMasks(n.layer).flatMap((m) => (m?.type === 'semantic-object' ? [m.target] : [])),
+      ),
+    );
+    const depth = (nodes: ResolvedLayer[]): number =>
+      Math.max(0, ...nodes.map((n) => 1 + depth(n.children)));
+    if (
+      width *
+        height *
+        (options.cache === false ? depth(nodes) + retained.size + 5 : all.length + 6) >
+      160 * 1024 * 1024
+    )
       throw new Error('Scene exceeds the CPU surface budget; reduce canvas size or layer count');
+    const coordinates = (v: { space?: 'canvas' | 'layer' }, n: ResolvedLayer) =>
+      v.space === 'layer'
+        ? coordinateMatrix(v, n)
+        : (options.canvasTransform ?? coordinateMatrix(v, n));
+    const printableMask = (mask: NonNullable<Layer['mask']>): NonNullable<Layer['mask']> =>
+      options.canvasTransform
+        ? {
+            ...mask,
+            space: mask.type === 'semantic-object' ? mask.space : 'layer',
+            ...(mask.type === 'combine' ? { masks: mask.masks.map(printableMask) } : {}),
+          }
+        : mask;
+    const operation = (op: Layer['operations'][number]) =>
+      options.canvasTransform
+        ? { ...op, space: 'layer' as const, ...(op.mask ? { mask: printableMask(op.mask) } : {}) }
+        : op;
     const statistics = { rasterized_layers: 0, cached_layers: 0, cache_bytes: 0 };
     const keys = new Map<string, string>();
     const keyFor = (node: ResolvedLayer): string => {
       const existing = keys.get(node.layer.id);
       if (existing) return existing;
       const { children, ...layer } = node.layer;
-      const masks = [
-        layer.mask,
-        ...layer.operations.map((op) => op.mask),
-        ...(layer.regions ?? []).flatMap((r) => r.operations.map((op) => op.mask)),
-      ].flatMap((mask) =>
-        mask?.type === 'semantic-object' ? [keyFor(index.get(mask.target)!)] : [],
+      const masks = layerMasks(layer as Layer).flatMap((mask) =>
+        mask.type === 'semantic-object' ? [keyFor(index.get(mask.target)!)] : [],
       );
       const key = sha256(
         canonical({
+          canvasTransform: options.canvasTransform,
           width,
           height,
           layer,
@@ -204,6 +250,13 @@ export class SkiaRenderer implements Renderer {
       text: TextDiagnostic[] = [];
     const fresh = () => createCanvas(width, height);
     const lookup = (id: string): Canvas => {
+      if (id.startsWith('asset:')) {
+        const im = assets.images.get(id.slice(6));
+        if (!im) throw new Error('Unknown mask asset');
+        const c = createCanvas(im.width, im.height);
+        c.getContext('2d').drawImage(im, 0, 0);
+        return c;
+      }
       const n = index.get(id);
       if (!n) throw new Error(`Unknown layer: ${id}`);
       return renderNode(n);
@@ -218,20 +271,20 @@ export class SkiaRenderer implements Renderer {
           for (const op of child.layer.operations)
             applyRasterOperation(
               modified,
-              op,
+              operation(op),
               lookup,
-              coordinateMatrix(op, child),
-              op.mask ? coordinateMatrix(op.mask, child) : undefined,
+              coordinates(op, child),
+              op.mask ? coordinates(op.mask, child) : undefined,
             );
           const before = ctx.getImageData(0, 0, width, height),
             after = modified.getContext('2d').getImageData(0, 0, width, height);
           const mask = child.layer.mask
             ? maskCanvas(
-                child.layer.mask,
+                printableMask(child.layer.mask),
                 width,
                 height,
                 lookup,
-                coordinateMatrix(child.layer.mask, child),
+                coordinates(child.layer.mask, child),
               )
                 .getContext('2d')
                 .getImageData(0, 0, width, height).data
@@ -252,7 +305,13 @@ export class SkiaRenderer implements Renderer {
         } else {
           ctx.globalCompositeOperation =
             child.layer.blend_mode === 'normal' ? 'source-over' : child.layer.blend_mode;
-          ctx.drawImage(renderNode(child), 0, 0);
+          const surface = renderNode(child);
+          ctx.drawImage(surface, 0, 0);
+          if (options.cache === false && !retained.has(child.layer.id)) {
+            cache.delete(child.layer.id);
+            surface.width = 1;
+            surface.height = 1;
+          }
         }
       }
       ctx.globalCompositeOperation = 'source-over';
@@ -297,6 +356,10 @@ export class SkiaRenderer implements Renderer {
         if (shape.stroke) {
           ctx.strokeStyle = shape.stroke;
           ctx.lineWidth = shape.stroke_width;
+          ctx.lineCap = shape.line_cap ?? 'butt';
+          ctx.lineJoin = shape.line_join ?? 'miter';
+          ctx.setLineDash(shape.dash ?? []);
+          ctx.lineDashOffset = shape.dash_offset ?? 0;
           if (path) ctx.stroke(path);
           else ctx.stroke();
         }
@@ -311,9 +374,22 @@ export class SkiaRenderer implements Renderer {
         ctx.textBaseline = 'top';
         ctx.textAlign = layer.style!.align;
         const x = layer.style!.align === 'center' ? w / 2 : layer.style!.align === 'right' ? w : 0;
-        diagnostic.lines.forEach((line, i) =>
-          ctx.fillText(line, x, i * layer.style!.size * layer.style!.line_height),
-        );
+        if (diagnostic.spans) {
+          ctx.textAlign = 'left';
+          diagnostic.spans.forEach((line, i) =>
+            line.forEach((span) => {
+              ctx.font = fontStyle(
+                { ...layer, style: { ...layer.style!, weight: span.weight } },
+                customFonts.aliases,
+              );
+              ctx.fillStyle = span.colour;
+              ctx.fillText(span.text, span.x, i * layer.style!.size * layer.style!.line_height);
+            }),
+          );
+        } else
+          diagnostic.lines.forEach((line, i) =>
+            ctx.fillText(line, x, i * layer.style!.size * layer.style!.line_height),
+          );
       }
       if (
         layer.type === 'asset' ||
@@ -324,13 +400,12 @@ export class SkiaRenderer implements Renderer {
         ctx.beginPath();
         ctx.rect(0, 0, w, h);
         ctx.clip();
-        const scale =
-          layer.fit === 'cover'
-            ? Math.max(w / image.width, h / image.height)
-            : Math.min(w / image.width, h / image.height);
-        const dw = layer.fit === 'stretch' ? w : image.width * scale,
-          dh = layer.fit === 'stretch' ? h : image.height * scale;
-        ctx.drawImage(image, (w - dw) / 2, (h - dh) / 2, dw, dh);
+        const placement = imagePlacement(layer, image.width, image.height, w, h);
+        if (layer.perspective) {
+          const local = createCanvas(Math.ceil(w), Math.ceil(h));
+          local.getContext('2d').drawImage(image, ...placement.crop, ...placement.destination);
+          ctx.drawImage(perspectiveImage(local, layer.perspective), 0, 0, w, h);
+        } else ctx.drawImage(image, ...placement.crop, ...placement.destination);
       }
       if (layer.type === 'procedural') {
         const generator = layer.generator!;
@@ -387,7 +462,8 @@ export class SkiaRenderer implements Renderer {
         );
         t.putImageData(data, 0, 0);
         ctx.save();
-        if (tile.space === 'layer') ctx.setTransform(...coordinateMatrix(tile, node));
+        if (tile.space === 'layer' || options.canvasTransform)
+          ctx.setTransform(...coordinates(tile, node));
         ctx.imageSmoothingEnabled = false;
         ctx.drawImage(tc, ...tile.bounds);
         ctx.restore();
@@ -395,17 +471,23 @@ export class SkiaRenderer implements Renderer {
       for (const op of layer.operations)
         applyRasterOperation(
           canvas,
-          op,
+          operation(op),
           lookup,
-          coordinateMatrix(op, node),
-          op.mask ? coordinateMatrix(op.mask, node) : undefined,
+          coordinates(op, node),
+          op.mask ? coordinates(op.mask, node) : undefined,
         );
       for (const region of layer.regions ?? [])
-        renderDetail(canvas, region, node, lookup, assets.images);
+        renderDetail(canvas, region, node, lookup, assets.images, options.canvasTransform);
       if (layer.mask) {
         ctx.globalCompositeOperation = 'destination-in';
         ctx.drawImage(
-          maskCanvas(layer.mask, width, height, lookup, coordinateMatrix(layer.mask, node)),
+          maskCanvas(
+            printableMask(layer.mask),
+            width,
+            height,
+            lookup,
+            coordinates(layer.mask, node),
+          ),
           0,
           0,
         );
@@ -483,6 +565,7 @@ export class SkiaRenderer implements Renderer {
           region: options.region,
           layer: options.layer,
           png_hash: sha256(png),
+          ...(options.canvasTransform ? { canvas_transform: options.canvasTransform } : {}),
           ...(options.excludeLayers?.length ? { excluded_layers: options.excludeLayers } : {}),
         },
       },

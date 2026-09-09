@@ -1,0 +1,23 @@
+{
+  "candidate": "finish-0",
+  "scene_hash": "sha256:e62434bda71026f61fd035650cc08c7699ee8965db3051ceae41bcae180aff55",
+  "png_hash": "sha256:d1ece1b118eb3fdf3f11e38ca637769617d94b1ea9a46dd1db6ea7c515b013de",
+  "reviewer": "Codex visual inspection of rendered image and requested detail crops",
+  "method": "vision-agent",
+  "fidelity": 0.85,
+  "quality": 0.75,
+  "criteria": [
+    {
+      "id": "focal",
+      "pass": true,
+      "evidence": "The head and green flame have the sharpest local contrast, while the muted landscape remains subordinate and readable."
+    },
+    {
+      "id": "cohesion",
+      "pass": true,
+      "evidence": "Warm near-wing paint, cool far-wing shadows, restrained canvas texture and broken landscape brushwork share a consistent muted palette with the green focal accent."
+    }
+  ],
+  "strengths": "The bright green fire and detailed skull lead the eye; curved brushwork and slight edge irregularity better integrate the creature with the painted hills.",
+  "weaknesses": "The near wing remains stiff, teeth and claws are conspicuously geometric, and the scene is closer to a stylized fantasy illustration with oil brushwork than an accomplished traditional oil painting. Further art-direction trials are needed before claiming excellent arbitrary art."
+}

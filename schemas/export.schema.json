@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "format": {
+      "default": "pdf",
+      "type": "string",
+      "enum": ["png", "jpeg", "tiff", "pdf", "svg"]
+    },
+    "colour_space": {
+      "default": "srgb",
+      "type": "string",
+      "enum": ["srgb", "cmyk"]
+    },
+    "profile": {
+      "type": "string"
+    },
+    "profile_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "intent": {
+      "default": "perceptual",
+      "type": "string",
+      "const": "perceptual"
+    },
+    "quality": {
+      "default": 90,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "chroma_subsampling": {
+      "default": "4:4:4",
+      "type": "string",
+      "enum": ["4:4:4", "4:2:0"]
+    },
+    "background": {
+      "default": "#ffffff",
+      "type": "string",
+      "pattern": "^#[a-fA-F0-9]{6}$"
+    },
+    "crop_marks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "minimum_ppi": {
+      "default": 150,
+      "type": "number",
+      "minimum": 1,
+      "maximum": 1200
+    },
+    "max_ink": {
+      "default": 300,
+      "type": "number",
+      "minimum": 100,
+      "maximum": 400
+    },
+    "black": {
+      "default": "k-only",
+      "type": "string",
+      "enum": ["profile", "k-only"]
+    },
+    "mode": {
+      "default": "hybrid",
+      "type": "string",
+      "enum": ["hybrid", "raster"]
+    },
+    "ppi": {
+      "type": "number",
+      "minimum": 36,
+      "maximum": 1200
+    }
+  },
+  "required": [
+    "format",
+    "colour_space",
+    "intent",
+    "quality",
+    "chroma_subsampling",
+    "background",
+    "crop_marks",
+    "minimum_ppi",
+    "max_ink",
+    "black",
+    "mode"
+  ],
+  "additionalProperties": false
+}

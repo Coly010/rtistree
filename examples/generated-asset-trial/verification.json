@@ -1,0 +1,41 @@
+{
+  "status": "pass",
+  "score": 1,
+  "issues": [],
+  "checks": 12,
+  "evidence": {
+    "renderer": {
+      "name": "rtistree-skia",
+      "version": "0.2.0",
+      "backend": "@napi-rs/canvas@1.0.8",
+      "node": "v24.14.0",
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "scene": {
+      "version": 1,
+      "hash": "sha256:2e66bdf8cefa3838a2e177cd4f30b67bdf299e3607b29f27e69b53f7334b99d9"
+    },
+    "assets": {
+      "alpine": "sha256:19e7f923f49be066921d63ef3beef99d992c0ca5aa2565fca9b8e8c5f8662f60"
+    },
+    "fonts": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "render": {
+      "width": 1600,
+      "height": 1000,
+      "colour_space": "srgb",
+      "quality": "final",
+      "png_hash": "sha256:82ae78eab24f3cd20fbfa3648363967e4be397b970291c5d321da8638a95a71d"
+    }
+  },
+  "limitations": [
+    "Rule checks do not judge aesthetic quality or semantic image content.",
+    "The legacy contrast rule uses declared colours; pixel-contrast measures the rendered composite.",
+    "Overlap and safe areas use transformed layer boxes.",
+    "Pixel contrast compares the final composite with the target omitted, sampling solid glyph/shape interiors. It is not an accessibility certification."
+  ]
+}

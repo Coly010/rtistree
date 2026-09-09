@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { localAssetPath, sha256 } from './assets.js';
 import type { Scene } from './schema.js';
 import type { RenderResult } from './render.js';
+import { copyRecipe } from './program.js';
 export async function writeArtifact(file: string, data: string | Uint8Array): Promise<void> {
   await mkdir(dirname(file), { recursive: true });
   const temporary = `${file}.${randomUUID()}.tmp`;
@@ -11,6 +12,8 @@ export async function writeArtifact(file: string, data: string | Uint8Array): Pr
   await rename(temporary, file);
 }
 export async function writeRender(file: string, result: RenderResult) {
+  if (extname(file).toLowerCase() !== '.png')
+    throw new Error('writeRender writes PNG only; use artwork export for other formats');
   await writeArtifact(file, result.png);
   await writeArtifact(`${file}.evidence.json`, JSON.stringify(result.evidence, null, 2) + '\n');
   return {
@@ -25,6 +28,7 @@ export async function writeRender(file: string, result: RenderResult) {
 export async function writeSceneBundle(input: Scene, root: string, file: string) {
   const scene = structuredClone(input);
   for (const asset of Object.values(scene.assets)) {
+    if (asset.recipe) asset.recipe = await copyRecipe(root, asset.recipe, dirname(file));
     const source = await localAssetPath(root, asset.source),
       bytes = await readFile(source),
       hash = sha256(bytes);

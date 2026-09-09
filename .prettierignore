@@ -4,4 +4,7 @@ examples/**/renders/
 examples/**/verification/
 examples/**/history/
 examples/**/raster/
+examples/**/recipes/
 package-lock.json
+
+examples/**/studio/

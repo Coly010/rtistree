@@ -1,0 +1,23 @@
+{
+  "candidate": "thumbnails-0",
+  "scene_hash": "sha256:77a99af7d7663355d429baf3d398fa145d21eb0029fc932a400adbcc1c636247",
+  "png_hash": "sha256:095a20b04d982d6cf42ad0d372fff0772b022cadfc276f3f7672729ad7875efa",
+  "reviewer": "Codex visual inspection of rendered comparison sheet",
+  "method": "vision-agent",
+  "fidelity": 0.87,
+  "quality": 0.79,
+  "criteria": [
+    {
+      "id": "read",
+      "evidence": "Horned dragon, raised wings and open-jaw green flame are identifiable at the 464 pixel comparison size.",
+      "pass": true
+    },
+    {
+      "id": "space",
+      "evidence": "Largest clear silhouette with space around both wingtips; the descending green fire leads into the right-hand hills.",
+      "pass": true
+    }
+  ],
+  "strengths": "Largest clear silhouette with space around both wingtips; the descending green fire leads into the right-hand hills.",
+  "weaknesses": "Wing planes are still rigid triangles and the hills are flat, appropriate issues for the following form and material stages."
+}

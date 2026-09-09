@@ -1,0 +1,31 @@
+version: 1
+scene: scene.json
+output_dir: output
+presets:
+  screen:
+    format: png
+    colour_space: srgb
+    intent: perceptual
+    quality: 90
+    chroma_subsampling: 4:4:4
+    background: '#ffffff'
+    crop_marks: false
+    minimum_ppi: 150
+    max_ink: 300
+    black: k-only
+    mode: hybrid
+    ppi: 96
+  print:
+    format: pdf
+    colour_space: cmyk
+    profile: profiles/156e7c14f244cfc4ed83a755ca4803d80e15dd249b40fae82cb127d3902e15c7.icc
+    profile_hash: sha256:156e7c14f244cfc4ed83a755ca4803d80e15dd249b40fae82cb127d3902e15c7
+    intent: perceptual
+    quality: 90
+    chroma_subsampling: 4:4:4
+    background: '#ffffff'
+    crop_marks: true
+    minimum_ppi: 300
+    max_ink: 300
+    black: k-only
+    mode: hybrid

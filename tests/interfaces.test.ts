@@ -63,7 +63,7 @@ test('MCP discovery, typed edits, PNG crops and verification work through a clie
   try {
     const list = await client.listTools();
     assert.ok(list.tools.some((tool) => tool.name === 'apply'));
-    assert.equal(list.tools.length, 14);
+    assert.equal(list.tools.length, 24);
     assert.ok(JSON.stringify(list).length < 100_000, 'Discovery must share repeated schemas');
     assert.ok(list.tools.find((tool) => tool.name === 'apply')!.inputSchema.definitions);
     const result = await client.callTool({ name: 'inspectScene', arguments: {} });
@@ -99,6 +99,25 @@ test('MCP discovery, typed edits, PNG crops and verification work through a clie
       },
     });
     assert.equal(stale.isError, true);
+    const painted = await client.callTool({
+      name: 'runProgram',
+      arguments: {
+        program: {
+          code: 'return art.raster((x,y)=>[x*8,y*8,100,255]);',
+          asset_id: 'painted',
+          target: 'painted',
+          width: 16,
+          height: 16,
+          reason: 'Exercise inline studio authoring through MCP',
+        },
+      },
+    });
+    assert.ok(!painted.isError, JSON.stringify(painted));
+    const replayed = await client.callTool({
+      name: 'replayProgram',
+      arguments: { asset: 'painted' },
+    });
+    assert.equal(JSON.parse((replayed.content as any[])[0].text).identical, true);
   } finally {
     await client.close();
     await server.close();
@@ -115,7 +134,7 @@ test('MCP stdio server starts with protocol-only stdout and closes cleanly', asy
   try {
     await client.connect(transport);
     const response = await client.listTools();
-    assert.equal(response.tools.length, 14);
+    assert.equal(response.tools.length, 24);
   } finally {
     await client.close();
   }

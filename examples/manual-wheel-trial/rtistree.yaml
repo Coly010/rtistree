@@ -1,0 +1,6 @@
+version: 1
+scene: scene.json
+output_dir: output
+presets:
+  screen:
+    format: png

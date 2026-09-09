@@ -57,7 +57,21 @@ export async function loadScene(file: string): Promise<SceneSource> {
           throw new Error(`Asset ${id} requires a source`);
         if (asset.source.startsWith('/') || /^[a-z]+:/i.test(asset.source))
           throw new Error('Assets must be relative local paths');
-        assets[id] = { ...asset, source: relative(root, resolve(dirname(safe), asset.source)) };
+        assets[id] = {
+          ...asset,
+          source: relative(root, resolve(dirname(safe), asset.source)),
+          ...(asset.recipe
+            ? {
+                recipe: {
+                  ...(asset.recipe as object),
+                  source: relative(
+                    root,
+                    resolve(dirname(safe), (asset.recipe as { source: string }).source),
+                  ),
+                },
+              }
+            : {}),
+        };
       }
     }
     if (doc.components) {

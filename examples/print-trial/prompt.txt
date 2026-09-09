@@ -1,0 +1,6 @@
+Use case: product-mockup
+Asset type: source photograph for a deterministic subject-extraction and compositing trial
+Primary request: A studio product photograph of a small handmade terracotta ceramic vase holding one delicate green leafy sprig.
+Scene/backdrop: Completely flat, uniform light grey background, approximately #e4e4e4, without a horizon line or cast shadow. Keep the subject's full silhouette inside the square frame with generous breathing room.
+Style/medium: Believable ceramic texture and natural leaf detail. Soft directional illumination from upper left gives the object real volume.
+Constraints: The vase should have a warm terracotta colour clearly distinct from the neutral background. No words, logos, labels, borders, watermark or page layout. This source will be masked and placed into a larger canvas using a separate graphics engine.

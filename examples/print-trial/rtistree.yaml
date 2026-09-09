@@ -1,0 +1,14 @@
+version: 1
+scene: scene.json
+output_dir: output
+presets:
+  screen:
+    format: png
+    ppi: 96
+  print:
+    format: pdf
+    colour_space: cmyk
+    profile: profiles/demo-cmyk.icc
+    profile_hash: 'sha256:156e7c14f244cfc4ed83a755ca4803d80e15dd249b40fae82cb127d3902e15c7'
+    crop_marks: true
+    minimum_ppi: 300

@@ -1,9 +1,11 @@
+import { stringify } from 'yaml';
+import { resolveProject, projectPath, type ProjectConfig } from './project-config.js';
 import { readJournal, compressJournal } from './history-storage.js';
 import { mergeSource } from './merge.js';
 import { validateCritique, type VisualCritique } from './critique.js';
 import { writeArtifact } from './artifacts.js';
 import { mkdir, open, readFile, unlink } from 'node:fs/promises';
-import { basename, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { canonical, localAssetPath, sceneHash, sha256 } from './assets.js';
 import { writeSceneBundle } from './artifacts.js';
 import { applyCommand, commandScopes, patchSchema, type Patch } from './commands.js';
@@ -46,12 +48,19 @@ export class Project {
   private constructor(
     readonly source: SceneSource,
     readonly renderer: Renderer = defaultRenderer,
+    readonly config?: ProjectConfig,
   ) {}
   static async open(file: string, renderer: Renderer = defaultRenderer): Promise<Project> {
-    return new Project(await loadScene(file), renderer);
+    const resolved = await resolveProject(file);
+    return new Project(await loadScene(resolved.file), renderer, resolved.config);
   }
   get root() {
     return this.source.root;
+  }
+  get outputDirectory() {
+    return this.config
+      ? projectPath(this.root, this.config.output_dir)
+      : join(this.root, 'renders');
   }
   get journal() {
     return join(this.root, 'history', `${basename(this.source.file)}.operations.jsonl`);
@@ -377,5 +386,20 @@ export class Project {
   }
   async exportScene(file: string) {
     await writeSceneBundle(await this.scene(), this.root, file);
+    if (this.config) {
+      const config = structuredClone(this.config);
+      config.scene = basename(file);
+      for (const preset of Object.values(config.presets)) {
+        if (!preset.profile) continue;
+        const bytes = await readFile(await localAssetPath(this.root, preset.profile));
+        const hash = sha256(bytes);
+        if (preset.profile_hash && preset.profile_hash !== hash)
+          throw new Error('ICC profile hash mismatch');
+        preset.profile = join('profiles', `${hash.slice(7)}.icc`);
+        preset.profile_hash = hash;
+        await writeArtifact(join(dirname(file), preset.profile), bytes);
+      }
+      await writeArtifact(join(dirname(file), 'rtistree.yaml'), stringify(config));
+    }
   }
 }

@@ -1,0 +1,34 @@
+{
+  "cold_identical": true,
+  "portable_identical": true,
+  "replays": [
+    {
+      "id": "dragon_dragon",
+      "identical": true,
+      "expected_hash": "sha256:93e8998711d6c764f5d382a20d82c3db42d06d5d970104e1accf0220b7f8be56",
+      "output_hash": "sha256:93e8998711d6c764f5d382a20d82c3db42d06d5d970104e1accf0220b7f8be56"
+    },
+    {
+      "id": "dragon_finish",
+      "identical": true,
+      "expected_hash": "sha256:d1ece1b118eb3fdf3f11e38ca637769617d94b1ea9a46dd1db6ea7c515b013de",
+      "output_hash": "sha256:d1ece1b118eb3fdf3f11e38ca637769617d94b1ea9a46dd1db6ea7c515b013de"
+    },
+    {
+      "id": "dragon_fire",
+      "identical": true,
+      "expected_hash": "sha256:d29d021753df3f80cf0b101d38b96ca538cbb3bf2ea1bf950c1e6e2636474f90",
+      "output_hash": "sha256:d29d021753df3f80cf0b101d38b96ca538cbb3bf2ea1bf950c1e6e2636474f90"
+    },
+    {
+      "id": "dragon_landscape",
+      "identical": true,
+      "expected_hash": "sha256:8286f36ac7b4e5122b74f7502dc288e602fc6215632ace237984c8430fda0dbd",
+      "output_hash": "sha256:8286f36ac7b4e5122b74f7502dc288e602fc6215632ace237984c8430fda0dbd"
+    }
+  ],
+  "scene_hash": "sha256:e62434bda71026f61fd035650cc08c7699ee8965db3051ceae41bcae180aff55",
+  "png_hash": "sha256:d1ece1b118eb3fdf3f11e38ca637769617d94b1ea9a46dd1db6ea7c515b013de",
+  "no_image_generation": true,
+  "no_external_inputs": true
+}

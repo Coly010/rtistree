@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "plan"
+        },
+        "plan": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/__schema0"
+            },
+            "brief": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "references": {
+              "$ref": "#/$defs/__schema2"
+            },
+            "stages": {
+              "$ref": "#/$defs/__schema4"
+            }
+          },
+          "required": ["id", "brief", "stages"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["action", "plan"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "status"
+        },
+        "session": {
+          "$ref": "#/$defs/__schema0"
+        }
+      },
+      "required": ["action", "session"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "study"
+        },
+        "session": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "reference": {
+          "$ref": "#/$defs/__schema3"
+        }
+      },
+      "required": ["action", "session", "reference"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "capture"
+        },
+        "session": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "candidate": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "expected_hash": {
+          "type": "string"
+        },
+        "notes": {
+          "default": "",
+          "type": "string",
+          "maxLength": 4000
+        },
+        "revision": {
+          "type": "object",
+          "properties": {
+            "parent": {
+              "$ref": "#/$defs/__schema0"
+            },
+            "hypothesis": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            }
+          },
+          "required": ["parent", "hypothesis"],
+          "additionalProperties": false
+        },
+        "crops": {
+          "default": [],
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema7"
+          }
+        }
+      },
+      "required": ["action", "session", "candidate", "expected_hash", "notes", "crops"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "review"
+        },
+        "session": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "review": {
+          "type": "object",
+          "properties": {
+            "candidate": {
+              "$ref": "#/$defs/__schema0"
+            },
+            "scene_hash": {
+              "type": "string"
+            },
+            "png_hash": {
+              "type": "string"
+            },
+            "reviewer": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "method": {
+              "type": "string",
+              "enum": ["human", "vision-agent"]
+            },
+            "fidelity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "quality": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "criteria": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema10"
+              }
+            },
+            "strengths": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "weaknesses": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "issues": {
+              "maxItems": 40,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema11"
+              }
+            },
+            "comparison": {
+              "type": "object",
+              "properties": {
+                "parent": {
+                  "$ref": "#/$defs/__schema0"
+                },
+                "verdict": {
+                  "type": "string",
+                  "enum": ["improved", "unchanged", "worse"]
+                },
+                "evidence": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4000
+                }
+              },
+              "required": ["parent", "verdict", "evidence"],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "candidate",
+            "scene_hash",
+            "png_hash",
+            "reviewer",
+            "method",
+            "fidelity",
+            "quality",
+            "criteria",
+            "strengths",
+            "weaknesses"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": ["action", "session", "review"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "compare"
+        },
+        "session": {
+          "$ref": "#/$defs/__schema0"
+        }
+      },
+      "required": ["action", "session"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "select"
+        },
+        "session": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "candidate": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "expected_hash": {
+          "type": "string"
+        }
+      },
+      "required": ["action", "session", "candidate", "expected_hash"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "advance"
+        },
+        "session": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "expected_hash": {
+          "type": "string"
+        }
+      },
+      "required": ["action", "session", "expected_hash"],
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+    },
+    "__schema1": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8000
+    },
+    "__schema2": {
+      "maxItems": 24,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema3"
+      }
+    },
+    "__schema3": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "observation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "application": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": ["id", "source", "observation", "application"],
+      "additionalProperties": false
+    },
+    "__schema4": {
+      "minItems": 1,
+      "maxItems": 12,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema5"
+      }
+    },
+    "__schema5": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "goal": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "criteria": {
+          "minItems": 1,
+          "maxItems": 20,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema6"
+          }
+        },
+        "minimum_alternatives": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "require_references": {
+          "type": "boolean"
+        },
+        "required_reviewer": {
+          "type": "string",
+          "enum": ["any", "human"]
+        },
+        "minimum_fidelity": {
+          "default": 0.7,
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minimum_quality": {
+          "default": 0.7,
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": ["id", "goal", "criteria", "minimum_fidelity", "minimum_quality"],
+      "additionalProperties": false
+    },
+    "__schema6": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      },
+      "required": ["id", "description"],
+      "additionalProperties": false
+    },
+    "__schema7": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/__schema8"
+        },
+        {
+          "$ref": "#/$defs/__schema8"
+        },
+        {
+          "$ref": "#/$defs/__schema9"
+        },
+        {
+          "$ref": "#/$defs/__schema9"
+        }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "__schema8": {
+      "type": "number"
+    },
+    "__schema9": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 8192,
+      "$ref": "#/$defs/__schema8"
+    },
+    "__schema10": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "pass": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": ["id", "pass", "evidence"],
+      "additionalProperties": false
+    },
+    "__schema11": {
+      "type": "object",
+      "properties": {
+        "criterion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["blocking", "minor"]
+        },
+        "observation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "correction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": ["criterion", "severity", "observation", "correction"],
+      "additionalProperties": false
+    }
+  }
+}

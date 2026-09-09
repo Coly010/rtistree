@@ -1,4 +1,4 @@
-import { createCanvas, type Canvas, type SKRSContext2D } from './native.js';
+import { Path2D, createCanvas, type Canvas, type SKRSContext2D } from './native.js';
 import { identity, type Matrix } from './layout.js';
 import { inverse, point, worldScope } from './spatial.js';
 import type { Bounds, Mask, RasterOperation } from './schema.js';
@@ -51,11 +51,98 @@ export function maskCanvas(
     ctx.beginPath();
     ctx.ellipse(x + w / 2, y + h / 2, w / 2, h / 2, 0, 0, Math.PI * 2);
     ctx.fill();
-  } else {
+  } else if (mask.type === 'polygon') {
     ctx.beginPath();
     mask.points.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
     ctx.closePath();
     ctx.fill();
+  }
+  if (mask.type === 'path') ctx.fill(new Path2D(mask.d));
+  if (mask.type === 'image') {
+    ctx.drawImage(lookup(`asset:${mask.source}`), ...mask.bounds);
+    const pixels = ctx.getImageData(0, 0, width, height),
+      key = mask.colour ? rgba(mask.colour) : undefined;
+    for (let i = 0; i < pixels.data.length; i += 4) {
+      const d = pixels.data;
+      let a = d[i + 3]!;
+      if (mask.channel === 'luma')
+        a *= (0.2126 * d[i]! + 0.7152 * d[i + 1]! + 0.0722 * d[i + 2]!) / 255;
+      if (mask.channel === 'colour') {
+        const distance = Math.max(...[0, 1, 2].map((c) => Math.abs(d[i + c]! - key![c]!))) / 255;
+        a *= distance <= mask.tolerance ? 1 : 0;
+      }
+      d[i] = d[i + 1] = d[i + 2] = 255;
+      d[i + 3] = a;
+    }
+    ctx.putImageData(pixels, 0, 0);
+  }
+  if (mask.type === 'combine') {
+    const parts = mask.masks.map(
+      (m) =>
+        maskCanvas({ ...m, space: m.space ?? mask.space }, width, height, lookup, matrix)
+          .getContext('2d')
+          .getImageData(0, 0, width, height).data,
+    );
+    const data = ctx.createImageData(width, height);
+    for (let i = 0; i < data.data.length; i += 4) {
+      let a = parts[0]![i + 3]! / 255;
+      for (const part of parts.slice(1)) {
+        const b = part[i + 3]! / 255;
+        a =
+          mask.operation === 'union'
+            ? a + b - a * b
+            : mask.operation === 'intersect'
+              ? a * b
+              : mask.operation === 'subtract'
+                ? a * (1 - b)
+                : a + b - 2 * a * b;
+      }
+      data.data[i] = data.data[i + 1] = data.data[i + 2] = 255;
+      data.data[i + 3] = a * 255;
+    }
+    ctx.putImageData(data, 0, 0);
+  }
+  if (mask.invert) {
+    const data = ctx.getImageData(0, 0, width, height);
+    for (let i = 0; i < data.data.length; i += 4) {
+      data.data[i] = data.data[i + 1] = data.data[i + 2] = 255;
+      data.data[i + 3] = 255 - data.data[i + 3]!;
+    }
+    ctx.putImageData(data, 0, 0);
+  }
+  if (mask.expand) {
+    const data = ctx.getImageData(0, 0, width, height),
+      radius = Math.ceil(Math.abs(mask.expand));
+    let values = new Uint8Array(width * height);
+    for (let i = 0; i < values.length; i++) values[i] = data.data[i * 4 + 3]!;
+    const dilation = mask.expand > 0;
+    for (const horizontal of [true, false]) {
+      const out = new Uint8Array(values.length),
+        length = horizontal ? width : height,
+        count = horizontal ? height : width;
+      for (let row = 0; row < count; row++) {
+        const deque: number[] = [];
+        let head = 0;
+        const value = (i: number) =>
+          i < 0 || i >= length ? 0 : values[horizontal ? row * width + i : i * width + row]!;
+        for (let i = -radius; i < length + radius; i++) {
+          while (
+            deque.length > head &&
+            (dilation ? value(deque.at(-1)!) <= value(i) : value(deque.at(-1)!) >= value(i))
+          )
+            deque.pop();
+          deque.push(i);
+          const at = i - radius;
+          if (at >= 0) {
+            while (deque[head]! < at - radius) head++;
+            out[horizontal ? row * width + at : at * width + row] = value(deque[head]!);
+          }
+        }
+      }
+      values = out;
+    }
+    for (let i = 0; i < values.length; i++) data.data[i * 4 + 3] = values[i]!;
+    ctx.putImageData(data, 0, 0);
   }
   if (mask.feather) {
     const blurred = createCanvas(width, height),
@@ -136,6 +223,39 @@ export function applyRasterOperation(
       stroke(c, op);
     }
     after.set(c.getImageData(x, y, w, h).data);
+  } else if (op.type === 'clone' || op.type === 'heal') {
+    const frozen = ctx.getImageData(0, 0, surface.width, surface.height).data;
+    const offset = attached
+      ? [
+          matrix[0] * op.source_offset[0] + matrix[2] * op.source_offset[1],
+          matrix[1] * op.source_offset[0] + matrix[3] * op.source_offset[1],
+        ]
+      : op.source_offset;
+    const correction = [0, 0, 0];
+    let samples = 0;
+    if (op.type === 'heal')
+      for (let py = 0; py < h; py++)
+        for (let px = 0; px < w; px++) {
+          const sx = Math.round(x + px + offset[0]!),
+            sy = Math.round(y + py + offset[1]!);
+          if (sx < 0 || sy < 0 || sx >= surface.width || sy >= surface.height) continue;
+          const i = (py * w + px) * 4,
+            j = (sy * surface.width + sx) * 4;
+          for (let c = 0; c < 3; c++) correction[c]! += original.data[i + c]! - frozen[j + c]!;
+          samples++;
+        }
+    for (let py = 0; py < h; py++)
+      for (let px = 0; px < w; px++) {
+        const sx = Math.round(x + px + offset[0]!),
+          sy = Math.round(y + py + offset[1]!);
+        if (sx < 0 || sy < 0 || sx >= surface.width || sy >= surface.height) continue;
+        const i = (py * w + px) * 4,
+          j = (sy * surface.width + sx) * 4;
+        for (let c = 0; c < 4; c++)
+          after[i + c] =
+            original.data[i + c]! * (1 - op.opacity) +
+            (frozen[j + c]! + (c < 3 ? correction[c]! / Math.max(1, samples) : 0)) * op.opacity;
+      }
   } else if (op.type === 'setPixels') {
     const pixels = new Map(op.pixels.map((p) => [`${p.x},${p.y}`, p.colour]));
     for (let py = y; py < y + h; py++)
@@ -150,6 +270,30 @@ export function applyRasterOperation(
       const r = after[i]!,
         g = after[i + 1]!,
         b = after[i + 2]!;
+      if (op.type === 'levels')
+        for (let c = 0; c < 3; c++)
+          after[i + c] =
+            Math.pow(
+              Math.max(0, Math.min(1, (after[i + c]! / 255 - op.black) / (op.white - op.black))),
+              1 / op.gamma,
+            ) * 255;
+      if (op.type === 'curves')
+        for (let c = 0; c < 3; c++) {
+          if (op.channel !== 'rgb' && op.channel !== ['r', 'g', 'b'][c]) continue;
+          const v = after[i + c]! / 255;
+          const k = Math.max(
+            1,
+            op.points.findIndex((p) => p[0] >= v),
+          );
+          const a = op.points[k - 1]!,
+            b = op.points[k]!;
+          after[i + c] = (a[1] + ((b[1] - a[1]) * (v - a[0])) / (b[0] - a[0])) * 255;
+        }
+      if (op.type === 'whiteBalance') {
+        after[i] = r * (1 + op.temperature * 0.3);
+        after[i + 1] = g * (1 + op.tint * 0.3);
+        after[i + 2] = b * (1 - op.temperature * 0.3);
+      }
       if (op.type === 'brightness')
         for (let c = 0; c < 3; c++) after[i + c] = after[i + c]! + op.amount * 255;
       if (op.type === 'contrast') {

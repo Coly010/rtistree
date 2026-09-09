@@ -2,6 +2,10 @@
 
 The examples in this document are the implemented format. The original proposal is exploratory; unsupported fields are rejected, not silently interpreted. Generate machine-readable schemas with `npm run schema` or `graphics schema`.
 
+The [production guide](production.md) describes v0.3 physical documents, exports, affine and perspective transforms, extended masks, adjustments, path commands and typography.
+
+The [studio guide](studio.md) describes v0.4 programmable assets and dense editing. Assets may carry a `recipe: {source, hash}` reference to a frozen program manifest. Promoted regions accept `composite: replace|over` (default replacement). Programs are executed explicitly and baked; scenes never execute referenced recipes while rendering.
+
 ## Files and assets
 
 Root documents contain `version: 1`, `canvas`, `layers` and/or `include`, optional `assets`, `metadata`, and `verification: {rules: [...]}`. Fragments contain `include`, `assets`, `fonts`, `components` and `layers`. JSON and YAML can be mixed. There can be at most 128 included documents and 256 total layers.
@@ -14,11 +18,11 @@ assets:
     hash: sha256:... # optional on input; checked when supplied
 ```
 
-PNG, JPEG and WebP are supported. No URL loading, SVG input, or external resource resolution. Asset paths must resolve inside the root scene directory, including after symlink resolution. File size is limited to 64 MiB and decoded dimensions to 32 megapixels. Large rasters belong in binary image files, not YAML arrays.
+PNG, JPEG, WebP and TIFF assets are supported. ICC-tagged input is normalised to sRGB. The separate `import-svg` command converts a closed static geometry subset into scene layers. No URL loading or external resource resolution is permitted. Asset paths must resolve inside the root scene directory, including after symlink resolution. File size is limited to 64 MiB and decoded dimensions to 32 megapixels. Large rasters belong in binary image files, not YAML arrays.
 
 ## Coordinates and layout
 
-`canvas` uses integer `width` and `height`, each from 1 to 4096, `colour_space: srgb`, and a `#RRGGBB` or `#RRGGBBAA` background. Both 512 and 1024 canvases are supported; a conservative total-surface memory budget can reject very large scenes with many layers.
+`canvas` uses integer `width` and `height`, each from 1 to 8192, `colour_space: srgb`, and a `#RRGGBB` or `#RRGGBBAA` background. A conservative total-surface memory budget can reject large scenes with many retained layers. Physical document dimensions are separate from these design pixels.
 
 Geometry uses `bounds: [x, y, width, height]` **relative to the parent**. Omitted bounds fill the parent's content area. A layer may override dimensions using numeric `width`/`height` or percentages, and `anchor` can be `top-left`, `center`, `top-right`, `bottom-left`, or `bottom-right`. Rotation is in degrees about the box center; scale is a positive `[x, y]` pair. Parent transforms apply to descendants.
 

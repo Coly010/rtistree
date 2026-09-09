@@ -1,0 +1,31 @@
+{
+  "candidate": "glide-silhouette",
+  "scene_hash": "sha256:c3b6c913b2acecaa9e92f3bb7ee3cfa3f03d258ff79a9338f947d9d06af23c1a",
+  "png_hash": "sha256:c2f63ffa745e440932c220f29bb4584134de28420b6359960c5bfa83c7f1350e",
+  "reviewer": "Codex, actual silhouette comparison at 464 px",
+  "method": "vision-agent",
+  "fidelity": 0.52,
+  "quality": 0.4,
+  "criteria": [
+    {
+      "id": "gesture",
+      "pass": true,
+      "evidence": "The swept wing and spine directions distinguish a climbing, banking or level-gliding gesture."
+    },
+    {
+      "id": "space",
+      "pass": false,
+      "evidence": "The head and neck merge into the far wing at thumbnail scale; the creature loses its most important identifying contour."
+    }
+  ],
+  "strengths": "The broad wing fan is more articulated than the previous triangular sail design.",
+  "weaknesses": "The hidden head is a structural failure. Shading is not an acceptable rescue for this silhouette.",
+  "issues": [
+    {
+      "criterion": "space",
+      "severity": "blocking",
+      "observation": "Head merges into far-wing silhouette.",
+      "correction": "Change neck/head placement or wing pose before proceeding."
+    }
+  ]
+}

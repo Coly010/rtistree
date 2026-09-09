@@ -1,0 +1,805 @@
+// An original, entirely 2D drawing. No image inputs, model calls, meshes or camera.
+// Landmarks, silhouettes and anatomical planes are authored; surface marks are seeded.
+const c = art.canvas(),
+  ctx = c.getContext('2d');
+const W = 1400,
+  H = 1050,
+  stage = parameters.stage ?? 'paint',
+  revision = parameters.revision ?? 0;
+ctx.scale(art.width / W, art.height / H);
+const rand = (a, b) => a + art.random() * (b - a);
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rgb = (r, g, b) =>
+  `rgb(${Math.round(clamp(r, 0, 255))},${Math.round(clamp(g, 0, 255))},${Math.round(clamp(b, 0, 255))})`;
+function fill(d, col) {
+  ctx.fillStyle = col;
+  ctx.fill(art.path(d));
+}
+function line(d, col, w = 1, alpha = 1) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = col;
+  ctx.lineWidth = w;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.stroke(art.path(d));
+  ctx.restore();
+}
+function gradient(x1, y1, x2, y2, stops) {
+  const g = ctx.createLinearGradient(x1, y1, x2, y2);
+  stops.forEach((v, i) => g.addColorStop(i / (stops.length - 1), v));
+  return g;
+}
+function radial(x, y, r, stops) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+  stops.forEach((v, i) => g.addColorStop(i / (stops.length - 1), v));
+  return g;
+}
+function poly(p, col) {
+  fill('M' + p.map((v) => v.join(' ')).join('L') + 'Z', col);
+}
+function ellipse(x, y, rx, ry, col, a = 0) {
+  ctx.fillStyle = col;
+  ctx.beginPath();
+  ctx.ellipse(x, y, rx, ry, a, 0, Math.PI * 2);
+  ctx.fill();
+}
+// Background: broad, low-contrast marks, with the light concentrated below the muzzle.
+ctx.fillStyle = gradient(0, 0, W, H, ['#4d4940', '#282c29', '#131c1b']);
+ctx.fillRect(0, 0, W, H);
+if (stage === 'paint') {
+  for (let i = 0; i < 2500; i++) {
+    const x = rand(-70, W + 70),
+      y = rand(-50, H + 50),
+      s = rand(8, 85),
+      v = art.fbm(x / 210, y / 190, 3);
+    const warm = clamp(1 - Math.hypot(x - 190, y - 100) / 950),
+      glow = clamp(1 - Math.hypot(x - 1230, y - 750) / 750);
+    ctx.save();
+    ctx.globalAlpha = rand(0.025, 0.12);
+    poly(
+      [
+        [x - s, y],
+        [x - s * 0.2, y - s * 0.22],
+        [x + s, y - s * 0.1],
+        [x + s * 0.55, y + s * 0.22],
+        [x - s * 0.6, y + s * 0.3],
+      ],
+      rgb(32 + v * 38 + warm * 45 + glow * 18, 38 + v * 32 + warm * 22 + glow * 40, 34 + v * 28),
+    );
+    ctx.restore();
+  }
+}
+ctx.fillStyle = radial(1170, 740, 550, ['#9da74b38', '#53704318', '#31553300']);
+ctx.fillRect(0, 0, W, H);
+// Separate far horns establish overlap; their soft values recede behind the skull.
+const farHorn = 'M592 344 C522 274 450 193 372 174 C440 261 459 330 495 394Z';
+fill(farHorn, gradient(430, 190, 550, 390, ['#737263', '#252e2a', '#121c1a']));
+fill(
+  'M699 327 C684 254 669 224 608 168 C635 243 602 290 639 349Z',
+  gradient(610, 190, 680, 340, ['#5e6658', '#222e28']),
+);
+// Neck, cranium, cheek and lower jaw are separate silhouettes, with one shared hinge.
+const neck =
+  'M-70 1130 L-50 720 C31 638 150 624 209 551 C273 471 275 397 390 363 C457 342 551 363 591 423 C666 528 640 634 563 716 C499 786 460 880 511 1069Z';
+const skull = revision
+  ? 'M353 416 C376 344 437 311 501 314 L550 281 L593 297 L624 281 L661 310 L703 307 L748 327 L787 360 L818 373 L860 375 L889 389 L922 387 L945 401 L975 403 L987 396 L1009 410 L1024 431 L1019 448 L1024 465 L1007 485 L991 487 L978 500 L953 506 L925 500 L907 506 L878 493 L850 497 L816 484 L786 491 L749 480 L729 495 L707 501 L692 528 L666 531 L633 558 L597 546 L577 538 L527 490 L458 472 L393 458Z'
+  : 'M353 416 C376 344 437 311 501 314 L550 281 L593 297 L624 281 L661 310 L703 307 L758 336 L800 366 L866 381 L916 386 L950 408 L1005 410 Q1033 431 1020 470 L997 496 L950 514 L878 503 L815 494 L742 490 L692 528 L633 558 L577 538 L527 490 L458 472 L393 458Z';
+const jaw =
+  'M585 498 C638 508 660 556 706 594 L829 654 L924 687 L946 714 L930 743 L887 753 L821 720 L738 692 L648 650 Q600 620 571 572Z';
+const cheek = 'M558 376 L648 354 L715 398 L735 448 L697 509 L633 555 L574 522 L534 451Z';
+fill(neck, gradient(130, 490, 590, 810, ['#111c1c', '#27322c', '#586046', '#222d25']));
+// Dorsal scutes have variable lengths and broken intervals, following the neck curve.
+for (let i = 0; i < 16; i++) {
+  const t = i / 15,
+    x = 25 + 335 * t,
+    y = 706 - 316 * t + Math.sin(t * 3) * 12,
+    s = 26 + Math.sin(t * 3.3) * 42;
+  fill(
+    `M${x} ${y + 26} Q${x - 25} ${y - s * 0.25} ${x - 25 - s} ${y - s} Q${x - 6} ${y - s * 0.7} ${x + 30} ${y + 10}Z`,
+    gradient(x - 40, y - s, x + 20, y + 25, ['#5b5f52', '#26352d', '#101c1a']),
+  );
+  line(
+    `M${x - 25 - s} ${y - s}Q${x - 15} ${y - s * 0.15} ${x + 15} ${y + 8}`,
+    '#7c8064',
+    1.3,
+    0.45,
+  );
+}
+// Throat plates follow the underside of the neck, becoming larger towards the viewer.
+ctx.save();
+ctx.clip(art.path(neck));
+for (let i = 0; i < 15; i++) {
+  const t = i / 14,
+    y = 606 + t * 500,
+    x = 540 - 130 * Math.sin(t * 2.5),
+    s = 40 + t * 20;
+  fill(
+    `M${x - 55} ${y - 30}Q${x + 14} ${y - 48} ${x + 70} ${y - 18}L${x + 56} ${y + s * 0.55}Q${x - 5} ${y + s * 0.08} ${x - 65} ${y + 6}Z`,
+    gradient(x - 50, y - 25, x + 55, y + 20, ['#1e2d26', '#727849', '#3b4b2f']),
+  );
+  line(`M${x - 56} ${y - 26}Q${x + 8} ${y - 42} ${x + 58} ${y - 18}`, '#a0a16b', 2, 0.45);
+}
+ctx.restore();
+fill(jaw, gradient(630, 630, 896, 750, ['#1d2822', '#6b773e', '#98a458', '#28382b']));
+fill(skull, gradient(530, 310, 800, 555, ['#474a3b', '#26342c', '#566749', '#85914f']));
+// Deliberate planes: temporal recess, cheek arch, nose bridge and jaw muscle.
+fill('M445 366 L550 333 L602 359 L566 432 L487 452 L422 431Z', '#29382e');
+fill(
+  'M529 372 L599 325 L667 346 L695 393 L630 416 L567 447Z',
+  gradient(577, 326, 626, 436, ['#626550', '#3b4a35', '#182923']),
+);
+fill(
+  'M697 364 L745 347 L807 388 L901 405 L879 429 L788 426 L739 413Z',
+  gradient(760, 355, 808, 434, ['#5e674b', '#8d8c5a', '#465840']),
+);
+fill(
+  'M763 438 L861 445 L915 427 L991 431 L1006 465 L953 485 L871 478 L810 481Z',
+  gradient(850, 424, 900, 497, ['#3d4a32', '#7e8850', '#b4b775']),
+);
+fill(cheek, gradient(556, 403, 709, 519, ['#192822', '#344b35', '#81904f', '#b0b76a']));
+fill('M583 417 L627 389 L657 402 L651 441 L610 475 L571 467Z', '#22342c');
+fill(
+  'M591 484 L650 456 L692 417 L718 442 L689 496 L634 535Z',
+  gradient(623, 451, 667, 518, ['#50633b', '#b0b672', '#667b41']),
+);
+fill(
+  'M670 535 Q705 568 748 586 L896 676 L921 691 L887 713 L782 673 L689 622Z',
+  gradient(750, 600, 790, 693, ['#859649', '#b1bc67', '#3b502f']),
+);
+// Open mouth: its dark wedge explains the hinge before teeth or fire are introduced.
+const mouth =
+  'M683 489 Q776 482 865 501 L986 490 L962 522 Q856 529 748 521 Q768 573 847 612 L932 687 L905 701 L815 655 L724 597 Q678 553 658 523Z';
+fill(mouth, gradient(740, 490, 867, 663, ['#070f10', '#172b1d', '#647b31']));
+fill(
+  'M697 509 Q786 507 850 526 Q874 553 905 584 Q825 553 768 541 L728 553Z',
+  gradient(770, 520, 857, 567, ['#435533', '#7f9d47', '#b5c67b']),
+);
+if (revision) {
+  // Painted 2D light fields replace flat polygon facets. Each lobe is a named anatomical mass.
+  const lobes = [
+    { x: 618, y: 443, rx: 68, ry: 88, k: 0.65 },
+    { x: 751, y: 384, rx: 100, ry: 35, k: 0.36 },
+    { x: 877, y: 444, rx: 159, ry: 43, k: 0.6 },
+    { x: 970, y: 451, rx: 48, ry: 34, k: 0.6 },
+  ];
+  ctx.save();
+  ctx.clip(art.path(skull));
+  const surface = art.raster(
+    (x, y) => {
+      const px = x + 345,
+        py = y + 278;
+      const coarse = art.fbm(px / 85, py / 70, 4),
+        grain = art.noise(px / 5, py / 5);
+      let volume = 0;
+      for (const m of lobes)
+        volume += Math.exp(-(((px - m.x) / m.rx) ** 2 + ((py - m.y) / m.ry) ** 2) * 1.7) * m.k;
+      const under = clamp((py - 375) / 185),
+        glow = clamp(1 - Math.hypot((px - 964) * 0.8, py - 553) / 395);
+      const temporal = Math.exp(-(((px - 576) / 39) ** 2 + ((py - 416) / 53) ** 2));
+      const cheekCleft = Math.exp(-(((px - 671) / 21) ** 2 + ((py - 464) / 46) ** 2));
+      const shade = clamp(0.15 + volume * 0.6 + coarse * 0.23 - temporal * 0.2 - cheekCleft * 0.24);
+      return [
+        18 + shade * 75 + glow * under * 38 + grain * 3,
+        23 + shade * 78 + glow * under * 64 + grain * 3,
+        21 + shade * 54 + glow * under * 15 + grain * 2,
+        255,
+      ];
+    },
+    690,
+    290,
+  );
+  ctx.drawImage(surface, 345, 278);
+  ctx.restore();
+  // A curved mandibular arch and throat web explain the connection at the gape.
+  fill(
+    'M655 520 Q666 566 705 605 L754 634 Q718 579 711 548 L741 522 Q694 529 655 520Z',
+    gradient(655, 542, 736, 590, ['#1d3025', '#647845', '#233a29']),
+  );
+  line('M659 520Q672 574 712 605', '#758d52', 3, 0.8);
+  line('M629 532Q654 573 687 591', '#111f1b', 6, 0.7);
+}
+// Major swept horns grow from a socket, and have a planar light side and a dark underside.
+function horn(d, edge, cracks) {
+  fill(d, gradient(260, 100, 550, 390, ['#a7a38a', '#777b65', '#39473b', '#14251f']));
+  fill(edge, '#777f62');
+  for (const p of cracks) line(p, '#1c2e27', 2, 0.55);
+}
+horn(
+  'M544 366 C466 352 424 313 390 247 C354 178 299 148 251 132 C354 127 419 180 465 223 C499 255 550 258 591 317Z',
+  'M261 135 C346 148 405 210 440 254 L486 316 L446 290 C403 214 341 154 261 135Z',
+  [
+    'M447 276Q472 269 485 259',
+    'M427 246Q447 239 455 230',
+    'M401 213L426 207',
+    'M377 185L398 180',
+    'M465 308Q492 309 515 285',
+  ],
+);
+horn(
+  'M472 424 Q411 416 356 366 C308 321 270 299 210 299 C264 277 324 298 376 326 Q426 350 506 360Z',
+  'M218 298Q291 291 374 347L449 389Q342 320 218 298Z',
+  ['M352 360L371 326', 'M383 385L403 341', 'M417 405L438 351'],
+);
+// Smaller crest blades, individually placed to avoid a repeated comb silhouette.
+for (const [x, y, dx, dy, s] of [
+  [563, 311, -48, -73, 26],
+  [621, 307, -32, -87, 24],
+  [673, 326, -16, -61, 20],
+  [714, 344, 5, -43, 17],
+  [458, 454, -104, 10, 27],
+  [503, 488, -80, 38, 22],
+  [555, 518, -53, 42, 18],
+]) {
+  fill(
+    `M${x - s} ${y + 10}Q${x + dx * 0.45} ${y + dy * 0.6} ${x + dx} ${y + dy}Q${x + dx * 0.15 + s} ${y + dy * 0.45} ${x + s} ${y + 15}Z`,
+    gradient(x + dx, y + dy, x, y + 10, ['#84866b', '#43523a', '#1b2e25']),
+  );
+}
+// At the value stage, construction and major light planes remain visible without surface detail.
+if (stage === 'paint') {
+  const masks = [
+    { d: neck, box: [0, 375, 590, 1090], size: 24, flow: 0.9 },
+    { d: skull, box: [360, 299, 1025, 532], size: 16, flow: 0.25 },
+    { d: jaw, box: [580, 521, 942, 750], size: 13, flow: 0.45 },
+  ];
+  const underpaint = revision >= 2 ? art.pixels(c) : null;
+  for (const region of masks) {
+    const mask = art.path(region.d);
+    ctx.save();
+    ctx.clip(mask);
+    if (revision >= 2) {
+      // Irregular cells share boundaries. Their values come from the painted form underneath,
+      // so texture does not replace the skull's lighting with a flat repeating palette.
+      const s = region.size * 0.78,
+        cols = Math.ceil((region.box[2] - region.box[0]) / s) + 3,
+        rows = Math.ceil((region.box[3] - region.box[1]) / s) + 3,
+        sites = [];
+      for (let j = 0; j < rows; j++)
+        for (let i = 0; i < cols; i++)
+          sites.push([
+            region.box[0] + (i - 1) * s + rand(-0.44, 0.44) * s,
+            region.box[1] + (j - 1) * s + rand(-0.44, 0.44) * s,
+          ]);
+      for (let j = 1; j < rows - 1; j++)
+        for (let i = 1; i < cols - 1; i++) {
+          const site = sites[j * cols + i],
+            [px, py] = site;
+          if (!ctx.isPointInPath(mask, px, py)) continue;
+          let cell = [
+            [px - s * 2, py - s * 2],
+            [px + s * 2, py - s * 2],
+            [px + s * 2, py + s * 2],
+            [px - s * 2, py + s * 2],
+          ];
+          for (let oy = -2; oy <= 2; oy++)
+            for (let ox = -2; ox <= 2; ox++) {
+              if ((!ox && !oy) || i + ox < 0 || j + oy < 0 || i + ox >= cols || j + oy >= rows)
+                continue;
+              const q = sites[(j + oy) * cols + i + ox],
+                nx = q[0] - px,
+                ny = q[1] - py,
+                k = (q[0] * q[0] + q[1] * q[1] - px * px - py * py) / 2,
+                next = [];
+              for (let z = 0; z < cell.length; z++) {
+                const a = cell[z],
+                  b = cell[(z + 1) % cell.length],
+                  da = a[0] * nx + a[1] * ny - k,
+                  db = b[0] * nx + b[1] * ny - k;
+                if (da <= 0) next.push(a);
+                if (da <= 0 !== db <= 0) {
+                  const t = da / (da - db);
+                  next.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
+                }
+              }
+              cell = next;
+            }
+          if (cell.length < 3) continue;
+          const idx = (Math.round(clamp(py, 0, H - 1)) * W + Math.round(clamp(px, 0, W - 1))) * 4,
+            base = [underpaint.data[idx], underpaint.data[idx + 1], underpaint.data[idx + 2]],
+            v = rand(-10, 9),
+            light = clamp(1 - Math.hypot(px - 925, py - 550) / 560);
+          cell = cell.map((p) => [px + (p[0] - px) * 0.88, py + (p[1] - py) * 0.88]);
+          ctx.globalAlpha = region === masks[0] ? 0.54 : 0.75;
+          poly(
+            cell,
+            gradient(px, py - s * 0.6, px + s * 0.2, py + s * 0.6, [
+              rgb(base[0] * 0.65 + v, base[1] * 0.68 + v, base[2] * 0.7 + v),
+              rgb(base[0] + v + light * 12, base[1] + v + light * 20, base[2] + v + light * 6),
+            ]),
+          );
+          // Break the lit edge into selected facets; most scales have no explicit outline.
+          if (art.random() < 0.5) {
+            const low = cell.filter((p) => p[1] > py);
+            if (low.length > 1)
+              line(
+                'M' + low.map((p) => p.join(' ')).join('L'),
+                rgb(base[0] + 18 + light * 25, base[1] + 22 + light * 28, base[2] + 12),
+                rand(0.6, 1.3),
+                0.65,
+              );
+          }
+        }
+      ctx.globalAlpha = 1;
+      ctx.restore();
+      continue;
+    }
+    // Unequal staggered scutes: the row flow bends with the drawn neck/skull.
+    for (let row = 0, y = region.box[1]; y < region.box[3]; row++, y += region.size * 0.77) {
+      for (let x = region.box[0] - 40; x < region.box[2] + 40; x += region.size * 1.18) {
+        const px = x + (row % 2) * region.size * 0.56 + rand(-5, 5),
+          py = y + Math.sin(x / 105 + row * 0.2) * region.size * 0.34 + rand(-4, 4);
+        if (!ctx.isPointInPath(mask, px, py)) continue;
+        const sz = region.size * rand(revision ? 0.42 : 0.62, revision ? 1.57 : 1.28),
+          n = art.fbm(px / 105, py / 80, 3),
+          near = clamp(1 - Math.hypot(px - 940, py - 580) / 480);
+        const plane = region === masks[0] ? clamp((px - 120) / 480) : clamp((py - 315) / 220);
+        const v = 19 + n * 35 + plane * 18 + near * 28;
+        const a = region.flow + (art.noise(px / 110, py / 160) - 0.5) * 0.7;
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(a);
+        ctx.globalAlpha = revision
+          ? rand(0.09, 0.42) * (region === masks[0] ? 0.6 : 1)
+          : rand(0.32, 0.8);
+        const points = [
+          [-sz * 0.53, -sz * 0.16],
+          [-sz * 0.21, -sz * 0.43],
+          [sz * 0.23, -sz * 0.35],
+          [sz * 0.58, -sz * 0.02],
+          [sz * 0.19, sz * 0.38],
+          [-sz * 0.34, sz * 0.3],
+        ].map((p) => (revision ? [p[0] + rand(-3, 3), p[1] + rand(-3, 3)] : p));
+        poly(
+          points,
+          revision
+            ? gradient(0, -sz * 0.4, 0, sz * 0.4, [
+                rgb(v * 0.65, v * 0.8, v * 0.5),
+                rgb(v + near * 22, v + near * 28, v * 0.63),
+              ])
+            : rgb(v * 0.81, v + near * 13, v * 0.67),
+        );
+        line(
+          `M${-sz * 0.48} ${-sz * 0.13}L${-sz * 0.18} ${-sz * 0.38}L${sz * 0.19} ${-sz * 0.3}`,
+          rgb(v + 27 + near * 17, v + 33 + near * 29, v * 0.68 + 16),
+          rand(0.7, 2),
+          0.7,
+        );
+        line(
+          `M${sz * 0.56} 0L${sz * 0.19} ${sz * 0.38}L${-sz * 0.28} ${sz * 0.3}`,
+          '#0f211b',
+          rand(0.6, 1.8),
+          0.85,
+        );
+        // Sparse scratches and broken paint, restricted to individual scutes.
+        if (art.random() < 0.25)
+          line(
+            `M${-sz * 0.16} ${-sz * 0.13}l${sz * 0.28} ${sz * 0.12}`,
+            rgb(v + 40, v + 45, v * 0.7 + 25),
+            0.7,
+            0.5,
+          );
+        ctx.restore();
+      }
+    }
+    ctx.restore();
+  }
+  if (revision >= 2) {
+    // Cheek and brow armour is designed as interlocking masses, with recessed seams and
+    // a curved lower arch. Large forms are intentionally different from the small scales.
+    const plates = [
+      ['M549 367Q563 342 592 346L620 366L606 391Q578 397 555 389Z', [552, 349, 612, 397]],
+      ['M598 335L622 316L656 333L675 357L655 377L621 361Z', [614, 325, 653, 377]],
+      ['M654 368L678 346L705 355L731 377L710 392L683 389Z', [668, 351, 705, 393]],
+      ['M574 410Q594 397 615 407L633 427L626 459L602 474L580 459L565 435Z', [575, 413, 630, 466]],
+      ['M633 423L657 402L677 417L686 440L670 461L645 475L631 457Z', [636, 420, 672, 467]],
+      ['M597 484L626 475L646 461L667 464L657 491L633 510L611 514L588 501Z', [610, 478, 642, 508]],
+      ['M804 412L822 398L850 405L869 421L850 439L826 434Z', [826, 404, 839, 437]],
+      ['M877 429L895 415L920 420L933 440L920 455L889 448Z', [883, 422, 919, 450]],
+    ];
+    for (let n = 0; n < plates.length; n++) {
+      const [d, b] = plates[n];
+      fill(
+        d,
+        gradient(...b, ['#26392c', n > 4 ? '#869356' : '#526342', n > 4 ? '#b2bd78' : '#738650']),
+      );
+      line(d, '#13291f', 2, 0.6);
+      ctx.save();
+      ctx.clip(art.path(d));
+      for (let k = 0; k < 100; k++) {
+        const x = rand(b[0] - 20, b[2] + 20),
+          y = rand(b[1] - 20, b[3] + 20);
+        line(
+          `M${x} ${y}l${rand(1, 6)} ${rand(-1, 3)}`,
+          k % 3 ? '#a0ac70' : '#17291e',
+          rand(0.5, 1.5),
+          rand(0.05, 0.2),
+        );
+      }
+      ctx.restore();
+    }
+    line('M582 460Q592 475 609 477L628 466', '#b3b979', 2, 0.65);
+    line('M608 511L621 518L639 509L650 495', '#ced091', 2.5, 0.75);
+    line('M677 437Q692 453 689 468L675 488', '#a7b870', 3, 0.65);
+    // Nose wrinkles sweep into the lip instead of continuing the cheek's scale grid.
+    for (let j = 0; j < 6; j++) {
+      const x = 807 + j * 26,
+        y = 443 + Math.sin(j * 0.8) * 7;
+      line(
+        `M${x - 5} ${y - 8}Q${x + 5} ${y} ${x + 7} ${y + 15}L${x + 1} ${y + 25}`,
+        '#243d27',
+        2.5,
+        0.7,
+      );
+      line(`M${x + 1} ${y - 6}Q${x + 12} ${y + 5} ${x + 11} ${y + 16}`, '#9fa96b', 1.7, 0.65);
+    }
+    // Horn growth ridges curve across the tapered form; they are not straight hatch marks.
+    for (let j = 0; j < 26; j++) {
+      const t = j / 26,
+        x = 281 + 252 * t,
+        y = 141 + 177 * t * t,
+        w = 4 + 25 * t;
+      line(
+        `M${x - w * 0.2} ${y - 3}Q${x - w * 0.2} ${y + w * 0.9} ${x - w} ${y + w * 1.4}`,
+        '#202f28',
+        1.3,
+        0.65,
+      );
+      line(
+        `M${x + 2} ${y - 2}Q${x + 3} ${y + w * 0.7} ${x - w + 2} ${y + w * 1.3}`,
+        '#a2a080',
+        0.8,
+        0.6,
+      );
+    }
+  }
+  // Larger overlapping brow armour replaces the fine scale pattern at structural landmarks.
+  if (!revision)
+    for (const [p, col] of [
+      [
+        [
+          [516, 343],
+          [559, 314],
+          [606, 336],
+          [577, 358],
+          [540, 365],
+        ],
+        '#535e43',
+      ],
+      [
+        [
+          [589, 358],
+          [632, 332],
+          [677, 353],
+          [683, 377],
+          [645, 397],
+          [613, 384],
+        ],
+        '#485c3c',
+      ],
+      [
+        [
+          [626, 412],
+          [659, 383],
+          [691, 397],
+          [697, 425],
+          [666, 452],
+          [637, 445],
+        ],
+        '#6e7c4b',
+      ],
+      [
+        [
+          [622, 470],
+          [661, 443],
+          [690, 453],
+          [676, 489],
+          [644, 511],
+          [609, 504],
+        ],
+        '#929e5b',
+      ],
+      [
+        [
+          [755, 397],
+          [782, 376],
+          [815, 397],
+          [837, 410],
+          [810, 422],
+          [777, 420],
+        ],
+        '#777c4e',
+      ],
+      [
+        [
+          [837, 415],
+          [873, 400],
+          [910, 416],
+          [905, 439],
+          [869, 448],
+          [839, 437],
+        ],
+        '#7b8650',
+      ],
+    ]) {
+      poly(p, col);
+      line(
+        'M' +
+          p
+            .slice(0, 3)
+            .map((v) => v.join(' '))
+            .join('L'),
+        '#b0ae72',
+        1.8,
+        0.55,
+      );
+      line(
+        'M' +
+          p
+            .slice(3)
+            .map((v) => v.join(' '))
+            .join('L'),
+        '#14291e',
+        2,
+        0.8,
+      );
+    }
+}
+// Eye socket, lid and nose: a small sharp focal group inside broader, quieter planes.
+if (!revision) {
+  fill('M691 388 Q730 361 774 394 L803 416 Q760 413 740 430 L710 427 L686 408Z', '#0c1a18');
+  fill(
+    'M709 404 Q741 385 773 406 Q751 424 722 416Z',
+    gradient(725, 394, 746, 423, ['#a4a365', '#c9db71', '#506f36']),
+  );
+  fill('M744 395 Q738 405 746 419 Q751 407 744 395Z', '#13251a');
+  ellipse(757, 403, 3, 2, '#f0edac');
+  line('M695 393Q738 369 780 399L800 409', '#8c9560', 5, 0.9);
+  line('M716 423Q747 432 776 415', '#aab777', 2, 0.65);
+  fill('M943 438 Q958 426 977 438 L979 452 Q956 458 943 450Z', '#0b1a16');
+  line('M937 439Q956 420 978 435', '#99a568', 3, 0.8);
+  line('M945 455Q965 463 981 451', '#b9c688', 2, 0.85);
+} else {
+  fill('M701 401 Q724 388 746 397 L784 410 L764 423 L729 427 L710 419Z', '#111f1a');
+  fill(
+    'M725 408 Q741 400 759 409 Q746 422 730 416Z',
+    gradient(736, 400, 742, 420, ['#6e803c', '#cbd573', '#778b3f']),
+  );
+  fill('M744 405L742 416L747 414Z', '#19271a');
+  ellipse(751, 408, 1.5, 1, '#f4e8b3');
+  fill(
+    'M693 386 L724 374 L748 384 L761 391 L785 410 L762 403 L739 397 L719 400 L697 410Z',
+    gradient(727, 374, 732, 410, ['#73744e', '#485339', '#1b2b22']),
+  );
+  line('M704 392L721 386L735 389L744 387L762 399', '#a3a477', 2, 0.72);
+  line('M720 423Q744 432 765 419', '#889a5d', 2, 0.75);
+  line('M716 438Q739 448 761 431', '#24372a', 3, 0.8);
+  fill('M950 443 Q960 435 972 440 L976 447 L959 451 L950 449Z', '#101b17');
+  line('M943 442Q958 429 974 438', '#8f9e63', 3, 0.8);
+  line('M953 455L965 455L978 449', '#bdc77e', 1.6, 0.85);
+}
+// Ragged gum edge connects each tooth to a continuous jaw rather than floating triangles.
+line('M706 495Q807 480 870 499Q936 511 999 480', '#a8bd70', 5, 0.8);
+line('M734 591Q813 649 919 700', '#aab95c', 6, 0.8);
+function tooth(x, y, dx, dy, w) {
+  fill(
+    `M${x - w} ${y}Q${x + w * 0.35} ${y + dy * 0.22} ${x + dx} ${y + dy}Q${x + w * 0.8} ${y + dy * 0.4} ${x + w} ${y - 2}Z`,
+    gradient(x - w, y, x + dx, y + dy, ['#5d7543', '#e0dfa1', '#a6c77b']),
+  );
+  line(
+    `M${x - w * 0.4} ${y + 2}Q${x - w * 0.2} ${y + dy * 0.3} ${x + dx} ${y + dy}`,
+    '#edf0bb',
+    1,
+    0.65,
+  );
+}
+for (let i = 0; i < 15; i++) {
+  const t = i / 14,
+    x = 725 + t * 271,
+    y = 494 + Math.sin(t * 3) * 10;
+  tooth(
+    x,
+    y,
+    -8 + 12 * t,
+    19 + Math.sin(t * 3.1) * 24 + (i % 4 === 0 ? 9 : 0),
+    4 + Math.sin(t * 3) * 3,
+  );
+}
+for (let i = 0; i < 11; i++) {
+  const t = i / 10,
+    x = 752 + t * 159,
+    y = 606 + t * 91;
+  tooth(x, y, 12, -20 - rand(0, 12), 4 + rand(0, 2));
+}
+if (stage === 'paint') {
+  // Green illumination is painted on existing planes, stronger at the mouth and weaker on the neck.
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  ctx.fillStyle = radial(963, 553, 310, ['#bad85b45', '#5e9f2f13', '#27571c00']);
+  ctx.fillRect(640, 270, 680, 630);
+  ctx.restore();
+  // Fire is a family of branching turbulent ribbons; the white core occupies a small area.
+  const flame = art.canvas(W, H),
+    fc = flame.getContext('2d');
+  function ribbon(points, width, col, alpha) {
+    fc.save();
+    fc.globalAlpha = alpha;
+    fc.strokeStyle = col;
+    fc.lineWidth = width;
+    fc.lineCap = 'round';
+    fc.lineJoin = 'round';
+    fc.beginPath();
+    points.forEach((p, i) => (i ? fc.lineTo(...p) : fc.moveTo(...p)));
+    fc.stroke();
+    fc.restore();
+  }
+  if (!revision)
+    for (let i = 0; i < 150; i++) {
+      const start = rand(0, 0.22),
+        end = rand(0.43, 1.15),
+        phase = rand(0, 9),
+        off = rand(-1, 1),
+        points = [];
+      for (let t = start; t < end; t += 0.018) {
+        const spread = 12 + 140 * t * t;
+        points.push([
+          940 + 485 * t + Math.sin(t * 16 + phase) * spread * 0.3,
+          541 + 415 * t + off * spread + Math.sin(t * 22 + phase) * spread * 0.32,
+        ]);
+      }
+      ribbon(
+        points,
+        rand(5, 31),
+        ['#678c2a', '#89ac37', '#b2d957', '#dbe77e'][i % 4],
+        rand(0.055, 0.2),
+      );
+    }
+  // Sharp cores break, split and curl instead of filling the whole plume white.
+  if (!revision)
+    for (let i = 0; i < 65; i++) {
+      const start = rand(0, 0.65),
+        end = Math.min(1.1, start + rand(0.08, 0.4)),
+        phase = rand(0, 10),
+        off = rand(-0.7, 0.7),
+        points = [];
+      for (let t = start; t < end; t += 0.012) {
+        const spread = 10 + 100 * t * t;
+        points.push([
+          938 + 485 * t + Math.sin(t * 19 + phase) * spread * 0.27,
+          543 + 415 * t + off * spread + Math.sin(t * 26 + phase) * spread * 0.33,
+        ]);
+      }
+      ribbon(points, rand(1, 8), i % 3 ? '#dae991' : '#f5f3c5', rand(0.18, 0.62));
+    }
+  if (revision) {
+    const fire = art.raster(
+      (x, y) => {
+        const px = x + 770,
+          py = y + 455,
+          dx = px - 839,
+          dy = py - 548,
+          t = (dx * 0.78 + dy * 0.625) / 670;
+        if (t < 0 || t > 1.35) return [0, 0, 0, 0];
+        const side = -dx * 0.625 + dy * 0.78,
+          noise = art.fbm(px / 58, py / 48, 5, 11),
+          fine = art.fbm(px / 17, py / 19, 3, 4);
+        const width = 12 + 155 * t ** 1.3,
+          warp = (art.noise(px / 105, py / 110, 7) - 0.5) * width * 1.6;
+        const envelope = clamp(1 - Math.abs(side + warp) / width);
+        const density = clamp(
+          envelope * (revision >= 2 ? 1.4 : 1.28) +
+            (noise - 0.55) * 1.7 +
+            (fine - 0.5) * 0.34 -
+            (revision >= 2 ? 0.08 : 0.19),
+        );
+        const core = clamp((density - 0.48) * 3.7),
+          hot = clamp((density - 0.76) * 5);
+        return [
+          75 + core * 134 + hot * 43,
+          112 + core * 116 + hot * 22,
+          24 + core * 80 + hot * 101,
+          clamp(density * 1.7) * 255,
+        ];
+      },
+      630,
+      595,
+    );
+    fc.drawImage(fire, 770, 455);
+  }
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  ctx.globalAlpha = 0.5;
+  ctx.drawImage(art.blur(flame, 22), 0, 0);
+  ctx.globalAlpha = 1;
+  ctx.drawImage(flame, 0, 0);
+  ctx.restore();
+  // Small ember strokes follow the flow and leave negative space around the eye.
+  for (let i = 0; i < 90; i++) {
+    const t = rand(0.1, 1.2),
+      x = 950 + t * 490 + rand(-80, 110) * t,
+      y = 548 + t * 400 + rand(-160, 160) * t;
+    line(
+      `M${x} ${y}l${rand(1, 7)} ${rand(1, 5)}`,
+      i % 3 ? '#a6c768' : '#eeebb4',
+      rand(0.5, 2),
+      rand(0.15, 0.65),
+    );
+  }
+  // Broken painted accents on selected edges. No universal outline or canvas-filter finish.
+  for (const d of [
+    'M798 478L820 484L840 482',
+    'M879 486L893 489L910 486',
+    'M992 469L985 480',
+    'M666 492L651 506L638 511',
+    'M854 700L869 707L882 708',
+    'M556 636L541 651',
+  ])
+    line(d, '#cfda8b', 2, 0.68);
+  if (revision) {
+    // Paint from our own constructed colours with short directional marks. This changes
+    // edge handling, not the underlying drawing; it cannot repair incorrect anatomy.
+    const source = art.pixels(c),
+      get = (x, y) => {
+        const i = (Math.round(clamp(y, 0, H - 1)) * W + Math.round(clamp(x, 0, W - 1))) * 4;
+        return [source.data[i], source.data[i + 1], source.data[i + 2]];
+      };
+    for (const [count, size, opacity] of [
+      [12000, 13, 0.32],
+      [32000, 5, 0.5],
+      [18000, 2, 0.42],
+    ]) {
+      for (let i = 0; i < count; i++) {
+        const px = rand(0, W),
+          py = rand(0, H),
+          col = get(px, py),
+          lum = (col[0] + col[1] + col[2]) / 3;
+        const focal = Math.exp(-(((px - 820) / 200) ** 2 + ((py - 460) / 150) ** 2));
+        const s = size * (1 - focal * 0.5) * rand(0.45, 1.5),
+          angle = px > 850 && py > 530 ? 0.68 : (px < 590 ? -0.8 : -0.2) + rand(-0.65, 0.65);
+        const d = rand(-9, 9),
+          alpha = opacity * (0.65 + art.random() * 0.4);
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(angle);
+        ctx.globalAlpha = alpha;
+        poly(
+          [
+            [-s, -s * 0.2],
+            [-s * 0.35, -s * 0.36],
+            [s * 0.7, -s * 0.17],
+            [s, 0],
+            [s * 0.4, s * 0.25],
+            [-s * 0.8, s * 0.2],
+          ],
+          rgb(col[0] + d, col[1] + d, col[2] + d * 0.8),
+        );
+        if (lum > 85 && art.random() < 0.23)
+          line(
+            `M${-s * 0.65} ${-s * 0.2}L${s * 0.55} ${-s * 0.12}`,
+            rgb(col[0] + d + 10, col[1] + d + 10, col[2] + d + 8),
+            0.7,
+            0.4,
+          );
+        ctx.restore();
+      }
+    }
+  }
+  // Fine luminance grain, confined to the finished painted surface; does not supply anatomy.
+  const pixels = art.pixels(c);
+  for (let i = 0; i < pixels.data.length; i += 4) {
+    const n = (art.random() - 0.5) * 5;
+    pixels.data[i] += n;
+    pixels.data[i + 1] += n;
+    pixels.data[i + 2] += n;
+  }
+  art.put(c, pixels);
+}
+if (stage === 'values') {
+  const p = art.pixels(c);
+  for (let i = 0; i < p.data.length; i += 4) {
+    const v = 0.2126 * p.data[i] + 0.7152 * p.data[i + 1] + 0.0722 * p.data[i + 2];
+    p.data[i] = p.data[i + 1] = p.data[i + 2] = v;
+  }
+  art.put(c, p);
+}
+return c;

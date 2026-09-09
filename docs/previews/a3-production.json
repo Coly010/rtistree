@@ -1,0 +1,36 @@
+{
+  "trim_mm": [420, 297],
+  "pixels": [5031, 3579],
+  "density": 300,
+  "channels": 4,
+  "pdf": {
+    "format": "pdf",
+    "pages": [
+      {
+        "media": {
+          "x": 0,
+          "y": 0,
+          "width": 1243.559055,
+          "height": 894.897638
+        },
+        "trim": {
+          "x": 26.503937,
+          "y": 26.503937,
+          "width": 1190.551181,
+          "height": 841.889764
+        },
+        "bleed": {
+          "x": 18,
+          "y": 18,
+          "width": 1207.559055,
+          "height": 858.897638
+        }
+      }
+    ],
+    "images": [],
+    "embedded_fonts": ["/CZZZZZ+DMSerifDisplay-Regular"],
+    "profile_hashes": ["sha256:156e7c14f244cfc4ed83a755ca4803d80e15dd249b40fae82cb127d3902e15c7"],
+    "output_intents": 1
+  },
+  "status": "pass"
+}

@@ -1,0 +1,49 @@
+{
+  "status": "pass",
+  "brief": {
+    "id": "masked-vase",
+    "category": "poster",
+    "prompt": "Extract the generated terracotta vase and leafy sprig from its neutral background. Integrate it into an editable still-life design with a believable contact shadow and matching colours, preserve the delicate leaves, adapt it to landscape and portrait, then produce a 160 by 100 mm CMYK print PDF with 3 mm bleed.",
+    "max_edits": 5
+  },
+  "agent": "Codex using imagegen then Rtistree",
+  "review_method": "same-agent visual critique; not independent human evaluation",
+  "edits": 1,
+  "commands": 5,
+  "tokens": null,
+  "token_note": "null means the host did not expose token usage",
+  "critique_before": 0.53,
+  "critique_after": 0.85,
+  "locality": {
+    "changed_pixels": 360414,
+    "outside_changed_pixels": 0,
+    "changed_bounds": [65, 80, 1165, 611],
+    "scopes": [[0, 0, 1280, 800]]
+  },
+  "cold_identical": true,
+  "export_identical": true,
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:2ec3b0120e4ee4114ca71130b325f4158754b99c16d6afb9cbdb5715c0d0b47b",
+      "png_hash": "sha256:bc378ea614ae7659ddc97292bc10295b86b0a5da64a3dbb572e0de2b005bcb21",
+      "png": "/Users/colum/dev/personal/rtistree/examples/print-trial/benchmarks/masked-vase/before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 0,
+      "timestamp": "2026-09-08T20:22:37.295Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:6cf53cd3a44f5bd854a8551ef696b496585bd7968e25dbb623298b097e4af425",
+      "png_hash": "sha256:b85eb6931af0cb6585bfd9befe7b83719d1cecbffefdcda8e57fe736d2f2078e",
+      "png": "/Users/colum/dev/personal/rtistree/examples/print-trial/benchmarks/masked-vase/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 1,
+      "timestamp": "2026-09-08T20:26:28.906Z",
+      "tokens": null
+    }
+  ]
+}

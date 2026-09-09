@@ -1,0 +1,49 @@
+{
+  "status": "fail",
+  "brief": {
+    "id": "manual-wheel",
+    "category": "illustration",
+    "prompt": "Create a close-up shot of a bicycle wheel, showing its tyre and machined rim in soft window light. Work as a digital artist using geometry, procedural materials, brushwork and compositing. No image-generation models, downloaded imagery, or source-photo pixels may be used.",
+    "max_edits": 8
+  },
+  "agent": "Codex using only Rtistree studio and hand-authored code",
+  "review_method": "same-agent visual critique; not independent human evaluation",
+  "edits": 8,
+  "commands": 16,
+  "tokens": null,
+  "token_note": "null means the host did not expose token usage",
+  "critique_before": 0.45,
+  "critique_after": 0.62,
+  "locality": {
+    "changed_pixels": 446121,
+    "outside_changed_pixels": 0,
+    "changed_bounds": [35, 0, 829, 1600],
+    "scopes": [[0, 0, 1200, 1600]]
+  },
+  "cold_identical": true,
+  "export_identical": true,
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:76c317924142bdc851aa9f1871b34ec01ad348478aeda5dc2b19914a66070c1b",
+      "png_hash": "sha256:c5c00b261bd21e231805c419fdc2ffa283156e79bc608c928918a5da31885268",
+      "png": "/Users/colum/dev/personal/rtistree/examples/manual-wheel-trial/benchmarks/manual-wheel/before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 8,
+      "timestamp": "2026-09-08T21:21:39.193Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:a057f01f6abfca78ede3228ce9c41b8c742fa715750f5f6f6266dd985df3b5fb",
+      "png_hash": "sha256:54604a839036206ccfc7bfc224989e8265b59b466a432c2b6996cc1e14348741",
+      "png": "/Users/colum/dev/personal/rtistree/examples/manual-wheel-trial/benchmarks/manual-wheel/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 16,
+      "timestamp": "2026-09-08T21:33:43.522Z",
+      "tokens": null
+    }
+  ]
+}

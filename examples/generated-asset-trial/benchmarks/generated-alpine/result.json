@@ -1,0 +1,49 @@
+{
+  "status": "pass",
+  "brief": {
+    "id": "generated-alpine",
+    "category": "poster",
+    "prompt": "Fit the generated square alpine photograph into a 1600 by 1000 editorial landscape composition. Preserve its aspect ratio and recognisable mountain and shoreline. Use Rtistree for the surrounding layout, editable title The quiet between., supporting copy, and graphic details. Keep text clear of the photograph. Inspect and refine the composition without further image generation.",
+    "max_edits": 5
+  },
+  "agent": "Codex with built-in imagegen followed by Rtistree",
+  "review_method": "same-agent visual critique; not independent human evaluation",
+  "edits": 1,
+  "commands": 10,
+  "tokens": null,
+  "token_note": "null means the host did not expose token usage",
+  "critique_before": 0.4,
+  "critique_after": 0.84,
+  "locality": {
+    "changed_pixels": 26830,
+    "outside_changed_pixels": 0,
+    "changed_bounds": [77, 82, 761, 872],
+    "scopes": [[0, 0, 1600, 1000]]
+  },
+  "cold_identical": true,
+  "export_identical": true,
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:90acc0aa38c161ae259d447f124c4e668326bdc76b93a1bf7af3ed8cd7c9928c",
+      "png_hash": "sha256:fe0f952572d84d2bec43cbdd3bd5d4970c8098bee9f556ddbcced6878e93175c",
+      "png": "/Users/colum/dev/personal/rtistree/examples/generated-asset-trial/benchmarks/generated-alpine/before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 0,
+      "timestamp": "2026-09-08T19:52:26.671Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:2e66bdf8cefa3838a2e177cd4f30b67bdf299e3607b29f27e69b53f7334b99d9",
+      "png_hash": "sha256:82ae78eab24f3cd20fbfa3648363967e4be397b970291c5d321da8638a95a71d",
+      "png": "/Users/colum/dev/personal/rtistree/examples/generated-asset-trial/benchmarks/generated-alpine/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "history_length": 1,
+      "timestamp": "2026-09-08T19:53:41.726Z",
+      "tokens": null
+    }
+  ]
+}

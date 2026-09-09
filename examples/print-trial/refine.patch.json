@@ -1,0 +1,69 @@
+{
+  "reason": "Extract the grey backdrop with a colour-range mask, refine its edge, and ground the vase with a warm contact shadow after visual inspection.",
+  "commands": [
+    {
+      "type": "setMask",
+      "target": "vase",
+      "mask": {
+        "type": "image",
+        "source": "vase",
+        "bounds": [0, 0, 600, 600],
+        "space": "layer",
+        "channel": "colour",
+        "colour": "#e4e4e4",
+        "tolerance": 0.13,
+        "invert": true,
+        "expand": -0.5,
+        "feather": 0.35
+      }
+    },
+    {
+      "type": "setZ",
+      "target": "vase",
+      "z": 2
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "contact-shadow",
+        "type": "vector",
+        "bounds": [842, 612, 192, 25],
+        "z": 1,
+        "opacity": 0.27,
+        "shape": {
+          "type": "ellipse",
+          "fill": "#796044"
+        },
+        "effects": [
+          {
+            "type": "blur",
+            "radius": 7
+          }
+        ]
+      }
+    },
+    {
+      "type": "applyRasterOperation",
+      "target": "vase",
+      "operation": {
+        "type": "whiteBalance",
+        "bounds": [0, 0, 600, 600],
+        "space": "layer",
+        "temperature": 0.035,
+        "tint": 0
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "rule",
+        "type": "vector",
+        "bounds": [65, 690, 490, 1],
+        "shape": {
+          "type": "rectangle",
+          "fill": "#9b9e88"
+        }
+      }
+    }
+  ]
+}

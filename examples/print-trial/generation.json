@@ -1,0 +1,10 @@
+{
+  "tool": "Codex built-in image_gen",
+  "generation_calls": 1,
+  "prompt": "prompt.txt",
+  "source": "assets/vase.png",
+  "source_hash": "sha256:e35e03bb20849c1cd29d6c625af1f352a3403e48f579a0275e8f826042afab5b",
+  "source_pixels": [1254, 1254],
+  "extraction": "Rtistree colour-range mask; invert, shrink, feather",
+  "profile": "Demo profile extracted from the pinned libvips built-in cmyk profile. Not chosen for a specific press/paper."
+}

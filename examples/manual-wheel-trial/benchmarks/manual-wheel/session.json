@@ -1,0 +1,97 @@
+{
+  "brief": {
+    "id": "manual-wheel",
+    "category": "illustration",
+    "prompt": "Create a close-up shot of a bicycle wheel, showing its tyre and machined rim in soft window light. Work as a digital artist using geometry, procedural materials, brushwork and compositing. No image-generation models, downloaded imagery, or source-photo pixels may be used.",
+    "max_edits": 8
+  },
+  "agent": "Codex using only Rtistree studio and hand-authored code",
+  "method": "interactive-agent",
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:76c317924142bdc851aa9f1871b34ec01ad348478aeda5dc2b19914a66070c1b",
+      "png_hash": "sha256:c5c00b261bd21e231805c419fdc2ffa283156e79bc608c928918a5da31885268",
+      "png": "/Users/colum/dev/personal/rtistree/examples/manual-wheel-trial/benchmarks/manual-wheel/before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:76c317924142bdc851aa9f1871b34ec01ad348478aeda5dc2b19914a66070c1b",
+        "png_hash": "sha256:c5c00b261bd21e231805c419fdc2ffa283156e79bc608c928918a5da31885268",
+        "reviewer": "Codex visual inspection",
+        "method": "vision-agent",
+        "summary": "Recognisable, coherently layered wheel close-up with correct curved geometry, but currently reads as a clean technical render rather than a photograph.",
+        "score": 0.45,
+        "issues": [
+          {
+            "id": "tread",
+            "category": "texture",
+            "severity": "high",
+            "target": "tread",
+            "message": "Identically outlined rectangular tread blocks look flat and stamped.",
+            "suggestion": "Paint bevels, vary silhouettes subtly, reduce outlines and add material wear."
+          },
+          {
+            "id": "rubber",
+            "category": "texture",
+            "severity": "medium",
+            "target": "tyre",
+            "message": "Rubber is too uniform and pristine; large-scale scuffs and small irregularities are absent."
+          },
+          {
+            "id": "metal",
+            "category": "lighting",
+            "severity": "medium",
+            "target": "rim",
+            "message": "Machining lines produce excessive regular moire and the highlight is too uniform."
+          }
+        ]
+      },
+      "history_length": 8,
+      "timestamp": "2026-09-08T21:21:39.193Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:a057f01f6abfca78ede3228ce9c41b8c742fa715750f5f6f6266dd985df3b5fb",
+      "png_hash": "sha256:54604a839036206ccfc7bfc224989e8265b59b466a432c2b6996cc1e14348741",
+      "png": "/Users/colum/dev/personal/rtistree/examples/manual-wheel-trial/benchmarks/manual-wheel/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:a057f01f6abfca78ede3228ce9c41b8c742fa715750f5f6f6266dd985df3b5fb",
+        "png_hash": "sha256:54604a839036206ccfc7bfc224989e8265b59b466a432c2b6996cc1e14348741",
+        "reviewer": "Codex visual inspection",
+        "method": "vision-agent",
+        "summary": "The tyre now has a curved shaded cross-section, tread bevels respond to light, and sparse abrasions replace the excessive texture experiment. Geometry, lettering, spokes and valve are coherent. The result remains a synthetic product illustration rather than a convincing photograph.",
+        "score": 0.62,
+        "issues": [
+          {
+            "id": "photographic-materials",
+            "category": "texture",
+            "severity": "medium",
+            "target": "tread",
+            "message": "Tread spacing and shapes remain too uniform, and surface detail lacks the multi-scale variation of real rubber."
+          },
+          {
+            "id": "lighting-environment",
+            "category": "lighting",
+            "severity": "medium",
+            "target": "rim",
+            "message": "The lighting and environment response are simplified; the blank background and regular rim highlights reinforce a rendered appearance."
+          },
+          {
+            "id": "abrasions",
+            "category": "texture",
+            "severity": "low",
+            "target": "wear",
+            "message": "A few broad scuff marks read as deliberate brush marks rather than incidental wear."
+          }
+        ]
+      },
+      "history_length": 16,
+      "timestamp": "2026-09-08T21:33:43.522Z",
+      "tokens": null
+    }
+  ]
+}

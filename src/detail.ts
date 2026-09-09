@@ -1,5 +1,5 @@
 import { createCanvas, type Canvas, type Image } from './native.js';
-import { multiply, type ResolvedLayer } from './layout.js';
+import { multiply, type ResolvedLayer, type Matrix } from './layout.js';
 import { coordinateMatrix, inverse, worldScope } from './spatial.js';
 import { applyRasterOperation, pixelBounds } from './paint.js';
 import type { RasterRegion } from './schema.js';
@@ -11,11 +11,17 @@ export function renderDetail(
   node: ResolvedLayer,
   lookup: (id: string) => Canvas,
   images: Map<string, Image>,
+  canvasTransform?: Matrix,
 ): void {
   if (!region.operations.length && !region.source) return;
   const [x, y, w, h] = region.bounds,
     scale = region.scale;
-  const matrix = multiply(coordinateMatrix(region, node), [1, 0, 0, 1, x, y]);
+  const matrix = multiply(
+    region.space === 'layer'
+      ? coordinateMatrix(region, node)
+      : (canvasTransform ?? coordinateMatrix(region, node)),
+    [1, 0, 0, 1, x, y],
+  );
   const rw = Math.ceil(w * scale),
     rh = Math.ceil(h * scale);
   if (rw * rh > 16 * 1024 * 1024) throw new Error('Promoted region exceeds 16 megapixels');
@@ -26,7 +32,7 @@ export function renderDetail(
   ctx.drawImage(surface, 0, 0);
   ctx.resetTransform();
   if (region.source) {
-    ctx.clearRect(0, 0, rw, rh);
+    if (region.composite !== 'over') ctx.clearRect(0, 0, rw, rh);
     ctx.drawImage(images.get(region.source)!, 0, 0, rw, rh);
   }
   const localLookup = (id: string) => {
@@ -59,11 +65,7 @@ export function renderDetail(
   out.clip();
   out.clearRect(0, 0, w, h);
   out.drawImage(patch, 0, 0, w, h);
-  const bounds = pixelBounds(
-    worldScope(region.bounds, coordinateMatrix(region, node)),
-    surface.width,
-    surface.height,
-  );
+  const bounds = pixelBounds(worldScope([0, 0, w, h], matrix), surface.width, surface.height);
   if (bounds)
     surface.getContext('2d').putImageData(out.getImageData(...bounds), bounds[0], bounds[1]);
 }

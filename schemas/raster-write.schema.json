@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "target": {
+      "type": "string"
+    },
+    "region_id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+    },
+    "source": {
+      "type": "string"
+    },
+    "bounds": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/__schema0"
+        },
+        {
+          "$ref": "#/$defs/__schema0"
+        },
+        {
+          "$ref": "#/$defs/__schema1"
+        },
+        {
+          "$ref": "#/$defs/__schema1"
+        }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "space": {
+      "default": "canvas",
+      "type": "string",
+      "enum": ["canvas", "layer"]
+    },
+    "composite": {
+      "default": "replace",
+      "type": "string",
+      "enum": ["replace", "over"]
+    },
+    "expected_hash": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "target",
+    "region_id",
+    "source",
+    "bounds",
+    "space",
+    "composite",
+    "expected_hash",
+    "reason"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "number"
+    },
+    "__schema1": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 8192,
+      "$ref": "#/$defs/__schema0"
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "reason": "Fit the untouched generated photograph into an editable editorial composition, adding a left text column, restrained rules, and captions after inspecting the initial placement.",
+  "commands": [
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "eyebrow",
+        "type": "text",
+        "bounds": [80, 82, 510, 32],
+        "content": "ALPINE STUDIES   /   01",
+        "style": {
+          "font": "inter",
+          "size": 16,
+          "colour": "#4b605b",
+          "weight": "bold"
+        }
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "top-rule",
+        "type": "vector",
+        "bounds": [80, 139, 500, 1],
+        "shape": {
+          "type": "rectangle",
+          "fill": "#a7b2a5"
+        }
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "title",
+        "type": "text",
+        "bounds": [76, 260, 530, 230],
+        "content": "The quiet\nbetween.",
+        "style": {
+          "font": "display",
+          "size": 88,
+          "colour": "#223a39",
+          "line_height": 1.02
+        }
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "accent",
+        "type": "vector",
+        "bounds": [80, 536, 48, 4],
+        "shape": {
+          "type": "rectangle",
+          "fill": "#809484"
+        }
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "description",
+        "type": "text",
+        "bounds": [80, 578, 490, 126],
+        "content": "A pause at the waterline.\nWhere the mountains meet\nthe morning.",
+        "style": {
+          "font": "inter",
+          "size": 24,
+          "colour": "#4b605b",
+          "line_height": 1.45
+        }
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "footnote",
+        "type": "text",
+        "bounds": [80, 844, 500, 50],
+        "content": "STILL WATER. SLOW MORNINGS.",
+        "style": {
+          "font": "inter",
+          "size": 14,
+          "colour": "#4b605b",
+          "weight": "bold"
+        }
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "bottom-rule",
+        "type": "vector",
+        "bounds": [80, 920, 500, 1],
+        "shape": {
+          "type": "rectangle",
+          "fill": "#a7b2a5"
+        }
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "folio",
+        "type": "text",
+        "bounds": [80, 944, 500, 26],
+        "content": "FIELD NOTES                                       01",
+        "style": {
+          "font": "inter",
+          "size": 12,
+          "colour": "#4b605b"
+        }
+      }
+    },
+    {
+      "type": "addLayer",
+      "layer": {
+        "id": "photo-caption",
+        "type": "text",
+        "bounds": [680, 944, 840, 26],
+        "content": "MOUNTAIN / MIST / WATER",
+        "style": {
+          "font": "inter",
+          "size": 12,
+          "colour": "#4b605b"
+        }
+      }
+    },
+    {
+      "type": "setVerification",
+      "rules": [
+        {
+          "type": "required-role",
+          "role": "hero-image"
+        },
+        {
+          "type": "text-equals",
+          "target": "title",
+          "expected": "The quiet\nbetween."
+        },
+        {
+          "type": "safe-area",
+          "target": "title",
+          "minimum": 60
+        },
+        {
+          "type": "no-overlap",
+          "target": "title",
+          "other": "photograph"
+        },
+        {
+          "type": "no-overlap",
+          "target": "description",
+          "other": "photograph"
+        },
+        {
+          "type": "pixel-contrast",
+          "target": "description",
+          "minimum": 4.5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "manual-wheel",
+  "category": "illustration",
+  "prompt": "Create a close-up shot of a bicycle wheel, showing its tyre and machined rim in soft window light. Work as a digital artist using geometry, procedural materials, brushwork and compositing. No image-generation models, downloaded imagery, or source-photo pixels may be used.",
+  "max_edits": 8
+}

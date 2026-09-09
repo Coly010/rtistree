@@ -1,0 +1,36 @@
+{
+  "renderer": {
+    "name": "rtistree-skia",
+    "version": "0.3.0",
+    "backend": "@napi-rs/canvas@1.0.8",
+    "node": "v24.14.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "scene": {
+    "version": 1,
+    "hash": "sha256:76c317924142bdc851aa9f1871b34ec01ad348478aeda5dc2b19914a66070c1b"
+  },
+  "assets": {
+    "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+    "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+    "tyrePaint": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1",
+    "treadPaint": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182",
+    "rimPaint": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad",
+    "letteringPaint": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6",
+    "wearPaint": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7",
+    "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+  },
+  "fonts": {
+    "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+    "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+    "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+  },
+  "render": {
+    "width": 1200,
+    "height": 1600,
+    "colour_space": "srgb",
+    "quality": "final",
+    "png_hash": "sha256:c5c00b261bd21e231805c419fdc2ffa283156e79bc608c928918a5da31885268"
+  }
+}

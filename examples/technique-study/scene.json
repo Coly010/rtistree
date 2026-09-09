@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 1000,
+    "height": 720,
+    "colour_space": "srgb",
+    "background": "#00000000"
+  },
+  "metadata": {},
+  "assets": {
+    "study": {
+      "recipe": {
+        "source": "recipes/fbfd4a2a12f26349c7f36d0eff619bd5de02944c4349cdd2c458a799f60ac3a1/recipe.json",
+        "hash": "sha256:fbfd4a2a12f26349c7f36d0eff619bd5de02944c4349cdd2c458a799f60ac3a1"
+      },
+      "type": "image",
+      "source": "recipes/fbfd4a2a12f26349c7f36d0eff619bd5de02944c4349cdd2c458a799f60ac3a1/output.png",
+      "hash": "sha256:c2aeede066d85142f97198ddbcd1473c318efc00127e8f3f45c92b2a8db6a627"
+    }
+  },
+  "layers": [
+    {
+      "id": "study",
+      "type": "raster",
+      "visible": true,
+      "opacity": 1,
+      "blend_mode": "normal",
+      "z": 0,
+      "bounds": [0, 0, 1000, 720],
+      "anchor": "top-left",
+      "source": "study",
+      "fit": "contain",
+      "effects": [],
+      "operations": [],
+      "tiles": [],
+      "children": []
+    }
+  ],
+  "verification": {
+    "rules": []
+  }
+}

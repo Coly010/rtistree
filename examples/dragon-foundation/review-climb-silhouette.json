@@ -1,0 +1,24 @@
+{
+  "candidate": "climb-silhouette",
+  "scene_hash": "sha256:029aceb98670fa04d6ee92b530c0e54a6590373dfdeff5cd4184f28ee166320e",
+  "png_hash": "sha256:fdd5a25a4d9fae3fcb57645aa34e4bd049d00e6a8ba93c66e3208d72aa01cdcf",
+  "reviewer": "Codex, actual silhouette comparison at 464 px",
+  "method": "vision-agent",
+  "fidelity": 0.75,
+  "quality": 0.65,
+  "criteria": [
+    {
+      "id": "gesture",
+      "pass": true,
+      "evidence": "The swept wing and spine directions distinguish a climbing, banking or level-gliding gesture."
+    },
+    {
+      "id": "space",
+      "pass": true,
+      "evidence": "Head and horns are visibly separated above the far wing."
+    }
+  ],
+  "strengths": "Distinct pose and asymmetric wing projection; climbing candidate offers visible head/neck separation.",
+  "weaknesses": "The tail has an abrupt curl and the limb cluster still needs inspection in a value study.",
+  "issues": []
+}

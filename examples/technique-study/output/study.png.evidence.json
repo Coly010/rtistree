@@ -1,0 +1,29 @@
+{
+  "renderer": {
+    "name": "rtistree-skia",
+    "version": "0.4.0",
+    "backend": "@napi-rs/canvas@1.0.8",
+    "node": "v24.14.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "scene": {
+    "version": 1,
+    "hash": "sha256:bc1b2e9ea5a4cf217492aaa292f7945a80852721e484027ac1848c7d5c40188c"
+  },
+  "assets": {
+    "study": "sha256:c2aeede066d85142f97198ddbcd1473c318efc00127e8f3f45c92b2a8db6a627"
+  },
+  "fonts": {
+    "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+    "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+    "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+  },
+  "render": {
+    "width": 1000,
+    "height": 720,
+    "colour_space": "srgb",
+    "quality": "final",
+    "png_hash": "sha256:c2aeede066d85142f97198ddbcd1473c318efc00127e8f3f45c92b2a8db6a627"
+  }
+}

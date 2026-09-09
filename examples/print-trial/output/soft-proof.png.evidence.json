@@ -1,0 +1,88 @@
+{
+  "status": "pass",
+  "scene_hash": "sha256:6cf53cd3a44f5bd854a8551ef696b496585bd7968e25dbb623298b097e4af425",
+  "preset": {
+    "format": "pdf",
+    "colour_space": "cmyk",
+    "profile": "profiles/demo-cmyk.icc",
+    "profile_hash": "sha256:156e7c14f244cfc4ed83a755ca4803d80e15dd249b40fae82cb127d3902e15c7",
+    "intent": "perceptual",
+    "quality": 90,
+    "chroma_subsampling": "4:4:4",
+    "background": "#ffffff",
+    "crop_marks": true,
+    "minimum_ppi": 300,
+    "max_ink": 300,
+    "black": "k-only",
+    "mode": "hybrid"
+  },
+  "profile_hash": "sha256:156e7c14f244cfc4ed83a755ca4803d80e15dd249b40fae82cb127d3902e15c7",
+  "geometry": {
+    "trim_mm": [160, 100],
+    "bleed_mm": 3,
+    "safe_mm": 6,
+    "full_mm": [166, 106],
+    "pixels": [1961, 1252],
+    "trim_pt": [453.5433070866142, 283.46456692913387],
+    "bleed_pt": 8.503937007874017
+  },
+  "placements": [
+    {
+      "layer": "vase",
+      "source_pixels": [1254, 1254],
+      "placed_mm": [75, 75],
+      "effective_ppi": 424.68799999999993,
+      "resampled": false
+    }
+  ],
+  "fonts": [
+    {
+      "layer": "eyebrow",
+      "font": "inter",
+      "weight": "regular",
+      "hash": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "missing": []
+    },
+    {
+      "layer": "title",
+      "font": "display",
+      "weight": "regular",
+      "hash": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda",
+      "missing": []
+    },
+    {
+      "layer": "description",
+      "font": "inter",
+      "weight": "regular",
+      "hash": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "missing": []
+    },
+    {
+      "layer": "footer",
+      "font": "inter",
+      "weight": "regular",
+      "hash": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "missing": []
+    }
+  ],
+  "issues": [
+    {
+      "severity": "warning",
+      "layer": "footer",
+      "message": "Text box crosses the document safe margin"
+    }
+  ],
+  "conformance": "PDF/X conformance is not asserted",
+  "inspection": {
+    "format": "png",
+    "width": 1961,
+    "height": 1252,
+    "colour_space": "srgb",
+    "channels": 3,
+    "depth": "uchar",
+    "has_alpha": false,
+    "profile_hash": "sha256:c56e1685d888f5edb92fe07f2750f387f8fe8e91b32ff8fb0b56bfbbb9458353"
+  },
+  "output_hash": "sha256:2b094bfa35bdd7122de44d9901705c7fb1d725b4aba084387303e66022df3314",
+  "method": "ICC perceptual sRGB -> project CMYK -> sRGB; no paper-white or monitor simulation"
+}

@@ -1,0 +1,3710 @@
+[
+  {
+    "sequence": 1,
+    "kind": "apply",
+    "reason": "Paint the background from mathematical geometry and brushwork; no image inputs",
+    "timestamp": "2026-09-08T21:19:03.974Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "after_hash": "sha256:e90ab01f148bb55e3d49f4ea43161129a9228ee7369ba9a3bd00d6f227eb231e",
+    "previous_hash": null,
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "backgroundPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "baseline": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {},
+      "layers": [],
+      "verification": {
+        "rules": []
+      }
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:bf68e7b473c19e6303e43a6e0e4778aa539623d7d367ce47195e8c665d178c87"
+  },
+  {
+    "sequence": 2,
+    "kind": "apply",
+    "reason": "Paint the spokes from mathematical geometry and brushwork; no image inputs",
+    "timestamp": "2026-09-08T21:19:04.146Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:e90ab01f148bb55e3d49f4ea43161129a9228ee7369ba9a3bd00d6f227eb231e",
+    "after_hash": "sha256:2c93ff98f62b5f05c0e3fcda091113beac09ce57954c15355aec851275b65d99",
+    "previous_hash": "sha256:bf68e7b473c19e6303e43a6e0e4778aa539623d7d367ce47195e8c665d178c87",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "spokesPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:72cd4a64ea0b09e499c47924a4e72091f40b6e6de4cd7a04a34395ebc0041287"
+  },
+  {
+    "sequence": 3,
+    "kind": "apply",
+    "reason": "Paint the tyre from mathematical geometry and brushwork; no image inputs",
+    "timestamp": "2026-09-08T21:19:04.895Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:2c93ff98f62b5f05c0e3fcda091113beac09ce57954c15355aec851275b65d99",
+    "after_hash": "sha256:6217f585f9672e05bb17a0c67542baa5ed254f19fd7fd5af5fc37a4a7015ce3d",
+    "previous_hash": "sha256:72cd4a64ea0b09e499c47924a4e72091f40b6e6de4cd7a04a34395ebc0041287",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "tyrePaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/recipe.json",
+            "hash": "sha256:0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1"
+          },
+          "type": "image",
+          "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/output.png",
+          "hash": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1"
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/recipe.json",
+            "hash": "sha256:0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1"
+          },
+          "type": "image",
+          "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/output.png",
+          "hash": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:cef45fb8db06f455ba72e01bc40f51e7e970db56ef2d33915cb6140d14c978b7"
+  },
+  {
+    "sequence": 4,
+    "kind": "apply",
+    "reason": "Paint the tread from mathematical geometry and brushwork; no image inputs",
+    "timestamp": "2026-09-08T21:19:05.097Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:6217f585f9672e05bb17a0c67542baa5ed254f19fd7fd5af5fc37a4a7015ce3d",
+    "after_hash": "sha256:43547098b8112a60acec9f1d91b591c78364173a36139642d505bbc5ed3045d4",
+    "previous_hash": "sha256:cef45fb8db06f455ba72e01bc40f51e7e970db56ef2d33915cb6140d14c978b7",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "treadPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/recipe.json",
+            "hash": "sha256:9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487"
+          },
+          "type": "image",
+          "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/output.png",
+          "hash": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182"
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1",
+      "treadPaint": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/recipe.json",
+            "hash": "sha256:0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1"
+          },
+          "type": "image",
+          "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/output.png",
+          "hash": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/recipe.json",
+            "hash": "sha256:9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487"
+          },
+          "type": "image",
+          "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/output.png",
+          "hash": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:44255139c766f45d7e59488a3c25bb2937a5b3c6edb1bbef4f0c4953d298c9c9"
+  },
+  {
+    "sequence": 5,
+    "kind": "apply",
+    "reason": "Paint the rim from mathematical geometry and brushwork; no image inputs",
+    "timestamp": "2026-09-08T21:19:05.744Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:43547098b8112a60acec9f1d91b591c78364173a36139642d505bbc5ed3045d4",
+    "after_hash": "sha256:dfd91f621cf0a6283e2fd384efa1b9987f4677466ab617fd5e06acb44546ece7",
+    "previous_hash": "sha256:44255139c766f45d7e59488a3c25bb2937a5b3c6edb1bbef4f0c4953d298c9c9",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "rimPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/recipe.json",
+            "hash": "sha256:d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868"
+          },
+          "type": "image",
+          "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/output.png",
+          "hash": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad"
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1",
+      "treadPaint": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182",
+      "rimPaint": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/recipe.json",
+            "hash": "sha256:0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1"
+          },
+          "type": "image",
+          "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/output.png",
+          "hash": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/recipe.json",
+            "hash": "sha256:9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487"
+          },
+          "type": "image",
+          "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/output.png",
+          "hash": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/recipe.json",
+            "hash": "sha256:d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868"
+          },
+          "type": "image",
+          "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/output.png",
+          "hash": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:2d55e4f4cedcd59d1466ba16dc28610bb16228ec7dd51047c816c3171e8b8e09"
+  },
+  {
+    "sequence": 6,
+    "kind": "apply",
+    "reason": "Paint the lettering from mathematical geometry and brushwork; no image inputs",
+    "timestamp": "2026-09-08T21:19:05.978Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:dfd91f621cf0a6283e2fd384efa1b9987f4677466ab617fd5e06acb44546ece7",
+    "after_hash": "sha256:a0b1ca792a40a361fe635f7081443fb3005e03253d42f81b86f6ce28f75bd0dc",
+    "previous_hash": "sha256:2d55e4f4cedcd59d1466ba16dc28610bb16228ec7dd51047c816c3171e8b8e09",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "letteringPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/recipe.json",
+            "hash": "sha256:a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0"
+          },
+          "type": "image",
+          "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/output.png",
+          "hash": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6"
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1",
+      "treadPaint": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182",
+      "rimPaint": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad",
+      "letteringPaint": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/recipe.json",
+            "hash": "sha256:0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1"
+          },
+          "type": "image",
+          "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/output.png",
+          "hash": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/recipe.json",
+            "hash": "sha256:9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487"
+          },
+          "type": "image",
+          "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/output.png",
+          "hash": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/recipe.json",
+            "hash": "sha256:d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868"
+          },
+          "type": "image",
+          "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/output.png",
+          "hash": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/recipe.json",
+            "hash": "sha256:a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0"
+          },
+          "type": "image",
+          "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/output.png",
+          "hash": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:8e4ab9c8df7b1c557ad6dbc1a6b2cb4d18ca82192319b7cae1c1ef364fb71573"
+  },
+  {
+    "sequence": 7,
+    "kind": "apply",
+    "reason": "Paint the wear from mathematical geometry and brushwork; no image inputs",
+    "timestamp": "2026-09-08T21:19:06.201Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:a0b1ca792a40a361fe635f7081443fb3005e03253d42f81b86f6ce28f75bd0dc",
+    "after_hash": "sha256:4d22084729fe261820205a1e89549b8ed24a0be04173ee431a6a76133eb4aed8",
+    "previous_hash": "sha256:8e4ab9c8df7b1c557ad6dbc1a6b2cb4d18ca82192319b7cae1c1ef364fb71573",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "wearPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/recipe.json",
+            "hash": "sha256:606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a"
+          },
+          "type": "image",
+          "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/output.png",
+          "hash": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7"
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1",
+      "treadPaint": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182",
+      "rimPaint": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad",
+      "letteringPaint": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6",
+      "wearPaint": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/recipe.json",
+            "hash": "sha256:0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1"
+          },
+          "type": "image",
+          "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/output.png",
+          "hash": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/recipe.json",
+            "hash": "sha256:9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487"
+          },
+          "type": "image",
+          "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/output.png",
+          "hash": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/recipe.json",
+            "hash": "sha256:d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868"
+          },
+          "type": "image",
+          "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/output.png",
+          "hash": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/recipe.json",
+            "hash": "sha256:a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0"
+          },
+          "type": "image",
+          "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/output.png",
+          "hash": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/recipe.json",
+            "hash": "sha256:606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a"
+          },
+          "type": "image",
+          "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/output.png",
+          "hash": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:cb882165cf8b35e9a5bc0817e0d1c96303ec34f86afb81e0ce90b9bdbc945897"
+  },
+  {
+    "sequence": 8,
+    "kind": "apply",
+    "reason": "Paint the valve from mathematical geometry and brushwork; no image inputs",
+    "timestamp": "2026-09-08T21:19:06.426Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:4d22084729fe261820205a1e89549b8ed24a0be04173ee431a6a76133eb4aed8",
+    "after_hash": "sha256:76c317924142bdc851aa9f1871b34ec01ad348478aeda5dc2b19914a66070c1b",
+    "previous_hash": "sha256:cb882165cf8b35e9a5bc0817e0d1c96303ec34f86afb81e0ce90b9bdbc945897",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "valvePaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      {
+        "type": "addLayer",
+        "layer": {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1",
+      "treadPaint": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182",
+      "rimPaint": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad",
+      "letteringPaint": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6",
+      "wearPaint": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/recipe.json",
+            "hash": "sha256:0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1"
+          },
+          "type": "image",
+          "source": "recipes/0dafa878c1298c7560f69af426c5381071087053124fe8ff2b318a1bea5922b1/output.png",
+          "hash": "sha256:4e2b7c9fe42ac9c5e5ba151de2b62d46976603d23ecb1c13f7449372f10699c1"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/recipe.json",
+            "hash": "sha256:9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487"
+          },
+          "type": "image",
+          "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/output.png",
+          "hash": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/recipe.json",
+            "hash": "sha256:d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868"
+          },
+          "type": "image",
+          "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/output.png",
+          "hash": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/recipe.json",
+            "hash": "sha256:a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0"
+          },
+          "type": "image",
+          "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/output.png",
+          "hash": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/recipe.json",
+            "hash": "sha256:606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a"
+          },
+          "type": "image",
+          "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/output.png",
+          "hash": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:46bcab39fb4c7ef830039fc5d1f8bb72f134d854171eabb670efe211e94180dc"
+  },
+  {
+    "sequence": 9,
+    "kind": "apply",
+    "reason": "Refine tyre following visual critique: bevelled tread, rubber variation, less regular machining and hand-painted scuffs",
+    "timestamp": "2026-09-08T21:22:25.919Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:76c317924142bdc851aa9f1871b34ec01ad348478aeda5dc2b19914a66070c1b",
+    "after_hash": "sha256:070a41161ffc686bd2d9057ec080c3261ad51ec9bc0d081c6ea000b340e60802",
+    "previous_hash": "sha256:46bcab39fb4c7ef830039fc5d1f8bb72f134d854171eabb670efe211e94180dc",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "tyrePaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/recipe.json",
+            "hash": "sha256:dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c"
+          },
+          "type": "image",
+          "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/output.png",
+          "hash": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78"
+        }
+      },
+      {
+        "type": "setSource",
+        "target": "tyre",
+        "source": "tyrePaint"
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78",
+      "treadPaint": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182",
+      "rimPaint": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad",
+      "letteringPaint": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6",
+      "wearPaint": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/recipe.json",
+            "hash": "sha256:dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c"
+          },
+          "type": "image",
+          "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/output.png",
+          "hash": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/recipe.json",
+            "hash": "sha256:9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487"
+          },
+          "type": "image",
+          "source": "recipes/9d7ea9d95120f09fe3daa4deaade353cd56be614cfcfb39f276f907be5f17487/output.png",
+          "hash": "sha256:76509cf1f403bc9fb6cea6182890c9ad96d2f41ca859a9db6df593213e5c8182"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/recipe.json",
+            "hash": "sha256:d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868"
+          },
+          "type": "image",
+          "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/output.png",
+          "hash": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/recipe.json",
+            "hash": "sha256:a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0"
+          },
+          "type": "image",
+          "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/output.png",
+          "hash": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/recipe.json",
+            "hash": "sha256:606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a"
+          },
+          "type": "image",
+          "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/output.png",
+          "hash": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:2291dc9da3b75c1599d27acad78a818ae464281c0314e6656ab0ea636b3c1c23"
+  },
+  {
+    "sequence": 10,
+    "kind": "apply",
+    "reason": "Refine tread following visual critique: bevelled tread, rubber variation, less regular machining and hand-painted scuffs",
+    "timestamp": "2026-09-08T21:22:26.184Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:070a41161ffc686bd2d9057ec080c3261ad51ec9bc0d081c6ea000b340e60802",
+    "after_hash": "sha256:4ba4f75f5a488f36927c1df1805aca5c5ec0116831025740334ca7f21362cd21",
+    "previous_hash": "sha256:2291dc9da3b75c1599d27acad78a818ae464281c0314e6656ab0ea636b3c1c23",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "treadPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/recipe.json",
+            "hash": "sha256:cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa"
+          },
+          "type": "image",
+          "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/output.png",
+          "hash": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc"
+        }
+      },
+      {
+        "type": "setSource",
+        "target": "tread",
+        "source": "treadPaint"
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78",
+      "treadPaint": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc",
+      "rimPaint": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad",
+      "letteringPaint": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6",
+      "wearPaint": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/recipe.json",
+            "hash": "sha256:dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c"
+          },
+          "type": "image",
+          "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/output.png",
+          "hash": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/recipe.json",
+            "hash": "sha256:cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa"
+          },
+          "type": "image",
+          "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/output.png",
+          "hash": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/recipe.json",
+            "hash": "sha256:d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868"
+          },
+          "type": "image",
+          "source": "recipes/d73e78ac3e1266523f5157f0f89aaf0f6dcc01780a61a8575d809045874c8868/output.png",
+          "hash": "sha256:ff6bdb2d91b2af50465377266cf8237119f6039c3f805941e83451f9b2f1a3ad"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/recipe.json",
+            "hash": "sha256:a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0"
+          },
+          "type": "image",
+          "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/output.png",
+          "hash": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/recipe.json",
+            "hash": "sha256:606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a"
+          },
+          "type": "image",
+          "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/output.png",
+          "hash": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:e3c5d9f9727f85fc0bc89879fd60e6f6f6ec5d05150389bf70a3c539dc40304c"
+  },
+  {
+    "sequence": 11,
+    "kind": "apply",
+    "reason": "Refine rim following visual critique: bevelled tread, rubber variation, less regular machining and hand-painted scuffs",
+    "timestamp": "2026-09-08T21:22:26.870Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:4ba4f75f5a488f36927c1df1805aca5c5ec0116831025740334ca7f21362cd21",
+    "after_hash": "sha256:636c372a23d1326dfebb17a3ddd545c364d4d7fae81459798e94466f5893ce56",
+    "previous_hash": "sha256:e3c5d9f9727f85fc0bc89879fd60e6f6f6ec5d05150389bf70a3c539dc40304c",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "rimPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/recipe.json",
+            "hash": "sha256:ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1"
+          },
+          "type": "image",
+          "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/output.png",
+          "hash": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3"
+        }
+      },
+      {
+        "type": "setSource",
+        "target": "rim",
+        "source": "rimPaint"
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78",
+      "treadPaint": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc",
+      "rimPaint": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3",
+      "letteringPaint": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6",
+      "wearPaint": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/recipe.json",
+            "hash": "sha256:dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c"
+          },
+          "type": "image",
+          "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/output.png",
+          "hash": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/recipe.json",
+            "hash": "sha256:cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa"
+          },
+          "type": "image",
+          "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/output.png",
+          "hash": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/recipe.json",
+            "hash": "sha256:ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1"
+          },
+          "type": "image",
+          "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/output.png",
+          "hash": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/recipe.json",
+            "hash": "sha256:a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0"
+          },
+          "type": "image",
+          "source": "recipes/a9b05edb4bc10dd81943658033e4fdce2042676311f361c3d773ccf120a5fbe0/output.png",
+          "hash": "sha256:19a96d079fadff070524e57d50cd915bc1c71c59bb60b4174f005a836eb55af6"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/recipe.json",
+            "hash": "sha256:606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a"
+          },
+          "type": "image",
+          "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/output.png",
+          "hash": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:10a70387ed770c50549e6415f0915045e4003f22c6a98fff45302d5b40b33632"
+  },
+  {
+    "sequence": 12,
+    "kind": "apply",
+    "reason": "Refine lettering following visual critique: bevelled tread, rubber variation, less regular machining and hand-painted scuffs",
+    "timestamp": "2026-09-08T21:22:27.101Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:636c372a23d1326dfebb17a3ddd545c364d4d7fae81459798e94466f5893ce56",
+    "after_hash": "sha256:f354f7465c1359db92c9beca7c2fc14d88afb125f6d407b2e21fe152f814f4d3",
+    "previous_hash": "sha256:10a70387ed770c50549e6415f0915045e4003f22c6a98fff45302d5b40b33632",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "letteringPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/recipe.json",
+            "hash": "sha256:524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48"
+          },
+          "type": "image",
+          "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/output.png",
+          "hash": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f"
+        }
+      },
+      {
+        "type": "setSource",
+        "target": "lettering",
+        "source": "letteringPaint"
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78",
+      "treadPaint": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc",
+      "rimPaint": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3",
+      "letteringPaint": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f",
+      "wearPaint": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/recipe.json",
+            "hash": "sha256:dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c"
+          },
+          "type": "image",
+          "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/output.png",
+          "hash": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/recipe.json",
+            "hash": "sha256:cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa"
+          },
+          "type": "image",
+          "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/output.png",
+          "hash": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/recipe.json",
+            "hash": "sha256:ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1"
+          },
+          "type": "image",
+          "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/output.png",
+          "hash": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/recipe.json",
+            "hash": "sha256:524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48"
+          },
+          "type": "image",
+          "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/output.png",
+          "hash": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/recipe.json",
+            "hash": "sha256:606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a"
+          },
+          "type": "image",
+          "source": "recipes/606184e7a68b2f9d005593a0a0f75babde39c2ce31ddf9da2a67fc5d58159c8a/output.png",
+          "hash": "sha256:d22490c0cd00f7e74b18305e38484ec7b07aa3bd6ee92072eee91982622d4dc7"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:a0135782ff99231589f4a60ee65bed9812ac379a2c7ff03163fd9177bd14cf73"
+  },
+  {
+    "sequence": 13,
+    "kind": "apply",
+    "reason": "Paint pressure-tapered abrasions and scuffs following the visual critique",
+    "timestamp": "2026-09-08T21:25:36.149Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:f354f7465c1359db92c9beca7c2fc14d88afb125f6d407b2e21fe152f814f4d3",
+    "after_hash": "sha256:23805e5ff7430018bdc82297cba285882779ceede22314342cde822ea8791a20",
+    "previous_hash": "sha256:a0135782ff99231589f4a60ee65bed9812ac379a2c7ff03163fd9177bd14cf73",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "wearPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb/recipe.json",
+            "hash": "sha256:9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb"
+          },
+          "type": "image",
+          "source": "recipes/9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb/output.png",
+          "hash": "sha256:043dd7e9a80b25aab11b18b31e9327d011c8f20a3d8587af70ab3b92ea91399b"
+        }
+      },
+      {
+        "type": "setSource",
+        "target": "wear",
+        "source": "wearPaint"
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78",
+      "treadPaint": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc",
+      "rimPaint": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3",
+      "letteringPaint": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f",
+      "wearPaint": "sha256:043dd7e9a80b25aab11b18b31e9327d011c8f20a3d8587af70ab3b92ea91399b",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/recipe.json",
+            "hash": "sha256:dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c"
+          },
+          "type": "image",
+          "source": "recipes/dccb88c55b50bee96db5734704d8df7747185cdcf00b98c885e8454f2fcc6e6c/output.png",
+          "hash": "sha256:cec8749f77ab8355da655465ddf956e787db38cfa5174af31e13ed5c11464b78"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/recipe.json",
+            "hash": "sha256:cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa"
+          },
+          "type": "image",
+          "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/output.png",
+          "hash": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/recipe.json",
+            "hash": "sha256:ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1"
+          },
+          "type": "image",
+          "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/output.png",
+          "hash": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/recipe.json",
+            "hash": "sha256:524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48"
+          },
+          "type": "image",
+          "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/output.png",
+          "hash": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb/recipe.json",
+            "hash": "sha256:9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb"
+          },
+          "type": "image",
+          "source": "recipes/9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb/output.png",
+          "hash": "sha256:043dd7e9a80b25aab11b18b31e9327d011c8f20a3d8587af70ab3b92ea91399b"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:df3305196821e876de4d8dcc41d888ba17dc5cea6d885d604e3873a2d261b0b1"
+  },
+  {
+    "sequence": 14,
+    "kind": "apply",
+    "reason": "Second visual review: replace flat tread shading with height-field lighting, remove camouflage-like texture and make abrasions sparse",
+    "timestamp": "2026-09-08T21:29:25.867Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:23805e5ff7430018bdc82297cba285882779ceede22314342cde822ea8791a20",
+    "after_hash": "sha256:20c39e02b345e59a8e56ba081c1ccb2c80fec1b99bdffb801d97b6f7b0f9bd12",
+    "previous_hash": "sha256:df3305196821e876de4d8dcc41d888ba17dc5cea6d885d604e3873a2d261b0b1",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "tyrePaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8/recipe.json",
+            "hash": "sha256:941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8"
+          },
+          "type": "image",
+          "source": "recipes/941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8/output.png",
+          "hash": "sha256:43abd6b174c848f1b5137c18e24cebf7281941056fb13177f5f0ea3fce82117a"
+        }
+      },
+      {
+        "type": "setSource",
+        "target": "tyre",
+        "source": "tyrePaint"
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:43abd6b174c848f1b5137c18e24cebf7281941056fb13177f5f0ea3fce82117a",
+      "treadPaint": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc",
+      "rimPaint": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3",
+      "letteringPaint": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f",
+      "wearPaint": "sha256:043dd7e9a80b25aab11b18b31e9327d011c8f20a3d8587af70ab3b92ea91399b",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8/recipe.json",
+            "hash": "sha256:941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8"
+          },
+          "type": "image",
+          "source": "recipes/941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8/output.png",
+          "hash": "sha256:43abd6b174c848f1b5137c18e24cebf7281941056fb13177f5f0ea3fce82117a"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/recipe.json",
+            "hash": "sha256:cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa"
+          },
+          "type": "image",
+          "source": "recipes/cd89eba9c14883a3b5a6f9b77cf40548faef1eda79e9afc00c50bf49c45f8faa/output.png",
+          "hash": "sha256:34da96a4f923dda3e2d4efc754ea6f8afb79ce01df32a921f56fa54e4702b4dc"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/recipe.json",
+            "hash": "sha256:ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1"
+          },
+          "type": "image",
+          "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/output.png",
+          "hash": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/recipe.json",
+            "hash": "sha256:524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48"
+          },
+          "type": "image",
+          "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/output.png",
+          "hash": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb/recipe.json",
+            "hash": "sha256:9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb"
+          },
+          "type": "image",
+          "source": "recipes/9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb/output.png",
+          "hash": "sha256:043dd7e9a80b25aab11b18b31e9327d011c8f20a3d8587af70ab3b92ea91399b"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:e5a948c0a9fce7e9f0f185fc3db96804f879fc6a7df989c591726b46e5274ab3"
+  },
+  {
+    "sequence": 15,
+    "kind": "apply",
+    "reason": "Second visual review: replace flat tread shading with height-field lighting, remove camouflage-like texture and make abrasions sparse",
+    "timestamp": "2026-09-08T21:29:27.770Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:20c39e02b345e59a8e56ba081c1ccb2c80fec1b99bdffb801d97b6f7b0f9bd12",
+    "after_hash": "sha256:f54257afb30c5b1b8da540ef974a777759de42304cbcb8626aaa8e2aef03d78a",
+    "previous_hash": "sha256:e5a948c0a9fce7e9f0f185fc3db96804f879fc6a7df989c591726b46e5274ab3",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "treadPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c/recipe.json",
+            "hash": "sha256:4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c"
+          },
+          "type": "image",
+          "source": "recipes/4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c/output.png",
+          "hash": "sha256:1c9d08c9d06e73354b5ff713cdddf283d607d4c4b0692883e798aa4c10028d57"
+        }
+      },
+      {
+        "type": "setSource",
+        "target": "tread",
+        "source": "treadPaint"
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:43abd6b174c848f1b5137c18e24cebf7281941056fb13177f5f0ea3fce82117a",
+      "treadPaint": "sha256:1c9d08c9d06e73354b5ff713cdddf283d607d4c4b0692883e798aa4c10028d57",
+      "rimPaint": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3",
+      "letteringPaint": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f",
+      "wearPaint": "sha256:043dd7e9a80b25aab11b18b31e9327d011c8f20a3d8587af70ab3b92ea91399b",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8/recipe.json",
+            "hash": "sha256:941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8"
+          },
+          "type": "image",
+          "source": "recipes/941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8/output.png",
+          "hash": "sha256:43abd6b174c848f1b5137c18e24cebf7281941056fb13177f5f0ea3fce82117a"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c/recipe.json",
+            "hash": "sha256:4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c"
+          },
+          "type": "image",
+          "source": "recipes/4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c/output.png",
+          "hash": "sha256:1c9d08c9d06e73354b5ff713cdddf283d607d4c4b0692883e798aa4c10028d57"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/recipe.json",
+            "hash": "sha256:ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1"
+          },
+          "type": "image",
+          "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/output.png",
+          "hash": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/recipe.json",
+            "hash": "sha256:524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48"
+          },
+          "type": "image",
+          "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/output.png",
+          "hash": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb/recipe.json",
+            "hash": "sha256:9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb"
+          },
+          "type": "image",
+          "source": "recipes/9ddf6bda04bd714c096115b251d03ab6e030348ed7d47ab6126dfa76233ffceb/output.png",
+          "hash": "sha256:043dd7e9a80b25aab11b18b31e9327d011c8f20a3d8587af70ab3b92ea91399b"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:001a46271187d1e77f2ab929f8bddffa492909db779ecd37b266ddf5a67c9da1"
+  },
+  {
+    "sequence": 16,
+    "kind": "apply",
+    "reason": "Second visual review: replace flat tread shading with height-field lighting, remove camouflage-like texture and make abrasions sparse",
+    "timestamp": "2026-09-08T21:29:28.057Z",
+    "source_hash": "sha256:45c51c0aa2a127a544223ebb09ebe438369f552df95e0a275a04eaf80e4f76d2",
+    "before_hash": "sha256:f54257afb30c5b1b8da540ef974a777759de42304cbcb8626aaa8e2aef03d78a",
+    "after_hash": "sha256:a057f01f6abfca78ede3228ce9c41b8c742fa715750f5f6f6266dd985df3b5fb",
+    "previous_hash": "sha256:001a46271187d1e77f2ab929f8bddffa492909db779ecd37b266ddf5a67c9da1",
+    "commands": [
+      {
+        "type": "registerAsset",
+        "id": "wearPaint",
+        "asset": {
+          "recipe": {
+            "source": "recipes/cbeb467f493dbc263d80b843778150db674d3d3f83135c06134079a7afdab2f8/recipe.json",
+            "hash": "sha256:cbeb467f493dbc263d80b843778150db674d3d3f83135c06134079a7afdab2f8"
+          },
+          "type": "image",
+          "source": "recipes/cbeb467f493dbc263d80b843778150db674d3d3f83135c06134079a7afdab2f8/output.png",
+          "hash": "sha256:0daa24fc7d44e6d2ccdb5e74e5557f948f54bcc37354b1e9e8b0f9e4c3aeb3e3"
+        }
+      },
+      {
+        "type": "setSource",
+        "target": "wear",
+        "source": "wearPaint"
+      }
+    ],
+    "asset_hashes": {
+      "backgroundPaint": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a",
+      "spokesPaint": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce",
+      "tyrePaint": "sha256:43abd6b174c848f1b5137c18e24cebf7281941056fb13177f5f0ea3fce82117a",
+      "treadPaint": "sha256:1c9d08c9d06e73354b5ff713cdddf283d607d4c4b0692883e798aa4c10028d57",
+      "rimPaint": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3",
+      "letteringPaint": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f",
+      "wearPaint": "sha256:0daa24fc7d44e6d2ccdb5e74e5557f948f54bcc37354b1e9e8b0f9e4c3aeb3e3",
+      "valvePaint": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+    },
+    "font_hashes": {
+      "inter": "sha256:e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45",
+      "inter-bold": "sha256:7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a",
+      "display": "sha256:1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+    },
+    "after": {
+      "version": 1,
+      "canvas": {
+        "width": 1200,
+        "height": 1600,
+        "colour_space": "srgb",
+        "background": "#00000000"
+      },
+      "metadata": {
+        "brief": "Close-up shot of a bicycle wheel, its tyre and machined rim, in soft window light.",
+        "image_generation": "forbidden",
+        "image_inputs": [],
+        "method": "Hand-authored 2D raster programs and digital painting"
+      },
+      "assets": {
+        "backgroundPaint": {
+          "recipe": {
+            "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/recipe.json",
+            "hash": "sha256:b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5"
+          },
+          "type": "image",
+          "source": "recipes/b9bca3d72e7bc17b51013f7742e4695793077d6dd34a2385ee700fb93fda16a5/output.png",
+          "hash": "sha256:ace525d0089aff6b9f390fe4eda3c4888935fddee11bd16da6587a4ed1fb505a"
+        },
+        "spokesPaint": {
+          "recipe": {
+            "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/recipe.json",
+            "hash": "sha256:105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892"
+          },
+          "type": "image",
+          "source": "recipes/105b8029aea22ea66fa5cf57af4ecaacdfbdeef74e471f3fade242c5dc118892/output.png",
+          "hash": "sha256:044b458a0f47d65edbda5e68702c3f50ed27df404c86ee3b990e52cd6884f9ce"
+        },
+        "tyrePaint": {
+          "recipe": {
+            "source": "recipes/941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8/recipe.json",
+            "hash": "sha256:941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8"
+          },
+          "type": "image",
+          "source": "recipes/941b66fc2ee2ae29705b6106956af8bb3aaffd1da318408327545c9fb3de95b8/output.png",
+          "hash": "sha256:43abd6b174c848f1b5137c18e24cebf7281941056fb13177f5f0ea3fce82117a"
+        },
+        "treadPaint": {
+          "recipe": {
+            "source": "recipes/4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c/recipe.json",
+            "hash": "sha256:4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c"
+          },
+          "type": "image",
+          "source": "recipes/4904acf310ef74cbe7fd00c69ed5e03bbe5711a2bd4a32ce96aa93aa7b79606c/output.png",
+          "hash": "sha256:1c9d08c9d06e73354b5ff713cdddf283d607d4c4b0692883e798aa4c10028d57"
+        },
+        "rimPaint": {
+          "recipe": {
+            "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/recipe.json",
+            "hash": "sha256:ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1"
+          },
+          "type": "image",
+          "source": "recipes/ef58914e64442b80603657b485a4aa7a9cc4f5fe775f6cd182d6766a745615e1/output.png",
+          "hash": "sha256:be598f06184ccbf183dbfe441b3810e3435ea562b30801e0320753ebcefb1fa3"
+        },
+        "letteringPaint": {
+          "recipe": {
+            "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/recipe.json",
+            "hash": "sha256:524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48"
+          },
+          "type": "image",
+          "source": "recipes/524e671c2b8fd07effa19544ab5f079c52da01cd81e17bafb7e12ac17a204b48/output.png",
+          "hash": "sha256:49d081e3a120a8e93538baeb048bf49a71990377cb7587ee61af15986eecbe5f"
+        },
+        "wearPaint": {
+          "recipe": {
+            "source": "recipes/cbeb467f493dbc263d80b843778150db674d3d3f83135c06134079a7afdab2f8/recipe.json",
+            "hash": "sha256:cbeb467f493dbc263d80b843778150db674d3d3f83135c06134079a7afdab2f8"
+          },
+          "type": "image",
+          "source": "recipes/cbeb467f493dbc263d80b843778150db674d3d3f83135c06134079a7afdab2f8/output.png",
+          "hash": "sha256:0daa24fc7d44e6d2ccdb5e74e5557f948f54bcc37354b1e9e8b0f9e4c3aeb3e3"
+        },
+        "valvePaint": {
+          "recipe": {
+            "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/recipe.json",
+            "hash": "sha256:db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65"
+          },
+          "type": "image",
+          "source": "recipes/db27bfb945f09d17109fe5ed896d01b80da0e37efa4f9dd5cc241af9fddebe65/output.png",
+          "hash": "sha256:0502c61cd779e839b96483a32906366a736cbad25efb424006ae29fca804fc98"
+        }
+      },
+      "layers": [
+        {
+          "id": "background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "backgroundPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "spokes",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "spokesPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tyre",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "tyrePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "tread",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "treadPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "rim",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "rimPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "lettering",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "letteringPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "wear",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "wearPaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        },
+        {
+          "id": "valve",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "z": 0,
+          "bounds": [0, 0, 1200, 1600],
+          "anchor": "top-left",
+          "source": "valvePaint",
+          "fit": "contain",
+          "effects": [],
+          "operations": [],
+          "tiles": [],
+          "children": []
+        }
+      ],
+      "verification": {
+        "rules": []
+      }
+    },
+    "locality": [],
+    "hash": "sha256:5d2b09cde3b1dde098006099d5d8b4a498e0cf69ad9224ab7bcd45fa812d5854"
+  }
+]

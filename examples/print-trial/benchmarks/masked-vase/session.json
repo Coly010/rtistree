@@ -1,0 +1,67 @@
+{
+  "brief": {
+    "id": "masked-vase",
+    "category": "poster",
+    "prompt": "Extract the generated terracotta vase and leafy sprig from its neutral background. Integrate it into an editable still-life design with a believable contact shadow and matching colours, preserve the delicate leaves, adapt it to landscape and portrait, then produce a 160 by 100 mm CMYK print PDF with 3 mm bleed.",
+    "max_edits": 5
+  },
+  "agent": "Codex using imagegen then Rtistree",
+  "method": "interactive-agent",
+  "checkpoints": [
+    {
+      "label": "before",
+      "scene_hash": "sha256:2ec3b0120e4ee4114ca71130b325f4158754b99c16d6afb9cbdb5715c0d0b47b",
+      "png_hash": "sha256:bc378ea614ae7659ddc97292bc10295b86b0a5da64a3dbb572e0de2b005bcb21",
+      "png": "/Users/colum/dev/personal/rtistree/examples/print-trial/benchmarks/masked-vase/before.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:2ec3b0120e4ee4114ca71130b325f4158754b99c16d6afb9cbdb5715c0d0b47b",
+        "png_hash": "sha256:bc378ea614ae7659ddc97292bc10295b86b0a5da64a3dbb572e0de2b005bcb21",
+        "reviewer": "Codex same-agent inspection",
+        "method": "vision-agent",
+        "summary": "The type hierarchy works, but the pale grey square visibly separates the photograph from the warm page. The vase floats without a surface shadow. Extract the silhouette and add a restrained contact shadow while preserving the leaf edges.",
+        "score": 0.53,
+        "issues": [
+          {
+            "id": "background",
+            "category": "coherence",
+            "severity": "high",
+            "target": "vase",
+            "message": "The photo background is visible as a rectangular block."
+          },
+          {
+            "id": "grounding",
+            "category": "lighting",
+            "severity": "medium",
+            "target": "vase",
+            "message": "The vase needs a subtle contact shadow to sit in the scene."
+          }
+        ]
+      },
+      "history_length": 0,
+      "timestamp": "2026-09-08T20:22:37.295Z",
+      "tokens": null
+    },
+    {
+      "label": "after",
+      "scene_hash": "sha256:6cf53cd3a44f5bd854a8551ef696b496585bd7968e25dbb623298b097e4af425",
+      "png_hash": "sha256:b85eb6931af0cb6585bfd9befe7b83719d1cecbffefdcda8e57fe736d2f2078e",
+      "png": "/Users/colum/dev/personal/rtistree/examples/print-trial/benchmarks/masked-vase/after.png",
+      "verification_status": "pass",
+      "score": 1,
+      "critique": {
+        "scene_hash": "sha256:6cf53cd3a44f5bd854a8551ef696b496585bd7968e25dbb623298b097e4af425",
+        "png_hash": "sha256:b85eb6931af0cb6585bfd9befe7b83719d1cecbffefdcda8e57fe736d2f2078e",
+        "reviewer": "Codex same-agent inspection",
+        "method": "vision-agent",
+        "summary": "The rectangular backdrop and pale extraction fringe are gone. The leafy silhouette is intact, the small soft shadow grounds the vase, and the hierarchy is clear. The PDF proof keeps crisp typography and continuous gradients with the correct trim and bleed. This is a controlled neutral-background extraction, not a general segmentation benchmark.",
+        "score": 0.85,
+        "issues": []
+      },
+      "history_length": 1,
+      "timestamp": "2026-09-08T20:26:28.906Z",
+      "tokens": null
+    }
+  ]
+}

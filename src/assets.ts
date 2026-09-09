@@ -1,3 +1,4 @@
+import sharp from 'sharp';
 import { createHash } from 'node:crypto';
 import { readFile, realpath } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
@@ -65,11 +66,15 @@ export async function loadAssets(scene: Scene, root: string): Promise<LoadedAsse
     const jpeg = bytes[0] === 255 && bytes[1] === 216;
     const webp =
       bytes.toString('ascii', 0, 4) === 'RIFF' && bytes.toString('ascii', 8, 12) === 'WEBP';
-    if (!png && !jpeg && !webp)
-      throw new Error(`Asset ${id}: only PNG, JPEG and WebP are supported`);
+    const tiff = bytes.toString('ascii', 0, 2) === 'II' || bytes.toString('ascii', 0, 2) === 'MM';
+    if (!png && !jpeg && !webp && !tiff)
+      throw new Error(`Asset ${id}: only PNG, JPEG, WebP and TIFF are supported`);
     const hash = sha256(bytes);
     if (asset.hash && asset.hash !== hash) throw new Error(`Asset hash mismatch: ${id}`);
-    const image = await loadImage(bytes);
+    const metadata = await sharp(bytes, { limitInputPixels: 32 * 1024 * 1024 }).metadata();
+    const image = await loadImage(
+      metadata.icc || tiff ? await sharp(bytes).toColourspace('srgb').png().toBuffer() : bytes,
+    );
     if (image.width * image.height > 32 * 1024 * 1024)
       throw new Error(`Asset dimensions too large: ${id}`);
     images.set(id, image);

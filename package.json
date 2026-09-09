@@ -1,6 +1,6 @@
 {
   "name": "rtistree",
-  "version": "0.2.0",
+  "version": "0.5.0",
   "description": "Deterministic, agent-operable raster graphics engine",
   "main": "./dist/index.js",
   "scripts": {
@@ -22,11 +22,18 @@
     "@fontsource/inter": "5.3.0",
     "@modelcontextprotocol/sdk": "1.30.0",
     "@napi-rs/canvas": "1.0.8",
+    "fast-xml-parser": "5.11.1",
+    "fontkit": "2.0.4",
+    "pdf-lib": "1.17.1",
+    "pdfkit": "0.20.2",
+    "sharp": "0.35.4",
     "yaml": "2.9.0",
     "zod": "4.5.4"
   },
   "devDependencies": {
+    "@types/fontkit": "2.0.9",
     "@types/node": "26.5.0",
+    "@types/pdfkit": "0.17.6",
     "prettier": "3.9.6",
     "tsx": "4.23.13",
     "typescript": "7.0.2"

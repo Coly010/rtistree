@@ -14,3 +14,18 @@ export * from './critique.js';
 export * from './components.js';
 export * from './spatial.js';
 export * from './merge.js';
+
+export * from './document.js';
+export * from './project-config.js';
+export * from './export.js';
+export * from './svg.js';
+export * from './raster-studio.js';
+export * from './program.js';
+export * from './raster-edit.js';
+
+export * from './pipeline.js';
+export * from './production-workflow.js';
+export * from './techniques.js';
+
+export * from './construction.js';
+export * from './art-direction.js';
