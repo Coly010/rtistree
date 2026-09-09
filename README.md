@@ -22,7 +22,7 @@ Requires Node.js 22 or newer. Linux and macOS are covered by CI.
 mkdir my-art
 cd my-art
 npm init -y
-npm install https://github.com/Coly010/rtistree/releases/download/v0.5.0/rtistree-0.5.0.tgz
+npm install rtistree
 mkdir hello
 cp node_modules/rtistree/examples/hello/scene.json hello/
 cp node_modules/rtistree/examples/hello/refine.json hello/

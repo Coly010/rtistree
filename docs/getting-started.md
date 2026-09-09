@@ -7,11 +7,10 @@ Start in an empty directory:
 mkdir my-art
 cd my-art
 npm init -y
-npm install https://github.com/Coly010/rtistree/releases/download/v0.5.0/rtistree-0.5.0.tgz
+npm install rtistree
 ```
 
-This installs the checked release tarball from GitHub. npm registry publication is pending;
-the installed package and `graphics` executable are the same.
+The same release is also available as a [downloadable package](https://github.com/Coly010/rtistree/releases/download/v0.5.0/rtistree-0.5.0.tgz) on GitHub.
 
 ## Render a scene
 

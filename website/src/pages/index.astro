@@ -29,8 +29,8 @@ const repository = 'https://github.com/Coly010/rtistree';
           <h1>Art, with an<br />editable <em>source.</em></h1>
           <p class="lede">Programmable graphics for AI agents. Build an image, inspect what’s there, and change exactly the part you mean.</p>
           <div class="actions"><a class="button primary" href="/docs/getting-started/">Make your first image <span aria-hidden="true">↗</span></a><a class="text-link" href="/docs/agent-setup/">Connect your agent →</a></div>
-          <div class="install"><span aria-hidden="true">$</span><code>npm install ./rtistree-0.5.0.tgz</code><button id="copy-install" aria-label="Copy install command">Copy</button></div>
-          <p class="install-note"><a href="https://github.com/Coly010/rtistree/releases/download/v0.5.0/rtistree-0.5.0.tgz">Download package ↓</a> <span>·</span> Node.js 22+ <span>·</span> MIT</p>
+          <div class="install"><span aria-hidden="true">$</span><code>npm install rtistree</code><button id="copy-install" aria-label="Copy install command">Copy</button></div>
+          <p class="install-note"><a href="https://www.npmjs.com/package/rtistree">View on npm ↗</a> <span>·</span> Node.js 22+ <span>·</span> MIT</p>
         </div>
         <div class="artboard">
           <div class="board-heading"><span>VERDIGRIS WATCH</span><span>ASSET STUDY / 004</span></div>
@@ -55,7 +55,7 @@ const repository = 'https://github.com/Coly010/rtistree';
     <script>
       const button = document.querySelector<HTMLButtonElement>('#copy-install');
       button?.addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText('npm install ./rtistree-0.5.0.tgz'); button.textContent = 'Copied'; }
+        try { await navigator.clipboard.writeText('npm install rtistree'); button.textContent = 'Copied'; }
         catch { button.textContent = 'Select command'; }
         setTimeout(() => { button.textContent = 'Copy'; }, 2000);
       });
