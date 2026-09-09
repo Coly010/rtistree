@@ -1,5 +1,6 @@
 ---
 import '../styles/home.css';
+import Brand from '../components/Brand.astro';
 const repository = 'https://github.com/Coly010/rtistree';
 const assets = [['watch', 'Watch'], ['stride', 'Stride'], ['guard', 'Guard'], ['sword', 'Sword'], ['shield', 'Shield'], ['coffer', 'Coffer']];
 ---
@@ -8,7 +9,7 @@ const assets = [['watch', 'Watch'], ['stride', 'Stride'], ['guard', 'Guard'], ['
 <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Examples — Rtistree</title><meta name="description" content="Reproducible Rtistree artwork with source, exported assets and an honest account of the refinement process." /><link rel="canonical" href="https://rtistree.dev/examples/" /><link rel="icon" href="/favicon.svg" type="image/svg+xml" /></head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="header wrap"><a class="wordmark" href="/"><span class="brand-mark" aria-hidden="true">r.</span>rtistree</a><nav aria-label="Main navigation"><a href="/docs/getting-started/">Docs</a><a href="/examples/" aria-current="page">Examples</a><a href={repository}>GitHub ↗</a></nav></header>
+<header class="header wrap"><Brand /><nav aria-label="Main navigation"><a href="/docs/getting-started/">Docs</a><a href="/examples/" aria-current="page">Examples</a><a href={repository}>GitHub ↗</a></nav></header>
 <main id="main" class="example-page wrap">
 <p class="eyebrow">MADE WITH RTISTREE</p><h1>Explore the source.<br />Change the result.</h1><p>These assets were drawn with Rtistree’s programmable 2D studio. The source, recipes and exports are available so you can reproduce the work and take it somewhere else.</p>
 <section><p class="eyebrow">ASSET TRIAL / REVISION 004</p><h2>Verdigris Watch</h2><p>Three knight poses, six matching props and an eight-frame walk. Shared drawing functions keep the sword and shield consistent across character and inventory assets. No image generation or 3D renderer was used in this trial.</p>
@@ -18,5 +19,5 @@ const assets = [['watch', 'Watch'], ['stride', 'Stride'], ['guard', 'Guard'], ['
 <details><summary>See the rejected first attempt</summary><p>Preserved as evidence of why technical validation alone is insufficient.</p><img src="/assets/rejected-contact-sheet.png" alt="Rejected first version of the knight asset family" width="1200" height="1400" loading="lazy" /></details>
 </section>
 <section><p class="eyebrow">A SMALLER START</p><h2>One scene. One focused edit.</h2><p>The quickstart uses a disc and a title to demonstrate rendering, a local brightness edit, undo and portable export. It is included in the npm package and checked from a clean installation.</p><div class="trial-links"><a class="button primary" href="/docs/getting-started/">Follow the quickstart ↗</a><a class="text-link" href="/downloads/hello/scene.json" download>Download scene.json ↓</a></div></section>
-</main><footer class="wrap"><a class="wordmark" href="/">rtistree</a><p>Built by Colum Ferry. Released under MIT.</p><a href={repository}>Contribute on GitHub ↗</a></footer>
+</main><footer class="wrap"><Brand /><p>Built by Colum Ferry. Released under MIT.</p><a href={repository}>Contribute on GitHub ↗</a></footer>
 </body></html>

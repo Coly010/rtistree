@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'Rtistree Display';
+  src: url('/fonts/dm-serif-display-latin-400-normal.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rtistree Display';
+  src: url('/fonts/dm-serif-display-latin-400-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+.rt-brand {
+  --brand-accent: var(--green, #c4f37b);
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  color: #ecf0e8;
+  text-decoration: none;
+}
+.rt-brand:hover { text-decoration: none; }
+.rt-brand-symbol {
+  display: block;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  color: var(--brand-accent);
+  background: currentColor;
+  mask: url('/brand/mark.svg') center / contain no-repeat;
+  -webkit-mask: url('/brand/mark.svg') center / contain no-repeat;
+}
+.rt-brand-name {
+  font-family: 'Rtistree Display', Georgia, serif;
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.rt-brand-name > span { font-style: italic; color: var(--brand-accent); }
+.rt-brand:focus-visible { outline: 2px solid var(--brand-accent); outline-offset: 6px; }
+@media(max-width: 760px) {
+  .rt-brand { gap: 7px; }
+  .rt-brand-symbol { width: 29px; height: 32px; }
+  .rt-brand-name { font-size: 29px; }
+}

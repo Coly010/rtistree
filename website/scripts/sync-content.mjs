@@ -63,3 +63,6 @@ await mkdir(resolve(publicDir, 'fonts'), { recursive: true });
 for (const weight of ['400', '700']) await cp(resolve(root, `node_modules/@fontsource/inter/files/inter-latin-${weight}-normal.woff2`), resolve(publicDir, `fonts/inter-latin-${weight}-normal.woff2`));
 await cp(resolve(root, 'licenses/Inter-OFL.txt'), resolve(publicDir, 'fonts/LICENSE-Inter.txt'));
 console.log('Synced canonical docs, trial assets, starter files and licensed fonts.');
+
+for (const style of ['normal', 'italic']) await cp(resolve(root, `node_modules/@fontsource/dm-serif-display/files/dm-serif-display-latin-400-${style}.woff2`), resolve(publicDir, `fonts/dm-serif-display-latin-400-${style}.woff2`));
+await cp(resolve(root, 'licenses/DM-Serif-Display-OFL.txt'), resolve(publicDir, 'fonts/LICENSE-DM-Serif-Display.txt'));
