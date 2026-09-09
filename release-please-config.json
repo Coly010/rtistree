@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "c3a8665c076c943036cf19f4810960fa073c61f3",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "include-component-in-tag": false,
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": false,
+      "extra-files": [
+        "README.md",
+        "website/src/pages/index.astro",
+        "website/package.json",
+        {
+          "type": "json",
+          "path": "website/package-lock.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "website/package-lock.json",
+          "jsonpath": "$.packages[\"\"].version"
+        }
+      ]
+    }
+  }
+}

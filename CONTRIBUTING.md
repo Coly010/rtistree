@@ -32,3 +32,14 @@ replace recorded trial results.
 Do not commit credentials, local environment files, dependency folders or temporary renders.
 By contributing, you agree that your original contributions are distributed under this
 repository's MIT license. Preserve notices for third-party material.
+
+## Commit and PR titles
+
+Use Conventional Commits for changes merged into `main`: `fix: ...` for a bug fix,
+`feat: ...` for a feature, and `docs: ...`, `test: ...`, `ci: ...` or `chore: ...` for
+maintenance. With squash merging, use this format in the PR title. Mark breaking changes
+with `!` and explain the migration in a `BREAKING CHANGE:` footer.
+
+Release Please uses these messages to propose versions and generate the changelog.
+Do not bump package versions manually in ordinary contributions. See the
+[release process](docs/releasing.md) for maintainer instructions.

@@ -1,31 +1,78 @@
-name: Publish npm release
+name: Release
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing release tag to retry publishing (leave blank to refresh the release PR)'
+        required: false
+        type: string
 permissions:
   contents: read
 concurrency:
   group: npm-release
   cancel-in-progress: false
 jobs:
-  publish:
+  release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
+      issues: write
+      pull-requests: write
+      actions: write
+    outputs:
+      tag: ${{ steps.release.outputs.tag_name || inputs.tag }}
+      publish: ${{ steps.release.outputs.release_created == 'true' || inputs.tag != '' }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        if: inputs.tag == ''
+        id: release
+        with:
+          target-branch: main
+      # GITHUB_TOKEN-created PRs do not trigger pull_request workflows.
+      # Explicit dispatches do run and report checks against the release branch SHA.
+      - name: Run CI on the release PR
+        if: steps.release.outputs.pr != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_PR: ${{ steps.release.outputs.pr }}
+        run: |
+          NUMBER=$(node -e 'console.log(JSON.parse(process.env.RELEASE_PR).number)')
+          BRANCH=$(gh pr view "$NUMBER" --json headRefName --jq .headRefName)
+          gh workflow run ci.yml --ref "$BRANCH"
+          gh workflow run website.yml --ref "$BRANCH"
+  publish:
+    needs: release
+    if: needs.release.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
       id-token: write
+    env:
+      RELEASE_TAG: ${{ needs.release.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.release.tag_name }}
+          ref: ${{ env.RELEASE_TAG }}
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
           cache: npm
-      - name: Check release tag
+      - name: Check release identity
         env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: node -e 'const p = require("./package.json"); if (process.env.RELEASE_TAG !== `v${p.version}`) throw new Error("Release tag does not match package version");'
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node -e 'const p = require("./package.json"); if (p.name !== "rtistree" || process.env.RELEASE_TAG !== "v" + p.version || !/^\d+\.\d+\.\d+$/.test(p.version)) throw new Error("Expected a matching rtistree release tag");'
+          git merge-base --is-ancestor HEAD origin/main
+          gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft | node -e 'let s=""; process.stdin.on("data", d => s += d).on("end", () => { if (s.trim() !== "false") process.exit(1); });'
+      - name: Install npm with trusted publishing support
+        run: npm install --global npm@11.19.1
       - run: npm ci
       - run: npm run check
       - run: npm run format:check
@@ -37,12 +84,11 @@ jobs:
         run: npm run package:check
         env:
           RTISTREE_PACKAGE_DIR: ${{ runner.temp }}
-      - name: Publish checked tarball
-        if: vars.NPM_TRUSTED_PUBLISHING_ENABLED == 'true'
+      - name: Publish checked tarball with npm OIDC
+        run: node scripts/publish-release.mjs
+      - name: Attach checked artifact to the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           VERSION=$(node -p 'require("./package.json").version')
-          if npm view "rtistree@$VERSION" version >/dev/null 2>&1; then
-            echo "Version $VERSION is already published; skipping bootstrap release."
-          else
-            npm publish "$RUNNER_TEMP/rtistree-$VERSION.tgz" --access public --provenance
-          fi
+          gh release upload "$RELEASE_TAG" "$RUNNER_TEMP/rtistree-$VERSION.tgz" --clobber
