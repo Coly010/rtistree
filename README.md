@@ -11,7 +11,7 @@ Edits have history and undo. PNG, JPEG, TIFF, PDF, SVG, portable projects and de
 sprite atlases with JSON metadata are outputs. Rendering uses native CPU Skia and requires no
 model API key, browser or GPU.
 
-**Public alpha · v0.6.0 · MIT.** APIs may change before 1.0. Technical checks do not judge artistic quality. <!-- x-release-please-version -->
+**Public alpha · v0.7.0 · MIT.** APIs may change before 1.0. Technical checks do not judge artistic quality. <!-- x-release-please-version -->
 
 ![Poster rendered by Rtistree](https://raw.githubusercontent.com/Coly010/rtistree/main/docs/previews/poster.png)
 

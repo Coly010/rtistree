@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.0](https://github.com/Coly010/rtistree/compare/v0.6.0...v0.7.0) (2026-09-14)
+
+
+### Features
+
+* add first-class pixel art sprite workflows ([ef83cfa](https://github.com/Coly010/rtistree/commit/ef83cfadf7f9282dcfe23cb9ec849adc9a66c2c1))
+
+
+### Bug Fixes
+
+* **docs:** align guides and examples with current behavior ([0f73e58](https://github.com/Coly010/rtistree/commit/0f73e583e8a4c5ee0f597e1fa6419f33f43832a1))
+* **release:** automate changelogs and publish through npm OIDC ([31f6e78](https://github.com/Coly010/rtistree/commit/31f6e78db8d18e6d62ca9339d4ba635e8d0103cd))
+* run source CLI outside the checkout and document agent workflow ([b0ce587](https://github.com/Coly010/rtistree/commit/b0ce5873abf377d42441e42a524fcf43d3b0acf6))
+
 ## [0.6.0](https://github.com/Coly010/rtistree/compare/v0.5.1...v0.6.0) (2026-09-14)
 
 
