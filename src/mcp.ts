@@ -27,8 +27,9 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod';
 import { join } from 'node:path';
 import { patchSchema } from './commands.js';
-import { boundsSchema } from './schema.js';
+import { boundsSchema, spriteAtlasSchema } from './schema.js';
 import { writeRender } from './artifacts.js';
+import { exportSpriteSheet } from './sprites.js';
 import type { Project } from './project.js';
 import type { RenderResult } from './render.js';
 
@@ -348,6 +349,28 @@ export function createServer(project: Project): McpServer {
           join(project.outputDirectory, `${name}.${options.format}`),
           options,
         ),
+      ),
+  );
+  registerTool(
+    'exportSprites',
+    {
+      description:
+        'Render declared sprite frames into a deterministic transparent PNG atlas and an engine-neutral JSON manifest. Frame rectangles are not trimmed, pivots and animation timing are preserved, and pixel-art sampling is nearest-neighbour.',
+      inputSchema: {
+        name: z
+          .string()
+          .regex(/^[a-zA-Z0-9_-]+$/)
+          .default('sprites'),
+        options: z.strictObject({ atlas: spriteAtlasSchema.optional() }).default({}),
+      },
+      annotations: mutate,
+    },
+    async ({ name, options }) =>
+      json(
+        await exportSpriteSheet(project, join(project.outputDirectory, `${name}.png`), {
+          ...options,
+          manifest: join(project.outputDirectory, `${name}.json`),
+        }),
       ),
   );
   registerTool(

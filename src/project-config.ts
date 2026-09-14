@@ -187,6 +187,7 @@ export async function createProject(
     'production',
     'raster-read',
     'raster-write',
+    'sprites',
   ])
     files[`schemas/${name}.schema.json`] = await readFile(
       resolve(dirname(fileURLToPath(import.meta.url)), '..', 'schemas', `${name}.schema.json`),

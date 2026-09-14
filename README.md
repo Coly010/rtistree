@@ -7,8 +7,9 @@ refine individual parts, and export usable assets with built-in art-direction gu
 
 Rtistree is a local Node.js graphics engine with a CLI, TypeScript SDK and MCP server.
 JSON/YAML scenes retain structure; seeded painting programs bake to replayable raster assets.
-Edits have history and undo. PNG, JPEG, TIFF, PDF, SVG and portable projects are outputs.
-Rendering uses native CPU Skia and requires no model API key, browser or GPU.
+Edits have history and undo. PNG, JPEG, TIFF, PDF, SVG, portable projects and deterministic
+sprite atlases with JSON metadata are outputs. Rendering uses native CPU Skia and requires no
+model API key, browser or GPU.
 
 **Public alpha · v0.5.1 · MIT.** APIs may change before 1.0. Technical checks do not judge artistic quality. <!-- x-release-please-version -->
 
@@ -71,9 +72,12 @@ not guarantee that every client supplies the guidance or every model follows it.
 ## Learn the engine
 
 - [Getting started](docs/getting-started.md) and [CLI reference](docs/cli-reference.md)
+- [Pixel art, sprites and spritesheets](docs/sprites.md)
 - [Agent setup](docs/agent-setup.md) and [art-direction workflow](docs/agent-art-workflow.md)
 - [Scene format](docs/scene-format.md) and [programmable studio](docs/studio.md)
 - [Staged production](docs/atelier.md) and [print/export](docs/production.md)
+- [Pixel sprite lab](examples/pixel-sprite-lab/README.md) — strict 16 × 16 frames,
+  deterministic atlas packing and a verifier
 - [Recorded asset trial](https://github.com/Coly010/rtistree/blob/main/examples/warden-asset-trial/README.md)
 - [Architecture and evidence](docs/engine-overview.md), [changelog](CHANGELOG.md), [release process](docs/releasing.md)
 

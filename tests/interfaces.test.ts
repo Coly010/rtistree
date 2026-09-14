@@ -91,7 +91,7 @@ test('MCP discovery, typed edits, PNG crops and verification work through a clie
     );
     const list = await client.listTools();
     assert.ok(list.tools.some((tool) => tool.name === 'apply'));
-    assert.equal(list.tools.length, 24);
+    assert.equal(list.tools.length, 25);
     assert.ok(JSON.stringify(list).length < 100_000, 'Discovery must share repeated schemas');
     assert.ok(list.tools.find((tool) => tool.name === 'apply')!.inputSchema.definitions);
     const result = await client.callTool({ name: 'inspectScene', arguments: {} });
@@ -193,7 +193,7 @@ test('MCP stdio server starts with protocol-only stdout and closes cleanly', asy
   try {
     await client.connect(transport);
     const response = await client.listTools();
-    assert.equal(response.tools.length, 24);
+    assert.equal(response.tools.length, 25);
   } finally {
     await client.close();
   }

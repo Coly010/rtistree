@@ -79,6 +79,18 @@ export interface RenderResult {
 export interface Renderer {
   render(scene: Scene, root: string, options?: RenderOptions): Promise<RenderResult>;
 }
+function validatePixelPalette(pixels: Uint8ClampedArray, palette: string[]) {
+  const permitted = new Set(palette.map((colour) => rgba(colour).join(',')));
+  for (let index = 0; index < pixels.length; index += 4) {
+    // Fully transparent RGB bytes are an encoder/compositor detail, not a visible colour.
+    if (pixels[index + 3] === 0) continue;
+    const colour = [pixels[index], pixels[index + 1], pixels[index + 2], pixels[index + 3]].join(
+      ',',
+    );
+    if (!permitted.has(colour))
+      throw new Error(`Rendered pixel outside pixel_art.palette: ${colour}`);
+  }
+}
 export function fontStyle(layer: Layer, aliases: Record<string, string> = {}): string {
   const s = layer.style!;
   if (aliases[s.font]) return `${s.size}px "${aliases[s.font]}"`;
@@ -342,6 +354,9 @@ export class SkiaRenderer implements Renderer {
         h = node.bounds[3];
       ctx.save();
       ctx.setTransform(...node.matrix);
+      // Pixel-art scenes opt into nearest-neighbour sampling for placed raster assets.
+      // Palette tiles already use this setting independently for backwards compatibility.
+      if (scene.pixel_art) ctx.imageSmoothingEnabled = false;
       if (layer.type === 'vector') {
         const shape = layer.shape!;
         ctx.fillStyle = shape.fill;
@@ -534,13 +549,16 @@ export class SkiaRenderer implements Renderer {
         Math.max(1, Math.ceil(output.width / 2)),
         Math.max(1, Math.ceil(output.height / 2)),
       );
+      if (scene.pixel_art) draft.getContext('2d').imageSmoothingEnabled = false;
       draft.getContext('2d').drawImage(output, 0, 0, draft.width, draft.height);
       output = draft;
     }
+    const pixels = output.getContext('2d').getImageData(0, 0, output.width, output.height).data;
+    if (scene.pixel_art?.strict) validatePixelPalette(pixels, scene.pixel_art.palette ?? []);
     const png = await output.encode('png');
     return {
       png,
-      pixels: output.getContext('2d').getImageData(0, 0, output.width, output.height).data,
+      pixels,
       width: output.width,
       height: output.height,
       text,

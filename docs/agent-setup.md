@@ -44,9 +44,11 @@ Example task:
 > visual findings separately. Revise failed criteria before exporting.
 
 The server exposes inspection, rendering, crop inspection, typed edits, undo/redo, verification,
-critiques, program execution, pipelines and staged production. Rendering tools return PNG image
-content; use a vision-capable agent to judge appearance. Structured inspection alone cannot
-establish that an image looks good.
+critiques, program execution, pipelines, sprite-atlas export and staged production. The
+`exportSprites` tool writes an engine-neutral PNG atlas plus JSON frame/animation metadata for
+a scene with a `sprites` manifest. Rendering tools return PNG image content; use a
+vision-capable agent to judge appearance. Structured inspection alone cannot establish that an
+image looks good.
 
 ## CLI agents
 

@@ -22,6 +22,7 @@ export * from './svg.js';
 export * from './raster-studio.js';
 export * from './program.js';
 export * from './raster-edit.js';
+export * from './sprites.js';
 
 export * from './pipeline.js';
 export * from './production-workflow.js';

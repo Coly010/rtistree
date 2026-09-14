@@ -120,6 +120,37 @@ Tiles have canvas bounds, a single-character palette, and rows of keys. Rows mus
 
 `replaceTile` replaces a tile with exactly matching bounds or appends a new one. Transparent tile pixels composite over underlying layer content. Palette tiles remain compact grids. Separately, `promoteRegion`, `updateRegion` and `demoteRegion` manage patches with 1–4× resolution and optional external raster sources; see [evolution](evolution.md).
 
+For a complete pixel-art and sprite workflow, see [Pixel art, sprites and
+spritesheets](sprites.md). An optional pixel-art scene contract makes integer
+coordinates, palette use and nearest-neighbour delivery explicit:
+
+```yaml
+pixel_art:
+  scale: 1 # authored tile pixel → scene-pixel multiplier
+  palette: ['#00000000', '#f2be81', '#b75c40']
+  strict: true # reject transforms/blur and invalid tile geometry
+```
+
+The optional `sprites` manifest selects integer canvas rectangles and records
+their game-facing pivot, duration and tags. Animations list frame IDs and a
+loop flag. Atlas settings support padding, edge extrusion, power-of-two output
+and a maximum width:
+
+```yaml
+sprites:
+  frames:
+    walk_0: { bounds: [0, 0, 16, 16], pivot: [8, 14], duration: 120, tags: [walk, right] }
+  animations:
+    walk_right: { frames: [walk_0], loop: true }
+  atlas: { padding: 1, extrusion: 1, power_of_two: true, max_width: 2048 }
+```
+
+`rtistree sprites scene.json -o atlas.png --manifest atlas.json` renders the
+declared frame rectangles and writes an engine-neutral, deterministic atlas
+manifest. Frames are not trimmed; exported records retain both atlas and source
+rectangles. Use `rtistree schema --kind scene` for the complete scene contract
+and `rtistree schema --kind sprites` for export options in the installed version.
+
 ## Commands and verification
 
 `apply` accepts `{reason, expected_hash?, commands: [...]}`. Commands include add/remove/move/resize layer, set opacity/blend/text/style, group siblings, align/distribute siblings, apply effect, apply raster operation, and replace tile. See `rtistree schema --kind command` for exact fields. Removing referenced mask or verification targets is rejected unless the resulting scene is valid. Grouping can change compositing with interleaved siblings; it is an explicit structural edit without a locality promise.

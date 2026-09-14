@@ -24,6 +24,7 @@ npx rtistree inspect scene.json --layer title
 npx rtistree inspect-region scene.json 0 0 100 100
 npx rtistree render scene.json -o image.png
 npx rtistree render-region scene.json 0 0 100 100 -o crop.png
+npx rtistree sprites scene.json -o output/sprites.png --manifest output/sprites.json
 npx rtistree apply scene.json patch.json
 npx rtistree undo scene.json
 npx rtistree redo scene.json
@@ -33,6 +34,13 @@ npx rtistree history scene.json
 Coordinates are `x y width height` in canvas pixels. A patch contains a reason and a typed
 commands array. Supply the current `expected_hash` when coordinating concurrent edits.
 See [scene format](scene-format.md) for command shapes and coordinate rules.
+
+`sprites` reads a scene or configured project with a sprite manifest and writes a
+deterministically packed atlas plus frame/animation metadata. The atlas output
+must end in `.png`; the optional `--manifest` path must end in `.json`. Pixel-art
+projects can opt into integer, palette and nearest-neighbour guardrails. Use
+`npx rtistree sprites --help` for the exact options supported by the installed
+version.
 
 ## Verify, review and export
 
@@ -80,6 +88,7 @@ The MCP server uses stdio. See [agent setup](agent-setup.md).
 | `npx rtistree compact scene.json`                           | Compress history while retaining undo and redo                                      |
 | `npx rtistree raster-read scene.json read.json`             | Write an exact crop plus evidence and return an asset descriptor                    |
 | `npx rtistree raster-write scene.json write.json`           | Commit an exact-size PNG patch with a required current hash                         |
+| `npx rtistree sprites scene.json -o output/sprites.png`     | Pack declared sprite frames into an atlas and write animation metadata              |
 | `npx rtistree import-svg drawing.svg -o drawing.scene.json` | Import the supported static SVG subset                                              |
 | `npx rtistree preflight artwork --preset screen`            | Check physical document/export settings and save a report                           |
 | `npx rtistree proof artwork --preset print -o proof.png`    | Make a CMYK round-trip proof; requires a configured ICC profile                     |

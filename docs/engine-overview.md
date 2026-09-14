@@ -16,6 +16,12 @@ local image assets, procedural fills, layouts, transforms, masks and adjustments
 Raster operations, sparse palette tiles and promoted regions add focused pixel edits.
 See [scene format](scene-format.md) and [editing workflows](evolution.md).
 
+Pixel-art scenes can opt into explicit integer, palette and nearest-neighbour
+guardrails. Sprite manifests describe frame rectangles, pivots, durations, tags and
+animation ordering; the sprite exporter packs them into a deterministic atlas without
+making Rtistree responsible for a game engine's runtime. See [pixel art, sprites and
+spritesheets](sprites.md).
+
 Layer IDs are unique throughout the tree. Assets, fonts and components each have their
 own ID map; they do not share the layer-ID namespace. Relative include and asset paths
 resolve from the declaring source file and must remain inside the root scene directory.
@@ -37,7 +43,8 @@ PDF/X certification, spot colours and overprint are not implemented.
 pixels and evidence; `project.inspect()` and `project.inspectLayer(id)` return structure.
 `project.apply({reason, expected_hash, commands})` validates and commits a typed transaction.
 The SDK exports `Project`, `SkiaRenderer`, schemas, command helpers, render/verification
-functions, `runProgram`, `buildPipeline`, `production` and the art-direction guide.
+functions, `runProgram`, `buildPipeline`, `exportSpriteSheet`, `production` and the
+art-direction guide.
 
 Authoring files remain the baseline. Mutations append to
 `history/<scene-filename>.operations.jsonl`; journal records include state snapshots,
@@ -64,7 +71,7 @@ MCP tools are:
 - Verification and review: `verify`, `recordCritique`, `readCritique`.
 - Painting: `studioHelp`, `runProgram`, `replayProgram`, `readRasterRegion`, `writeRasterRegion`.
 - Staged work: `buildPipeline`, `production`.
-- Artwork export: `exportArtwork`, `preflight`, `softProof`.
+- Artwork export: `exportArtwork`, `exportSprites`, `preflight`, `softProof`.
 
 MCP rendering/crop tools return PNG image content. Production capture and comparison return
 artifact paths in JSON; the host needs a way to open those images. The MCP server operates
@@ -91,8 +98,10 @@ A bounded layer cache reuses unchanged surfaces. Simple pointwise region scenes 
 viewport; antialias-sensitive cases use a full render and exact crop. `cache: false` and
 `regionMode: 'full'` request reference paths. Draft downsamples after rendering. A general
 dirty-tile compositor, automatic quadtree refinement, a native animation timeline, mesh warp,
-smudge and general segmentation remain unimplemented. Procedural programs can still author
-individual animation frames, as the [asset trial](https://github.com/Coly010/rtistree/tree/main/examples/warden-asset-trial) demonstrates.
+smudge and general segmentation remain unimplemented. Sprite manifests and atlas export
+package authored frames but do not provide inverse kinematics, retargeting or automatic
+visual approval. Procedural programs can still author individual animation frames, as the
+[asset trial](https://github.com/Coly010/rtistree/tree/main/examples/warden-asset-trial) demonstrates.
 
 The [poster benchmark](previews/benchmark.json) records 4,704 changed pixels inside a
 56 × 84 region and zero outside, with successful replay/undo/export checks. It is recorded

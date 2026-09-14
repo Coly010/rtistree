@@ -59,6 +59,16 @@ hidden backs of its hoops over the near lid, where they looked like handles.
 Both shared geometry and correct occlusion matter. Distinct shaded faces and a
 common palette are insufficient evidence of sound construction.
 
+**Pixel art:** declare the intended display size, palette and transparency policy.
+Keep coordinates, frame dimensions and pivots on integer pixels, use
+nearest-neighbour scaling, and inspect at the actual game size. A declared
+pixel-art contract can catch palette overruns, invalid tile geometry and
+disallowed transforms or blur; the sprite exporter preserves exact RGBA frame
+pixels. It cannot decide whether a one-pixel choice is artistically good.
+Use palette tiles for compact indexed marks and seeded studio programs for dense
+or generated frames. Pack a set only after the individual frames and their
+contact sheet have been inspected.
+
 **Animation:** declare facing, travel direction, ground plane, stride distance,
 cycle duration and contact/recovery phases. Play a full loop against ground
 markers and inspect contact, passing and recovery frames at the intended size.

@@ -26,12 +26,15 @@ try {
   for (const required of [
     'dist/cli.js',
     'dist/index.d.ts',
+    'dist/sprites.js',
     'dist/art-direction.js',
     'LICENSE',
     'THIRD_PARTY_NOTICES.md',
     'licenses/Inter-OFL.txt',
     'examples/hello/scene.json',
     'docs/getting-started.md',
+    'docs/sprites.md',
+    'schemas/sprites.schema.json',
   ])
     assert.ok(files.has(required), `Missing ${required}`);
   assert.ok(
@@ -73,6 +76,7 @@ try {
   run(npm, ['run', 'render'], join(work, 'hello'));
   const guide = JSON.parse(graphics('art-guide'));
   assert.equal(guide.version, 'foundation-first/2');
+  assert.ok(JSON.parse(graphics('schema', '--kind', 'sprites')).properties.atlas);
   graphics('render', 'hello/scene.json', '-o', 'before.png');
   graphics('apply', 'hello/scene.json', 'hello/refine.json');
   graphics('render', 'hello/scene.json', '-o', 'after.png');
@@ -90,6 +94,40 @@ try {
     before,
     await readFile(join(work, 'restored.png')),
     'Undo must restore exact PNG',
+  );
+  await writeFile(
+    join(work, 'sprites.scene.json'),
+    JSON.stringify({
+      version: 1,
+      canvas: { width: 2, height: 1 },
+      pixel_art: { scale: 1, palette: ['#ff0000', '#00ff00'] },
+      sprites: {
+        frames: {
+          red: { bounds: [0, 0, 1, 1], pivot: [0, 1] },
+          green: { bounds: [1, 0, 1, 1], pivot: [0, 1] },
+        },
+        animations: { blink: { frames: ['red', 'green'] } },
+      },
+      layers: [
+        {
+          id: 'pixels',
+          type: 'raster',
+          tiles: [
+            {
+              bounds: [0, 0, 2, 1],
+              palette: { R: '#ff0000', G: '#00ff00' },
+              pixels: ['RG'],
+            },
+          ],
+        },
+      ],
+    }),
+  );
+  graphics('sprites', 'sprites.scene.json', '-o', 'sprites.png', '--manifest', 'sprites.json');
+  assert.equal((await readFile(join(work, 'sprites.png'))).subarray(1, 4).toString(), 'PNG');
+  assert.equal(
+    JSON.parse(await readFile(join(work, 'sprites.json'), 'utf8')).frames.red.duration,
+    100,
   );
   graphics('export', 'hello/scene.json', '-o', 'portable/scene.json');
   graphics('render', 'portable/scene.json', '-o', 'portable.png');
@@ -119,6 +157,7 @@ try {
   assert.ok(guide.contents.length > 0);
   const tools = await client.listTools();
   assert.ok(tools.tools.some(t => t.name === 'studioHelp'));
+  assert.ok(tools.tools.some(t => t.name === 'exportSprites'));
 } finally { await client.close(); }
 `,
   );
@@ -137,6 +176,7 @@ try {
           'edit',
           'undo',
           'portable export',
+          'pixel-art sprite atlas export',
           'SDK',
           'MCP onboarding',
         ],

@@ -4,6 +4,13 @@ The studio is the escape hatch below scene abstractions. An agent can build an i
 
 Scene layers still describe composition. Programs produce ordinary pinned PNG assets and can replace the source of a raster/image layer. Their exact source, seed, parameters, input snapshots and output hash are saved as a recipe. Rendering, inspecting and opening a scene never runs a program. Re-execution is explicit, and existing edits remain undoable.
 
+This is also the frame-generation path for sprites: keep the frame construction
+function pure and parameterise its pose or animation phase, then bake one asset
+per frame. A `sprites` manifest can reference those frames and the sprite
+exporter can pack them into an atlas with pivots, durations and animation tags.
+See [pixel art, sprites and spritesheets](sprites.md) for the review and delivery
+workflow.
+
 ## First painting
 
 Run these commands from a directory where `npm install rtistree` has already completed.

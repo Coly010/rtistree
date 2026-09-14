@@ -414,6 +414,75 @@ export const fontSchema = z.strictObject({
     .regex(/^sha256:[a-f0-9]{64}$/)
     .optional(),
 });
+/**
+ * Opt-in constraints for artwork whose canvas pixels are the authored medium.
+ * This is deliberately a scene concern rather than a separate file format: a
+ * pixel scene remains an ordinary, composable Rtistree scene.
+ */
+export const pixelArtSchema = z.strictObject({
+  scale: z.number().int().min(1).max(256).default(1),
+  palette: z.array(colourSchema).min(1).max(256).optional(),
+  strict: z.boolean().default(true),
+});
+export type PixelArt = z.infer<typeof pixelArtSchema>;
+
+const spriteFrameSchema = z.strictObject({
+  bounds: boundsSchema,
+  // [x, y] in untrimmed frame pixels, measured from its top-left corner.
+  pivot: pointSchema.default([0, 0]),
+  duration: z.number().int().positive().max(60_000).default(100),
+  tags: z.array(idSchema).max(32).default([]),
+});
+export type SpriteFrame = {
+  bounds: Bounds;
+  pivot: [number, number];
+  duration: number;
+  tags: string[];
+};
+const spriteAnimationSchema = z.strictObject({
+  frames: z.array(idSchema).min(1).max(4096),
+  loop: z.boolean().default(true),
+});
+export type SpriteAnimation = { frames: string[]; loop: boolean };
+export const spriteAtlasSchema = z.strictObject({
+  padding: z.number().int().min(0).max(128).default(0),
+  extrusion: z.number().int().min(0).max(32).default(0),
+  power_of_two: z.boolean().default(false),
+  max_width: z.number().int().min(1).max(8192).default(8192),
+});
+export type SpriteAtlas = {
+  padding: number;
+  extrusion: number;
+  power_of_two: boolean;
+  max_width: number;
+};
+/** Neutral frame and animation metadata; it intentionally has no game-engine fields. */
+export interface Sprites {
+  frames: Record<string, SpriteFrame>;
+  animations: Record<string, SpriteAnimation>;
+  atlas: SpriteAtlas;
+}
+export const spritesSchema: z.ZodType<Sprites> = z.strictObject({
+  frames: z.record(idSchema, spriteFrameSchema).superRefine((frames, ctx) => {
+    if (!Object.keys(frames).length)
+      ctx.addIssue({ code: 'custom', message: 'Sprites require at least one frame' });
+    if (Object.keys(frames).length > 4096)
+      ctx.addIssue({ code: 'custom', message: 'Sprites support at most 4096 frames' });
+  }),
+  animations: z
+    .record(idSchema, spriteAnimationSchema)
+    .superRefine((animations, ctx) => {
+      if (Object.keys(animations).length > 4096)
+        ctx.addIssue({ code: 'custom', message: 'Sprites support at most 4096 animations' });
+    })
+    .default({}),
+  atlas: spriteAtlasSchema.default(() => ({
+    padding: 0,
+    extrusion: 0,
+    power_of_two: false,
+    max_width: 8192,
+  })),
+}) as z.ZodType<Sprites>;
 export const sceneSchema = z.strictObject({
   version: z.literal(1),
   canvas: z.strictObject({
@@ -426,6 +495,8 @@ export const sceneSchema = z.strictObject({
   paragraph_styles: z.record(idSchema, styleSchema).optional(),
   fonts: z.record(idSchema, fontSchema).optional(),
   metadata: z.record(z.string(), z.json()).default({}),
+  pixel_art: pixelArtSchema.optional(),
+  sprites: spritesSchema.optional(),
   assets: z.record(idSchema, assetSchema).default({}),
   layers: z.array(layerSchema).max(256),
   verification: z
@@ -461,6 +532,50 @@ export function parseScene(input: unknown): Scene {
     if (['inter', 'display', 'inter-bold'].includes(id))
       throw new Error('Cannot replace a bundled font name');
   const all = flattenLayers(scene.layers);
+  if (scene.pixel_art?.strict) {
+    if (!scene.pixel_art.palette?.length)
+      throw new Error('Strict pixel art requires a declared pixel_art.palette');
+    const declared = new Set((scene.pixel_art.palette ?? []).map((colour) => colour.toLowerCase()));
+    for (const layer of all) {
+      const operations = [
+        ...layer.operations,
+        ...(layer.regions ?? []).flatMap((r) => r.operations),
+      ];
+      if (
+        layer.affine ||
+        (layer.transform &&
+          (layer.transform.rotation ||
+            layer.transform.scale[0] !== 1 ||
+            layer.transform.scale[1] !== 1)) ||
+        layer.effects.some((effect) => effect.type === 'blur' && effect.radius > 0) ||
+        operations.some((operation) => operation.type === 'blur' && operation.radius > 0) ||
+        layerMasks(layer).some((mask) => mask.feather > 0)
+      )
+        throw new Error(
+          'Strict pixel art does not permit transforms, rotation, blur, or feathering',
+        );
+      for (const tile of layer.tiles) {
+        const [x, y, width, height] = tile.bounds;
+        const pixelsWide = tile.pixels[0]!.length,
+          pixelsHigh = tile.pixels.length;
+        if (
+          ![x, y, width, height].every(Number.isInteger) ||
+          width % pixelsWide ||
+          height % pixelsHigh ||
+          width / pixelsWide !== height / pixelsHigh ||
+          width / pixelsWide !== scene.pixel_art.scale
+        )
+          throw new Error(
+            'Strict pixel art palette tiles require integer bounds and an exact uniform pixel scale',
+          );
+        if (
+          declared.size &&
+          Object.values(tile.palette).some((colour) => !declared.has(colour.toLowerCase()))
+        )
+          throw new Error('Palette tile uses a colour outside pixel_art.palette');
+      }
+    }
+  }
   if (all.length > 256) throw new Error('A scene may contain at most 256 layers');
   const ids = new Set<string>();
   for (const layer of all) {
@@ -534,6 +649,38 @@ export function parseScene(input: unknown): Scene {
     }
     if (layer.source && !Object.hasOwn(scene.assets, layer.source))
       throw new Error(`Unknown asset: ${layer.source}`);
+  }
+  if (scene.sprites) {
+    for (const [id, frame] of Object.entries(scene.sprites.frames)) {
+      const [x, y, width, height] = frame.bounds;
+      if (
+        ![x, y, width, height, ...frame.pivot].every(Number.isInteger) ||
+        x < 0 ||
+        y < 0 ||
+        x + width > scene.canvas.width ||
+        y + height > scene.canvas.height
+      )
+        throw new Error(`Sprite frame ${id} must be an integer rectangle inside the canvas`);
+      if (
+        frame.pivot[0] < 0 ||
+        frame.pivot[1] < 0 ||
+        frame.pivot[0] > width ||
+        frame.pivot[1] > height
+      )
+        throw new Error(`Sprite frame ${id} pivot must lie inside its bounds`);
+    }
+    for (const [id, animation] of Object.entries(scene.sprites.animations))
+      for (const frame of animation.frames)
+        if (!scene.sprites.frames[frame])
+          throw new Error(`Sprite animation ${id} references unknown frame: ${frame}`);
+    const widest = Math.max(...Object.values(scene.sprites.frames).map((frame) => frame.bounds[2]));
+    if (
+      scene.sprites.atlas.max_width <
+      widest + 2 * (scene.sprites.atlas.padding + scene.sprites.atlas.extrusion)
+    )
+      throw new Error(
+        'Sprite atlas max_width cannot fit its widest frame with padding and extrusion',
+      );
   }
   for (const layer of all)
     for (const mask of layerMasks(layer))

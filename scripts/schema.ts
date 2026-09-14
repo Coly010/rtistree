@@ -12,6 +12,7 @@ import { critiqueSchema } from '../src/critique.js';
 import { briefSchema } from '../src/benchmark.js';
 import { sceneSchema, layerSchema } from '../src/schema.js';
 import { commandSchema, patchSchema } from '../src/commands.js';
+import { spriteSheetOptionsSchema } from '../src/sprites.js';
 import { writeArtifact } from '../src/artifacts.js';
 const include = z.array(z.string().min(1)).max(128).optional();
 const authoredLayer: z.ZodType = z.lazy(() =>
@@ -46,6 +47,7 @@ for (const [name, schema] of Object.entries({
   fragment,
   command: commandSchema,
   patch: patchSchema,
+  sprites: spriteSheetOptionsSchema,
 })) {
   await writeArtifact(
     resolve(`schemas/${name}.schema.json`),

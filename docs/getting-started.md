@@ -132,5 +132,7 @@ The SDK and CLI use the same engine. For an existing Node project, install with
 
 - [CLI reference](cli-reference.md) — inspect, edit, render and export commands.
 - [Scene format](scene-format.md) — layers, coordinates, assets and effects.
+- [Pixel art, sprites and spritesheets](sprites.md) — indexed tiles, frame metadata,
+  deterministic atlases and animation review.
 - [Studio](studio.md) — trusted JavaScript painting programs and replayable recipes.
 - [Staged production](atelier.md) — compare candidates and record visual review.

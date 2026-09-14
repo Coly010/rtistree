@@ -20,6 +20,7 @@ import { boundsSchema, sceneSchema } from './schema.js';
 import { commandSchema } from './commands.js';
 import { writeArtifact, writeRender } from './artifacts.js';
 import { verificationHeatmap } from './verify.js';
+import { exportSpriteSheet, spriteSheetOptionsSchema } from './sprites.js';
 
 const help = `Rtistree — deterministic graphics for agents
 
@@ -37,6 +38,7 @@ const help = `Rtistree — deterministic graphics for agents
   rtistree proof <project-or-scene> --preset print [-o proof.png]
   rtistree preflight <project-or-scene> [--preset print]
   rtistree export <project-or-scene> --format png|jpeg|tiff|pdf|svg|project [--preset print] [-o file]
+  rtistree sprites <project-or-scene> [-o atlas.png] [--manifest atlas.json]
   rtistree render <scene.yaml> [-o render.png] [--quality draft|preview|final]
   rtistree render-region <scene.yaml> <x> <y> <width> <height> [-o region.png]
   rtistree inspect <scene.yaml> [--layer <id>]
@@ -51,7 +53,7 @@ const help = `Rtistree — deterministic graphics for agents
   rtistree benchmark <scene.yaml> <brief.json> <checkpoint-label|finish>
   rtistree verify <scene.yaml> [-o report.json] [--heatmap heatmap.png]
   rtistree export <scene.yaml> -o <new-project/scene.json>
-  rtistree schema [--kind scene|command]
+  rtistree schema [--kind scene|command|sprites]
   rtistree serve <scene.yaml>  (MCP over stdio)
 
 Before creating artwork, read rtistree art-guide. Technical verification does not rate artistic quality.
@@ -77,6 +79,7 @@ async function main() {
       quality: { type: 'string' },
       layer: { type: 'string' },
       heatmap: { type: 'string' },
+      manifest: { type: 'string' },
       kind: { type: 'string' },
       help: { type: 'boolean', short: 'h' },
     },
@@ -101,10 +104,17 @@ async function main() {
     return;
   }
   if (command === 'schema') {
-    if (values.kind && !['scene', 'command'].includes(values.kind))
+    if (values.kind && !['scene', 'command', 'sprites'].includes(values.kind))
       throw new Error('Unknown schema kind');
     print(
-      z.toJSONSchema(values.kind === 'command' ? commandSchema : sceneSchema, { reused: 'ref' }),
+      z.toJSONSchema(
+        values.kind === 'command'
+          ? commandSchema
+          : values.kind === 'sprites'
+            ? spriteSheetOptionsSchema
+            : sceneSchema,
+        { reused: 'ref' },
+      ),
     );
     return;
   }
@@ -320,6 +330,18 @@ async function main() {
         throw new Error('Scene bundle output must end in .json or .yaml; use --format for artwork');
       await project.exportScene(resolve(values.output));
       print({ scene: resolve(values.output) });
+      break;
+    case 'sprites':
+      if (args.length) throw new Error('sprites accepts only a project or scene path');
+      print(
+        await exportSpriteSheet(
+          project,
+          resolve(values.output ?? join(project.outputDirectory, 'sprites.png')),
+          values.manifest
+            ? { manifest: resolve(values.manifest) }
+            : { manifest: join(project.outputDirectory, 'sprites.json') },
+        ),
+      );
       break;
     case 'serve': {
       const { serve } = await import('./mcp.js');

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "manifest": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "atlas": {
+      "type": "object",
+      "properties": {
+        "padding": {
+          "default": 0,
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 128
+        },
+        "extrusion": {
+          "default": 0,
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 32
+        },
+        "power_of_two": {
+          "default": false,
+          "type": "boolean"
+        },
+        "max_width": {
+          "default": 8192,
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        }
+      },
+      "required": ["padding", "extrusion", "power_of_two", "max_width"],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

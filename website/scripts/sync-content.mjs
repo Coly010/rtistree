@@ -20,7 +20,7 @@ const publicDir = resolve(site, 'public');
 await rm(output, { recursive: true, force: true });
 await rm(resolve(publicDir, 'docs-source'), { recursive: true, force: true });
 await mkdir(output, { recursive: true });
-const preferred = ['core-concepts.md', 'getting-started.md', 'agent-setup.md', 'agent-art-workflow.md', 'cli-reference.md', 'scene-format.md', 'studio.md', 'atelier.md', 'production.md', 'evolution.md', 'engine-overview.md', 'changelog.md'];
+const preferred = ['core-concepts.md', 'getting-started.md', 'sprites.md', 'agent-setup.md', 'agent-art-workflow.md', 'cli-reference.md', 'scene-format.md', 'studio.md', 'atelier.md', 'production.md', 'evolution.md', 'engine-overview.md', 'changelog.md'];
 async function syncDoc(path, rel = relative(docs, path).split('\\').join('/')) {
   const source = await readFile(path, 'utf8');
   const title = source.match(/^# (.+)$/m)?.[1] ?? rel;
@@ -54,6 +54,7 @@ for (const name of ['watch', 'guard', 'stride', 'sword', 'shield', 'coffer', 'la
   await cp(resolve(root, `examples/warden-asset-trial/output/${name}.png`), resolve(publicDir, `assets/${name}.png`));
 }
 await cp(resolve(root, 'examples/warden-asset-trial/rejected-v1/output/contact-sheet.png'), resolve(publicDir, 'assets/rejected-contact-sheet.png'));
+await cp(resolve(root, 'examples/pixel-sprite-lab/output/walk-review.png'), resolve(publicDir, 'assets/pixel-walk-review.png'));
 await mkdir(resolve(publicDir, 'downloads'), { recursive: true });
 await cp(resolve(root, 'examples/warden-asset-trial/output/asset-pack.zip'), resolve(publicDir, 'downloads/verdigris-watch.zip'));
 await cp(resolve(root, 'examples/hello'), resolve(publicDir, 'downloads/hello'), { recursive: true, filter: p => !/(?:history|\.png|\.evidence\.json)/.test(p) });
